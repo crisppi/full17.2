@@ -1,0 +1,48 @@
+:root {
+    --select-border: #777;
+    --select-focus: blue;
+    --select-arrow: var(--select-border);
+}
+
+/* lista lista_menu */
+.lista_menu {
+    width: 30%;
+    height: 400px;
+    margin: 10px;
+    font-weight: 300;
+    margin-top: 10px;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+.lista_menu a {
+    color: black;
+    font-weight: 500;
+    padding-bottom: 30px;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.lista_menu a:hover {
+    color: rgb(221, 106, 6);
+}
+
+.menu_pesquisa {
+    background-color: rgb(220, 217, 217);
+    margin-bottom: 10px;
+
+}
+
+.menu_pesquisa input[type="text"] {
+    background-color: rgb(241, 240, 240);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    font-size: .7em;
+    font-weight: normal;
+    padding: 5px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}

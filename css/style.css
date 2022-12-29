@@ -1,0 +1,412 @@
+:root {
+    --select-border: #777;
+    --select-focus: blue;
+    --select-arrow: var(--select-border);
+}
+
+.full-height {
+    min-height: 100vh;
+}
+
+.img-cover {
+    background-image: url('Img/black.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.input {
+    width: 100%;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+.icons>.btn {
+    color: white;
+    width: 40px;
+    height: 40px;
+    padding: 0px;
+    line-height: 0.8rem;
+}
+
+
+/* CABECALHO */
+
+.nav-item li {
+    text-decoration: none;
+    color: rgb(168, 65, 65);
+}
+
+
+/* FORMULARIO*/
+
+.formulario {
+    font-family: Tahoma;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    margin: 10px auto;
+    margin-bottom: 30px;
+    color: black;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+}
+
+.formulario legend {
+    padding: 10px;
+    padding-top: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.formulario input[type="text"] {
+    background-color: rgb(241, 240, 240);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    font-size: .7em;
+    font-weight: normal;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.font_nome_form input[type="text"] {
+    font-size: .9em;
+    font-weight: 800;
+    background-color: rgb(189, 189, 189);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+
+}
+
+.formulario input[type="date"] {
+    background-color: rgb(189, 189, 189);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    font-size: .7em;
+    font-weight: normal;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.formulario input[type="textarea"] {
+    background-color: rgb(189, 189, 189);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    font-size: .7em;
+    font-weight: normal;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.formulario input[type="email"] {
+    background-color: rgb(240, 232, 232);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    font-size: .7em;
+    font-weight: normal;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+
+.formulario input:hover {
+    background-color: rgb(227, 227, 227);
+    border-color: #777;
+}
+
+.formulario label {
+    padding: 2px;
+    font-size: .8em;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.formulario label select {
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.formulario label input {
+    font-size: .8em;
+    font-style: bold;
+    margin: 1px;
+    cursor: pointer;
+    margin-top: 5px;
+    padding: 1px;
+}
+
+.data-entrada {
+    background-color: rgb(240, 232, 232);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    font-size: .8em;
+    font-weight: normal;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.formulario data input {
+    font-size: .8em;
+    font-style: bold;
+    margin: 1px;
+    cursor: pointer;
+    margin-top: 5px;
+    padding: 1px;
+
+
+}
+
+
+.oculto {
+    display: none;
+}
+
+.visible {
+    display: yes;
+}
+
+.formulario select {
+    width: 100%;
+    min-width: 18ch;
+    max-width: 35ch;
+    border: .1px solid;
+    border-color: rgb(206, 206, 205);
+    border-radius: 0.5em;
+    padding: 0.3em 0.5em;
+    font-size: .7em;
+    color: rgb(70, 70, 70);
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 7px;
+    background-color: rgb(225, 229, 225);
+    box-shadow: inset -1px -1px 2px rgba(255, 255, 255, .6), inset 1px 1px 3px rgba(228, 227, 227, 0.6);
+    background-image: linear-gradient(to top, #e4e2e2, #fff 100%);
+}
+
+.formulario select::after {
+    content: "";
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--select-arrow);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+/* RODAPE */
+
+.rodape {
+    border-width: 1px;
+    width: 100%;
+    height: 170px;
+    background-color: rgb(236, 237, 237);
+    justify-content: center;
+
+}
+
+.rodape h4 {
+    font-size: 1.1em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: white;
+}
+
+.rodape01 {
+    width: 31%;
+    margin: 15px;
+    background-color: hsl(120, 2%, 31%, 0.5);
+    float: right;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+}
+
+.rodape02 {
+    width: 31%;
+    background-color: rgb(128, 0, 117, 0.5);
+    margin: 15px;
+    float: right;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+}
+
+.rodape03 {
+    width: 31%;
+    background-color: rgb(122, 128, 0, 0.5);
+    margin: 15px;
+    float: right;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+}
+
+.rodape nav ul li {
+    margin-top: 5px;
+    font-size: 1em;
+    padding-top: 1px;
+    font-style: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.rodape-central {
+    width: 100%;
+    height: 30px;
+    color: rgb(10, 10, 10);
+    text-align: center;
+    clear: both;
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding: 5px;
+    background-color: rgb(231, 230, 230);
+}
+
+.rodape-central h2 {
+    font-size: 15px;
+}
+
+
+/* back*/
+
+#back-link-container {
+    display: block;
+    width: 500px;
+    margin: 30px auto 0;
+}
+
+#back-link {
+    border: 1px solid #007BFF;
+    color: #007BFF;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+#back-link:hover {
+    text-decoration: none;
+}
+
+/* TABELAS */
+
+.table {
+    width: 98%;
+    margin: 0 auto;
+}
+
+.table tr {
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
+    font-size: .8em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+}
+
+.table td {
+    font-size: .8em;
+}
+
+.table th {
+    text-align: center;
+    font-style: uppercase;
+}
+
+
+.table a {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
+
+
+.table a:hover {
+    font-size: larger;
+    font-style: bold;
+}
+
+.actions {
+    text-align: center;
+    align-items: center;
+}
+
+
+
+/* OCULTAR ELEMENTO */
+
+.oculto {
+    display: none;
+}
+
+/* MOSTRAR  ELEMENTO */
+
+.visible {
+    display: yes;
+}
+
+.btn btn-primary {
+    margin: 20px;
+}
+
+/* BOTAO DE EXCLUSAO */
+
+.styled {
+    border: 0;
+    width: 180px;
+    margin: 0 auto 10px;
+    line-height: 2.0;
+    padding: 0 5px;
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 1s all;
+    background-color: rgb(68, 97, 203);
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6), inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+.styled a {
+    color: #fff;
+}
+
+.styled:hover a {
+    transform: scale(1.1);
+    text-decoration: none;
+    color: rgb(217, 147, 7);
+}
+
+.styled:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6), inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+/* DIV MENSAGEM DE ALERTA - SUCESS */
+.mensagem {
+    height: 30px;
+    width: 400px;
+    justify-content: center;
+    text-align: center;
+    background-color: #97f59a;
+    color: aliceblue;
+
+}
+
+.mensagem p {
+    color: aliceblue;
+}
+
+
+/* MENSAGEM CONTAINER */
+
+.msg-container {
+    background-color: aliceblue;
+    padding: 15px;
+}
+
+.msg {
+    width: 60%;
+    margin: 0 auto;
+    padding: 10px;
+    border: solid 1px #000;
+    text-align: center;
+}
+
+.msg.error {
+    color: #842029;
+    background-color: #F8D7DA;
+    border-color: #F5C2C7;
+}
+
+.msg.success {
+    color: #0F5132;
+    background-color: #D1E7DD;
+    border-color: #BADBCC;
+}
