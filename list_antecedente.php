@@ -27,6 +27,8 @@
 
     <!--tabela antecedente-->
 
+    <!--tabela antecedente-->
+
     <div class="container-fluid py-5">
         <h2 class="page-title">Relação antecedente</h2>
         <div class="menu_pesquisa">
