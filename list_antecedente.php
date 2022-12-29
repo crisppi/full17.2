@@ -170,8 +170,8 @@ include_once("templates/footer1.php");
         // $('#deletar-btn').attr('href', '<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $antecedente["id_antecedente"] ?>');
         console.log($('#deletar-btn').attr('href'));
         console.log($('#deletar-btn').attr('href'))
-        console.log($('#deletar-btn').attr("value"));
-
+        let varIdAntec = console.log($('#deletar-btn').attr("value"));
+        console.log(varIdAntec)
     };
 
     $(document).ready(function() {
