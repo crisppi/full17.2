@@ -84,10 +84,11 @@
 
                                 <!-- <a name="type" id="delete-btn" value="delete" href="" . data-confirm='Tem certeza de que deseja excluir o item selecionado?'>Apagar</a> -->
 
-                                <form class=" d-inline-block delete-form" id="minhaForm" action="process_antecedente.php" method="POST">
-                                    <input type="hidden" name="type" value="delete">
+                                <form class=" d-inline-block delete-form" id="minhaForm" action="tratar.php" method="POST">
+                                    <input type="hidden" name="type" id="type" value="delete">
+                                    <input type="hidden" name="confirmado" id="confirmado" value="nao">
                                     <input type="hidden" name="id_antecedente" value="<?= $id_antecedente ?>">
-                                    <div><button type="submit" id="data-confirm" onclick=SubmeterFormulario() style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
+                                    <div><button type="submit" id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
                                 </form>
                                 <div id="info"></div>
                             </td>
@@ -164,26 +165,19 @@ include_once("templates/footer1.php");
     function apareceOpcoes() {
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'block';
-        console.log("chegou");
 
-        deletar()
     }
 
     function deletar() {
-        console.log("chegou no delete");
+        // console.log("chegou no delete");
         $('#deletar-btn').attr('href', 'tratar.php');
-        console.log($('#deletar-btn').attr('href'));
+        // console.log($('#deletar-btn').attr('href'));
         console.log("deletou");
+        let idAcoes = (document.getElementById('id-confirmacao'));
+        idAcoes.style.display = 'none';
 
     };
 
-    $(document).ready(function() {
-        $("#deletar").click(function(event) {
-            event.preventDefault();
-            $('#delete-btn').attr('href', 'google.com')
-
-        });
-    });
 
     function cancelar() {
         let idAcoes = (document.getElementById('id-confirmacao'));
@@ -194,6 +188,6 @@ include_once("templates/footer1.php");
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<script src="js/javascript.js"></script>
+<script src="js/script.js"></script>
 
 </html>
