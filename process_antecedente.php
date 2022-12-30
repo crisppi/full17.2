@@ -56,7 +56,7 @@ if ($type === "create") {
 if ($type === "delete") {
     // Recebe os dados do form
     $id_antecedente = filter_input(INPUT_POST, "id_antecedente");
-
+    echo (filter_input(INPUT_POST, "id_antecedente"));
     $antecedenteDao = new antecedenteDAO($conn, $BASE_URL);
 
     $antecedente = $antecedenteDao->findById($id_antecedente);
