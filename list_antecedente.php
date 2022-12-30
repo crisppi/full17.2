@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -24,8 +25,6 @@
     $antecedentes = $antecedente_geral->findGeral();
     //var_dump($antecedentes);
     ?>
-
-    <!--tabela antecedente-->
 
     <!--tabela antecedente-->
 
@@ -85,10 +84,10 @@
 
                                 <!-- <a name="type" id="delete-btn" value="delete" href="" . data-confirm='Tem certeza de que deseja excluir o item selecionado?'>Apagar</a> -->
 
-                                <form class=" d-inline-block delete-form" id="minhaForm" action="process_antecedente.php" method="POST">
+                                <form class=" d-inline-block delete-form" id="minhaForm" action="#" method="POST">
                                     <input type="hidden" name="type" value="delete">
                                     <input type="hidden" name="id_antecedente" value="<?= $antecedente["id_antecedente"] ?>">
-                                    <div><button id="data-confirm" onclick="SubmeterFormulario('minhaForm')" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
+                                    <div><button id="data-confirm" onclick="SubmeterFormulario()" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
                                 </form>
                                 <div id="info"></div>
                             </td>
@@ -196,10 +195,8 @@ include_once("templates/footer1.php");
     };
     <?php print_r($_POST) ?>
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script src="js/javascript.js"></script>
-<!-- <script src="js/formulario.js"></script> -->
 
 </html>

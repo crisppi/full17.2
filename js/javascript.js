@@ -1,28 +1,26 @@
-function SubmeterFormulario(id_formulario) {
+function SubmeterFormulario() {
 
-    let frm = $('#' + id_formulario);
+    let frm = $('#minhaForm');
 
-    let idAcoes = (document.getElementById('id-confirmacao'));
-    idAcoes.style.display = 'block';
-    console.log("chegou aqui");
-    console.log($(id_formulario).attr('href'));
-
-    frm.submit(function (event) {
+    // let idAcoes = (document.getElementById('id-confirmacao'));
+    // idAcoes.style.display = 'block';
+    // console.log("chegou aqui");
+    frm.submit(function (e) {
         // IMPEDE O ENVIO DOR FORMULARIO
-        event.preventDefault();
+        e.preventDefault();
 
         // SUMISSAO O FORMULARIO VIA AJAX
         $.ajax({
-            type: frm.attr('method'),
-            url: frm.attr('action'),
-            data: frm.serialize(),
+            type: "POST",
+            url: "process_antecedente.php",
+            data: serialize(),
 
             //SUCESSO
             success: function (i) {
                 $('#info').html('Enviado com sucesso')
             },
             //ERROR 
-            error: function () {
+            error: function (i) {
                 $('#info').html('Aconteceu um erro!!!')
 
             }
@@ -31,4 +29,5 @@ function SubmeterFormulario(id_formulario) {
 
         );
     })
+    return false;
 }
