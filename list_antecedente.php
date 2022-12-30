@@ -83,13 +83,14 @@
 
                                 <a href="<?= $BASE_URL ?>edit_antecedente.php?id_antecedente=<?= $antecedente["id_antecedente"] ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>
 
-                                <a name="type" id="delete-btn" value="delete" href="" . data-confirm='Tem certeza de que deseja excluir o item selecionado?'>Apagar</a>
+                                <!-- <a name="type" id="delete-btn" value="delete" href="" . data-confirm='Tem certeza de que deseja excluir o item selecionado?'>Apagar</a> -->
 
-                                <form class=" d-inline-block delete-form" id="minhaForm" action="tratars.php" method="POST">
+                                <form class=" d-inline-block delete-form" id="minhaForm" action="process_antecedente.php" method="POST">
                                     <input type="hidden" name="type" value="delete">
                                     <input type="hidden" name="id_antecedente" value="<?= $antecedente["id_antecedente"] ?>">
-                                    <button type="button" onclick="submeterFomulario('minhaForm')" id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button>
+                                    <div><button id="data-confirm" onclick="SubmeterFormulario('minhaForm')" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
                                 </form>
+                                <div id="info"></div>
                             </td>
                         </tr>
                     <?php endforeach; ?>

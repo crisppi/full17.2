@@ -1,12 +1,15 @@
-function submeterFomulario(id_formulario) {
+function SubmeterFormulario(id_formulario) {
+
     let frm = $('#' + id_formulario);
+
     let idAcoes = (document.getElementById('id-confirmacao'));
     idAcoes.style.display = 'block';
     console.log("chegou aqui");
+    console.log($(id_formulario).attr('href'));
 
-    frm.submit(function (e) {
+    frm.submit(function (event) {
         // IMPEDE O ENVIO DOR FORMULARIO
-        e.preventDefault();
+        event.preventDefault();
 
         // SUMISSAO O FORMULARIO VIA AJAX
         $.ajax({
@@ -16,12 +19,11 @@ function submeterFomulario(id_formulario) {
 
             //SUCESSO
             success: function (i) {
-                console.log('dados inseridos com sucesso');
-                console.log(i);
+                $('#info').html('Enviado com sucesso')
             },
             //ERROR 
             error: function () {
-                console.log('dados inseridos com sucesso');
+                $('#info').html('Aconteceu um erro!!!')
 
             }
 
