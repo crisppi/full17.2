@@ -38,7 +38,6 @@ require_once("templates/header.php");
             </li>
             <li>
                 <a href="list_hospital.php">Hospital</a>
-
             </li>
             <li>
                 <a href="list_usuario.php">Usuário</a>
@@ -79,9 +78,6 @@ require_once("templates/header.php");
             <li>
                 <a href="cad_visita.php">Outras Visitas</a>
             </li>
-
-
-
         </div>
     </div>
 </div>

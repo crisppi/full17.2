@@ -21,7 +21,6 @@ if ($type === "create") {
     // Receber os dados dos inputs
     $antecedente_ant = filter_input(INPUT_POST, "antecedente_ant");
 
-
     $antecedente = new antecedente();
 
     // Validação mínima de dados
@@ -60,7 +59,6 @@ if ($type === "delete") {
     $antecedenteDao = new antecedenteDAO($conn, $BASE_URL);
 
     $antecedente = $antecedenteDao->findById($id_antecedente);
-
 
     if ($antecedente) {
 

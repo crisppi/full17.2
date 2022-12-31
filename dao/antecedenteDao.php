@@ -134,7 +134,7 @@ class antecedenteDAO implements antecedenteDAOInterface
         $cad_antec = 1;
         // Mensagem de sucesso por adicionar antecedente
         // Mensagem de sucesso por adicionar filme
-        $this->message->setMessage("Filme adicionado com sucesso!", "success", "cad_antecedente.php");
+        $this->message->setMessage("Adicionado com sucesso!", "success", "cad_antecedente.php");
     }
 
     public function update(antecedente $antecedente)
@@ -151,7 +151,7 @@ class antecedenteDAO implements antecedenteDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por editar antecedente
-        $this->message->setMessage("antecedente atualizado com sucesso!", "success", "list_antecedente.php");
+        $this->message->setMessage("Atualizado com sucesso!", "success", "list_antecedente.php");
     }
 
     public function destroy($id_antecedente)
@@ -163,7 +163,7 @@ class antecedenteDAO implements antecedenteDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por remover filme
-        $this->message->setMessage("antecedente removido com sucesso!", "success", "list_antecedente.php");
+        $this->message->setMessage("Removido com sucesso!", "success", "list_antecedente.php");
     }
 
 

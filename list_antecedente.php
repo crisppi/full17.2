@@ -15,24 +15,22 @@
     include_once("models/antecedente.php");
     include_once("dao/antecedenteDao.php");
     include_once("templates/header.php");
-    ?>
-    <?php
+
     //Instanciando a classe
     //Criado o objeto $listarantecedentes
     $antecedente_geral = new antecedenteDAO($conn, $BASE_URL);
 
     //Instanciar o metodo listar antecedente
     $antecedentes = $antecedente_geral->findGeral();
-    //var_dump($antecedentes);
     ?>
 
     <!--tabela antecedente-->
-
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-2">
         <h2 class="page-title">Relação antecedente</h2>
         <div class="menu_pesquisa">
-            <form method="post">
+            <form id="form_pesquisa" method="POST">
                 <input type="text" name="pesquisa_antec" id="pesquisa_antec" placeholder="Pesquisa por antecedente">
+                <input type="hidden" name="pesquisa" id="pesquisa" value="sim">
                 <button style="margin:10px" type="submit" class="btn-sm btn-info">Buscar</button>
             </form>
 
@@ -187,7 +185,7 @@ include_once("templates/footer1.php");
     };
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="js/script.js"></script>
 
 </html>

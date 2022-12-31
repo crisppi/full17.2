@@ -8,7 +8,7 @@ require_once("models/message.php");
 $message = new Message($BASE_URL);
 
 $flassMessage = $message->getMessage();
-
+var_dump($flassMessage);
 if (!empty($flassMessage["msg"])) {
     // Limpar a mensagem
     $message->clearMessage();
@@ -40,7 +40,6 @@ $id_antecedente = filter_input(INPUT_GET, "id_antecedente");
                 <div class="msg-container">
                     <p class="msg <?= $flassMessage["type"] ?>"><?= $flassMessage["msg"] ?></p>
                 </div>
-                <?php $message->clearMessage(); ?>
             <?php endif; ?>
     </div>
     </form>
