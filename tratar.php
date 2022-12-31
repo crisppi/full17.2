@@ -9,3 +9,13 @@ echo ('<br>');
 echo ($_POST['id_antecedente']);
 echo ('<br>');
 echo ($_POST['type']);
+echo ('<br>');
+
+if ($_POST['confirmado'] == "nao") {
+}
+echo ('<br>');
+
+
+if ($_POST['confirmado'] == "sim") {
+    print_r("chegou nesse ponto do sim");
+}

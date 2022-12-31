@@ -4,6 +4,7 @@ class Message
 {
 
     private $url;
+    private $type;
 
     public function __construct($url)
     {

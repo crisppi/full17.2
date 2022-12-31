@@ -11,7 +11,7 @@
 
 
 <?php
-include_once("formularios/form_cad_antecedente.php");
+include_once("formularios/form_list_antecedente.php");
 include_once("templates/footer1.php");
 ?>
 

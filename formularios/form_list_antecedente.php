@@ -71,7 +71,7 @@
 
                                 <!-- <a name="type" id="delete-btn" value="delete" href="" . data-confirm='Tem certeza de que deseja excluir o item selecionado?'>Apagar</a> -->
 
-                                <form class=" d-inline-block delete-form" id="minhaForm" action="process_antecedente.php" method="POST">
+                                <form class=" d-inline-block delete-form" id="minhaForm" action="tratar.php" method="POST">
                                     <input type="hidden" name="type" id="type" value="delete">
                                     <input type="hidden" name="confirmado" id="confirmado" value="nao">
                                     <input type="hidden" name="id_antecedente" value="<?= $id_antecedente ?>">
