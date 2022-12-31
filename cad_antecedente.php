@@ -8,7 +8,6 @@ require_once("models/message.php");
 $message = new Message($BASE_URL);
 
 $flassMessage = $message->getMessage();
-var_dump($flassMessage);
 if (!empty($flassMessage["msg"])) {
     // Limpar a mensagem
     $message->clearMessage();
