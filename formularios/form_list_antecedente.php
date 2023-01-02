@@ -183,7 +183,6 @@
 
     };
 
-
     function cancelar() {
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'none';
