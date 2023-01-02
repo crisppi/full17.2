@@ -12,6 +12,7 @@ echo ($_POST['type']);
 echo ('<br>');
 
 if ($_POST['confirmado'] == "nao") {
+    echo ('nao confirmados');
 }
 echo ('<br>');
 

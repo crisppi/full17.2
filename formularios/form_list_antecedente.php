@@ -75,7 +75,7 @@
                                     <input type="hidden" name="type" id="type" value="delete">
                                     <input type="hidden" name="confirmado" id="confirmado" value="nao">
                                     <input type="hidden" name="id_antecedente" value="<?= $id_antecedente ?>">
-                                    <div><button type="submit" id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
+                                    <div><button type="submit" onclick=apareceOpcoes() id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
                                 </form>
                                 <div id="info"></div>
                             </td>
@@ -154,12 +154,32 @@
     }
 
     function deletar() {
-        // console.log("chegou no delete");
-        $('#deletar-btn').attr('href', 'tratar.php');
-        // console.log($('#deletar-btn').attr('href'));
+        $('#deletar-btn').attr('href', '/process_antecedente.php');
+        console.log($('#deletar-btn').attr('href'));
         console.log("deletou");
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'none';
+        //window.location.href = 'tratar.php';
+
+        $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+
+                //SUCESSO
+                success: function(data) {
+                    $('#info').html('Enviado com sucesso');
+                    console.log($(this).serialize());
+                },
+                //ERROR 
+                error: function(data) {
+                    $('#info').html('Aconteceu um erro!!!')
+
+                }
+
+            }
+
+        )
 
     };
 
@@ -170,4 +190,5 @@
         console.log("chegou no cancelar");
 
     };
+    src = "js/script.js"
 </script>

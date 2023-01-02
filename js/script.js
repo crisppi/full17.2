@@ -1,36 +1,33 @@
-// $("form").on("submit", function (event) {
-//     event.preventDefault();
-// processamento do formulario
+$("form").on("submit", function(event) {
+    event.preventDefault();
+    // processamento do formulario
 
-// FORMULARIO DE DELETE DA TELA LISTA ANTECEDENTE
-function abrirOpcoesDelete() {
-    let frm = $('#minhaForm');
-    frm.submit(function(event) {
-        event.preventDefault();
-        echo(frm);
-        let action = $(frm.attr('action'));
-        var form_status = $('<div id="minhaForm"></div>');
-        $(this).prepend(form_status);
+    // FORMULARIO DE DELETE DA TELA LISTA ANTECEDENTE
+    console.log("chegou no prevents");
+    //let action = $(frm.attr('action'));
+    var form_status = $('<div id="minhaForm"></div>');
+    $(this).prepend(form_status);
 
-        console.log($(this).attr('action'));
-        var dados = ($(this).serialize());
-        var dados2 = $("#confirmado").val();
-        console.log(dados);
+    console.log($(this).attr('action'));
+    var dados = ($(this).serialize());
+    var dados2 = $("#confirmado").val();
+    console.log(dados);
+    if ($("#confirmado").val() == 'nao') {
+        console.log(dados2);
         apareceOpcoes();
-        if ($("#confirmado").val() = 'nao') {
-            console.log(dados2);
-            apareceOpcoes();
-
-        }
 
         $.ajax({
                 type: "POST",
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
-
                 //SUCESSO
                 success: function(data) {
                     $('#info').html('Enviado com sucesso')
+                    console.log($(this).serialize());
+                    var form = document.querySelector('form');
+                    var data = new FormData(form);
+
+                    console.log(data);
                 },
                 //ERROR 
                 error: function(data) {
@@ -41,15 +38,20 @@ function abrirOpcoesDelete() {
             }
 
         );
+    }
 
-    });
-}
+
+
+});
+
+
 // FORMULARIO DE PESQUISA DA TELA LISTA ANTECEDENTE
 let frm_pesq = $('#form_pesquisa');
 frm_pesq.submit(function(event) {
     let action = $(frm_pesq.attr('action'));
     var form_status_pesq = $('<div id="form_pesquisa"></div>');
     $(this).prepend(form_status_pesq);
+
 
     if ($("#pesquisa").val() = 'sim') {
         $.ajax({
@@ -59,7 +61,8 @@ frm_pesq.submit(function(event) {
 
                 //SUCESSO
                 success: function(data) {
-                    $('#info').html('Enviado com sucesso')
+                    $('#info').html('Enviado com sucesso');
+
                 },
                 //ERROR 
                 error: function(data) {
@@ -74,3 +77,8 @@ frm_pesq.submit(function(event) {
     }
 
 });
+
+
+
+
+src = "js/script.js"
