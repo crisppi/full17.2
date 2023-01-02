@@ -71,12 +71,13 @@
 
                                 <!-- <a name="type" id="delete-btn" value="delete" href="" . data-confirm='Tem certeza de que deseja excluir o item selecionado?'>Apagar</a> -->
 
-                                <form class=" d-inline-block delete-form" id="minhaForm" action="tratar.php" method="POST">
-                                    <input type="hidden" name="type" id="type" value="delete">
-                                    <input type="hidden" name="confirmado" id="confirmado" value="nao">
-                                    <input type="hidden" name="id_antecedente" id="id_antecedente" value="<?= $id_antecedente ?>">
-                                    <div><button type="button" onclick=apareceOpcoes() id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
+                                <form class=" d-inline-block delete-form" id="minhaForm">
+                                    <input type="text" name="type" id="type" value="delete">
+                                    <input type="text" name="confirmado" id="confirmado" value="nao">
+                                    <input type="text" name="id_antecedente" id="id_antecedente" value="<?= $id_antecedente ?>">
+                                    <div><button onclick=apareceOpcoes() id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
                                 </form>
+
                                 <div id="info"></div>
                             </td>
                         </tr>
@@ -150,14 +151,13 @@
     function apareceOpcoes() {
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'block';
-        let frm = $('#minhaForm');
 
     }
 
     function deletar() {
         $('#deletar-btn').attr('href', '/process_antecedente.php');
         console.log($('#deletar-btn').attr('href'));
-        console.log("deletou");
+        console.log("vai deletar");
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'none';
         //window.location.href = '<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $antecedente["id_antecedente"] ?>.php';
