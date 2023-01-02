@@ -10,24 +10,25 @@ $("form").on("submit", function(event) {
 
     console.log($(this).attr('action'));
     var dados = ($(this).serialize());
-    var dados2 = $("#confirmado").val();
-    console.log(dados);
+    var dadosConf = $("#confirmado").val();
+    var dadosID = $("#id_antecedente").val();
+
     if ($("#confirmado").val() == 'nao') {
-        console.log(dados2);
+        console.log(dadosConf);
+        console.log(dadosID);
         apareceOpcoes();
 
         $.ajax({
                 type: "POST",
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
+                dataType: 'json',
                 //SUCESSO
                 success: function(data) {
                     $('#info').html('Enviado com sucesso')
                     console.log($(this).serialize());
-                    var form = document.querySelector('form');
-                    var data = new FormData(form);
+                    console.log(data.id_antecedente);
 
-                    console.log(data);
                 },
                 //ERROR 
                 error: function(data) {

@@ -74,8 +74,8 @@
                                 <form class=" d-inline-block delete-form" id="minhaForm" action="tratar.php" method="POST">
                                     <input type="hidden" name="type" id="type" value="delete">
                                     <input type="hidden" name="confirmado" id="confirmado" value="nao">
-                                    <input type="hidden" name="id_antecedente" value="<?= $id_antecedente ?>">
-                                    <div><button type="submit" onclick=apareceOpcoes() id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
+                                    <input type="hidden" name="id_antecedente" id="id_antecedente" value="<?= $id_antecedente ?>">
+                                    <div><button type="button" onclick=apareceOpcoes() id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
                                 </form>
                                 <div id="info"></div>
                             </td>
@@ -87,7 +87,7 @@
             <div id="id-confirmacao" class="btn_acoes oculto">
                 <p>Deseja deletar este antecedente: <?= $antecedente["antecedente_ant"] ?>?</p>
                 <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
-                <button class="btn btn-danger styled" href="" onclick=deletar() value="<?= $antecedente["id_antecedente"] ?>" type="button" id="deletar-btn" name="deletar  ">Deletar</button>
+                <button class="btn btn-danger styled" href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $antecedente["id_antecedente"] ?>" onclick=deletar() value="<?= $antecedente["id_antecedente"] ?>" type="button" id="deletar-btn" name="deletar  ">Deletar</button>
                 <a name="type" onclick=deletar() id="deletar" value="delete" href="">Apagar</a>
 
             </div>
@@ -150,6 +150,7 @@
     function apareceOpcoes() {
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'block';
+        let frm = $('#minhaForm');
 
     }
 
@@ -159,7 +160,7 @@
         console.log("deletou");
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'none';
-        //window.location.href = 'tratar.php';
+        //window.location.href = '<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $antecedente["id_antecedente"] ?>.php';
 
         $.ajax({
                 type: "POST",
