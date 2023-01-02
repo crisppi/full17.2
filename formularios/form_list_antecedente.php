@@ -156,11 +156,10 @@
 
     function deletar() {
         $('#deletar-btn').attr('href', '/process_antecedente.php');
-        console.log($('#deletar-btn').attr('href'));
+        //console.log($('#deletar-btn').attr('href'));
         console.log("vai deletar");
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'none';
-        //window.location.href = '<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $antecedente["id_antecedente"] ?>.php';
 
         $.ajax({
                 type: "POST",
