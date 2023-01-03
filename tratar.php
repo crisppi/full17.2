@@ -1,9 +1,9 @@
 <?php
-echo ('dados cadastrados');
-var_dump($_get);
+echo ('chegou no aquivo Tratar.PHP: ');
+//var_dump($_POST);
 echo ('<br>');
 
-echo ($_POST['confirmado']);
+var_dump($_POST['confirmado']);
 echo ('<br>');
 
 echo ($_POST['id_antecedente']);
