@@ -1,6 +1,6 @@
 <?php
 echo ('dados cadastrados');
-var_dump($_POST);
+var_dump($_get);
 echo ('<br>');
 
 echo ($_POST['confirmado']);
@@ -20,3 +20,6 @@ echo ('<br>');
 if ($_POST['confirmado'] == "sim") {
     print_r("chegou nesse ponto do sim");
 }
+
+$formId_capt = $_POST['id_antecedente'];
+echo (" voce pegou este ID :" . $formId_capt);

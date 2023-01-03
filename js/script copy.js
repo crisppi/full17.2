@@ -15,7 +15,7 @@ $("form").on("submit", function(event) {
         apareceOpcoes();
 
         $.ajax({
-                type: "POST",
+                type: "GET",
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
                 dataType: 'json',

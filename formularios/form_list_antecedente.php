@@ -1,4 +1,6 @@
 <body>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <?php
     include_once("globals.php");
     include_once("models/antecedente.php");
@@ -71,11 +73,11 @@
 
                                 <!-- <a name="type" id="delete-btn" value="delete" href="" . data-confirm='Tem certeza de que deseja excluir o item selecionado?'>Apagar</a> -->
 
-                                <form class=" d-inline-block delete-form" id="minhaForm">
+                                <form class=" d-inline-block delete-form" action="tratar.php" id="minhaForm">
                                     <input type="text" name="type" id="type" value="delete">
                                     <input type="text" name="confirmado" id="confirmado" value="nao">
                                     <input type="text" name="id_antecedente" id="id_antecedente" value="<?= $id_antecedente ?>">
-                                    <div><button onclick=apareceOpcoes() id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
+                                    <div><button type="submit" id="data-confirm" href="tratar.php" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
                                 </form>
 
                                 <div id="info"></div>
@@ -88,8 +90,15 @@
             <div id="id-confirmacao" class="btn_acoes oculto">
                 <p>Deseja deletar este antecedente: <?= $antecedente["antecedente_ant"] ?>?</p>
                 <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
-                <button class="btn btn-danger styled" href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $antecedente["id_antecedente"] ?>" onclick=deletar() value="<?= $antecedente["id_antecedente"] ?>" type="button" id="deletar-btn" name="deletar  ">Deletar</button>
-                <a name="type" onclick=deletar() id="deletar" value="delete" href="">Apagar</a>
+                <button class="btn btn-danger styled" href="<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $formId_capt ?>" onclick=deletar() value="<?= $antecedente["id_antecedente"] ?>" type="button" id="deletar-btn" name="deletar  ">Deletar</button>
+
+            </div>
+            <div>
+
+                <script>
+                    $formId_capt = "";
+                    console.log(echo(" voce pegou este ID".$formId_capt))
+                </script>
 
             </div>
     </div>
@@ -106,7 +115,6 @@
         } else {
             echo "<p style='color: #f00;'>Erro: Usuário não cadastrado!</p>";
         };
-
 
         try {
 
@@ -144,43 +152,19 @@
         echo " </ul>";
         echo "</nav>";
         echo "</div>"; ?>
-
 </body>
 
 <script>
     function apareceOpcoes() {
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'block';
-
     }
 
     function deletar() {
-        $('#deletar-btn').attr('href', '/process_antecedente.php');
-        //console.log($('#deletar-btn').attr('href'));
-        console.log("vai deletar");
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'none';
-
-        $.ajax({
-                type: "POST",
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
-
-                //SUCESSO
-                success: function(data) {
-                    $('#info').html('Enviado com sucesso');
-                    console.log($(this).serialize());
-                },
-                //ERROR 
-                error: function(data) {
-                    $('#info').html('Aconteceu um erro!!!')
-
-                }
-
-            }
-
-        )
-
+        window.location.href = "process_antecedente.php?id_antecedente="
+            .<?= $formId_capt ?>;
     };
 
     function cancelar() {
@@ -189,5 +173,6 @@
         console.log("chegou no cancelar");
 
     };
+    src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js";
     src = "js/script.js"
 </script>
