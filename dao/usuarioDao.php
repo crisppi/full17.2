@@ -22,11 +22,11 @@ class UserDAO implements UserDAOInterface
 
         $user = new Usuario();
 
-        $user->id_usuario = $data["id_usuario"]; 
+        $user->id_usuario = $data["id_usuario"];
         $user->usuario_user = $data["usuario_user"];
         $user->email_user = $data["email_user"];
         $user->email02_user = $data["email02_user"];
-        $user->senha_user = password_hash($data["senha_user"], PASSWORD_DEFAULT);
+        $user->senha_user = password_hash($data["senha_user"], PASSWORD_BCRYPT);
         $user->endereco_user = $data["endereco_user"];
         $user->numero_user = $data["numero_user"];
         $user->bairro_user = $data["bairro_user"];

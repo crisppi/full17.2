@@ -30,7 +30,7 @@ if (empty($id_usuario)) {
 ?>
 <div id="main-container" class="container-fluid">
     <div class="row">
-        <h1 class="page-title">Cadastrar Usuário</h1>
+        <h4 class="page-title">Cadastrar Usuário</h4>
         <p class="page-description">Adicione informações sobre o usuário</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_usuario.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="type" value="create">
@@ -160,18 +160,18 @@ if (empty($id_usuario)) {
                     <input type="text" class="form-control" id="usuario_create_user" name="usuario_create_user" placeholder="Digite o usuário">
                 </div>
             </div>
-    
-    <div class="form-group row">
-    <div class="form-group col-sm-9">
+
+            <div class="form-group row">
+                <div class="form-group col-sm-9">
                     <label for="obs_user">Observações</label>
-                    <textarea type="textarea" rows="10"class="form-control" id="obs_user" name="obs_user" placeholder="Digite as observações do usuário"></textarea>
+                    <textarea type="textarea" rows="10" class="form-control" id="obs_user" name="obs_user" placeholder="Digite as observações do usuário"></textarea>
                 </div>
+            </div>
+            <br>
+            <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
+            <br>
     </div>
-    <br>
-    <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
-    <br>
-</div>
-</form>
+    </form>
 </div>
 </div>
 <script>
