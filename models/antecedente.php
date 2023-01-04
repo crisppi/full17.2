@@ -3,7 +3,7 @@
 class Antecedente
 {
   public $id_antecedente;
-  public $antecedenteNome;
+  public $antecedente_ant;
 }
 
 interface antecedenteDAOInterface

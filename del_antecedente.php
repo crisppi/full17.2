@@ -10,7 +10,7 @@ require_once("dao/antecedenteDao.php");
 //$message = new Message($BASE_URL);
 $userDao = new UserDAO($conn, $BASE_URL);
 $antecedenteDao = new antecedenteDAO($conn, $BASE_URL);
-//$antecedente = new Paciente();
+
 // Resgata o tipo do formulário
 
 $type = "delete";
@@ -23,7 +23,7 @@ if ($type === "delete") {
     $antecedenteDao = new antecedenteDAO($conn, $BASE_URL);
 
     $antecedente = $antecedenteDao->findById($id_antecedente);
-
+    var_dump($id_antecedente);
     if ($antecedente) {
 
         $antecedenteDao->destroy($id_antecedente);

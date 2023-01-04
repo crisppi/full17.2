@@ -17,7 +17,7 @@
 
     <!--tabela antecedente-->
     <div class="container-fluid py-2">
-        <h2 class="page-title">Relação antecedente</h2>
+        <h2 class="page-title">Relação de antecedentes</h2>
         <div class="menu_pesquisa">
             <form id="form_pesquisa" method="POST">
                 <input type="text" name="pesquisa_antec" id="pesquisa_antec" placeholder="Pesquisa por antecedente">
@@ -71,12 +71,14 @@
 
                                 <a href="<?= $BASE_URL ?>edit_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>
 
-                                <form class=" d-inline-block delete-form" method="POST" action="<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $id_antecedente ?>" id="minhaForm">
+                                <a href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:red; margin-left:10px" name="type" value="edite" class="d-inline-block bi bi-x-square-fill delete-icon"></i></a>
+
+                                <!-- <form class=" d-inline-block delete-form" method="POST" action="<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $id_antecedente ?>" id="minhaForm">
                                     <input type="hidden" name="type" id="type" value="delete">
                                     <input type="hidden" name="confirmado" id="confirmado" value="nao">
                                     <input type="hidden" name="id_antecedente" id="id_antecedente" value="<?= $id_antecedente ?>">
                                     <div><button type="submit" id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
-                                </form>
+                                </form> -->
 
                                 <div id="info"></div>
                             </td>
@@ -89,10 +91,7 @@
                 <p>Deseja deletar este antecedente: <?= $antecedente_ant ?>?</p>
                 <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
                 <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
-
-
             </div>
-
     </div>
 
 <?php }
@@ -101,7 +100,7 @@
         $formData = "0";
         $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if ($formData != "0") {
+        if ($formData !== "0") {
             $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
             //header("Location: index.php");
         } else {
@@ -160,7 +159,8 @@
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'none';
         let mudancaStatus = ($('#deletar-btn').val())
-        console.log(mudancaStatus)
+        console.log(mudancaStatus);
+        window.location = "<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $id_antecedente ?>";
     };
 
     function cancelar() {
