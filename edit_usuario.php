@@ -81,7 +81,7 @@ $usuario = $usuarioDao->findById_user($id_usuario);
 
                 </div>
                 <div class="form-group col-sm-4">
-                    <input type="data" type="hidden" class="form-control" value='<?php echo date("d/m/Y"); ?>' id="data_create" name="data_create" placeholder="">
+                    <input type="date" type="hidden" class="form-control" value='<?php echo date("d/m/Y"); ?>' id="data_create" name="data_create" placeholder="">
                 </div>
                 <div class="form-group col-sm-4">
                     <input type="text" class="form-control" id="usuario_create_user" name="usuario_create_user" placeholder="Digite o usuário">

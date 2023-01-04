@@ -34,9 +34,9 @@ class Usuario
         return bin2hex(random_bytes(50));
     }
 
-    public function generatePassword($senha)
+    public function generatePassword($senha_user)
     {
-        return password_hash($senha, PASSWORD_DEFAULT);
+        return password_hash($senha_user, PASSWORD_DEFAULT);
     }
 
     public function imageGenerateName()
@@ -61,5 +61,3 @@ interface UserDAOInterface
     public function changePassword(Usuario $user);
     public function findGeral();
 }
-
-// faltam dados para corrigir
