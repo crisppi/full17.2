@@ -62,20 +62,20 @@
                         extract($antecedente);
                     ?>
                         <tr>
-                            <td scope="row" class="col-id"><?= $antecedente["id_antecedente"] ?></td>
-                            <td scope="row" class="nome-coluna-table"><?= $antecedente["antecedente_ant"] ?></td>
+                            <td scope="row" class="col-id"><?= $id_antecedente ?></td>
+                            <td scope="row" class="nome-coluna-table"><?= $antecedente_ant ?></td>
 
                             <td class="action">
                                 <a href="cad_antecedente.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a>
-                                <a href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $antecedente["id_antecedente"] ?>"><i style="color:orange; margin-right:10px" class="fas fa-eye check-icon"></i></a>
+                                <a href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:orange; margin-right:10px" class="fas fa-eye check-icon"></i></a>
 
-                                <a href="<?= $BASE_URL ?>edit_antecedente.php?id_antecedente=<?= $antecedente["id_antecedente"] ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>
+                                <a href="<?= $BASE_URL ?>edit_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>
 
-                                <form class=" d-inline-block delete-form" method="POST" action="tratar.php" id="minhaForm">
+                                <form class=" d-inline-block delete-form" method="POST" action="<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $id_antecedente ?>" id="minhaForm">
                                     <input type="hidden" name="type" id="type" value="delete">
                                     <input type="hidden" name="confirmado" id="confirmado" value="nao">
                                     <input type="hidden" name="id_antecedente" id="id_antecedente" value="<?= $id_antecedente ?>">
-                                    <div><button type="submit" onclick=apareceOpcoes() id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
+                                    <div><button type="submit" id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
                                 </form>
 
                                 <div id="info"></div>
@@ -86,9 +86,9 @@
             </table>
 
             <div id="id-confirmacao" class="btn_acoes oculto">
-                <p>Deseja deletar este antecedente: <?= $antecedente["antecedente_ant"] ?>?</p>
+                <p>Deseja deletar este antecedente: <?= $antecedente_ant ?>?</p>
                 <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
-                <button class="btn btn-danger styled" onclick=deletar() value="nao" type="button" id="deletar-btn" name="deletar  ">Deletar</button>
+                <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
 
 
             </div>
@@ -170,5 +170,4 @@
 
     };
     src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js";
-    src = "js/novoJava.js"
 </script>

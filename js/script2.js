@@ -1,9 +1,9 @@
-$("form#form1").on("submit", function(event) {
+$("form").on("submit", function(event) {
     event.preventDefault();
 
     $.ajax({
             type: "POST",
-            url: "/tratar.php",
+            url: "tratar.php",
             data: $(this).serialize(),
 
             //SUCESSO
