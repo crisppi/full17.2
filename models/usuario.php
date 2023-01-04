@@ -3,24 +3,26 @@ class Usuario
 {
 
     public $id_usuario;
-    public $usuarionome;
-    public $endereco;
-    public $bairro;
-    public $cidade;
-    public $numero;
-    public $email02;
-    public $email01;
-    public $telefone01;
-    public $telefone02;
-    public $usuario_create;
-    public $ativo;
-    public $vinculo;
-    public $data_adm;
-    public $cargo;
-    public $nivel;
-    public $reg_profissional;
-    public $cpf;
-    public $senha;
+    public $usuario_user;
+    public $endereco_user;
+    public $bairro_user;
+    public $cidade_user;
+    public $numero_user;
+    public $email02_user;
+    public $email_user;
+    public $telefone01_user;
+    public $telefone02_user;
+    public $usuario_create_user;
+    public $data_create_user;
+    public $ativo_user;
+    public $vinculo_user;
+    public $data_adm_user;
+    public $cargo_user;
+    public $nivel_user;
+    public $reg_profissional_user;
+    public $cpf_user;
+    public $senha_user;
+    public $token;
 
     public function getFullName($user)
     {

@@ -36,7 +36,7 @@ if (empty($id_usuario)) {
             <input type="hidden" name="type" value="create">
             <div class="form-group row">
                 <div class="form-group col-sm-4">
-                    <label for="usuario_user">Usuário</label>
+                    <label for="usuario_user">Nome do Usuário</label>
                     <input type="text" class="form-control" id="usuario_user" name="usuario_user" placeholder="Digite o nome do usuário" required>
                 </div>
                 <div class="form-group col-sm-1">
@@ -103,18 +103,75 @@ if (empty($id_usuario)) {
                         <option value="Não">Não</option>
                     </select>
                 </div>
-                <!-- <div class="form-group col-sm-4">
-                    <input class="oculto" type="date" type="hidden" class="form-control" id="data_create" name="data_create" placeholder="">
+                <div class="form-group col-sm-1">
+                    <label class="control-label" for="data_admissao_user">Admissão</label>
+                    <input class="form-control" type="date" id="data_admissao_user" name="data_admissao_user">
                 </div>
-                <div class="form-group col-sm-4 oculto">
-                    <input type="text" class="form-control" id="usuario_create" name="usuario_create" placeholder="Digite o usuário">
-                </div> -->
             </div>
-            <br>
-            <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
-            <br>
+            <div class="form-group row">
+
+                <div class="form-group col-sm-2 ">
+                    <label class="control-label" for="cargo_user">Sexo</label>
+                    <select class="form-control" name="cargo_user">
+                        <option value="">Cargo</option>
+                        <option value="Administrativo">Administrativo</option>
+                        <option value="Auditor">Auditor</option>
+                        <option value="Gerente">Gerente</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-2 ">
+                    <label class="control-label" for="nivel_user">Nível </label>
+                    <select class="form-control" name="nivel_user">
+                        <option value="">Nível</option>
+                        <option value="nivel01">Nível 01</option>
+                        <option value="nivel02">Nível 02</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-2 ">
+                    <label class="control-label" for="depto_user">Departamento </label>
+                    <select class="form-control" name="depto_user">
+                        <option value="">Departamento</option>
+                        <option value="coordenacao">Coordenação</option>
+                        <option value="auditoria">Auditoria</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-2 ">
+                    <label class="control-label" for="vinculo_user">Vínculo </label>
+                    <select class="form-control" name="vinculo_user">
+                        <option value="">Vínculo</option>
+                        <option value="coordenacao">CLT</option>
+                        <option value="auditoria">Terceiro</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <div class="form-group col-sm-2">
+                    <label for="senha_user">Senha Default</label>
+                    <input type="password" class="form-control" id="senha_user" name="senha_user" placeholder="Digite a senha">
+                </div>
+
+                <div class="form-group col-sm-2">
+                    <label for="data_create_user">Data criação</label>
+                    <input class="form-control" type="date" type="date" class="form-control" id="data_create_user" name="data_create_user" placeholder="">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label for="usuario_create_user">Usuario criação</label>
+                    <input type="text" class="form-control" id="usuario_create_user" name="usuario_create_user" placeholder="Digite o usuário">
+                </div>
+            </div>
+    
+    <div class="form-group row">
+    <div class="form-group col-sm-9">
+                    <label for="obs_user">Observações</label>
+                    <textarea type="textarea" rows="10"class="form-control" id="obs_user" name="obs_user" placeholder="Digite as observações do usuário"></textarea>
+                </div>
     </div>
-    </form>
+    <br>
+    <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
+    <br>
+</div>
+</form>
 </div>
 </div>
 <script>

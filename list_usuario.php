@@ -36,6 +36,7 @@
                     <th scope="col">Id</th>
                     <th scope="col">Usuário</th>
                     <th scope="col">Cargo</th>
+                    <th scope="col">Senha</th>
                     <th scope="col">Endereço</th>
                     <th scope="col">Número</th>
                     <th scope="col">Bairro</th>
@@ -55,6 +56,7 @@
                         <td scope="row" id="id-select" class="col-id id-select"><?= $usuario["id_usuario"] ?></td>
                         <td scope="row" class="nome-coluna-table"><?= $usuario["usuario_user"] ?></td>
                         <td scope="row"><?= $usuario["cargo_user"] ?></td>
+                        <td scope="row"><?= $usuario["senha_user"] ?></td>
                         <td scope="row"><?= $usuario["endereco_user"] ?></td>
                         <td scope="row"><?= $usuario["numero_user"] ?></td>
                         <td scope="row"><?= $usuario["bairro_user"] ?></td>

@@ -66,6 +66,14 @@
     padding: 5px;
     margin-left: 5px;
 }
+.formulario input[type="password"] {
+    background-color: rgb(241, 240, 240);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    font-size: .7em;
+    font-weight: normal;
+    padding: 5px;
+    margin-left: 5px;
+}
 
 .font_nome_form input[type="text"] {
     font-size: .9em;

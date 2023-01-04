@@ -22,15 +22,15 @@ class UserDAO implements UserDAOInterface
 
         $user = new Usuario();
 
-        $user->id_usuario = $data["id_usuario"];
+        $user->id_usuario = $data["id_usuario"]; 
         $user->usuario_user = $data["usuario_user"];
         $user->email_user = $data["email_user"];
-        $user->senha_user = $data["senha_user"];
+        $user->email02_user = $data["email02_user"];
+        $user->senha_user = password_hash($data["senha_user"], PASSWORD_DEFAULT);
         $user->endereco_user = $data["endereco_user"];
         $user->numero_user = $data["numero_user"];
         $user->bairro_user = $data["bairro_user"];
         $user->cidade_user = $data["cidade_user"];
-        $user->email02_user = $data["email02_user"];
         $user->telefone01_user = $data["telefone01_user"];
         $user->telefone02_user = $data["telefone02_user"];
         $user->data_create_user = $data["data_create_user"];
@@ -303,8 +303,8 @@ class UserDAO implements UserDAOInterface
         WHERE id_usuario = :id_usuario
       ");
 
-        $stmt->bindParam(":senha_user", $user->password);
-        $stmt->bindParam(":id_usuario", $user->id);
+        $stmt->bindParam(":senha_user", $user->senha_user);
+        $stmt->bindParam(":id_usuario", $user->id_usuario);
 
         $stmt->execute();
 
