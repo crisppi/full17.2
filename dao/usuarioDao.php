@@ -1,6 +1,7 @@
 <?php
 
 require_once("models/usuario.php");
+require_once("models/senha.php");
 require_once("models/message.php");
 
 class UserDAO implements UserDAOInterface
@@ -42,7 +43,7 @@ class UserDAO implements UserDAOInterface
         $user->cargo_user = $data["cargo_user"];
         $user->cpf_user = $data["cpf_user"];
         $user->reg_profissional_user = $data["reg_profissional_user"];
-
+        $senhaHash = password_hash($data["senha_user"], PASSWORD_DEFAULT);
         return $user;
     }
 
@@ -126,7 +127,7 @@ class UserDAO implements UserDAOInterface
         $stmt->bindParam(":cargo_user", $usuario->cargo_user);
         $stmt->bindParam(":cpf_user", $usuario->cpf_user);
         $stmt->bindParam(":reg_profissional_user", $usuario->reg_profissional_user);
-        $stmt->bindParam(":senha_user", $usuario->senha_user);
+        $stmt->bindParam(":senha_user", $senhaHash);
 
         $stmt->bindParam(":id_usuario", $usuario->id_usuario);
 
