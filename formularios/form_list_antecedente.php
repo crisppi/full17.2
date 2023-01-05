@@ -17,7 +17,7 @@
 
     <!--tabela antecedente-->
     <div class="container-fluid py-2">
-        <h2 class="page-title">Relação de antecedentes</h2>
+        <h4 class="page-title">Relação de antecedentes</h4>
         <div class="menu_pesquisa">
             <form id="form_pesquisa" method="POST">
                 <input type="text" name="pesquisa_antec" id="pesquisa_antec" placeholder="Pesquisa por antecedente">
@@ -125,7 +125,6 @@
         }
         echo "<div style=margin-left:20px;>";
         echo "<div style='color:blue; margin-left:20px;'>";
-        echo "Navegação";
         echo "</div>";
         echo "<nav aria-label='Page navigation example'>";
         echo " <ul class='pagination'>";

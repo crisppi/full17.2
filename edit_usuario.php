@@ -56,11 +56,11 @@ $usuario = $usuarioDao->findById_user($id_usuario);
                     <input type="text" oninput="mascara(this, 'cpf')" value="<?= $usuario->cpf_user ?>" class="form-control" id="cpf_user" name="cpf_user" placeholder="Digite a cpf">
                 </div>
                 <div class="form-group col-sm-2">
-                    <label for="email01">email01</label>
-                    <input type="email_user" class="form-control" id="email_user" value="<?= $usuario->email_user ?>" name="email_user" placeholder="Digite a email01">
+                    <label for="email01">E-mail01</label>
+                    <input type="email" class="form-control" id="email_user" value="<?= $usuario->email_user ?>" name="email_user" placeholder="Digite a email01">
                 </div>
                 <div class="form-group col-sm-2">
-                    <label for="email02_user">email02</label>
+                    <label for="email02_user">E-mail02</label>
                     <input type="email" class="form-control" id="email02_user" value="<?= $usuario->email02_user ?>" name="email02_user" placeholder="Digite a email02">
                 </div>
                 <div class="form-group col-sm-2">
@@ -81,7 +81,7 @@ $usuario = $usuarioDao->findById_user($id_usuario);
 
                 </div>
                 <div class="form-group col-sm-4">
-                    <input type="date" type="hidden" class="form-control" value='<?php echo date("d/m/Y"); ?>' id="data_create" name="data_create" placeholder="">
+                    <input type="date" type="hidden" class="form-control" value='<?php echo date("d/m/Y"); ?>' id="data_create_user" name="data_create_user" placeholder="">
                 </div>
                 <div class="form-group col-sm-4">
                     <input type="text" class="form-control" id="usuario_create_user" name="usuario_create_user" placeholder="Digite o usuário">
