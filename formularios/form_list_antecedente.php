@@ -18,6 +18,10 @@
     <!--tabela antecedente-->
     <div class="container-fluid py-2">
         <h4 class="page-title">Relação de antecedentes</h4>
+        <p> usuario logado </p>
+        <?php
+        $_SESSION['email-login']; ?>
+
         <div class="menu_pesquisa">
             <form id="form_pesquisa" method="POST">
                 <input type="text" name="pesquisa_antec" id="pesquisa_antec" placeholder="Pesquisa por antecedente">

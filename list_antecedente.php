@@ -1,5 +1,15 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['email_login'])) {
+    header('location: index.php');
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 
 <head>
     <meta charset="UTF-8">
