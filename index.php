@@ -1,5 +1,6 @@
 <?php
 require_once("templates/header.php");
+
 if (isset($_POST['email_login'])) {
     $_SESSION['email_login'] = $_POST['email_login'];
 }
