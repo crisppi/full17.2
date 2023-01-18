@@ -3,23 +3,23 @@
 class Estipulante
 {
   public $id_estipulante;
-  public $estipulanteNome;
-  public $cidade;
-  public $endereco;
-  public $email01;
-  public $email02;
-  public $telefone01;
-  public $telefone02;
-  public $numero;
-  public $bairro;
-  public $cnpj;
-  public $ativo;
-  public $coordMedico;
-  public $emailCoordMedico;
-  public $coordFat;
-  public $email_coordFat;
-  public $data_create;
-  public $usuario_create;
+  public $nome_est;
+  public $cidade_est;
+  public $endereco_est;
+  public $email01_est;
+  public $email02_est;
+  public $telefone01_est;
+  public $telefone02_est;
+  public $numero_est;
+  public $bairro_est;
+  public $cnpj_est;
+  public $ativo_est;
+  public $coordMedico_est;
+  public $emailCoordMedico_est;
+  public $coordFat_est;
+  public $email_coordFat_est;
+  public $data_create_est;
+  public $usuario_create_est;
 }
 
 interface EstipulanteDAOInterface
@@ -29,7 +29,7 @@ interface EstipulanteDAOInterface
   public function findAll();
   public function getestipulante();
   public function findById($id_estipulante);
-  //public function findByTitle($title);
+  public function findByEstipulante($pesquisa_nome);
   public function create(Estipulante $estipulante);
   public function update(Estipulante $estipulante);
   public function destroy($id_estipulante);

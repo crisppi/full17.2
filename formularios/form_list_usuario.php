@@ -108,7 +108,7 @@
         </table>
 
         <div id="id-confirmacao" class="btn_acoes oculto">
-            <p>Deseja deletar este usuario: <?= $usuario_ant ?>?</p>
+            <p>Deseja deletar este hospital: <?= $hospital_ant ?>?</p>
             <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
             <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
         </div>
@@ -194,3 +194,5 @@
     };
     src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js";
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

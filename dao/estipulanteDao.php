@@ -43,8 +43,32 @@ class EstipulanteDAO implements EstipulanteDAOInterface
 
     public function findAll()
     {
+        $estipulante = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM tb_estipulante
+        ORDER BY id_estipulante asc");
+
+        $stmt->execute();
+
+        $estipulante = $stmt->fetchAll();
+        return $estipulante;
     }
 
+    public function findByEstipulante($pesquisa_nome)
+    {
+
+        $usuario = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM tb_estipulante
+                                    WHERE nome_est LIKE :nome_est ");
+
+        $stmt->bindValue(":nome_est", '%' . $pesquisa_nome . '%');
+
+        $stmt->execute();
+
+        $usuario = $stmt->fetchAll();
+        return $usuario;
+    }
     public function getestipulante()
     {
 
@@ -256,6 +280,6 @@ $pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
 # Atribui a variável inicio o inicio de onde os registros vão ser
 # mostrados por página, exemplo 0 à 10, 11 à 20 e assim por diante
 $inicio = ($pg * $limite) - $limite;
-$pesquisa_hosp = "";
+$pesquisa_est = "";
 # seleciona o total de registros  
 $sql_Total = 'SELECT id_estipulante FROM tb_estipulante';

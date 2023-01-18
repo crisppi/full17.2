@@ -3,22 +3,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <?php
     include_once("globals.php");
-    include_once("models/seguradora.php");
+    include_once("models/estipulante.php");
     include_once("models/message.php");
-    include_once("dao/seguradoraDao.php");
+    include_once("dao/estipulanteDao.php");
     include_once("templates/header.php");
     include_once("array_dados.php");
 
     //Instanciando a classe
     //Criado o objeto $listareventos
-    $seguradora = new seguradoraDAO($conn, $BASE_URL);
+    $estipulante = new estipulanteDAO($conn, $BASE_URL);
 
     //Instanciar o metodo listar evento
     $pesquisa_ativo = "";
-    $seguradoras = $seguradora->findGeral();
+    $estipulantes = $estipulante->findGeral();
     $pesquisa_nome = "";
     $pesquisa_ativo = "";
-    $pesquisa_seguradora = "";
+    $pesquisa_estipulante = "";
     ?>
 
     <!--tabela evento-->
@@ -30,7 +30,7 @@
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <input type="hidden" name="pesquisa" id="pesquisa" value="sim">
                     <div class="form-group col-sm-2">
-                        <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por seguradora">
+                        <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por estipulante">
                     </div>
 
                     <!-- <div class="form-group col-sm-1">
@@ -57,24 +57,24 @@
 
             // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
             if (($pesquisa_nome != "")) {
-                $query = $seguradora->findBySeguradora($pesquisa_nome);
+                $query = $estipulante->findByEstipulante($pesquisa_nome);
             }
 
             if ($pesquisa_nome == "") {
-                $query = $seguradora->findAll();
+                $query = $estipulante->findAll();
             };
 
 
             ?>
         </div>
         <div>
-            <h4 class="page-title">Relação de Seguradoras</h4>
+            <h4 class="page-title">Relação de estipulantes</h4>
         </div>
         <table class="table table-sm table-striped table-bordered table-hover table-condensed">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">seguradora</th>
+                    <th scope="col">estipulante</th>
                     <th scope="col">Endereço</th>
                     <th scope="col">Cidade</th>
                     <th scope="col">Ações</th>
@@ -83,22 +83,22 @@
             <tbody>
                 <?php
 
-                foreach ($query as $seguradora) :
-                    extract($seguradora);
+                foreach ($query as $estipulante) :
+                    extract($estipulante);
                 ?>
                     <tr>
-                        <td scope="row" class="col-id"><?= $id_seguradora ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $seguradora_seg ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $endereco_seg ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $cidade_seg ?></td>
+                        <td scope="row" class="col-id"><?= $id_estipulante ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $nome_est ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $endereco_est ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $cidade_est ?></td>
 
                         <td class="action">
-                            <!-- <a href="cad_seguradora.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a> -->
-                            <a href="<?= $BASE_URL ?>show_seguradora.php?id_seguradora=<?= $id_seguradora ?>"><i style="color:green; margin-right:10px" class="fas fa-eye check-icon"></i></a>
+                            <!-- <a href="cad_estipulante.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a> -->
+                            <a href="<?= $BASE_URL ?>show_estipulante.php?id_estipulante=<?= $id_estipulante ?>"><i style="color:green; margin-right:10px" class="fas fa-eye check-icon"></i></a>
 
-                            <a href="<?= $BASE_URL ?>edit_seguradora.php?id_seguradora=<?= $id_seguradora ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>
+                            <a href="<?= $BASE_URL ?>edit_estipulante.php?id_estipulante=<?= $id_estipulante ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>
 
-                            <a href="<?= $BASE_URL ?>show_seguradora.php?id_seguradora=<?= $id_seguradora ?>"><i style="color:red; margin-left:10px" name="type" value="edite" class="d-inline-block bi bi-x-square-fill delete-icon"></i></a>
+                            <a href="<?= $BASE_URL ?>show_estipulante.php?id_estipulante=<?= $id_estipulante ?>"><i style="color:red; margin-left:10px" name="type" value="edite" class="d-inline-block bi bi-x-square-fill delete-icon"></i></a>
 
                             <div id="info"></div>
                         </td>
@@ -121,10 +121,10 @@
     $formData = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
     if ($formData !== "0") {
-        $_SESSION['msg'] = "<p style='color: green;'>seguradora cadastrado com sucesso!</p>";
+        $_SESSION['msg'] = "<p style='color: green;'>estipulante cadastrado com sucesso!</p>";
         //header("Location: index.php");
     } else {
-        echo "<p style='color: #f00;'>Erro: seguradora não cadastrado!</p>";
+        echo "<p style='color: #f00;'>Erro: estipulante não cadastrado!</p>";
     };
 
     try {
@@ -148,23 +148,23 @@
     echo "</div>";
     echo "<nav aria-label='Page navigation example'>";
     echo " <ul class='pagination'>";
-    echo " <li class='page-item'><a class='page-link' href='list_seguradora.php?pg=1'><span aria-hidden='true'>&laquo;</span></a></li>";
+    echo " <li class='page-item'><a class='page-link' href='list_estipulante.php?pg=1'><span aria-hidden='true'>&laquo;</span></a></li>";
     if ($qtdPag > 1 && $pg <= $qtdPag) {
         for ($i = 1; $i <= $qtdPag; $i++) {
             if ($i == $pg) {
                 echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
             } else {
-                echo "<li class='page-item '><a class='page-link' href='list_seguradora.php?pg=$i'>" . $i . "</a></li>";
+                echo "<li class='page-item '><a class='page-link' href='list_estipulante.php?pg=$i'>" . $i . "</a></li>";
             }
         }
     }
-    echo "<li class='page-item'><a class='page-link' href='list_seguradora.php?pg=$qtdPag'><span aria-hidden='true'>&raquo;</span></a></li>";
+    echo "<li class='page-item'><a class='page-link' href='list_estipulante.php?pg=$qtdPag'><span aria-hidden='true'>&raquo;</span></a></li>";
     echo " </ul>";
     echo "</nav>";
     echo "</div>"; ?>
     <div>
         <hr>
-        <a class="btn btn-success styled" style="margin-left:120px" href="cad_seguradora.php">Nova seguradora</a>
+        <a class="btn btn-success styled" style="margin-left:120px" href="cad_estipulante.php">Nova estipulante</a>
     </div>
 </body>
 

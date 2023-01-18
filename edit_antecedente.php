@@ -50,4 +50,4 @@ $antecedente = $antecedenteDao->findById($id_antecedente);
 <?php include_once("diversos/backbtn_antecedente.php"); ?>
 
 <?php
-require_once("templates/footer1.php");
+require_once("templates/footer.php");
