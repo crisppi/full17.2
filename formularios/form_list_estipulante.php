@@ -89,8 +89,8 @@
                     <tr>
                         <td scope="row" class="col-id"><?= $id_estipulante ?></td>
                         <td scope="row" class="nome-coluna-table"><?= $nome_est ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $endereco_est ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $cidade_est ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $endereco_seg ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $cidade_seg ?></td>
 
                         <td class="action">
                             <!-- <a href="cad_estipulante.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a> -->
