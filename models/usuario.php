@@ -47,7 +47,6 @@ class Usuario
 
 interface UserDAOInterface
 {
-
     public function buildUser($data);
     public function create(Usuario $usuario);
     public function update(Usuario $usuario);
@@ -56,8 +55,10 @@ interface UserDAOInterface
     public function authenticateUser($email, $senha);
     public function findByEmail($email);
     public function findById_user($id_usuario);
+    public function findByUser($pesquisa_nome);
     public function findByToken($token);
     public function destroy($id_usuario);
     public function changePassword(Usuario $user);
     public function findGeral();
+    public function findAll();
 }

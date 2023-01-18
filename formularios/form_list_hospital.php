@@ -3,39 +3,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <?php
     include_once("globals.php");
-    include_once("models/antecedente.php");
-    include_once("dao/antecedenteDao.php");
+    include_once("models/hospital.php");
+    include_once("dao/hospitalDao.php");
     include_once("templates/header.php");
 
     //Instanciando a classe
-    //Criado o objeto $listarantecedentes
-    $antecedente_geral = new antecedenteDAO($conn, $BASE_URL);
+    //Criado o objeto $listarhospitals
+    $hospital_geral = new hospitalDAO($conn, $BASE_URL);
 
-    //Instanciar o metodo listar antecedente
-    $antecedentes = $antecedente_geral->findGeral();
+    //Instanciar o metodo listar hospital
+    $hospitals = $hospital_geral->findGeral();
     ?>
 
-    <!--tabela antecedente-->
+    <!--tabela hospital-->
     <div class="container-fluid py-2">
-        <h4 class="page-title">Relação de antecedentes</h4>
+        <h4 class="page-title">Relação de hospitals</h4>
 
 
         <div class="menu_pesquisa">
             <form id="form_pesquisa" method="POST">
-                <input type="text" name="pesquisa_antec" id="pesquisa_antec" placeholder="Pesquisa por antecedente">
+                <input type="text" name="pesquisa_hosp" id="pesquisa_hosp" placeholder="Pesquisa por hospital">
                 <input type="hidden" name="pesquisa" id="pesquisa" value="sim">
                 <button style="margin:10px" type="submit" class="btn-sm btn-info">Buscar</button>
             </form>
 
             <?php
-            $pesquisa_antec = filter_input(INPUT_POST, "pesquisa_antec");
+            $pesquisa_hosp = filter_input(INPUT_POST, "pesquisa_hosp");
             ?>
         </div>
         <?php
-        if (!$pesquisa_antec) {
-            $sql = "SELECT * FROM tb_antecedente ORDER BY id_antecedente ASC LIMIT " . $inicio . ", " . $limite;
+        if (!$pesquisa_hosp) {
+            $sql = "SELECT * FROM tb_hospital ORDER BY id_hospital ASC LIMIT " . $inicio . ", " . $limite;
         } else {
-            $sql = "SELECT * FROM tb_antecedente WHERE antecedente_ant like '$pesquisa_antec%' ORDER BY antecedente_ant desc";
+            $sql = "SELECT * FROM tb_hospital WHERE nome_hosp like '$pesquisa_hosp%' ORDER BY nome_hosp desc";
         }
 
         try {
@@ -53,34 +53,27 @@
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">antecedente</th>
+                        <th scope="col">hospital</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
 
-                    foreach ($query  as $antecedente) :
-                        extract($antecedente);
+                    foreach ($query  as $hospital) :
+                        extract($hospital);
                     ?>
                         <tr>
-                            <td scope="row" class="col-id"><?= $id_antecedente ?></td>
-                            <td scope="row" class="nome-coluna-table"><?= $antecedente_ant ?></td>
+                            <td scope="row" class="col-id"><?= $id_hospital ?></td>
+                            <td scope="row" class="nome-coluna-table"><?= $nome_hosp ?></td>
 
                             <td class="action">
-                                <a href="cad_antecedente.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a>
-                                <a href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:orange; margin-right:10px" class="fas fa-eye check-icon"></i></a>
+                                <a href="cad_hospital.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a>
+                                <a href="<?= $BASE_URL ?>show_hospital.php?id_hospital=<?= $id_hospital ?>"><i style="color:orange; margin-right:10px" class="fas fa-eye check-icon"></i></a>
 
-                                <a href="<?= $BASE_URL ?>edit_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>
+                                <a href="<?= $BASE_URL ?>edit_hospital.php?id_hospital=<?= $id_hospital ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>
 
-                                <a href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:red; margin-left:10px" name="type" value="edite" class="d-inline-block bi bi-x-square-fill delete-icon"></i></a>
-
-                                <!-- <form class=" d-inline-block delete-form" method="POST" action="<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $id_antecedente ?>" id="minhaForm">
-                                    <input type="hidden" name="type" id="type" value="delete">
-                                    <input type="hidden" name="confirmado" id="confirmado" value="nao">
-                                    <input type="hidden" name="id_antecedente" id="id_antecedente" value="<?= $id_antecedente ?>">
-                                    <div><button type="submit" id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
-                                </form> -->
+                                <a href="<?= $BASE_URL ?>show_hospital.php?id_hospital=<?= $id_hospital ?>"><i style="color:red; margin-left:10px" name="type" value="edite" class="d-inline-block bi bi-x-square-fill delete-icon"></i></a>
 
                                 <div id="info"></div>
                             </td>
@@ -90,7 +83,7 @@
             </table>
 
             <div id="id-confirmacao" class="btn_acoes oculto">
-                <p>Deseja deletar este antecedente: <?= $antecedente_ant ?>?</p>
+                <p>Deseja deletar este hospital: <?= $hospital_ant ?>?</p>
                 <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
                 <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
             </div>
@@ -130,17 +123,17 @@
         echo "</div>";
         echo "<nav aria-label='Page navigation example'>";
         echo " <ul class='pagination'>";
-        echo " <li class='page-item'><a class='page-link' href='list_antecedente.php?pg=1'><span aria-hidden='true'>&laquo;</span></a></li>";
+        echo " <li class='page-item'><a class='page-link' href='list_hospital.php?pg=1'><span aria-hidden='true'>&laquo;</span></a></li>";
         if ($qtdPag > 1 && $pg <= $qtdPag) {
             for ($i = 1; $i <= $qtdPag; $i++) {
                 if ($i == $pg) {
                     echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
                 } else {
-                    echo "<li class='page-item '><a class='page-link' href='list_antecedente.php?pg=$i'>" . $i . "</a></li>";
+                    echo "<li class='page-item '><a class='page-link' href='list_hospital.php?pg=$i'>" . $i . "</a></li>";
                 }
             }
         }
-        echo "<li class='page-item'><a class='page-link' href='list_antecedente.php?pg=$qtdPag'><span aria-hidden='true'>&raquo;</span></a></li>";
+        echo "<li class='page-item'><a class='page-link' href='list_hospital.php?pg=$qtdPag'><span aria-hidden='true'>&raquo;</span></a></li>";
         echo " </ul>";
         echo "</nav>";
         echo "</div>"; ?>
@@ -161,7 +154,7 @@
         idAcoes.style.display = 'none';
         let mudancaStatus = ($('#deletar-btn').val())
         console.log(mudancaStatus);
-        window.location = "<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $id_antecedente ?>";
+        window.location = "<?= $BASE_URL ?>del_hospital.php?id_hospital=<?= $id_hospital ?>";
     };
 
     function cancelar() {
