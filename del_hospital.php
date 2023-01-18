@@ -18,7 +18,7 @@ $type = "delete";
 
 if ($type === "delete") {
     // Recebe os dados do form
-    $id_hospital = filter_input(INPUT_POST, "id_hospital");
+    $id_hospital = filter_input(INPUT_GET, "id_hospital");
 
     $hospitalDao = new hospitalDAO($conn, $BASE_URL);
 
@@ -31,6 +31,6 @@ if ($type === "delete") {
         include_once('list_hospital.php');
     } else {
 
-        //$message->setMessage("Informações inválidas!", "error", "index.php");
+        $message->setMessage("Informações inválidas!", "error", "index.php");
     }
 }

@@ -21,7 +21,7 @@ if (!isset($_SESSION['email_login'])) {
 
 <?php
 include_once("formularios/form_list_antecedente.php");
-include_once("templates/footer1.php");
+include_once("templates/footer.php");
 ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>

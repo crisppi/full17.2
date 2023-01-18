@@ -18,7 +18,7 @@ $type = "delete";
 
 if ($type === "delete") {
     // Recebe os dados do form
-    $id_internacao = filter_input(INPUT_POST, "id_internacao");
+    $id_internacao = filter_input(INPUT_GET, "id_internacao");
 
     $internacaoDao = new internacaoDAO($conn, $BASE_URL);
 

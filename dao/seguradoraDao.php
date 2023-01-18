@@ -41,8 +41,33 @@ class seguradoraDAO implements seguradoraDAOInterface
         return $seguradora;
     }
 
+    public function findBySeguradora($pesquisa_nome)
+    {
+
+        $seguradora = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM tb_seguradora
+                                    WHERE seguradora_seg LIKE :seguradora_seg ");
+
+        $stmt->bindValue(":seguradora_seg", '%' . $pesquisa_nome . '%');
+
+        $stmt->execute();
+
+        $seguradora = $stmt->fetchAll();
+        return $seguradora;
+    }
+
     public function findAll()
     {
+        $seguradora = [];
+
+        $stmt = $this->conn->query("SELECT * FROM tb_seguradora ORDER BY id_seguradora asc");
+
+        $stmt->execute();
+
+        $seguradora = $stmt->fetchAll();
+
+        return $seguradora;
     }
 
     public function getseguradora()

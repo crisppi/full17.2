@@ -10,7 +10,6 @@ if (!isset($_SESSION['email_login'])) {
 <!DOCTYPE html>
 <html lang="pt-br">
 
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +20,7 @@ if (!isset($_SESSION['email_login'])) {
 
 <?php
 include_once("formularios/form_list_hospital.php");
-include_once("templates/footer1.php");
+include_once("templates/footer.php");
 ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>

@@ -18,7 +18,7 @@ $type = "delete";
 
 if ($type === "delete") {
     // Recebe os dados do form
-    $id_seguradora = filter_input(INPUT_POST, "id_seguradora");
+    $id_seguradora = filter_input(INPUT_GET, "id_seguradora");
 
     $seguradoraDao = new seguradoraDAO($conn, $BASE_URL);
 

@@ -37,7 +37,7 @@ $antecedente = $antecedenteDao->findById($id_antecedente);
 
     </div>
 </div>
-<div class="mensagem-apg">apagado
+<div class="mensagem-apg">apagada
 
 
 </div>

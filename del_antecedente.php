@@ -23,7 +23,6 @@ if ($type === "delete") {
     $antecedenteDao = new antecedenteDAO($conn, $BASE_URL);
 
     $antecedente = $antecedenteDao->findById($id_antecedente);
-    var_dump($id_antecedente);
     if ($antecedente) {
 
         $antecedenteDao->destroy($id_antecedente);

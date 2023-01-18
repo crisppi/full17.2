@@ -3,23 +3,23 @@
 class Seguradora
 {
   public $id_seguradora;
-  public $seguradoraNome;
-  public $cidade;
-  public $endereco;
-  public $email01;
-  public $email02;
-  public $telefone01;
-  public $telefone02;
-  public $numero;
-  public $bairro;
-  public $cnpj;
-  public $ativo;
-  public $coordMedico;
-  public $emailCoordMedico;
-  public $coordFat;
-  public $email_coordFat;
-  public $data_create;
-  public $usuario_create;
+  public $seguradora_seg;
+  public $cidade_seg;
+  public $endereco_seg;
+  public $email01_seg;
+  public $email02_seg;
+  public $telefone01_seg;
+  public $telefone02_seg;
+  public $numero_seg;
+  public $bairro_seg;
+  public $cnpj_seg;
+  public $ativo_seg;
+  public $coordMedico_seg;
+  public $emailCoordMedico_seg;
+  public $coordFat_seg;
+  public $email_coordFat_seg;
+  public $data_create_seg;
+  public $usuario_create_seg;
 }
 
 interface seguradoraDAOInterface
@@ -29,7 +29,7 @@ interface seguradoraDAOInterface
   public function findAll();
   public function getseguradora();
   public function findById($id_seguradora);
-  //public function findByTitle($title);
+  public function findBySeguradora($pesquisa_nome);
   public function create(seguradora $seguradora);
   public function update(seguradora $seguradora);
   public function destroy($id_seguradora);

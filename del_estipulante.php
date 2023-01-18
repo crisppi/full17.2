@@ -18,7 +18,7 @@ $type = "delete";
 
 if ($type === "delete") {
     // Recebe os dados do form
-    $id_estipulante = filter_input(INPUT_POST, "id_estipulante");
+    $id_estipulante = filter_input(INPUT_GET, "id_estipulante");
 
     $estipulanteDao = new estipulanteDAO($conn, $BASE_URL);
 

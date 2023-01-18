@@ -29,7 +29,7 @@ interface HospitalDAOInterface
   public function findAll();
   public function gethospital();
   public function findById($id_hospital);
-  //public function findByTitle($title);
+  public function findByHosp($pesquisa_nome);
   public function create(Hospital $hospital);
   public function update(Hospital $hospital);
   public function destroy($id_hospital);

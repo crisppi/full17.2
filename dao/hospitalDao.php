@@ -42,6 +42,32 @@ class HospitalDAO implements HospitalDAOInterface
 
     public function findAll()
     {
+        $hospital = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM tb_hospital
+        ORDER BY id_hospital asc");
+
+        $stmt->execute();
+
+        $hospital = $stmt->fetchAll();
+        return $hospital;
+    }
+
+
+    public function findByHosp($pesquisa_nome)
+    {
+
+        $usuario = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM tb_hospital
+                                    WHERE nome_hosp LIKE :nome_hosp ");
+
+        $stmt->bindValue(":nome_hosp", '%' . $pesquisa_nome . '%');
+
+        $stmt->execute();
+
+        $usuario = $stmt->fetchAll();
+        return $usuario;
     }
 
     public function gethospital()
@@ -105,30 +131,6 @@ class HospitalDAO implements HospitalDAOInterface
         return $hospital;
     }
 
-    public function findByTitle($pesquisa_hosp)
-    {
-
-        $hospital = [];
-
-        $stmt = $this->conn->prepare("SELECT * FROM tb_hospital
-                                    WHERE nome_hosp LIKE :pesquisa_hosp");
-
-        $stmt->bindValue(":nome_hosp", '%' . $pesquisa_hosp . '%');
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-
-            $hospitalArray = $stmt->fetchAll();
-
-            foreach ($hospitalArray as $hospital) {
-                $hospital[] = $this->buildhospital($hospital);
-            }
-        }
-
-        return $hospital;
-        $query = $hospital;
-    }
 
     public function create(Hospital $hospital)
     {

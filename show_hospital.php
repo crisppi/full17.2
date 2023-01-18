@@ -36,8 +36,48 @@ $hospital = $hospitalDao->findById($id_hospital);
         <hr>
     </div>
 
+    <div id="id-confirmacao" class="btn_acoes visible">
+        <p>Deseja deletar este hospital: <?= $hospital->nome_hosp ?>?</p>
+        <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
+        <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
+
+    </div>
 </div>
+<div class="mensagem-apg">apagada
+
+
+</div>
+</div>
+<script>
+    function apareceOpcoes() {
+        $('#deletar-btn').val('nao');
+        let mudancaStatus = ($('#deletar-btn').val())
+        console.log(mudancaStatus);
+        let idAcoes = (document.getElementById('id-confirmacao'));
+        idAcoes.style.display = 'block';
+    }
+
+    function deletar() {
+        let idAcoes = (document.getElementById('id-confirmacao'));
+        idAcoes.style.display = 'none';
+        window.location = "<?= $BASE_URL ?>del_hospital.php?id_hospital=<?= $id_hospital ?>";
+
+    };
+
+    function cancelar() {
+        let idAcoes = (document.getElementById('id-confirmacao'));
+        idAcoes.style.display = 'none';
+        console.log("chegou no cancelar");
+        window.location = "<?= $BASE_URL ?>del_hospital.php?id_hospital=<?= $id_hospital ?>";
+
+
+    };
+    src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js";
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
 <?php include_once("diversos/backbtn_hospital.php"); ?>
 
 <?php
-include_once("templates/footer1.php");
+include_once("templates/footer.php");
