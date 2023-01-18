@@ -48,6 +48,15 @@ class PacienteDAO implements PacienteDAOInterface
 
     public function findAll()
     {
+        $paciente = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM tb_paciente
+        ORDER BY id_paciente asc");
+
+        $stmt->execute();
+
+        $paciente = $stmt->fetchAll();
+        return $paciente;
     }
 
     public function getpacientes()
@@ -112,28 +121,19 @@ class PacienteDAO implements PacienteDAOInterface
         return $paciente;
     }
 
-    public function findByTitle($title)
+    public function findByPac($pesquisa_nome)
     {
-
-        $pacientes = [];
+        $paciente = [];
 
         $stmt = $this->conn->prepare("SELECT * FROM tb_paciente
-                                    WHERE title LIKE :nome_pac");
+                                    WHERE nome_pac LIKE :nome_pac ");
 
-        $stmt->bindValue(":title", '%' . $title . '%');
+        $stmt->bindValue(":nome_pac", '%' . $pesquisa_nome . '%');
 
         $stmt->execute();
 
-        if ($stmt->rowCount() > 0) {
-
-            $pacientesArray = $stmt->fetchAll();
-
-            foreach ($pacientesArray as $paciente) {
-                $pacientes[] = $this->buildpaciente($paciente);
-            }
-        }
-
-        return $pacientes;
+        $paciente = $stmt->fetchAll();
+        return $paciente;
     }
 
     public function create(Paciente $paciente)
@@ -281,6 +281,6 @@ $pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
 # Atribui a variável inicio o inicio de onde os registros vão ser
 # mostrados por página, exemplo 0 à 10, 11 à 20 e assim por diante
 $inicio = ($pg * $limite) - $limite;
-$pesquisa_hosp = "";
+$pesquisa_pac = "";
 # seleciona o total de registros  
 $sql_Total = 'SELECT id_paciente FROM tb_paciente';

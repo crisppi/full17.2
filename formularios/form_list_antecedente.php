@@ -75,13 +75,6 @@
 
                                 <a href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:red; margin-left:10px" name="type" value="edite" class="d-inline-block bi bi-x-square-fill delete-icon"></i></a>
 
-                                <!-- <form class=" d-inline-block delete-form" method="POST" action="<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $id_antecedente ?>" id="minhaForm">
-                                    <input type="hidden" name="type" id="type" value="delete">
-                                    <input type="hidden" name="confirmado" id="confirmado" value="nao">
-                                    <input type="hidden" name="id_antecedente" id="id_antecedente" value="<?= $id_antecedente ?>">
-                                    <div><button type="submit" id="data-confirm" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class="d-inline-block bi bi-x-square-fill delete-icon"></i></button></div>
-                                </form> -->
-
                                 <div id="info"></div>
                             </td>
                         </tr>

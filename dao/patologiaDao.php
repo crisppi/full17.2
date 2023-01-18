@@ -33,6 +33,15 @@ class patologiaDAO implements patologiaDAOInterface
 
     public function findAll()
     {
+        $patologia = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM tb_patologia
+        ORDER BY id_patologia asc");
+
+        $stmt->execute();
+
+        $patologia = $stmt->fetchAll();
+        return $patologia;
     }
 
     public function getpatologia()
@@ -141,6 +150,21 @@ class patologiaDAO implements patologiaDAOInterface
         $this->message->setMessage("patologia adicionado com sucesso!", "success", "list_patologia.php");
     }
 
+    public function findByPatologia($pesquisa_nome)
+    {
+
+        $patologia = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM tb_patologia
+                                    WHERE patologia_pat LIKE :patologia_pat ");
+
+        $stmt->bindValue(":patologia_pat", '%' . $pesquisa_nome . '%');
+
+        $stmt->execute();
+
+        $patologia = $stmt->fetchAll();
+        return $patologia;
+    }
     public function update(patologia $patologia)
     {
 
@@ -188,3 +212,19 @@ class patologiaDAO implements patologiaDAOInterface
         return $patologia;
     }
 }
+
+
+
+
+# Limita o número de registros a serem mostrados por página
+$limite = 10;
+
+# Se pg não existe atribui 1 a variável pg
+$pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
+
+# Atribui a variável inicio o inicio de onde os registros vão ser
+# mostrados por página, exemplo 0 à 10, 11 à 20 e assim por diante
+$inicio = ($pg * $limite) - $limite;
+$pesquisa_hosp = "";
+# seleciona o total de registros  
+$sql_Total = 'SELECT id_patologia FROM tb_patologia';

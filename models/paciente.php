@@ -3,22 +3,22 @@
 class Paciente
 {
   public $id_paciente;
-  public $nome;
-  public $idade;
-  public $cidade;
-  public $endereco;
-  public $email01;
-  public $email02;
-  public $telefone01;
-  public $telefone02;
-  public $numero;
-  public $bairro;
-  public $cpf;
-  public $mae;
-  public $ativo;
-  public $sexo;
-  public $data_create;
-  public $usuario_create;
+  public $nome_pac;
+  public $idade_pac;
+  public $cidade_pac;
+  public $endereco_pac;
+  public $email01_pac;
+  public $email02_pac;
+  public $telefone01_pac;
+  public $telefone02_pac;
+  public $numero_pac;
+  public $bairro_pac;
+  public $cpf_pac;
+  public $mae_pac;
+  public $ativo_pac;
+  public $sexo_pac;
+  public $data_create_pac;
+  public $usuario_create_pac;
 }
 
 interface PacienteDAOInterface
@@ -28,7 +28,7 @@ interface PacienteDAOInterface
   public function findAll();
   public function getPacientes();
   public function findById($id_paciente);
-  //public function findByTitle($title);
+  public function findByPac($pesquisa_nome);
   public function create(Paciente $paciente);
   public function update(Paciente $paciente);
   public function destroy($id_paciente);

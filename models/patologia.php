@@ -14,7 +14,7 @@ interface patologiaDAOInterface
   public function findAll();
   public function getpatologia();
   public function findById($id_patologia);
-  //public function findByTitle($title);
+  public function findByPatologia($pesquisa_pat);
   public function create(patologia $patologia);
   public function update(patologia $patologia);
   public function destroy($id_patologia);

@@ -18,7 +18,7 @@ $type = "delete";
 
 if ($type === "delete") {
     // Recebe os dados do form
-    $id_patologia = filter_input(INPUT_POST, "id_patologia");
+    $id_patologia = filter_input(INPUT_GET, "id_patologia");
 
     $patologiaDao = new patologiaDAO($conn, $BASE_URL);
 

@@ -32,6 +32,15 @@ class antecedenteDAO implements antecedenteDAOInterface
 
     public function findAll()
     {
+        $antecedente = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM tb_antecedente
+        ORDER BY id_antecedente asc");
+
+        $stmt->execute();
+
+        $antecedente = $stmt->fetchAll();
+        return $antecedente;
     }
 
     public function getantecedente()

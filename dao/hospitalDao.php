@@ -57,7 +57,7 @@ class HospitalDAO implements HospitalDAOInterface
     public function findByHosp($pesquisa_nome)
     {
 
-        $usuario = [];
+        $hospital = [];
 
         $stmt = $this->conn->prepare("SELECT * FROM tb_hospital
                                     WHERE nome_hosp LIKE :nome_hosp ");
@@ -66,8 +66,8 @@ class HospitalDAO implements HospitalDAOInterface
 
         $stmt->execute();
 
-        $usuario = $stmt->fetchAll();
-        return $usuario;
+        $hospital = $stmt->fetchAll();
+        return $hospital;
     }
 
     public function gethospital()
