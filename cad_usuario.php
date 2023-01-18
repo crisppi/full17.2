@@ -271,5 +271,5 @@ if (empty($id_usuario)) {
 
 
 <?php
-require_once("templates/footer1.php");
+require_once("templates/footer.php");
 ?>

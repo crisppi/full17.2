@@ -68,7 +68,7 @@
             ?>
         </div>
         <div>
-            <h4 class="page-title">Relação de eventos</h4>
+            <h4 class="page-title">Relação de usuários</h4>
         </div>
         <table class="table table-sm table-striped table-bordered table-hover table-condensed">
             <thead>
@@ -183,7 +183,7 @@
         idAcoes.style.display = 'none';
         let mudancaStatus = ($('#deletar-btn').val())
         console.log(mudancaStatus);
-        window.location = "<?= $BASE_URL ?>del_evento.php?id_evento=<?= $id_evento ?>";
+        window.location = "<?= $BASE_URL ?>del_usuario.php?id_usuario=<?= $id_usuario ?>";
     };
 
     function cancelar() {

@@ -37,7 +37,47 @@ $usuario = $usuarioDao->findById_user($id_usuario);
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </div>
+
+
+<hr>
+<div id="id-confirmacao" class="btn_acoes visible">
+    <p style="font-weight: bold; font-size:1.0em">Deseja mesmo deletar este usuario?</p>
+    <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
+    <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
+</div>
+</div>
+<!-- mensagem de apagar -->
+<!-- <div styled="margin:0 auto" class="mensagem-apgar">
+    <p styled="margin:0 auto">Apagado</p>
+</div> -->
+<?php include_once("diversos/backbtn_usuario.php"); ?>
+<script>
+    function apareceOpcoes() {
+        $('#deletar-btn').val('nao');
+        let mudancaStatus = ($('#deletar-btn').val())
+        console.log(mudancaStatus);
+        let idAcoes = (document.getElementById('id-confirmacao'));
+        idAcoes.style.display = 'block';
+    }
+
+    function deletar() {
+        let idAcoes = (document.getElementById('id-confirmacao'));
+        idAcoes.style.display = 'none';
+        window.location = "<?= $BASE_URL ?>del_usuario.php?id_usuario=<?= $id_usuario ?>";
+
+    };
+
+    function cancelar() {
+        let idAcoes = (document.getElementById('id-confirmacao'));
+        idAcoes.style.display = 'none';
+        console.log("chegou no cancelar");
+        window.location = "<?= $BASE_URL ?>list_usuario.php";
+
+
+    };
+    src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js";
+</script>
 <?php include_once("diversos/backbtn_usuarios.php"); ?>
 
 <?php
-include_once("templates/footer1.php");
+include_once("templates/footer.php");
