@@ -22,7 +22,6 @@ if ($type === "create") {
     $patologia_pat = filter_input(INPUT_POST, "patologia_pat");
     $dias_pato = filter_input(INPUT_POST, "dias_pato");
 
-
     $patologia = new patologia();
 
     // Validação mínima de dados
@@ -30,7 +29,6 @@ if ($type === "create") {
 
         $patologia->patologia_pat = $patologia_pat;
         $patologia->dias_pato = $dias_pato;
-
 
         $patologiaDao->create($patologia);
     } else {
