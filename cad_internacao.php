@@ -1,16 +1,22 @@
 <?php
-include_once("globals.php");
 
 require_once("templates/header.php");
+include_once("models/internacao.php");
 require_once("dao/internacaoDao.php");
-require_once("models/message.php");
+// require_once("models/message.php");
+
 include_once("models/hospital.php");
 include_once("dao/hospitalDao.php");
+
 include_once("models/patologia.php");
 include_once("dao/patologiaDao.php");
+
+include_once("models/paciente.php");
 require_once("dao/pacienteDAO.php");
+
 include_once("models/gestao.php");
 include_once("dao/gestaoDao.php");
+include_once("array_dados.php");
 
 $internacaoDao = new internacaoDAO($conn, $BASE_URL);
 $hospital_geral = new hospitalDAO($conn, $BASE_URL);
@@ -23,33 +29,34 @@ $gestao = new gestaoDAO($conn, $BASE_URL);
 $gestaoIdMax = $gestao->findMax();
 
 // Receber id do usuário
-$id_internacao = filter_input(INPUT_GET, "id_internacao");
+// $id_internacao = filter_input(INPUT_GET, "id_internacao");
 
-if (empty($id_internacao)) {
+// if (empty($id_internacao)) {
 
-    if (!empty($userData)) {
+//     if (!empty($userData)) {
 
-        $id = $userData->id_internacao;
-    } else {
+//         $id = $userData->id_internacao;
+//     } else {
 
-        //$message->setMessage("Usuário não encontrado!", "error", "index.php");
-    }
-} else {
+//         //$message->setMessage("Usuário não encontrado!", "error", "index.php");
+//     }
+// } else {
 
-    $userData = $userDao->findById($id_internacao);
+//     $userData = $userDao->findById($id_internacao);
 
-    // Se não encontrar usuário
-    if (!$userData) {
-        $message->setMessage("internacao não encontrada!", "error", "index.php");
-    }
-}
+//     // Se não encontrar usuário
+//     if (!$userData) {
+//         $message->setMessage("internacao não encontrada!", "error", "index.php");
+//     }
+// }
 
 ?>
-<div id="main-container" class="container-fluid">
+<div id="main-container" class="container">
     <div class="row">
 
         <h2 class="page-title">Cadastrar internação</h2>
         <p class="page-description">Adicione informações sobre a internação</p>
+
         <form class="formulario visible" action="<?= $BASE_URL ?>process_internacao.php" id="add-internacao-form" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="type" value="create">
 
@@ -77,7 +84,7 @@ if (empty($id_internacao)) {
                     <input type="date" class="form-control" id="data_intern_int" name="data_intern_int">
                 </div>
                 <div class="form-group col-sm-1">
-                    <label for="data_visita_int">Data da Visita</label>
+                    <label for="data_visita_int">Data1 Visita</label>
                     <input type="date" class="form-control" id="data_visita_int" name="data_visita_int">
                 </div>
                 <div class="form-group col-sm-1">
@@ -95,13 +102,11 @@ if (empty($id_internacao)) {
                     <label class="control-label" for="acomodacao_int">Acomodação</label>
                     <select class="form-control" id="acomodacao_int" name="acomodacao_int">
                         <option value=""></option>
-                        <option value="UTI">UTI</option>
-                        <option value="Semi">Semi</option>
-                        <option value="Apto">Apto</option>
-                        <option value="Enfermaria">Enfermaria</option>
-                        <option value="Uco">Uco</option>
-                        <option value="Maternidade">Maternidade</option>
-                        <option value="Berçário">Berçário</option>
+                        <?php
+                        sort($dados_acomodacao, SORT_ASC);
+                        foreach ($dados_acomodacao as $acomd) { ?>
+                            <option value="<?= $acomod; ?>"><?= $acomd; ?></option>
+                        <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-sm-2">

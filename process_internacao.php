@@ -26,8 +26,8 @@ if ($type === "create") {
     $fk_patologia2 = filter_input(INPUT_POST, "fk_patologia2");
     $internado_int = filter_input(INPUT_POST, "internado_int");
     $modo_admissao_int = filter_input(INPUT_POST, "modo_internacao_int");
-    $tipo_internacao_int = filter_input(INPUT_POST, "modo_internacao_int");
-    $data_visita_int = filter_input(INPUT_POST, "data_visita_int");
+    $tipo_admissao_int = filter_input(INPUT_POST, "tipo_admissao_int");
+    $data_visita_int = filter_input(INPUT_POST, "data_visita_int") ?: null;
     $acoes_int = filter_input(INPUT_POST, "acoes_int");
     $titular_int = filter_input(INPUT_POST, "titular_int");
     $especialidade_int = filter_input(INPUT_POST, "especialidade_int");
@@ -46,8 +46,8 @@ if ($type === "create") {
         $internacao->fk_patologia_int = $fk_patologia_int;
         $internacao->fk_patologia2 = $fk_patologia2;
         $internacao->internado_int = $internado_int;
-        $internacao->tipo_internacao_int = $tipo_internacao_int;
-        $internacao->modo_admissao_int = $modo_admissao_int;
+        $internacao->modo_internacao_int = $modo_internacao_int;
+        $internacao->tipo_admissao_int = $tipo_admissao_int;
         $internacao->grupo_patologia_int = $grupo_patologia_int;
         $internacao->data_visita_int = $data_visita_int;
         $internacao->especialidade_int = $especialidade_int;

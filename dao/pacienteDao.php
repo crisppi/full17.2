@@ -4,7 +4,6 @@ require_once("./models/paciente.php");
 require_once("./models/message.php");
 
 // Review DAO
-require_once("dao/pacienteDao.php");
 
 class PacienteDAO implements PacienteDAOInterface
 {
@@ -59,30 +58,8 @@ class PacienteDAO implements PacienteDAOInterface
         return $paciente;
     }
 
-    public function getpacientes()
-    {
-
-        $pacientes = [];
-
-        $stmt = $this->conn->query("SELECT * FROM tb_paciente ORDER BY id_paciente asc");
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-
-            $pacientesArray = $stmt->fetchAll();
-
-            foreach ($pacientesArray as $paciente) {
-                $pacientes[] = $this->buildpaciente($paciente);
-            }
-        }
-
-        return $pacientes;
-    }
-
     public function getpacientesBynome_pac($nome_pac)
     {
-
         $pacientes = [];
 
         $stmt = $this->conn->prepare("SELECT * FROM tb_paciente
@@ -90,18 +67,11 @@ class PacienteDAO implements PacienteDAOInterface
                                     ORDER BY id_paciente asc");
 
         $stmt->bindParam(":nome_pac", $nome_pac);
-
         $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-
-            $pacientesArray = $stmt->fetchAll();
-
-            foreach ($pacientesArray as $paciente) {
-                $pacientes[] = $this->buildpaciente($paciente);
-            }
+        $pacientesArray = $stmt->fetchAll();
+        foreach ($pacientesArray as $paciente) {
+            $pacientes[] = $this->buildpaciente($paciente);
         }
-
         return $pacientes;
     }
 
@@ -110,7 +80,6 @@ class PacienteDAO implements PacienteDAOInterface
         $paciente = [];
         $stmt = $this->conn->prepare("SELECT * FROM tb_paciente
                                     WHERE id_paciente = :id_paciente");
-
         $stmt->bindParam(":id_paciente", $id_paciente);
         $stmt->execute();
 

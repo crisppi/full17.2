@@ -28,7 +28,7 @@ if (empty($id_hospital)) {
 }
 
 ?>
-<div id="main-container" class="container-fluid">
+<div id="main-container" class="container">
     <div class="row">
         <h1 class="page-title">Cadastrar Paciente</h1>
         <p class="page-description">Adicione informações sobre o paciente</p>
