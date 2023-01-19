@@ -1,7 +1,5 @@
 <?php
 
-require_once("globals.php");
-require_once("db.php");
 require_once("models/internacao.php");
 require_once("models/message.php");
 require_once("dao/usuarioDao.php");
