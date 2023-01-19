@@ -8,7 +8,6 @@ require_once("dao/antecedenteDao.php");
 
 class antecedenteDAO implements antecedenteDAOInterface
 {
-
     private $conn;
     private $url;
     public $message;
@@ -40,27 +39,6 @@ class antecedenteDAO implements antecedenteDAOInterface
         $stmt->execute();
 
         $antecedente = $stmt->fetchAll();
-        return $antecedente;
-    }
-
-    public function getantecedente()
-    {
-
-        $antecedente = [];
-
-        $stmt = $this->conn->query("SELECT * FROM tb_antecedente ORDER BY id_antecedente asc");
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-
-            $antecedenteArray = $stmt->fetchAll();
-
-            foreach ($antecedenteArray as $antecedente) {
-                $antecedente[] = $this->buildantecedente($antecedente);
-            }
-        }
-
         return $antecedente;
     }
 
@@ -105,29 +83,7 @@ class antecedenteDAO implements antecedenteDAOInterface
         return $antecedente;
     }
 
-    public function findByTitle($title)
-    {
 
-        $antecedente = [];
-
-        $stmt = $this->conn->prepare("SELECT * FROM tb_antecedente
-                                    WHERE title LIKE :nome");
-
-        $stmt->bindValue(":title", '%' . $title . '%');
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-
-            $antecedenteArray = $stmt->fetchAll();
-
-            foreach ($antecedenteArray as $antecedente) {
-                $antecedente[] = $this->buildantecedente($antecedente);
-            }
-        }
-
-        return $antecedente;
-    }
 
     public function create(antecedente $antecedente)
     {

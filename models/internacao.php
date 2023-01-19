@@ -22,8 +22,8 @@ class Internacao
   public $fk_antecedente_int;
   public $fk_capeante_int;
   public $fk_patologia_int;
-  public $fk_patologia2_int;
-  public $fk_usuario_int;
+  public $fk_patologia2;
+  public $fk_user_int;
   public $fk_uti;
   public $grupo_patologia_int;
   public $hospital_int;
@@ -32,7 +32,7 @@ class Internacao
   public $internado_int;
   public $internado_uti_int;
   public $isolamento_int;
-  public $modo_admissao_int;
+  public $tipo_admissao_int;
   public $no_visita_int;
   public $obito_int;
   public $paciente_int;
@@ -40,8 +40,9 @@ class Internacao
   public $patologia2_int;
   public $primeira_visita_int;
   public $senha_int;
+  public $rel_int;
   public $tipo_alta_int;
-  public $tipo_internacao_int;
+  public $modo_internacao_int;
   public $titular_int;
   public $fk_negociacoes_int;
 }

@@ -234,9 +234,37 @@ class InternacaoDAO implements InternacaoDAOInterface
     {
 
         $stmt = $this->conn->prepare("INSERT INTO tb_internacao (
-         fk_hospital_int, rel_int, fk_paciente_int, fk_user_int, fk_patologia_int, fk_patologia2, data_intern_int, internado_int, modo_internacao_int, tipo_admissao_int, acoes_int, titular_int, data_visita_int, grupo_patologia_int, especialidade_int
+         fk_hospital_int, 
+         rel_int, 
+         fk_paciente_int, 
+         fk_user_int, 
+         fk_patologia_int, 
+         fk_patologia2, 
+         data_intern_int, 
+         internado_int, 
+         modo_internacao_int, 
+         tipo_admissao_int, 
+         acoes_int, 
+         titular_int, 
+         data_visita_int, 
+         grupo_patologia_int, 
+         especialidade_int
       ) VALUES (
-        :fk_hospital_int, :rel_int, :fk_paciente_int, :fk_user_int, :fk_patologia_int, :fk_patologia2, :data_intern_int, :internado_int, :modo_internacao_int, :tipo_admissao_int, :acoes_int, :titular_int, :data_visita_int, :grupo_patologia_int, :especialidade_int
+        :fk_hospital_int, 
+        :rel_int, 
+        :fk_paciente_int, 
+        :fk_user_int, 
+        :fk_patologia_int, 
+        :fk_patologia2, 
+        :data_intern_int, 
+        :internado_int, 
+        :modo_internacao_int, 
+        :tipo_admissao_int, 
+        :acoes_int, 
+        :titular_int, 
+        :data_visita_int, 
+        :grupo_patologia_int, 
+        :especialidade_int
      )");
 
         $stmt->bindParam(":fk_hospital_int", $internacao->fk_hospital_int);
@@ -302,7 +330,7 @@ class InternacaoDAO implements InternacaoDAOInterface
         $stmt->bindParam(":rel_int", $internacao->rel_int);
         $stmt->bindParam(":grupo_patologia_int", $internacao->grupo_patologia_int);
         $stmt->bindParam(":fk_user_int", $internacao->fk_user_int);
-        $stmt->bindParam(":id_internacao_int", $internacao->id_internacao_int);
+        $stmt->bindParam(":id_internacao", $internacao->id_internacao);
 
         $stmt->execute();
 
