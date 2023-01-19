@@ -68,7 +68,7 @@
             ?>
         </div>
         <div>
-            <h4 class="page-title">Relação de usuários</h4>
+            <h4 class="page-title">Relação de pacientes</h4>
         </div>
         <table class="table table-sm table-striped table-bordered table-hover table-condensed">
             <thead>
@@ -164,7 +164,7 @@
     echo "</div>"; ?>
     <div>
         <hr>
-        <a class="btn btn-success styled" style="margin-left:120px" href="cad_paciente.php">Novo usuário</a>
+        <a class="btn btn-success styled" style="margin-left:120px" href="cad_paciente.php">Novo paciente</a>
     </div>
 </body>
 

@@ -1,5 +1,4 @@
 <?php
-include_once("globals.php");
 
 require_once("templates/header.php");
 require_once("dao/internacaoDao.php");
