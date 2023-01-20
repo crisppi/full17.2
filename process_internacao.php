@@ -1,13 +1,14 @@
 <?php
+require_once("globals.php");
+require_once("db.php");
+require_once("models/internacao.php");
+require_once("models/message.php");
+require_once("dao/usuarioDao.php");
+require_once("dao/internacaoDao.php");
 
-// require_once("models/internacao.php");
-// require_once("models/message.php");
-// require_once("dao/usuarioDao.php");
-// require_once("dao/internacaoDao.php");
-
-// $message = new Message($BASE_URL);
-// $userDao = new UserDAO($conn, $BASE_URL);
-// $internacaoDao = new InternacaoDAO($conn, $BASE_URL);
+$message = new Message($BASE_URL);
+$userDao = new UserDAO($conn, $BASE_URL);
+$internacaoDao = new InternacaoDAO($conn, $BASE_URL);
 
 // Resgata o tipo do formulário
 $type = filter_input(INPUT_POST, "type");
@@ -17,8 +18,8 @@ if ($type === "create") {
 
     // Receber os dados dos inputs
     $rel_int = filter_input(INPUT_POST, "rel_int") ?: null;
-    $fk_hospital_int = filter_input(INPUT_POST, "fk_hospital_int") ?: null;
-    $fk_paciente_int = filter_input(INPUT_POST, "fk_paciente_int") ?: null;
+    $fk_hospital_int = filter_input(INPUT_POST, "fk_hospital_int");
+    $fk_paciente_int = filter_input(INPUT_POST, "fk_paciente_int");
     // $fk_patologia_int = filter_input(INPUT_POST, "fk_patologia_int");
     // $fk_patologia2 = filter_input(INPUT_POST, "fk_patologia2");
     // $internado_int = filter_input(INPUT_POST, "internado_int");
@@ -33,13 +34,13 @@ if ($type === "create") {
     // $usuario_create = filter_input(INPUT_POST, "usuario_create_int");
     // $data_create = filter_input(INPUT_POST, "data_create");
 
-    // $internacao = new internacao();
+    $internacao = new internacao();
 
     // Validação mínima de dados
     if (3 < 4) {
 
-        $internacao->fk_hospital_int = $fk_hospital_int;
         $internacao->fk_paciente_int = $fk_paciente_int;
+        $internacao->fk_hospital_int = $fk_hospital_int;
         // $internacao->fk_patologia_int = $fk_patologia_int;
         // $internacao->fk_patologia2 = $fk_patologia2;
         // $internacao->internado_int = $internado_int;
@@ -56,6 +57,7 @@ if ($type === "create") {
         // $internacao->data_create = $data_create;
 
         $internacaoDao->create($internacao);
+        include_once('list_internacao.php');
     } else {
         header("Location: javascript:history.back(1)");
         $message->setMessage("Você precisa adicionar pelo menos: nome da internacao!", "error", "list_internacao.php");
