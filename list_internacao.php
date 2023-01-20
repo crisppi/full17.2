@@ -74,94 +74,41 @@
     <?php
     $pesquisa_hosp = "";
     $type = "";
+    $pesqInternado = "";
+    $limite = "";
+    $inicio = "";
 
     $pesquisa_hosp = filter_input(INPUT_POST, "pesquisa_hosp");
-    $pesquisa_int = filter_input(INPUT_POST, "pesqInternado");
+    $pesqInternado = filter_input(INPUT_POST, "pesqInternado");
     $type = filter_input(INPUT_POST, "type");
     ?>
     <?php
-    if ($type === "pesquisaList") {
-        $sql = "SELECT 
-        ac.id_internacao,
-        ac.data_intern_int,
-        ac.acomodacao_int,
-        ac.fk_hospital_int,
-        ac.fk_paciente_int,
-        ac.data_visita_int,
-        ac.rel_int,
-        ac.internado_int,
-        ac.acoes_int,
-        ac.modo_internacao_int,
-        ac.especialidade_int,
-        ac.grupo_patologia_int,
-        ac.tipo_admissao_int,
-        ac.titular_int,
-        ho.id_hospital,
-        ho.nome_hosp,
-        pa.id_paciente,
-        pa.nome_pac, 
-        pat.id_patologia,
-        pat.patologia_pat 
-
-        FROM tb_internacao ac
-
-        iNNER JOIN tb_hospital as ho On  
-        ac.fk_hospital_int = ho.id_hospital
-        
-        left join tb_paciente as pa on
-        ac.fk_paciente_int = pa.id_paciente
-
-        left join tb_patologia as pat on
-        ac.fk_patologia_int = pat.id_patologia
-
-        WHERE ho.id_hospital Like '$pesquisa_hosp%' AND ac.internado_int = '$pesquisa_int'
-        
-        ORDER BY id_internacao 
-
-        ASC LIMIT " . $inicio . ", " . $limite;
-    } else {
-        $sql = ("SELECT 
-        ac.id_internacao, 
-        ac.acoes_int, 
-        ac.data_intern_int, 
-        ac.data_visita_int, 
-        ac.rel_int, 
-        ac.fk_paciente_int, 
-        ac.fk_user_int, 
-        ac.fk_hospital_int, 
-        ac.modo_internacao_int, 
-        ac.tipo_admissao_int,
-        ac.especialidade_int, 
-        ac.titular_int, 
-        ac.grupo_patologia_int, 
-        ac.acomodacao_int, 
-        ac.fk_patologia_int, 
-        ac.fk_patologia2, 
-        ac.internado_int,
-        pa.id_paciente,
-        pa.nome_pac,
-        ho.id_hospital, 
-        ho.nome_hosp,
-        pat.patologia_pat 
-
-        FROM tb_internacao ac 
-
-        iNNER JOIN tb_hospital as ho On  
-        ac.fk_hospital_int = ho.id_hospital
-
-        left join tb_paciente as pa on
-        ac.fk_paciente_int = pa.id_paciente
-
-        left join tb_patologia as pat on
-        ac.fk_patologia_int = pat.id_patologia
-
-        ");
+    // validacao do formulario
+    if (isset($_POST['pesqInternado'])) {
+        $pesqInternado = $_POST['pesqInternado'];
     }
+
+    if (isset($_POST['pesquisa_hosp'])) {
+        $pesquisa_hosp = $_POST['pesquisa_hosp'];
+    }
+
+    // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
+    if (($pesquisa_hosp != "")) {
+        $query = $internacao->findInternByHosp($pesquisa_hosp, $limite, $inicio);
+    }
+
+    if (($pesqInternado != "")) {
+        $query = $internacao->findInternByInternado($pesqInternado, $limite, $inicio);
+    }
+    if (($pesqInternado != "") || ($pesquisa_hosp != "")) {
+        $query = $internacao->findInternAll($limite, $inicio);
+    }
+
 
     try {
 
-        $internacaos = $conn->prepare($sql);
-        $internacaos->execute();
+        $internacao = $conn->prepare($sql);
+        $internacao->execute();
     } catch (PDOexception $error_sql) {
         echo 'Erro ao retornar os Dados.' . $error_sql->getMessage();
     } ?>

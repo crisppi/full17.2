@@ -27,20 +27,20 @@ class InternacaoDAO implements InternacaoDAOInterface
         $internacao->id_internacao = $data['id_internacao'];
         $internacao->fk_hospital_int = $data["fk_hospital_int"];
         $internacao->fk_paciente_int = $data["fk_paciente_int"];
-        // $internacao->acoes_int = $data["acoes_int"];
+        $internacao->acoes_int = $data["acoes_int"];
         $internacao->fk_patologia_int = $data["fk_patologia_int"];
         $internacao->fk_patologia2 = $data["fk_patologia2"];
-        // $internacao->acomodacao_int = $data["acomodacao_int"];
-        // $internacao->modo_internacao_int = $data["modo_internacao_int"];
-        // $internacao->tipo_admissao_int = $data["tipo_admissao_int"];
-        // $internacao->data_intern_int = $data["data_intern_int"];
-        // //$internacao->data_visita_int = $data["data_visita_int"];
-        // // $internacao->data_create = $internacao["data_create"];
-        // $internacao->fk_user_int = $data["fk_user_int"];
-        // $internacao->titular_int = $data["titular_int"];
-        // $internacao->especialidade_int = $data["especialidade_int"];
-        // $internacao->grupo_patologia_int = $data["grupo_patologia_int"];
-        // $internacao->internado_int = $data["internado_int"];
+        $internacao->acomodacao_int = $data["acomodacao_int"];
+        $internacao->modo_internacao_int = $data["modo_internacao_int"];
+        $internacao->tipo_admissao_int = $data["tipo_admissao_int"];
+        $internacao->data_intern_int = $data["data_intern_int"];
+        //$internacao->data_visita_int = $data["data_visita_int"];
+        // $internacao->data_create = $internacao["data_create"];
+        $internacao->fk_user_int = $data["fk_user_int"];
+        $internacao->titular_int = $data["titular_int"];
+        $internacao->especialidade_int = $data["especialidade_int"];
+        $internacao->grupo_patologia_int = $data["grupo_patologia_int"];
+        $internacao->internado_int = $data["internado_int"];
         $internacao->rel_int = $data['rel_int'];
 
         return $internacao;
@@ -51,7 +51,28 @@ class InternacaoDAO implements InternacaoDAOInterface
 
         $internacao = [];
 
-        $stmt = $this->conn->query("SELECT ac.id_internacao, ac.acoes_int, ac.fk_patologia_int, ac.data_intern_int, ac.rel_int, ac.fk_paciente_int, pa.id_paciente, pa.nome_pac, ac.tipo_admissao_int, ac.fk_hospital_int, ac.fk_patologia_int, ac.modo_internacao_int, ho.id_hospital, ho.nome_hosp, ac.acomodacao_int, ac.fk_patologia2, pat.patologia_pat, ac.titular_int, ac.data_visita_int, ac.especialidade_int, ac.grupo_patologia_int, ac.internado_int
+        $stmt = $this->conn->query("SELECT ac.id_internacao, 
+        ac.acoes_int, 
+        ac.fk_patologia_int, 
+        ac.data_intern_int, 
+        ac.rel_int, 
+        ac.fk_paciente_int, 
+        pa.id_paciente, 
+        pa.nome_pac, 
+        ac.tipo_admissao_int, 
+        ac.fk_hospital_int, 
+        ac.fk_patologia_int, 
+        ac.modo_internacao_int, 
+        ho.id_hospital, 
+        ho.nome_hosp, 
+        ac.acomodacao_int, 
+        ac.fk_patologia2, 
+        pat.patologia_pat, 
+        ac.titular_int, 
+        ac.data_visita_int, 
+        ac.especialidade_int, 
+        ac.grupo_patologia_int, 
+        ac.internado_int
          FROM tb_internacao ac 
 
          iNNER JOIN tb_hospital as ho On  
@@ -70,9 +91,31 @@ class InternacaoDAO implements InternacaoDAOInterface
     }
     public function joininternacaoHospitalSelect()
     {
-
         $internacao = [];
-        $stmt = $this->conn->query("SELECT ac.id_internacao, ac.acoes_int, ac.fk_patologia_int, ac.data_inter_int, ac.rel_auditoria, ac.fk_paciente_int, pa.id_paciente, pa.nome_pac, ac.tipo_admissao_int, ac.fk_hospital_int, ac.fk_patologia_int, ac.tipo_internacao_int, ho.id_hospital, ho.nome_hosp, ac.acomodacao_int, ac.fk_patologia1, pat.patologia_pat, ac.titular_int, ac.data_visita_int, ac.especialidade_int, ac.grupo_patologia_int, ac.internado_int
+        $stmt = $this->conn->query("SELECT 
+        ac.id_internacao, 
+        ac.acoes_int, 
+        ac.fk_patologia_int, 
+        ac.data_inter_int, 
+        ac.rel_auditoria, 
+        ac.fk_paciente_int, 
+        pa.id_paciente, 
+        pa.nome_pac, 
+        ac.tipo_admissao_int, 
+        ac.fk_hospital_int, 
+        ac.fk_patologia_int, 
+        ac.tipo_internacao_int, 
+        ho.id_hospital, 
+        ho.nome_hosp, 
+        ac.acomodacao_int, 
+        ac.fk_patologia1, 
+        pat.patologia_pat, 
+        ac.titular_int, 
+        ac.data_visita_int, 
+        ac.especialidade_int, 
+        ac.grupo_patologia_int, 
+        ac.internado_int
+
          FROM tb_internacao ac 
 
          iNNER JOIN tb_hospital as ho On  
@@ -95,7 +138,30 @@ class InternacaoDAO implements InternacaoDAOInterface
     public function joininternacaoHospitalshow($id_internacao)
 
     {
-        $stmt = $this->conn->query("SELECT ac.id_internacao, ac.acoes_int,  ac.internado_int, ac.fk_patologia_int, ac.data_intern_int, ac.rel_int, ac.fk_paciente_int, ac.acomodacao_int, pa.id_paciente, pa.nome_pac, ac.fk_user_int, ac.fk_hospital_int, ac.modo_internacao_int, ac.tipo_admissao_int, ho.id_hospital, ho.nome_hosp, ac.especialidade_int, ac.titular_int, ac.data_visita_int, ac.grupo_patologia_int, ac.acomodacao_int, ac.fk_patologia_int, pat.patologia_pat
+        $stmt = $this->conn->query("SELECT ac.id_internacao, 
+        ac.acoes_int,  
+        ac.internado_int, 
+        ac.fk_patologia_int, 
+        ac.data_intern_int, 
+        ac.rel_int, 
+        ac.fk_paciente_int, 
+        ac.acomodacao_int, 
+        pa.id_paciente, 
+        pa.nome_pac, 
+        ac.fk_user_int, 
+        ac.fk_hospital_int, 
+        ac.modo_internacao_int, 
+        ac.tipo_admissao_int, 
+        ho.id_hospital, 
+        ho.nome_hosp, 
+        ac.especialidade_int, 
+        ac.titular_int, 
+        ac.data_visita_int, 
+        ac.grupo_patologia_int, 
+        ac.acomodacao_int, 
+        ac.fk_patologia_int, 
+        pat.patologia_pat
+
         FROM tb_internacao ac 
 
         iNNER JOIN tb_hospital as ho On  
@@ -218,13 +284,11 @@ class InternacaoDAO implements InternacaoDAOInterface
 
         $stmt->execute();
 
-        if ($stmt->rowCount() > 0) {
 
-            $internacaoArray = $stmt->fetchAll();
+        $internacaoArray = $stmt->fetchAll();
 
-            foreach ($internacaoArray as $internacao) {
-                $internacao[] = $this->buildinternacao($internacao);
-            }
+        foreach ($internacaoArray as $internacao) {
+            $internacao[] = $this->buildinternacao($internacao);
         }
         return $internacao;
     }
@@ -234,53 +298,53 @@ class InternacaoDAO implements InternacaoDAOInterface
         $stmt = $this->conn->prepare("INSERT INTO tb_internacao (
          fk_hospital_int, 
          rel_int, 
-         fk_paciente_int 
-        --  fk_user_int, 
-        --  fk_patologia_int, 
-        --  fk_patologia2, 
-        --  data_intern_int, 
-        --  internado_int, 
-        --  modo_internacao_int, 
-        --  tipo_admissao_int, 
-        --  acoes_int, 
-        --  titular_int, 
-        --  data_visita_int, 
-        --  grupo_patologia_int, 
-        --  especialidade_int
+         fk_paciente_int, 
+         fk_user_int, 
+         fk_patologia_int, 
+         fk_patologia2, 
+         data_intern_int, 
+         internado_int, 
+         modo_internacao_int, 
+         tipo_admissao_int, 
+         acoes_int, 
+         titular_int, 
+         data_visita_int, 
+         grupo_patologia_int, 
+         especialidade_int
 
       ) VALUES (
         :fk_hospital_int, 
         :rel_int, 
-        :fk_paciente_int 
-        -- :fk_user_int, 
-        -- :fk_patologia_int, 
-        -- :fk_patologia2, 
-        -- :data_intern_int, 
-        -- :internado_int, 
-        -- :modo_internacao_int, 
-        -- :tipo_admissao_int, 
-        -- :acoes_int, 
-        -- :titular_int, 
-        -- :data_visita_int, 
-        -- :grupo_patologia_int, 
-        -- :especialidade_int
+        :fk_paciente_int,
+        :fk_user_int, 
+        :fk_patologia_int, 
+        :fk_patologia2, 
+        :data_intern_int, 
+        :internado_int, 
+        :modo_internacao_int, 
+        :tipo_admissao_int, 
+        :acoes_int, 
+        :titular_int, 
+        :data_visita_int, 
+        :grupo_patologia_int, 
+        :especialidade_int
      )");
 
         $stmt->bindParam(":fk_hospital_int", $internacao->fk_hospital_int);
         $stmt->bindParam(":fk_paciente_int", $internacao->fk_paciente_int);
         $stmt->bindParam(":rel_int", $internacao->rel_int);
-        // $stmt->bindParam(":fk_user_int", $internacao->fk_user_int);
-        // $stmt->bindParam(":fk_patologia_int", $internacao->fk_patologia_int);
-        // $stmt->bindParam(":fk_patologia2", $internacao->fk_patologia_int);
-        // $stmt->bindParam(":data_intern_int", $internacao->data_intern_int);
-        // $stmt->bindParam(":internado_int", $internacao->internado_int);
-        // $stmt->bindParam(":acoes_int", $internacao->acoes_int);
-        // $stmt->bindParam(":modo_internacao_int", $internacao->modo_internacao_int);
-        // $stmt->bindParam(":tipo_admissao_int", $internacao->tipo_admissao_int);
-        // $stmt->bindParam(":especialidade_int", $internacao->especialidade_int);
-        // $stmt->bindParam(":data_visita_int", $internacao->data_visita_int);
-        // $stmt->bindParam(":grupo_patologia_int", $internacao->grupo_patologia_int);
-        // $stmt->bindParam(":titular_int", $internacao->titular_int);
+        $stmt->bindParam(":fk_user_int", $internacao->fk_user_int);
+        $stmt->bindParam(":fk_patologia_int", $internacao->fk_patologia_int);
+        $stmt->bindParam(":fk_patologia2", $internacao->fk_patologia_int);
+        $stmt->bindParam(":data_intern_int", $internacao->data_intern_int);
+        $stmt->bindParam(":internado_int", $internacao->internado_int);
+        $stmt->bindParam(":acoes_int", $internacao->acoes_int);
+        $stmt->bindParam(":modo_internacao_int", $internacao->modo_internacao_int);
+        $stmt->bindParam(":tipo_admissao_int", $internacao->tipo_admissao_int);
+        $stmt->bindParam(":especialidade_int", $internacao->especialidade_int);
+        $stmt->bindParam(":data_visita_int", $internacao->data_visita_int);
+        $stmt->bindParam(":grupo_patologia_int", $internacao->grupo_patologia_int);
+        $stmt->bindParam(":titular_int", $internacao->titular_int);
 
         $stmt->execute();
 
@@ -318,7 +382,6 @@ class InternacaoDAO implements InternacaoDAOInterface
         $stmt->bindParam(":fk_patologia2", $internacao->fk_patologia2);
         $stmt->bindParam(":internado_int", $internacao->internado_int);
         $stmt->bindParam(":acoes_int", $internacao->acoes_int);
-        $stmt->bindParam(":modo_internacao_int", $internacao->modo_internacao_int);
         $stmt->bindParam(":acomodacao_int", $internacao->acomodacao_int);
         $stmt->bindParam(":modo_internacao_int", $internacao->modo_internacao_int);
         $stmt->bindParam(":tipo_admissao_int", $internacao->tipo_admissao_int);
@@ -381,4 +444,162 @@ class InternacaoDAO implements InternacaoDAOInterface
 
         return $internacao;
     }
+    // PESQUISAR INTERNACAO POR HOSPITAL
+    public function findInternByInternado($pesqInternado, $limite, $inicio)
+    {
+        $internacao = [];
+        $stmt = $this->conn->query("SELECT 
+        ac.id_internacao, 
+        ac.acoes_int, 
+        ac.data_intern_int, 
+        ac.data_visita_int, 
+        ac.rel_int, 
+        ac.fk_paciente_int, 
+        ac.fk_user_int, 
+        ac.fk_hospital_int, 
+        ac.modo_internacao_int, 
+        ac.tipo_admissao_int,
+        ac.especialidade_int, 
+        ac.titular_int, 
+        ac.grupo_patologia_int, 
+        ac.acomodacao_int, 
+        ac.fk_patologia_int, 
+        ac.fk_patologia2, 
+        ac.internado_int,
+        pa.id_paciente,
+        pa.nome_pac,
+        ho.id_hospital, 
+        ho.nome_hosp,
+        pat.patologia_pat 
+
+        FROM tb_internacao ac 
+
+        iNNER JOIN tb_hospital as ho On  
+        ac.fk_hospital_int = ho.id_hospital
+
+        left join tb_paciente as pa on
+        ac.fk_paciente_int = pa.id_paciente
+
+        left join tb_patologia as pat on
+        ac.fk_patologia_int = pat.id_patologia
+
+        WHERE ac.internado_int = '$pesqInternado'
+
+        ASC LIMIT " . $inicio . "," . $limite . ";");
+
+        $stmt->execute();
+
+        $internacao = $stmt->fetchAll();
+
+        return $internacao;
+    }
+    public function findInternAll($limite, $inicio)
+    {
+        $internacao = [];
+        $stmt = $this->conn->query("SELECT 
+        ac.id_internacao, 
+        ac.acoes_int, 
+        ac.data_intern_int, 
+        ac.data_visita_int, 
+        ac.rel_int, 
+        ac.fk_paciente_int, 
+        ac.fk_user_int, 
+        ac.fk_hospital_int, 
+        ac.modo_internacao_int, 
+        ac.tipo_admissao_int,
+        ac.especialidade_int, 
+        ac.titular_int, 
+        ac.grupo_patologia_int, 
+        ac.acomodacao_int, 
+        ac.fk_patologia_int, 
+        ac.fk_patologia2, 
+        ac.internado_int,
+        pa.id_paciente,
+        pa.nome_pac,
+        ho.id_hospital, 
+        ho.nome_hosp,
+        pat.patologia_pat 
+
+        FROM tb_internacao ac 
+
+        iNNER JOIN tb_hospital as ho On  
+        ac.fk_hospital_int = ho.id_hospital
+
+        left join tb_paciente as pa on
+        ac.fk_paciente_int = pa.id_paciente
+
+        left join tb_patologia as pat on
+        ac.fk_patologia_int = pat.id_patologia
+
+        ASC LIMIT " . $inicio . "," . $limite . ";");
+
+        $stmt->execute();
+
+        $internacao = $stmt->fetchAll();
+
+        return $internacao;
+    }
+    // PESQUISAR INTERNACAO POR HOSPITAL
+    public function findInternByHosp($pesquisa_hosp, $limite, $inicio)
+    {
+        $internacao = [];
+        $stmt = $this->conn->query("SELECT 
+        ac.id_internacao,
+        ac.data_intern_int,
+        ac.acomodacao_int,
+        ac.fk_hospital_int,
+        ac.fk_paciente_int,
+        ac.data_visita_int,
+        ac.rel_int,
+        ac.internado_int,
+        ac.acoes_int,
+        ac.modo_internacao_int,
+        ac.especialidade_int,
+        ac.grupo_patologia_int,
+        ac.tipo_admissao_int,
+        ac.titular_int,
+        ho.id_hospital,
+        ho.nome_hosp,
+        pa.id_paciente,
+        pa.nome_pac, 
+        pat.id_patologia,
+        pat.patologia_pat 
+
+        FROM tb_internacao ac
+
+        iNNER JOIN tb_hospital as ho On  
+        ac.fk_hospital_int = ho.id_hospital
+        
+        left join tb_paciente as pa on
+        ac.fk_paciente_int = pa.id_paciente
+
+        left join tb_patologia as pat on
+        ac.fk_patologia_int = pat.id_patologia
+
+        WHERE ho.id_hospital = '$pesquisa_hosp%' 
+        
+        ORDER BY id_internacao 
+
+        ASC LIMIT " . $inicio . "," . $limite . ";");
+
+        $stmt->execute();
+
+        $internacao = $stmt->fetchAll();
+
+        return $internacao;
+    }
 }
+
+
+# Limita o número de registros a serem mostrados por página
+$limite = 10;
+
+# Se pg não existe atribui 1 a variável pg
+$pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
+
+# Atribui a variável inicio o inicio de onde os registros vão ser
+# mostrados por página, exemplo 0 à 10, 11 à 20 e assim por diante
+$inicio = ($pg * $limite) - $limite;
+$pesquisa_pac = "";
+# seleciona o total de registros  
+$sql_Total = 'SELECT id_internacao FROM tb_internacao';
