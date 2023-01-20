@@ -38,6 +38,9 @@
     //Instanciar o metodo listar internacao
     $internacaos = $internacao_geral->joininternacaoHospital();
 
+    //Instanciar o metodo listar internacao
+    $internacaos = $internacao_geral->findInternAll($limite, $inicio);
+
     ?>
     <!-- FORMULARIO DE PESQUISAS -->
     <div class="container py-2">
@@ -77,7 +80,6 @@
     $pesqInternado = "";
     $limite = "";
     $inicio = "";
-
     $pesquisa_hosp = filter_input(INPUT_POST, "pesquisa_hosp");
     $pesqInternado = filter_input(INPUT_POST, "pesqInternado");
     $type = filter_input(INPUT_POST, "type");
@@ -94,20 +96,20 @@
 
     // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
     if (($pesquisa_hosp != "")) {
-        $query = $internacao->findInternByHosp($pesquisa_hosp, $limite, $inicio);
+        $query = $internacao_geral->findInternByHosp($pesquisa_hosp, $limite, $inicio);
     }
 
     if (($pesqInternado != "")) {
-        $query = $internacao->findInternByInternado($pesqInternado, $limite, $inicio);
+        $query = $internacao_geral->findInternByInternado($pesqInternado, $limite, $inicio);
     }
     if (($pesqInternado != "") || ($pesquisa_hosp != "")) {
-        $query = $internacao->findInternAll($limite, $inicio);
+        $query = $internacao_geral->findInternAll($limite, $inicio);
     }
 
 
     try {
 
-        $internacao = $conn->prepare($sql);
+        $internacao = $conn->prepare($query);
         $internacao->execute();
     } catch (PDOexception $error_sql) {
         echo 'Erro ao retornar os Dados.' . $error_sql->getMessage();

@@ -469,8 +469,7 @@ class InternacaoDAO implements InternacaoDAOInterface
         pa.id_paciente,
         pa.nome_pac,
         ho.id_hospital, 
-        ho.nome_hosp,
-        pat.patologia_pat 
+        ho.nome_hosp
 
         FROM tb_internacao ac 
 
@@ -480,12 +479,9 @@ class InternacaoDAO implements InternacaoDAOInterface
         left join tb_paciente as pa on
         ac.fk_paciente_int = pa.id_paciente
 
-        left join tb_patologia as pat on
-        ac.fk_patologia_int = pat.id_patologia
+        WHERE ac.internado_int = '$pesqInternado' 
 
-        WHERE ac.internado_int = '$pesqInternado'
-
-        ASC LIMIT " . $inicio . "," . $limite . ";");
+        LIMIT " . $inicio . "," . $limite . ";");
 
         $stmt->execute();
 
@@ -517,8 +513,7 @@ class InternacaoDAO implements InternacaoDAOInterface
         pa.id_paciente,
         pa.nome_pac,
         ho.id_hospital, 
-        ho.nome_hosp,
-        pat.patologia_pat 
+        ho.nome_hosp
 
         FROM tb_internacao ac 
 
@@ -528,10 +523,7 @@ class InternacaoDAO implements InternacaoDAOInterface
         left join tb_paciente as pa on
         ac.fk_paciente_int = pa.id_paciente
 
-        left join tb_patologia as pat on
-        ac.fk_patologia_int = pat.id_patologia
-
-        ASC LIMIT " . $inicio . "," . $limite . ";");
+        LIMIT " . $inicio . "," . $limite . ";");
 
         $stmt->execute();
 
@@ -561,9 +553,8 @@ class InternacaoDAO implements InternacaoDAOInterface
         ho.id_hospital,
         ho.nome_hosp,
         pa.id_paciente,
-        pa.nome_pac, 
-        pat.id_patologia,
-        pat.patologia_pat 
+        pa.nome_pac 
+        
 
         FROM tb_internacao ac
 
@@ -573,14 +564,11 @@ class InternacaoDAO implements InternacaoDAOInterface
         left join tb_paciente as pa on
         ac.fk_paciente_int = pa.id_paciente
 
-        left join tb_patologia as pat on
-        ac.fk_patologia_int = pat.id_patologia
-
         WHERE ho.id_hospital = '$pesquisa_hosp%' 
         
         ORDER BY id_internacao 
 
-        ASC LIMIT " . $inicio . "," . $limite . ";");
+        LIMIT " . $inicio . "," . $limite . ";");
 
         $stmt->execute();
 
