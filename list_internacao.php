@@ -100,14 +100,15 @@
         // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
         // filtro de hospital
         if (($pesquisa_hosp != "")) {
-            print_r($pesquisa_hosp);
+            // print_r($pesquisa_hosp);
             $query = $internacao->findInternByHosp($pesquisa_hosp, $limite, $inicio);
-            ?><pre>
+        ?>
+            <pre>
                 <?php
-            print_r($query);
+                // print_r($query);
                 ?>  
                 </pre>
-                <?php
+        <?php
         }
         // filtro de internados
         if (($pesqInternado != "")) {
@@ -119,75 +120,9 @@
         if (($pesqInternado === "") || ($pesquisa_hosp === "")) {
             $query = $internacao_geral->findInternAll($limite, $inicio);
         }
+        include_once("formularios/form_list_internacao.php");
         ?>
-        <div class="container">
-            <h6 class="page-title">Relatório de internações</h6>
-            <table class="table table-sm table-striped table-bordered table-hover table-condensed">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Internado</th>
-                        <th scope="col">Hospital</th>
-                        <th scope="col">Paciente</th>
-                        <th scope="col">Data internação</th>
-                        <th scope="col">Acomodação</th>
-                        <th scope="col">Data visita</th>
-                        <th scope="col">Grupo Patologia</th>
-                        <th scope="col">Modo Admissão</th>
-                        <th scope="col">Tipo internação</th>
-                        <th scope="col">Médico</th>
-                        <th scope="col">Especialidade</th>
-                        <th scope="col">Relatório</th>
-                        <th scope="col">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
 
-                    foreach ($internacaos as $internacao) : ?>
-                        <tr>
-                            <td scope="row" class="col-id"><?= $internacao["id_internacao"] ?></td>
-                            <td scope="row" class="nome-coluna-table"><?= $internacao["internado_int"] ?></td>
-                            <td scope="row" class="nome-coluna-table"><?= $internacao["nome_hosp"] ?></td>
-                            <td scope="row"><?= $internacao["nome_pac"] ?></td>
-                            <td scope="row"><?= $internacao["data_intern_int"] ?></td>
-                            <td scope="row"><?= $internacao["acomodacao_int"] ?></td>
-                            <td scope="row"><?= $internacao["data_visita_int"] ?></td>
-                            <td scope="row"><?= $internacao["grupo_patologia_int"] ?></td>
-                            <td scope="row"><?= $internacao["tipo_admissao_int"] ?></td>
-                            <td scope="row"><?= $internacao["modo_internacao_int"] ?></td>
-                            <td scope="row"><?= $internacao["titular_int"] ?></td>
-                            <td scope="row"><?= $internacao["especialidade_int"] ?></td>
-                            <td scope="row"><?= $internacao["rel_int"] ?></td>
-
-                            <td class="action">
-                                <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $internacao["id_internacao"] ?>"><i style="color:orange; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>
-                                <a href="<?= $BASE_URL ?>cad_visita.php?id_internacao=<?= $internacao["id_internacao"] ?>"><i style="color:black; font-weigth:bold; margin-left:5px;margin-right:5px" name="type" value="visita" class="aparecer-acoes bi bi-file-text"></i></a>
-
-                                <form class="d-inline-block delete-form" action="process_alta.php" method="POST">
-                                    <input type="hidden" name="type" value="alta">
-                                    <input type="hidden" name="alta" value="Não">
-                                    <input type="hidden" name="id_internacao" value="<?= $internacao["id_internacao"] ?>">
-                                    <button type="submit" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block bi bi-door-open"></i></button>
-                                </form>
-                                <form class="d-inline-block delete-form" action="del_internacao.php" method="POST">
-                                    <input type="hidden" name="type" value="delete">
-                                    <input type="hidden" name="id_internacao" value="<?= $internacao["id_internacao"] ?>">
-                                    <button type="submit" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block aparecer-acoes bi bi-x-square-fill delete-icon"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-            <?php $id_internacao = filter_input(INPUT_GET, "id_internacao"); ?>
-
-            <!-- <div class="btn_acoes oculto">
-            <p>Deseja deletar este internacao: <?php $internacao['nome'] ?> ?</p>
-            <button class="cancelar btn btn-success styled" type="button" id="cancelar" name="cancelar">Cancelar</button>
-            <button class="btn btn-danger styled" type="button" id="deletar" name="deletar">Deletar</button>
-        </div> -->
-        </div>
         <script>
             // $(".aparecer-acoes").click(function() {
             //     $('.btn_acoes').removeClass('oculto');
@@ -224,7 +159,7 @@
             //     document.getElementById("texto").innerHTML = "Você selecionou : " + varhospNome;
             // };
         </script>
-        
+
         <?php
 
         //modo cadastro
