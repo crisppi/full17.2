@@ -564,11 +564,11 @@ class InternacaoDAO implements InternacaoDAOInterface
         left join tb_paciente as pa on
         ac.fk_paciente_int = pa.id_paciente
 
-        WHERE ho.id_hospital = '$pesquisa_hosp%' 
+        WHERE ac.fk_hospital = '$pesquisa_hosp%' 
         
         ORDER BY id_internacao 
 
-        LIMIT " . $inicio . "," . $limite . ";");
+        LIMIT 10 , 0 ;");
 
         $stmt->execute();
 
