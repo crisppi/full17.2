@@ -555,7 +555,6 @@ class InternacaoDAO implements InternacaoDAOInterface
         pa.id_paciente,
         pa.nome_pac 
         
-
         FROM tb_internacao ac
 
         iNNER JOIN tb_hospital as ho On  
@@ -564,11 +563,11 @@ class InternacaoDAO implements InternacaoDAOInterface
         left join tb_paciente as pa on
         ac.fk_paciente_int = pa.id_paciente
 
-        WHERE ac.fk_hospital = '$pesquisa_hosp%' 
+        WHERE ac.fk_hospital_int = '$pesquisa_hosp' 
         
         ORDER BY id_internacao 
 
-        LIMIT 10 , 0 ;");
+        LIMIT " . $inicio . "," . $limite . ";");
 
         $stmt->execute();
 

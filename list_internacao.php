@@ -34,6 +34,7 @@
     //Instanciando a classe
     //Criado o objeto $listarinternacaos
     $internacao_geral = new internacaoDAO($conn, $BASE_URL);
+    $internacao = new internacaoDAO($conn, $BASE_URL);
 
     //Instanciar o metodo listar internacao
     // $internacaos = $internacao_geral->joininternacaoHospital();
@@ -99,13 +100,19 @@
         // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
         // filtro de hospital
         if (($pesquisa_hosp != "")) {
-
-            $query = $internacao_geral->findInternByHosp($pesquisa_hosp, $limite, $inicio);
+            print_r($pesquisa_hosp);
+            $query = $internacao->findInternByHosp($pesquisa_hosp, $limite, $inicio);
+            ?><pre>
+                <?php
+            print_r($query);
+                ?>  
+                </pre>
+                <?php
         }
         // filtro de internados
         if (($pesqInternado != "")) {
 
-            $query = $internacao_geral->findInternByInternado($pesqInternado, $limite, $inicio);
+            $query = $internacao->findInternByInternado($pesqInternado, $limite, $inicio);
         }
 
         // filtro vazio
@@ -125,7 +132,6 @@
                         <th scope="col">Data internação</th>
                         <th scope="col">Acomodação</th>
                         <th scope="col">Data visita</th>
-                        <th scope="col">Patologia</th>
                         <th scope="col">Grupo Patologia</th>
                         <th scope="col">Modo Admissão</th>
                         <th scope="col">Tipo internação</th>
@@ -147,19 +153,15 @@
                             <td scope="row"><?= $internacao["data_intern_int"] ?></td>
                             <td scope="row"><?= $internacao["acomodacao_int"] ?></td>
                             <td scope="row"><?= $internacao["data_visita_int"] ?></td>
-                            <td scope="row"><?= $internacao["patologia_pat"] ?></td>
                             <td scope="row"><?= $internacao["grupo_patologia_int"] ?></td>
                             <td scope="row"><?= $internacao["tipo_admissao_int"] ?></td>
                             <td scope="row"><?= $internacao["modo_internacao_int"] ?></td>
                             <td scope="row"><?= $internacao["titular_int"] ?></td>
                             <td scope="row"><?= $internacao["especialidade_int"] ?></td>
                             <td scope="row"><?= $internacao["rel_int"] ?></td>
-                            <td scope="row"><?= $internacao["acoes_int"] ?></td>
 
                             <td class="action">
-                                <a href="cad_internacao.php"><i style="color:green; margin-right:10px" class="aparecer-acoes bi bi-plus-square-fill edit-icon"></i></a>
                                 <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $internacao["id_internacao"] ?>"><i style="color:orange; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>
-                                <a href="<?= $BASE_URL ?>edit_internacao.php?id_internacao=<?= $internacao["id_internacao"] ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>
                                 <a href="<?= $BASE_URL ?>cad_visita.php?id_internacao=<?= $internacao["id_internacao"] ?>"><i style="color:black; font-weigth:bold; margin-left:5px;margin-right:5px" name="type" value="visita" class="aparecer-acoes bi bi-file-text"></i></a>
 
                                 <form class="d-inline-block delete-form" action="process_alta.php" method="POST">
@@ -222,19 +224,7 @@
             //     document.getElementById("texto").innerHTML = "Você selecionou : " + varhospNome;
             // };
         </script>
-        <?php
-
-        //modo cadastro
-        $formData = "0";
-        $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-        if ($formData != "0") {
-            $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
-            //header("Location: index.php");
-        } else {
-            echo "<p style='color: #f00;'>Erro: Usuário não cadastrado!</p>";
-        };
-        ?>
+        
         <?php
 
         //modo cadastro
