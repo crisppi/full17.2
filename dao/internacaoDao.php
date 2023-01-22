@@ -445,9 +445,10 @@ class InternacaoDAO implements InternacaoDAOInterface
         return $internacao;
     }
     // PESQUISAR INTERNACAO POR HOSPITAL
-    public function findInternByInternado($pesqInternado, $limite, $inicio)
+    public function findInternByInternado($pesqInternado)
     {
         $internacao = [];
+
         $stmt = $this->conn->query("SELECT 
         ac.id_internacao, 
         ac.acoes_int, 
@@ -481,7 +482,7 @@ class InternacaoDAO implements InternacaoDAOInterface
 
         WHERE ac.internado_int = '$pesqInternado' 
 
-        LIMIT " . $inicio . "," . $limite . ";");
+        ");
 
         $stmt->execute();
 
@@ -532,7 +533,7 @@ class InternacaoDAO implements InternacaoDAOInterface
         return $internacao;
     }
     // PESQUISAR INTERNACAO POR HOSPITAL
-    public function findInternByHosp($pesquisa_hosp, $limite, $inicio)
+    public function findInternByHosp($pesquisa_hosp)
     {
         $internacao = [];
         $stmt = $this->conn->query("SELECT 
@@ -567,13 +568,13 @@ class InternacaoDAO implements InternacaoDAOInterface
         
         ORDER BY id_internacao 
 
-        LIMIT " . $inicio . "," . $limite . ";");
+        ");
 
         $stmt->execute();
 
-        $internacao = $stmt->fetchAll();
+        $internacaoList = $stmt->fetchAll();
 
-        return $internacao;
+        // return $internacao;
     }
 }
 

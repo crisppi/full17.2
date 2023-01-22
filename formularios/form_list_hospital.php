@@ -2,7 +2,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <?php
-    include_once("globals.php");
+    // include_once("globals.php");
     include_once("models/hospital.php");
     include_once("models/message.php");
     include_once("dao/hospitalDao.php");

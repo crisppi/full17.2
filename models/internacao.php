@@ -58,8 +58,8 @@ interface InternacaoDAOInterface
   public function findByIdUpdate($id_internacao);
   public function create(Internacao $internacao);
 
-  public function findInternByInternado($pesqInternado, $limite, $inicio);
-  public function findInternByHosp($pesquisa_hosp, $limite, $inicio);
+  public function findInternByInternado($pesqInternado);
+  public function findInternByHosp($pesquisa_hosp);
 
   public function update(Internacao $internacao);
   public function destroy($id_internacao);
