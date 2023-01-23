@@ -33,6 +33,9 @@
     // $internacaoSel = $internacao->findGeral();
 
     $pesquisa_hosp = filter_input(INPUT_GET, 'pesquisa_hosp');
+    isset($_GET['pesqInternado']) ? $pesqInternado = filter_input(INPUT_GET, 'pesqInternado') : "";
+    $ativo = filter_input(INPUT_GET, 'pesqInternado');
+
     ?>
     <!-- FORMULARIO DE PESQUISAS -->
     <div class="container">
@@ -62,18 +65,16 @@
         <!-- BASE DAS PESQUISAS -->
 
         <?php
-        $condicoes = [
-            strlen($pesquisa_hosp) ? ' where ho.nome_hosp LIKE "%' . $pesquisa_hosp . '%" ' : null
+        // $condicoes = [
+        //     strlen($pesquisa_hosp) ? ' "%' . $pesquisa_hosp . '%" ' : null
 
-        ];
-        // clausula where
-        $where = implode(' AND ', $condicoes);
+        // ];
+        // // clausula where
+        // $where = implode(' ', $condicoes);
+        $where = '%' . $pesquisa_hosp . '%';
 
-        // echo "<pre>";
-        // print_r($where);
-        // echo "<pre>";
 
-        $internacaoList = $internacao->findInternByInternado($where);
+        $internacaoList = $internacao->findInternByInternado($where, $ativo, $limite, $inicio);
 
         ?>
         <div class="container">

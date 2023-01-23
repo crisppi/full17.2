@@ -6,18 +6,6 @@ require_once("./models/message.php");
 // Review DAO
 // require_once("dao/internacaoDao.php");
 
-// PAGINACAO
-# Limita o número de registros a serem mostrados por página
-$limite = 10;
-
-# Se pg não existe atribui 1 a variável pg
-$pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
-
-# Atribui a variável inicio o inicio de onde os registros vão ser
-# mostrados por página, exemplo 0 à 10, 11 à 20 e assim por diante
-$inicio = ($pg * $limite) - $limite;
-# seleciona o total de registros  
-$sql_Total = 'SELECT id_internacao FROM tb_internacao';
 
 class InternacaoDao implements InternacaoDAOInterface
 {
@@ -133,7 +121,7 @@ class InternacaoDao implements InternacaoDAOInterface
         return $internacao;
     }
     // PESQUISAR INTERNACAO POR HOSPITAL
-    public function findInternByInternado($where)
+    public function findInternByInternado($where, $ativo, $limite, $inicio)
     {
 
         $stmt = $this->conn->query("SELECT 
@@ -167,9 +155,7 @@ class InternacaoDao implements InternacaoDAOInterface
         left join tb_paciente as pa on
         ac.fk_paciente_int = pa.id_paciente
 
-        
-        
-        ");
+        WHERE nome_hosp LIKE '$where' AND internado_int = '$ativo' LIMIT $limite ");
 
         $stmt->execute();
 

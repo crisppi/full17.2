@@ -51,5 +51,5 @@ interface InternacaoDAOInterface
 {
   public function findGeral();
   public function create(internacao $internacao);
-  public function findInternByInternado($where);
+  public function findInternByInternado($where, $ativo, $limite, $inicio);
 }
