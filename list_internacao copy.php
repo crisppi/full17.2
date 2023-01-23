@@ -32,19 +32,38 @@
     $internacao = new internacaoDAO($conn, $BASE_URL);
     // $internacaoSel = $internacao->findGeral();
 
-    $pesquisa_hosp = filter_input(INPUT_GET, 'pesquisa_hosp');
+    $pesquisa_hosp = "";
+    $type = "";
+    $pesqInternado = "";
+
+    $type = filter_input(INPUT_POST, "type");
+
+    //Instanciando a classe
+    //Criado o objeto $listarinternacaos
+
+    //Instanciar o metodo listar internacao
+    //Instanciar o metodo listar internacao
+    // $internacaos = $internacao_geral->joininternacaoHospital();
     ?>
     <!-- FORMULARIO DE PESQUISAS -->
+
     <div class="container">
         <div class="container py-2">
-            <form class="formulario visible" action="" id="select-internacao-form" method="GET">
+            <form class="formulario visible" action="#" id="select-internacao-form" method="POST" enctype="multipart/form-data">
                 <h6 class="page-title">Pesquisa internações</h6>
-
+                <div>
+                    <input type="hidden" name="type" value="pesquisaList">
+                </div>
                 <div class="form-group row">
-                    <div class="form-group col-sm-4">
-                        <input type="text" name="pesquisa_hosp" placeholder="Selecione o Hospital" value="<?= $pesquisa_hosp ?>">
-                    </div>
 
+                    <div class="form-group col-sm-4">
+                        <select class="form-control mb-2" id="pesquisa_hosp" name="pesquisa_hosp">
+                            <option value="">Selecione o Hospital</option>
+                            <?php foreach ($hospitals as $hospital) : ?>
+                                <option value="<?= $hospital["id_hospital"] ?>"><?= $hospital["nome_hosp"] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                     <div class="form-group col-sm-4">
                         <select class="form-control mb-3" id="pesqInternado" name="pesqInternado">
                             <option value="Sim">Busca por Internados</option>
@@ -57,24 +76,43 @@
                     </div>
                 </div>
             </form>
+
         </div>
 
         <!-- BASE DAS PESQUISAS -->
 
         <?php
-        $condicoes = [
-            strlen($pesquisa_hosp) ? 'ho.nome_hosp LIKE "%' . $pesquisa_hosp . '%" ' : null
+        // $pesquisa_hosp = filter_input(INPUT_POST, "pesquisa_hosp");
 
-        ];
-        // clausula where
-        $where = implode(' AND ', $condicoes);
+        // $pesqInternado = filter_input(INPUT_POST, "pesqInternado");
+        // validacao do formulario
+        if (isset($_POST['pesqInternado'])) {
+            $pesqInternado = $_POST['pesqInternado'];
+        }
 
-        // echo "<pre>";
-        // print_r($where);
-        // echo "<pre>";
+        if (isset($_POST['pesquisa_hosp'])) {
+            $pesquisa_hosp = $_POST['pesquisa_hosp'];
+        }
 
-        $internacaoList = $internacao->findInternByHosp($where);
+        echo "internado = " . $pesqInternado . "<br>";
+        echo "hospital = " . $pesquisa_hosp;
+        // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
+        // filtro de hospital
+        if (($pesquisa_hosp != "")) {
+            $internacaoList = $internacao->findInternByHosp($pesquisa_hosp);
+            echo "hospitais ________" . "<br>" . print_r($internacaoList);
+        }
+        // filtro de internados
+        if (($pesqInternado != "")) {
+            $internacaoList = $internacao->findInternByInternado($pesqInternado);
+            // print_r($internacaoList);
+        }
 
+        // filtro vazio
+        if (($pesqInternado === "") || ($pesquisa_hosp === "")) {
+            $internacaoList = $internacao->findInternAll($limite, $inicio);
+            // print_r($query);
+        }
         ?>
         <div class="container">
             <h6 class="page-title">Relatório de internações</h6>
@@ -99,7 +137,10 @@
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($internacao as $intern) :
+
+                    foreach ($internacaoList as $intern) :
+                        echo "hospitais ________" . "<br>" . print_r($intern);
+
                     ?>
                         <tr>
                             <td scope="row" class="col-id"><?= $intern["id_internacao"] ?></td>

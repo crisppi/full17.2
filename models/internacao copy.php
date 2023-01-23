@@ -47,9 +47,24 @@ class Internacao
   public $fk_negociacoes_int;
 }
 
-interface InternacaoDAOInterface
-{
-  public function findGeral();
-  public function create(internacao $internacao);
-  public function findInternByInternado($pesqInternado);
-}
+// interface InternacaoDAOInterface
+// {
+
+//   public function buildinternacao($internacao);
+//   public function findAll();
+//   public function getinternacao();
+//   public function findById($id_internacao);
+//   public function findInternAll($limite, $inicio);
+//   public function findByIdUpdate($id_internacao);
+//   public function create(Internacao $internacao);
+
+//   public function findInternByInternado($pesqInternado);
+//   public function findInternByHosp($pesquisa_hosp);
+
+//   public function update(Internacao $internacao);
+//   public function destroy($id_internacao);
+//   public function joininternacaoHospital();
+//   public function joininternacaoHospitalSelect();
+//   public function joininternacaoHospitalShow($id_internacao);
+//   public function findGeral();
+// };
