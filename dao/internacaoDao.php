@@ -167,8 +167,8 @@ class InternacaoDao implements InternacaoDAOInterface
         left join tb_paciente as pa on
         ac.fk_paciente_int = pa.id_paciente
 
-        WHERE = '$where'
-
+        
+        
         ");
 
         $stmt->execute();

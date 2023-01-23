@@ -63,7 +63,7 @@
 
         <?php
         $condicoes = [
-            strlen($pesquisa_hosp) ? 'ho.nome_hosp LIKE "%' . $pesquisa_hosp . '%" ' : null
+            strlen($pesquisa_hosp) ? ' where ho.nome_hosp LIKE "%' . $pesquisa_hosp . '%" ' : null
 
         ];
         // clausula where
@@ -73,7 +73,7 @@
         // print_r($where);
         // echo "<pre>";
 
-        $internacaoList = $internacao->findInternByHosp($where);
+        $internacaoList = $internacao->findInternByInternado($where);
 
         ?>
         <div class="container">
@@ -99,7 +99,7 @@
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($internacao as $intern) :
+                    foreach ($internacaoList as $intern) :
                     ?>
                         <tr>
                             <td scope="row" class="col-id"><?= $intern["id_internacao"] ?></td>
