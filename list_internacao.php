@@ -41,11 +41,11 @@
     <div class="container">
         <div class="container py-2">
             <form class="formulario visible" action="" id="select-internacao-form" method="GET">
-                <h6 class="page-title">Pesquisa internações</h6>
+                <h6 style="margin-left: 30px; padding-top:10px" class="page-title">Pesquisa internações</h6>
 
                 <div class="form-group row">
                     <div class="form-group col-sm-4">
-                        <input type="text" name="pesquisa_hosp" placeholder="Selecione o Hospital" value="<?= $pesquisa_hosp ?>">
+                        <input style="margin-left: 30px;" type="text" name="pesquisa_hosp" placeholder="Selecione o Hospital" value="<?= $pesquisa_hosp ?>">
                     </div>
 
                     <div class="form-group col-sm-4">
@@ -157,7 +157,6 @@
 
             $query_Total = $conn->prepare($sql_Total);
             $query_Total->execute();
-
             $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
 
             # conta quantos registros tem no banco de dados
