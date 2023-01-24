@@ -99,30 +99,7 @@ class gestaoDAO implements gestaoDAOInterface
         return $gestao;
     }
 
-    public function getgestaoByNome($nome)
-    {
 
-        $gestao = [];
-
-        $stmt = $this->conn->prepare("SELECT * FROM tb_gestao
-                                    WHERE nome_hosp = :nome_hosp
-                                    ORDER BY id_gestao asc");
-
-        $stmt->bindParam(":nome_hosp", $nome_hosp);
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-
-            $gestaoArray = $stmt->fetchAll();
-
-            foreach ($gestaoArray as $gestao) {
-                $gestao[] = $this->buildgestao($gestao);
-            }
-        }
-
-        return $gestao;
-    }
 
     public function findById($id_gestao)
     {
@@ -139,30 +116,6 @@ class gestaoDAO implements gestaoDAOInterface
         return $gestao;
     }
 
-    public function findByTitle($pesquisa_hosp)
-    {
-
-        $gestao = [];
-
-        $stmt = $this->conn->prepare("SELECT * FROM tb_gestao
-                                    WHERE nome_hosp LIKE :pesquisa_hosp");
-
-        $stmt->bindValue(":nome_hosp", '%' . $pesquisa_hosp . '%');
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-
-            $gestaoArray = $stmt->fetchAll();
-
-            foreach ($gestaoArray as $gestao) {
-                $gestao[] = $this->buildgestao($gestao);
-            }
-        }
-
-        return $gestao;
-        $query = $gestao;
-    }
 
     public function create(gestao $gestao)
     {
@@ -212,7 +165,7 @@ class gestaoDAO implements gestaoDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por adicionar filme
-        $this->message->setMessage("gestao adicionado com sucesso!", "success", "list_gestao.php");
+        $this->message->setMessage("gestao adicionado com sucesso!", "success", "cad_internacao_niveis.php");
     }
 
     public function update($gestao)
@@ -303,7 +256,7 @@ class gestaoDAO implements gestaoDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por remover filme
-        $this->message->setMessage("gestao removido com sucesso!", "success", "list_gestao.php");
+        $this->message->setMessage("gestao removido com sucesso!", "success", "cad_internacao_niveis.php");
     }
 
 

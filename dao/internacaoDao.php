@@ -140,6 +140,55 @@ class InternacaoDao implements InternacaoDAOInterface
 
         return $internacao;
     }
+
+    public function findById($id_internacao)
+    {
+        $internacao = [];
+        $stmt = $this->conn->prepare("SELECT 
+        ac.id_internacao, 
+        ac.acoes_int, 
+        ac.data_intern_int, 
+        ac.rel_int, 
+        ac.fk_paciente_int, 
+        ac.fk_user_int, 
+        ac.fk_hospital_int, 
+        ac.modo_internacao_int, 
+        ac.tipo_admissao_int,
+        ac.especialidade_int, 
+        ac.titular_int, 
+        ac.grupo_patologia_int, 
+        ac.acomodacao_int, 
+        ac.fk_patologia_int, 
+        ac.fk_patologia2, 
+        ac.internado_int,
+        pa.id_paciente,
+        pa.nome_pac,
+        ho.id_hospital, 
+        ho.nome_hosp,
+        pat.patologia_pat 
+
+        FROM tb_internacao ac 
+
+        iNNER JOIN tb_hospital as ho On  
+        ac.fk_hospital_int = ho.id_hospital
+
+        left join tb_paciente as pa on
+        ac.fk_paciente_int = pa.id_paciente
+
+        left join tb_patologia as pat on
+        ac.fk_patologia_int = pat.id_patologia
+
+        WHERE id_internacao = :id_internacao
+        ");
+
+        $stmt->bindParam(":id_internacao", $id_internacao);
+        $stmt->execute();
+
+        $data = $stmt->fetch();
+        $internacao = $this->buildinternacao($data);
+
+        return $internacao;
+    }
     // PESQUISAR INTERNACAO POR HOSPITAL
     public function findInternByInternado($where, $ativo, $limite, $inicio)
     {

@@ -27,7 +27,6 @@ interface gestaoDAOInterface
   public function getgestao();
   public function findById($id_gestao);
   public function findByIdUpdate($id_gestao);
-  public function findByTitle($title);
   public function create(gestao $gestao);
   public function update(gestao $gestao);
   public function destroy($id_gestao);

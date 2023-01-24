@@ -24,7 +24,7 @@
     require_once("dao/pacienteDAO.php");
 
 
-    // Pegar o id do paceinte
+    // Pegar o id da internacao
     $id_internacao = filter_input(INPUT_GET, "id_internacao", FILTER_SANITIZE_NUMBER_INT);
 
     $internacao;

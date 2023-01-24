@@ -88,9 +88,10 @@
                 </select>
             </div>
             <br>
-            <div> <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
-            </div>
+            <!-- <div> <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
+            </div> -->
             <br>
         </div>
+        <br>
     </form>
 </div>

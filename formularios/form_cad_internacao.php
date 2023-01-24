@@ -51,7 +51,7 @@
                     <?php
                     sort($dados_acomodacao, SORT_ASC);
                     foreach ($dados_acomodacao as $acomd) { ?>
-                        <option value="<?= $acomod; ?>"><?= $acomd; ?></option>
+                        <option value="<?= $acomd; ?>"><?= $acomd; ?></option>
                     <?php } ?>
                 </select>
             </div>

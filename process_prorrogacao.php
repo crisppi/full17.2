@@ -20,14 +20,8 @@ if ($type === "create") {
 
     // Receber os dados dos inputs
     $acomod1_pror = filter_input(INPUT_POST, "acomod1_pror");
-    echo "<pre>";
-    print_r($acomod1_pror);
-
     $isol_1_pror = filter_input(INPUT_POST, "isol_1_pror");
-<<<<<<< Updated upstream
-=======
     $fk_internacao_pror = filter_input(INPUT_POST, "fk_internacao_pror");
->>>>>>> Stashed changes
     $prorrog1_fim_pror = filter_input(INPUT_POST, "prorrog1_fim_pror") ?: null;
     $prorrog1_ini_pror = filter_input(INPUT_POST, "prorrog1_ini_pror") ?: null;
 
@@ -45,7 +39,7 @@ if ($type === "create") {
         $prorrogacaoDao->create($prorrogacao);
     } else {
 
-        $message->setMessage("Você precisa adicionar pelo menos: prorrogacao_aco do prorrogacao!", "error", "back");
+        $message->setMessage("Você precisa adicionar pelo menos: prorrogacao do prorrogacao!", "error", "back");
     }
 } else if ($type === "update") {
 

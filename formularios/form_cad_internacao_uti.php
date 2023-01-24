@@ -13,7 +13,7 @@
             ?>
             <div>
                 <label for="fk_internacao_ges">ID Int</label>
-                <input type="text" class="form-control" id="fk_internacao_uti" name="fk_internacao_uti" value="<?= ($ultimoReg) + 1 ?> " placeholder="Relatório da auditoria">
+                <input type="text" class="form-control" id="fk_internacao_uti" name="fk_internacao_uti" value="<?= ($ultimoReg) ?> " placeholder="Relatório da auditoria">
             </div>
 
             <div class="form-group col-sm-2">
