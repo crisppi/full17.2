@@ -29,6 +29,7 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
         $prorrogacao->acomod1_pror = $data["acomod1_pror"];
         $prorrogacao->isol_1_pror = $data["isol_1_pror"];
         $prorrogacao->prorrog1_fim_pror = $data["prorrog1_fim_pror"];
+        $prorrogacao->fk_internacao_pror = $data["fk_internacao_pror"];
         $prorrogacao->prorrog1_ini_pror = $data["prorrog1_ini_pror"];
         $prorrogacao->fk_internacao_pror = $data["fk_internacao_pror"];
 
@@ -46,8 +47,13 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
       ) VALUES (
         :acomod1_pror, 
         :isol_1_pror, 
+<<<<<<< Updated upstream
         :prorrog1_fim_pror,
         :fk_internacao_pror,
+=======
+        :fk_internacao_pror,
+        :prorrog1_fim_pror, 
+>>>>>>> Stashed changes
         :prorrog1_ini_pror
 
      )");
@@ -55,14 +61,14 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
         $stmt->bindParam(":acomod1_pror", $prorrogacao->acomod1_pror);
         $stmt->bindParam(":isol_1_pror", $prorrogacao->isol_1_pror);
         $stmt->bindParam(":prorrog1_fim_pror", $prorrogacao->prorrog1_fim_pror);
+        $stmt->bindParam(":fk_internacao_pror", $prorrogacao->fk_internacao_pror);
         $stmt->bindParam(":prorrog1_ini_pror", $prorrogacao->prorrog1_ini_pror);
         $stmt->bindParam(":fk_internacao_pror", $prorrogacao->fk_internacao_pror);
-
 
         $stmt->execute();
 
         // Mensagem de sucesso por adicionar filme
-        $this->message->setMessage("prorrogacao adicionado com sucesso!", "success", "list_prorrogacao.php");
+        $this->message->setMessage("prorrogacao adicionado com sucesso!", "success", "cad_internacao_niveis.php");
     }
     public function joinprorrogacaoHospital()
     {

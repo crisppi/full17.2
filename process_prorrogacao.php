@@ -24,6 +24,10 @@ if ($type === "create") {
     print_r($acomod1_pror);
 
     $isol_1_pror = filter_input(INPUT_POST, "isol_1_pror");
+<<<<<<< Updated upstream
+=======
+    $fk_internacao_pror = filter_input(INPUT_POST, "fk_internacao_pror");
+>>>>>>> Stashed changes
     $prorrog1_fim_pror = filter_input(INPUT_POST, "prorrog1_fim_pror") ?: null;
     $prorrog1_ini_pror = filter_input(INPUT_POST, "prorrog1_ini_pror") ?: null;
 
@@ -33,6 +37,7 @@ if ($type === "create") {
     if (!empty($acomod1_pror)) {
 
         $prorrogacao->acomod1_pror = $acomod1_pror;
+        $prorrogacao->fk_internacao_pror = $fk_internacao_pror;
         $prorrogacao->isol_1_pror = $isol_1_pror;
         $prorrogacao->prorrog1_fim_pror = $prorrog1_fim_pror;
         $prorrogacao->prorrog1_ini_pror = $prorrog1_ini_pror;
@@ -61,7 +66,7 @@ if ($type === "create") {
 
     $prorrogacaoDao->update($prorrogacao);
 
-    include_once('list_prorrogacao.php');
+    include_once('cad_internacao_niveis.php');
 }
 
 $type = filter_input(INPUT_GET, "type");
