@@ -30,6 +30,7 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
         $prorrogacao->isol_1_pror = $data["isol_1_pror"];
         $prorrogacao->prorrog1_fim_pror = $data["prorrog1_fim_pror"];
         $prorrogacao->prorrog1_ini_pror = $data["prorrog1_ini_pror"];
+        $prorrogacao->fk_internacao_pror = $data["fk_internacao_pror"];
 
         return $prorrogacao;
     }
@@ -39,12 +40,14 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
         $stmt = $this->conn->prepare("INSERT INTO tb_prorrogacao (
         acomod1_pror, 
         isol_1_pror, 
-        prorrog1_fim_pror, 
+        prorrog1_fim_pror,
+        fk_internacao_pror,
         prorrog1_ini_pror
       ) VALUES (
         :acomod1_pror, 
         :isol_1_pror, 
-        :prorrog1_fim_pror, 
+        :prorrog1_fim_pror,
+        :fk_internacao_pror,
         :prorrog1_ini_pror
 
      )");
@@ -53,6 +56,7 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
         $stmt->bindParam(":isol_1_pror", $prorrogacao->isol_1_pror);
         $stmt->bindParam(":prorrog1_fim_pror", $prorrogacao->prorrog1_fim_pror);
         $stmt->bindParam(":prorrog1_ini_pror", $prorrogacao->prorrog1_ini_pror);
+        $stmt->bindParam(":fk_internacao_pror", $prorrogacao->fk_internacao_pror);
 
 
         $stmt->execute();

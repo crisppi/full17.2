@@ -20,9 +20,12 @@ if ($type === "create") {
 
     // Receber os dados dos inputs
     $acomod1_pror = filter_input(INPUT_POST, "acomod1_pror");
+    echo "<pre>";
+    print_r($acomod1_pror);
+
     $isol_1_pror = filter_input(INPUT_POST, "isol_1_pror");
-    $prorrog1_fim_pror = filter_input(INPUT_POST, "prorrog1_fim_pror");
-    $prorrog1_ini_pror = filter_input(INPUT_POST, "prorrog1_ini_pror");
+    $prorrog1_fim_pror = filter_input(INPUT_POST, "prorrog1_fim_pror") ?: null;
+    $prorrog1_ini_pror = filter_input(INPUT_POST, "prorrog1_ini_pror") ?: null;
 
     $prorrogacao = new prorrogacao();
 

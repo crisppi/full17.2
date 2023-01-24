@@ -3,7 +3,7 @@
     <h4 class="page-title">Cadastrar dados de prorrogação</h4>
     <p class="page-description">Adicione informações sobre as diárias da prorrogação</p>
     <form class="formulario" action="<?= $BASE_URL ?>process_prorrogacao.php" id="add-prorrogacao-form" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="type" value="create">
+        <input type="text" name="type" value="create">
         <div class="form-group col-sm-1">
             <?php
             $a = ($gestaoIdMax[0]);
@@ -12,7 +12,7 @@
             <label for="fk_internacao_pror">ID Int</label>
             <input type="text" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= ($ultimoReg) + 1 ?> " placeholder="Relatório da auditoria">
         </div>
-        <!-- PRORROGACAO 2 -->
+        <!-- PRORROGACAO 1 -->
         <div class="form-group row">
             <div class="form-group col-sm-2">
                 <label class="control-label" for="acomod1_pror">Acomodação</label>
