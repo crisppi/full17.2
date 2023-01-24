@@ -26,29 +26,50 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
         $prorrogacao = new prorrogacao();
 
         $prorrogacao->id_prorrogacao = $data["id_prorrogacao"];
-        $prorrogacao->fk_internacao_pror = $data["fk_internacao_pror"];
-        $prorrogacao->alto_custo_pror = $data["alto_custo_pror"];
-        $prorrogacao->rel_alto_custo_pror = $data["rel_alto_custo_pror"];
-        $prorrogacao->evento_adverso_pror = $data["evento_adverso_pror"];
-        $prorrogacao->rel_evento_adverso_pror = $data["rel_evento_adverso_pror"];
-        $prorrogacao->rel_evento_adverso_pror = $data["rel_evento_adverso_pror"];
-        $prorrogacao->rel_evento_adverso_pror = $data["rel_evento_adverso_pror"];
-        $prorrogacao->rel_opme_pror = $data["rel_opme_pror"];
-        $prorrogacao->home_care_pror = $data["home_care_pror"];
-        $prorrogacao->rel_home_care_pror = $data["rel_home_care_pror"];
-        $prorrogacao->desospitalizacao_pror = $data["desospitalizacao_pror"];
-        $prorrogacao->rel_desospitalizacao_pror = $data["rel_desospitalizacao_pror"];
-        $prorrogacao->fk_user_pror = $data["fk_user_pror"];
-
+        $prorrogacao->acomod1_pror = $data["acomod1_pror"];
+        $prorrogacao->isol_1_pror = $data["isol_1_pror"];
+        $prorrogacao->prorrog1_fim_pror = $data["prorrog1_fim_pror"];
+        $prorrogacao->prorrog1_ini_pror = $data["prorrog1_ini_pror"];
 
         return $prorrogacao;
+    }
+    public function create(prorrogacao $prorrogacao)
+    {
+
+        $stmt = $this->conn->prepare("INSERT INTO tb_prorrogacao (
+        acomod1_pror, 
+        isol_1_pror, 
+        prorrog1_fim_pror, 
+        prorrog1_ini_pror
+      ) VALUES (
+        :acomod1_pror, 
+        :isol_1_pror, 
+        :prorrog1_fim_pror, 
+        :prorrog1_ini_pror
+
+     )");
+
+        $stmt->bindParam(":acomod1_pror", $prorrogacao->acomod1_pror);
+        $stmt->bindParam(":isol_1_pror", $prorrogacao->isol_1_pror);
+        $stmt->bindParam(":prorrog1_fim_pror", $prorrogacao->prorrog1_fim_pror);
+        $stmt->bindParam(":prorrog1_ini_pror", $prorrogacao->prorrog1_ini_pror);
+
+
+        $stmt->execute();
+
+        // Mensagem de sucesso por adicionar filme
+        $this->message->setMessage("prorrogacao adicionado com sucesso!", "success", "list_prorrogacao.php");
     }
     public function joinprorrogacaoHospital()
     {
 
         $prorrogacao = [];
 
-        $stmt = $this->conn->query("SELECT ac.id_prorrogacao, ac.valor_aco, ac.prorrogacao_aco, ho.id_hospital, ho.nome_hosp
+        $stmt = $this->conn->query("SELECT ac.id_prorrogacao, 
+        ac.valor_aco, 
+        ac.prorrogacao_aco, 
+        ho.id_hospital, 
+        ho.nome_hosp
          FROM tb_prorrogacao ac 
          iNNER JOIN tb_hospital as ho On  
          ac.fk_hospital = ho.id_hospital
@@ -78,51 +99,6 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
     {
     }
 
-    public function getprorrogacao()
-    {
-
-        $prorrogacao = [];
-
-        $stmt = $this->conn->query("SELECT * FROM tb_prorrogacao ORDER BY id_prorrogacao asc");
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-
-            $prorrogacaoArray = $stmt->fetchAll();
-
-            foreach ($prorrogacaoArray as $prorrogacao) {
-                $prorrogacao[] = $this->buildprorrogacao($prorrogacao);
-            }
-        }
-
-        return $prorrogacao;
-    }
-
-    public function getprorrogacaoByNome($nome)
-    {
-
-        $prorrogacao = [];
-
-        $stmt = $this->conn->prepare("SELECT * FROM tb_prorrogacao
-                                    WHERE nome_hosp = :nome_hosp
-                                    ORDER BY id_prorrogacao asc");
-
-        $stmt->bindParam(":nome_hosp", $nome_hosp);
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-
-            $prorrogacaoArray = $stmt->fetchAll();
-
-            foreach ($prorrogacaoArray as $prorrogacao) {
-                $prorrogacao[] = $this->buildprorrogacao($prorrogacao);
-            }
-        }
-
-        return $prorrogacao;
-    }
 
     public function findById($id_prorrogacao)
     {
@@ -139,58 +115,7 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
         return $prorrogacao;
     }
 
-    public function findByTitle($pesquisa_hosp)
-    {
 
-        $prorrogacao = [];
-
-        $stmt = $this->conn->prepare("SELECT * FROM tb_prorrogacao
-                                    WHERE nome_hosp LIKE :pesquisa_hosp");
-
-        $stmt->bindValue(":nome_hosp", '%' . $pesquisa_hosp . '%');
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-
-            $prorrogacaoArray = $stmt->fetchAll();
-
-            foreach ($prorrogacaoArray as $prorrogacao) {
-                $prorrogacao[] = $this->buildprorrogacao($prorrogacao);
-            }
-        }
-
-        return $prorrogacao;
-        $query = $prorrogacao;
-    }
-
-    public function create(prorrogacao $prorrogacao)
-    {
-
-        $stmt = $this->conn->prepare("INSERT INTO tb_prorrogacao (
-        acomod1_pror, 
-        isol_1_pror, 
-        prorrog1_fim_pror, 
-        prorrog1_ini_pror
-      ) VALUES (
-        :acomod1_pror, 
-        :isol_1_pror, 
-        :prorrog1_fim_pror, 
-        :prorrog1_ini_pror
-
-     )");
-
-        $stmt->bindParam(":acomod1_pror", $prorrogacao->acomod1_pror);
-        $stmt->bindParam(":isol_1_pror", $prorrogacao->isol_1_pror);
-        $stmt->bindParam(":prorrog1_fim_pror", $prorrogacao->prorrog1_fim_pror);
-        $stmt->bindParam(":prorrog1_ini_pror", $prorrogacao->prorrog1_ini_pror);
-
-
-        $stmt->execute();
-
-        // Mensagem de sucesso por adicionar filme
-        $this->message->setMessage("prorrogacao adicionado com sucesso!", "success", "list_prorrogacao.php");
-    }
 
     public function update($prorrogacao)
     {

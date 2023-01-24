@@ -52,4 +52,5 @@ interface InternacaoDAOInterface
   public function findGeral();
   public function create(internacao $internacao);
   public function findInternByInternado($where, $ativo, $limite, $inicio);
+  public function joininternacaoHospitalshow($id_internacao);
 }

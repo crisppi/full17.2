@@ -26,11 +26,8 @@ interface prorrogacaoDAOInterface
 {
 
   public function buildprorrogacao($prorrogacao);
-  public function findAll();
-  public function getprorrogacao();
   public function findById($id_prorrogacao);
   public function findByIdUpdate($id_prorrogacao);
-  public function findByTitle($title);
   public function create(prorrogacao $prorrogacao);
   public function update(prorrogacao $prorrogacao);
   public function destroy($id_prorrogacao);

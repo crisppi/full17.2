@@ -105,6 +105,26 @@ class InternacaoDao implements InternacaoDAOInterface
 
         // Mensagem de sucesso por adicionar internacao
         // $this->message->setMessage("internacao adicionado com sucesso!", "success", "cad_internacao.php");
+
+        //     INSERT INTO tb_prorrogacao (
+        //         acomod1_pror, 
+        //         isol_1_pror, 
+        //         prorrog1_fim_pror, 
+        //         prorrog1_ini_pror
+        //       ) VALUES (
+        //         :acomod1_pror, 
+        //         :isol_1_pror, 
+        //         :prorrog1_fim_pror, 
+        //         :prorrog1_ini_pror
+
+        //      )");
+
+        //         $stmt->bindParam(":acomod1_pror", $prorrogacao->acomod1_pror);
+        //         $stmt->bindParam(":isol_1_pror", $prorrogacao->isol_1_pror);
+        //         $stmt->bindParam(":prorrog1_fim_pror", $prorrogacao->prorrog1_fim_pror);
+        //         $stmt->bindParam(":prorrog1_ini_pror", $prorrogacao->prorrog1_ini_pror);
+
+
     }
 
     public function findGeral()
@@ -161,6 +181,31 @@ class InternacaoDao implements InternacaoDAOInterface
 
         $internacao = $stmt->fetchAll();
 
+        return $internacao;
+    }
+
+    public function joininternacaoHospitalshow($id_internacao)
+
+    {
+        $stmt = $this->conn->query("SELECT ac.id_internacao, ac.acoes_int,  ac.internado_int, ac.fk_patologia_int, ac.data_intern_int, ac.rel_int, ac.fk_paciente_int, ac.acomodacao_int, pa.id_paciente, pa.nome_pac, ac.fk_user_int, ac.fk_hospital_int, ac.modo_internacao_int, ac.tipo_admissao_int, ho.id_hospital, ho.nome_hosp, ac.especialidade_int, ac.titular_int, ac.data_visita_int, ac.grupo_patologia_int, ac.acomodacao_int, ac.fk_patologia_int, pat.patologia_pat
+        FROM tb_internacao ac 
+
+        iNNER JOIN tb_hospital as ho On  
+        ac.fk_hospital_int = ho.id_hospital
+
+        left join tb_paciente as pa on
+        ac.fk_paciente_int = pa.id_paciente
+
+        left join tb_patologia as pat on
+        ac.fk_patologia_int = pat.id_patologia
+
+        WHERE id_internacao = $id_internacao
+         
+         ");
+
+        $stmt->execute();
+
+        $internacao = $stmt->fetch();
         return $internacao;
     }
 

@@ -1,8 +1,9 @@
 <?php
 
 include_once("globals.php");
-include_once("db.php"); ?>
-
+include_once("db.php");
+date_default_timezone_set('America/Sao_Paulo');
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -83,6 +84,7 @@ include_once("db.php"); ?>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>cad_internacao.php">Internação</a></li>
+                <li><a class="dropdown-item" href="<?php $BASE_URL ?>cad_internacao_niveis.php">Niveis</a></li>
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>cad_visita.php">Visita</a></li>
 
                 <li>
@@ -98,7 +100,7 @@ include_once("db.php"); ?>
       <div class="col-md-4" style="margin-left:20px; font-size:12px">
         <?php
         $agora = date('d/m/Y H:i');
-        echo "Bem vindo:  " . $_SESSION['email_login'] . "     " . $agora ?>
+        echo "Bem vindo:  " . $_SESSION['email_login'] . "  " . "<br>" . $agora ?>
       </div>
   </div>
   </nav>

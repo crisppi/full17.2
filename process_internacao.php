@@ -23,7 +23,7 @@ if ($type === "create") {
     $fk_patologia_int = filter_input(INPUT_POST, "fk_patologia_int") ?: 1000;
     $fk_patologia2 = filter_input(INPUT_POST, "fk_patologia2");
     $internado_int = filter_input(INPUT_POST, "internado_int");
-    $modo_admissao_int = filter_input(INPUT_POST, "modo_internacao_int");
+    $modo_internacao_int = filter_input(INPUT_POST, "modo_internacao_int");
     $tipo_admissao_int = filter_input(INPUT_POST, "tipo_admissao_int");
     $data_visita_int = filter_input(INPUT_POST, "data_visita_int") ?: null;
     $acoes_int = filter_input(INPUT_POST, "acoes_int");
@@ -57,7 +57,7 @@ if ($type === "create") {
         // $internacao->data_create = $data_create;
 
         $internacaoDao->create($internacao);
-        include_once('list_internacao.php');
+        include_once('cad_internacao_niveis.php');
     } else {
         header("Location: javascript:history.back(1)");
         $message->setMessage("Você precisa adicionar pelo menos: nome da internacao!", "error", "list_internacao.php");

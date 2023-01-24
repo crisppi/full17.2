@@ -46,7 +46,7 @@
     </div>
     <div class="card-header container-fluid" id="view-contact-container">
         <span style="font-weight: 500;" class="card-title bold">Visita:</span>
-        <span class="card-title bold"><?= $internacao['data_visita_int'] ?></span>
+        <span class="card-title bold"><?= date("d/m/Y", strtotime($internacao['data_visita_int']))  ?></span>
         <br>
     </div>
     <div class="card-body">
@@ -91,7 +91,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
     <?php
-    include_once("templates/footer1.php"); ?>
+    include_once("templates/footer.php"); ?>
 </body>
 
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
