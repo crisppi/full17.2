@@ -54,7 +54,7 @@ interface UserDAOInterface
     public function setTokenToSession($token, $redirect = true);
     public function authenticateUser($email, $senha);
     public function findByEmail($email_user);
-    public function findByLogin($email_login, $senha_login);
+    public function findByLogin(Usuario $user);
     public function findById_user($id_usuario);
     public function findByUser($pesquisa_nome);
     public function findByToken($token);

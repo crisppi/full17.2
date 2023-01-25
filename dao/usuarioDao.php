@@ -218,15 +218,15 @@ class UserDAO implements UserDAOInterface
         }
     }
 
-    public function findByLogin($email_login, $senha_login)
+    public function findByLogin(Usuario $user)
     {
 
-        if ($email_login != "") {
+        if ($user != "") {
 
-            $stmt = $this->conn->prepare("SELECT * FROM tb_user WHERE email_user = :email_login AND senha_user =:senha_login");
+            $stmt = $this->conn->prepare("SELECT * FROM tb_user WHERE usuario_user = :username AND senha_user =:senha_login");
 
-            $stmt->bindParam(":email_user", $email_login);
-            $stmt->bindParam(":senha_user", $senha_login);
+            $stmt->bindParam(":usuario_user", $user->senha_user);
+            $stmt->bindParam(":senha_user", $user->usuario_user);
 
             $stmt->execute();
 

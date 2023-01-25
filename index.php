@@ -1,46 +1,43 @@
 <?php
 require_once("templates/header.php");
 
-// include_once("app/conf_usuario.php");
+include_once("app/conf_usuario.php");
 
-// if (isset($_POST['username'])) {
-//     $_SESSION['username'] = $_POST['username'];
-//     require_once("menu.php");
+if (isset($_POST['username'])) {
+    $_SESSION['username'] = $_POST['username'];
+    header("Location: menu.php");
+} else {
+    echo "Você não está logado";
+};
+
+// if (isset($_POST['username']) || isset($_POST['senha_login'])) {
+
+//     if (strlen($_POST['username']) == 0) {
+//         echo "Preencha seu e-mail";
+//     } else if (strlen($_POST['senha_login']) == 0) {
+//         echo "Preencha sua senha";
+//     } else {
+
+//         $query = "SELECT * FROM tb_user WHERE usuario_user = :username AND senha_user = :senha_login";
+
+//         $usuarioDao = $conn->prepare($query);
+//         $usuarioDao->execute(
+//             array(
+//                 'username' =>  $_POST["username"],
+//                 'senha_login' =>  $_POST["senha_login"]
+//             )
+//         );
+
+//         $usuario = $usuarioDao->fetch_assoc();
+//         echo "<br>";
+//         print_r($usuario);
+
+//         $_SESSION['id_user'] = $usuario['id_usuario'];
+//         $_SESSION['email_user'] = $usuario['email_user'];
+
+//         header("Location: menu.php");
+//     }
 // }
-
-if (isset($_POST['username']) || isset($_POST['senha_login'])) {
-
-    if (strlen($_POST['username']) == 0) {
-        echo "Preencha seu e-mail";
-    } else if (strlen($_POST['senha_login']) == 0) {
-        echo "Preencha sua senha";
-    } else {
-
-        $query = "SELECT * FROM tb_user WHERE usuario_user = :username AND senha_user = :senha_login";
-
-        $usuarioDao = $conn->prepare($query);
-        $usuarioDao->execute(
-            array(
-                'username' =>  $_POST["username"],
-                'senha_login' =>  $_POST["senha_login"]
-            )
-        );
-
-        $usuario = $usuarioDao->fetch_assoc();
-        echo "<br>";
-        print_r($usuario);
-
-
-        // if (!isset($_SESSION)) {
-        //     session_start();
-        // }
-
-        $_SESSION['id_user'] = $usuario['id_usuario'];
-        $_SESSION['email_user'] = $usuario['email_user'];
-
-        header("Location: menu.php");
-    }
-}
 
 ?>
 <div class="container-fluid">
