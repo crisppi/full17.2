@@ -36,11 +36,11 @@
             <div class="form-group col-sm-1">
                 <label class="control-label" for="internado_int">Internado</label>
                 <select class="form-control" id="internado_int" name="internado_int">
-                    <option value="">Sim</option>
                     <option value="Sim">Sim</option>
                     <option value="Não">Não</option>
                 </select>
             </div>
+
         </div>
 
         <div class="row">
@@ -128,7 +128,7 @@
                 </div>
             </div>
             <br>
-            <div> <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
+            <div> <button style="margin:10px" type="submit" class="btn-sm btn-success">Cadastrar</button>
             </div>
             <br>
         </div>

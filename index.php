@@ -1,23 +1,25 @@
 <?php
 require_once("templates/header.php");
 
-if (isset($_POST['email_login'])) {
-    $_SESSION['email_login'] = $_POST['email_login'];
+// include_once("app/conf_usuario.php");
+
+if (isset($_POST['username'])) {
+    $_SESSION['username'] = $_POST['username'];
     require_once("menu.php");
 }
 
-if (isset($_POST['email_login']) || isset($_POST['senha_login'])) {
+if (isset($_POST['username']) || isset($_POST['senha_login'])) {
 
-    if (strlen($_POST['email_login']) == 0) {
+    if (strlen($_POST['username']) == 0) {
         echo "Preencha seu e-mail";
     } else if (strlen($_POST['senha_login']) == 0) {
         echo "Preencha sua senha";
     } else {
 
-        $email = $mysqli->real_escape_string($_POST['email_login']);
+        $email = $mysqli->real_escape_string($_POST['username']);
         $senha = $mysqli->real_escape_string($_POST['senha']);
 
-        $sql_code = "SELECT * FROM tb_user WHERE email_user = '$email_login' AND senha_user = '$senha_login'";
+        $sql_code = "SELECT * FROM tb_user WHERE email_user = '$username' AND senha_user = '$senha_login'";
         $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
 
         $quantidade = $sql_query->num_rows;
@@ -30,7 +32,7 @@ if (isset($_POST['email_login']) || isset($_POST['senha_login'])) {
                 session_start();
             }
 
-            $_SESSION['id_user'] = $usuario['id_user'];
+            $_SESSION['id_user'] = $usuario['id_usuario'];
             $_SESSION['email_user'] = $usuario['email_user'];
 
             header("Location: menu.php");
@@ -48,7 +50,7 @@ if (isset($_POST['email_login']) || isset($_POST['senha_login'])) {
                     <h2 class="display-5">Login</h2>
                     <p class="lead mb-4">Faça o login para continuar</p>
                     <form method="post">
-                        <input class="input border-0 border-bottom p-2" style="border-radius:10px" name="email_login" id="email_login" placeholder="E-mail" type="email" />
+                        <input class="input border-0 border-bottom p-2" style="border-radius:10px" name="username" id="username" placeholder="E-mail" type="email" />
                         <br />
                         <input class="input border-0 border-bottom p-2" style="border-radius:10px" name="senha_login" id="senha_login" placeholder="Senha" type="password" />
                         <br />
@@ -59,9 +61,9 @@ if (isset($_POST['email_login']) || isset($_POST['senha_login'])) {
                     </form>
                 </div>
 
-                <?php if (isset($_SESSION['email_login'])) { ?>
+                <?php if (isset($_SESSION['username'])) { ?>
                     <div class="alerta alert alert-info d-flex justify-content-center" style="height: 40px;">
-                        <?php echo $_SESSION['email_login'] . " Você esta logado"; ?>
+                        <?php echo $_SESSION['username'] . " Você esta logado"; ?>
                     </div>
             </div>
         <?php } ?>

@@ -3,12 +3,13 @@
 include_once("globals.php");
 include_once("db.php");
 date_default_timezone_set('America/Sao_Paulo');
+header("Content-type: text/html; charset=utf-8");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Full-2022</title>
@@ -100,7 +101,7 @@ date_default_timezone_set('America/Sao_Paulo');
       <div class="col-md-4" style="margin-left:20px; font-size:12px">
         <?php
         $agora = date('d/m/Y H:i');
-        echo "Bem vindo:  " . $_SESSION['email_login'] . "  " . "<br>" . $agora ?>
+        echo "Bem vindo:  " . $_SESSION['username'] . "  " . "<br>" . $agora ?>
       </div>
   </div>
   </nav>

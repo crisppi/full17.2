@@ -26,7 +26,7 @@ class UserDAO implements UserDAOInterface
         $user->usuario_user = $data["usuario_user"];
         $user->email_user = $data["email_user"];
         $user->email02_user = $data["email02_user"];
-        $user->senha_user = password_hash($data["senha_user"], PASSWORD_BCRYPT);
+        $user->senha_user = $data["senha_user"];
         $user->endereco_user = $data["endereco_user"];
         $user->numero_user = $data["numero_user"];
         $user->bairro_user = $data["bairro_user"];
@@ -218,12 +218,32 @@ class UserDAO implements UserDAOInterface
         }
     }
 
+    public function findByLogin($email_login, $senha_login)
+    {
+
+        if ($email_login != "") {
+
+            $stmt = $this->conn->prepare("SELECT * FROM tb_user WHERE email_user = :email_login AND senha_user =:senha_login");
+
+            $stmt->bindParam(":email_user", $email_login);
+            $stmt->bindParam(":senha_user", $senha_login);
+
+            $stmt->execute();
+
+
+            $data = $stmt->fetch();
+            $user = $this->buildUser($data);
+
+            return $user;
+        }
+    }
+
     public function findByEmail($email_user)
     {
 
         if ($email_user != "") {
 
-            $stmt = $this->conn->prepare("SELECT * FROM tb_user WHERE email_user = :email_user");
+            $stmt = $this->conn->prepare("SELECT * FROM tb_user WHERE email_user = :email_login AND senha_user =:senha_login");
 
             $stmt->bindParam(":email_user", $email_user);
 
@@ -242,7 +262,6 @@ class UserDAO implements UserDAOInterface
             return false;
         }
     }
-
     public function findById_user($id_usuario)
     {
 
