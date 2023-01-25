@@ -3,10 +3,10 @@ require_once("templates/header.php");
 
 // include_once("app/conf_usuario.php");
 
-if (isset($_POST['username'])) {
-    $_SESSION['username'] = $_POST['username'];
-    require_once("menu.php");
-}
+// if (isset($_POST['username'])) {
+//     $_SESSION['username'] = $_POST['username'];
+//     require_once("menu.php");
+// }
 
 if (isset($_POST['username']) || isset($_POST['senha_login'])) {
 
@@ -16,31 +16,32 @@ if (isset($_POST['username']) || isset($_POST['senha_login'])) {
         echo "Preencha sua senha";
     } else {
 
-        $email = $mysqli->real_escape_string($_POST['username']);
-        $senha = $mysqli->real_escape_string($_POST['senha']);
+        $query = "SELECT * FROM tb_user WHERE usuario_user = :username AND senha_user = :senha_login";
 
-        $sql_code = "SELECT * FROM tb_user WHERE email_user = '$username' AND senha_user = '$senha_login'";
-        $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
+        $usuarioDao = $conn->prepare($query);
+        $usuarioDao->execute(
+            array(
+                'username' =>  $_POST["username"],
+                'senha_login' =>  $_POST["senha_login"]
+            )
+        );
 
-        $quantidade = $sql_query->num_rows;
+        $usuario = $usuarioDao->fetch_assoc();
+        echo "<br>";
+        print_r($usuario);
 
-        if ($quantidade == 1) {
 
-            $usuario = $sql_query->fetch_assoc();
+        // if (!isset($_SESSION)) {
+        //     session_start();
+        // }
 
-            if (!isset($_SESSION)) {
-                session_start();
-            }
+        $_SESSION['id_user'] = $usuario['id_usuario'];
+        $_SESSION['email_user'] = $usuario['email_user'];
 
-            $_SESSION['id_user'] = $usuario['id_usuario'];
-            $_SESSION['email_user'] = $usuario['email_user'];
-
-            header("Location: menu.php");
-        } else {
-            echo "Falha ao logar! E-mail ou senha incorretos";
-        }
+        header("Location: menu.php");
     }
 }
+
 ?>
 <div class="container-fluid">
     <div class="row full-height" style="background-color:#e9e9e9">
@@ -50,7 +51,7 @@ if (isset($_POST['username']) || isset($_POST['senha_login'])) {
                     <h2 class="display-5">Login</h2>
                     <p class="lead mb-4">Faça o login para continuar</p>
                     <form method="post">
-                        <input class="input border-0 border-bottom p-2" style="border-radius:10px" name="username" id="username" placeholder="E-mail" type="email" />
+                        <input class="input border-0 border-bottom p-2" style="border-radius:10px" name="username" id="username" placeholder="E-mail" type="text" />
                         <br />
                         <input class="input border-0 border-bottom p-2" style="border-radius:10px" name="senha_login" id="senha_login" placeholder="Senha" type="password" />
                         <br />
