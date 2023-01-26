@@ -31,8 +31,8 @@ if ($type === "create") {
     $especialidade_int = filter_input(INPUT_POST, "especialidade_int");
     $grupo_patologia_int = filter_input(INPUT_POST, "grupo_patologia_int");
     $acomodacao_int = filter_input(INPUT_POST, "acomodacao_int");
-    // $usuario_create = filter_input(INPUT_POST, "usuario_create_int");
-    // $data_create = filter_input(INPUT_POST, "data_create");
+    $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
+    $data_create_int = filter_input(INPUT_POST, "data_create_int");
 
     $internacao = new internacao();
 
@@ -52,12 +52,12 @@ if ($type === "create") {
         $internacao->titular_int = $titular_int;
         $internacao->acomodacao_int = $acomodacao_int;
         $internacao->rel_int = $rel_int;
-        // $internacao->acoes_int = $acoes_int;
-        // $internacao->usuario_create = $usuario_create;
-        // $internacao->data_create = $data_create;
+        $internacao->acoes_int = $acoes_int;
+        $internacao->usuario_create_int = $usuario_create_int;
+        $internacao->data_create_int = $data_create_int;
 
         $internacaoDao->create($internacao);
-        include_once('cad_internacao_niveis.php');
+        include_once('cad_internacao.php');
     } else {
         header("Location: javascript:history.back(1)");
         $message->setMessage("Você precisa adicionar pelo menos: nome da internacao!", "error", "list_internacao.php");
@@ -82,8 +82,8 @@ if ($type === "create") {
     $acomodacao_int = filter_input(INPUT_POST, "acomodacao_int");
     $acoes_int = filter_input(INPUT_POST, "acoes_int");
     $rel_int = filter_input(INPUT_POST, "rel_int");
-    // $usuario_create = filter_input(INPUT_POST, "usuario_create");
-    // $data_create = filter_input(INPUT_POST, "data_create");
+    $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
+    $data_create_int = filter_input(INPUT_POST, "data_create_int");
 
     $internacaoData = $internacaoDao->findById($id_internacao);
 
@@ -102,8 +102,9 @@ if ($type === "create") {
     $internacaoData->acomodacao_int = $acomodacao_int;
     $internacaoData->acoes_int = $acoes_int;
     $internacaoData->rel_int = $rel_int;
-    // $internacao['data_create'] = $data_create;
-    // $internacao['usuario_create'] = $usuario_create;
+    $internacaoData->usuario_create_int = $usuario_create_int;
+    $internacaoData->data_create_int = $data_create_int;
+
     $internacaoDao->update($internacaoData);
 
     // include_once('list_internacao.php');

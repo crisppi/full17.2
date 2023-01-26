@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header('location: index.php');
+    exit;
+}
 include_once("globals.php");
 
 include_once("models/usuario.php");

@@ -5,5 +5,5 @@ $dados_UTI = ["Insuficência respiratória", "Choque cardiogênico", "Choque sé
 $dados_saps = ["0-20", "21-40", "41-61", "61-80", ">81"];
 $dados_especialidade = ["Clínica", "Pediatria", "Ginecologia", "Cirurgia Geral", "Cirurgia Vascular", "Cirurgia Torácica"];
 $dados_criter = ["Clínica", "Pediatria", "Ginecologia", "Cirurgia Geral", "Cirurgia Vascular", "Cirurgia Torácica"];
-$dados_grupo_pat = ["0-20", "21-40", "41-61", "61-80", ">81"];
-$dados_tipo_evento = ["Úlcera pressão", "Quedaa", "Broncoaspiração", "Infecção hospitalar", "Infecção cirúrgica"];
+$dados_grupo_pat = ["Cardiológica", "Pediátrica", "Oncológica", "Urológica", "Infecção"];
+$dados_tipo_evento = ["Úlcera pressão", "Queda", "Broncoaspiração", "Infecção hospitalar", "Infecção cirúrgica"];

@@ -31,7 +31,9 @@
             </div>
             <div class="form-group col-sm-2">
                 <label for="data_visita_int">Data Visita</label>
-                <input type="date" class="form-control" id="data_visita_int" name="data_visita_int">
+                <?php $agora = date('d/m/Y'); ?>
+
+                <input type="text" value='<?= $agora; ?>' class="form-control" id="data_visita_int" name="data_visita_int">
             </div>
             <div class="form-group col-sm-1">
                 <label class="control-label" for="internado_int">Internado</label>
@@ -99,7 +101,7 @@
             <div class="form-group col-sm-2">
                 <label class="control-label" for="fk_patologia2">Patologia</label>
                 <select class="form-control" id="fk_patologia2" name="fk_patologia2">
-                    <option value=""></option>
+                    <option value="">Selecione a Patologia</option>
                     <?php foreach ($patologias as $patologia) : ?>
                         <option value="<?= $patologia["id_patologia"] ?>"><?= $patologia["patologia_pat"] ?></option>
                     <?php endforeach; ?>
@@ -108,24 +110,30 @@
             <div class="form-group col-sm-2">
                 <label class="control-label" for="grupo_patologia_int">Grupo Patologia</label>
                 <select class="form-control" id="grupo_patologia_int" name="grupo_patologia_int">
-                    <option value=""></option>
-                    <option value="Cardiológica">Cardiológica</option>
-                    <option value="Pediatria">Pediatria</option>
-                    <option value="Ortopedia">Ortopedia</option>
-                    <option value="Obstetrícia">Obstetrícia</option>
+                    <option value="">Selecione o Grupo</option>
+                    <?php foreach ($dados_grupo_pat as $grupo) : ?>
+                        <option value="<?= $grupo ?>"><?= $grupo ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
-
+            <div class="form-group col-sm-3">
+                <label for="usuario_create_int">Usuário</label>
+                <input type="text" class="form-control" id="usuario_create_int" value="<?= $_SESSION['username'] ?>" name="usuario_create_int" placeholder="Digite o nome do médico">
+            </div>
             <div class="form-group row">
-
                 <div>
                     <label for="rel_int">Relatório Auditoria</label>
                     <textarea type="textarea" rows="10" class="form-control" id="rel_int" name="rel_int" placeholder="Relatório da auditoria"></textarea>
                 </div>
                 <div>
-                    <label for="acoes_int">Ações Auditoria</label>
-                    <textarea type="textarea" rows="10" class="form-control" id="acoes_int" name="acoes_int" placeholder="Ações de auditoria"></textarea>
+                    <label for="data_create_int">Ações Auditoria</label>
+                    <textarea type="textarea" rows="10" class="form-control" id="data_create_int" name="data_create_int" placeholder="Ações de auditoria"></textarea>
                 </div>
+                <div class="form-group col-sm-3">
+                    <?php $agora = date('d/m/Y'); ?>
+                    <input type="hidden" class="form-control" id="data_create_int" value='<?= $agora; ?>' name="data_create_int" placeholder="Digite o nome do médico">
+                </div>
+
             </div>
             <br>
             <div> <button style="margin:10px" type="submit" class="btn-sm btn-success">Cadastrar</button>

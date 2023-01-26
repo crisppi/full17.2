@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header('location: index.php');
+    exit;
+}
 require_once("models/usuario.php");
 require_once("models/usuario.php");
 require_once("dao/usuarioDao.php");
@@ -194,4 +200,10 @@ $usuario = $usuarioDao->findById_user($id_usuario);
 <?php include_once("diversos/backbtn_usuarios.php"); ?>
 
 <?php
-require_once("templates/footer1.php");
+include_once("templates/footer.php");
+?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</html>

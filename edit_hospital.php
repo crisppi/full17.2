@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header('location: index.php');
+    exit;
+}
+
 require_once("models/usuario.php");
 require_once("models/hospital.php");
 require_once("dao/usuarioDao.php");
@@ -59,7 +66,7 @@ $hospital = $hospitalDao->findById($id_hospital);
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="email01_hosp">email01</label>
-                    <input type="email" class="form-control" id="email01_hosp" value="<?= $hospital->email01 ?>" name="email01_hosp" placeholder="Digite o email principal">
+                    <input type="email" class="form-control" id="email01_hosp" value="<?= $hospital->email01_hosp ?>" name="email01_hosp" placeholder="Digite o email principal">
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="email02_hosp">email02</label>
@@ -71,7 +78,7 @@ $hospital = $hospitalDao->findById($id_hospital);
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="telefone02">Telefone</label>
-                    <input type="text" onkeydown="return mascaraTelefone(event)" value="<?= $hospital->telefone02 ?>" class="form-control" id="telefone02" name="telefone02" placeholder="Digite outro telefone">
+                    <input type="text" onkeydown="return mascaraTelefone(event)" value="<?= $hospital->telefone02_hosp ?>" class="form-control" id="telefone02" name="telefone02" placeholder="Digite outro telefone">
                 </div>
 
                 <!-- <div class="form-group col-sm-4">
@@ -185,4 +192,10 @@ $hospital = $hospitalDao->findById($id_hospital);
 <?php include_once("diversos/backbtn_hospital.php"); ?>
 
 <?php
-require_once("templates/footer1.php");
+include_once("templates/footer.php");
+?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</html>

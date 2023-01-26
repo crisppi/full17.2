@@ -1,5 +1,10 @@
 <?php
+session_start();
 
+if (!isset($_SESSION['username'])) {
+    header('location: index.php');
+    exit;
+}
 # inclui o arquivo config(arquivo de conexão com o banco de dados)
 include_once("globals.php");
 require("db.php");
