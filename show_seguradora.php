@@ -36,7 +36,7 @@ $seguradora = $seguradoraDao->findById($id_seguradora);
         <hr>
     </div>
     <div id="id-confirmacao" class="btn_acoes visible">
-        <p>Deseja deletar esta Seguradora?: <?= $hospital_ant ?>?</p>
+        <p>Deseja mesmo deletar esta Seguradora?: <?= $seguradora->seguradora_seg ?>?</p>
         <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
         <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
     </div>
@@ -69,5 +69,8 @@ $seguradora = $seguradoraDao->findById($id_seguradora);
 </script>
 <?php include_once("diversos/backbtn_seguradora.php"); ?>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <?php
-include_once("templates/footer1.php");
+require_once("templates/footer.php");
+?>

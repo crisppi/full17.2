@@ -8,6 +8,15 @@
     min-height: 100vh;
 }
 
+h2 {
+    color: black;
+
+}
+
+p {
+    color: black;
+}
+
 .img-cover {
     background-repeat: no-repeat;
     background-size: cover;

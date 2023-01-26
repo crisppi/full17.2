@@ -63,5 +63,8 @@ $patologia = $patologiaDao->findById($id_patologia);
 </script>
 <?php include_once("diversos/backbtn_patologia.php"); ?>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <?php
-include_once("templates/footer.php");
+require_once("templates/footer.php");
+?>

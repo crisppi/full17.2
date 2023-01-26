@@ -184,7 +184,9 @@ class PacienteDAO implements PacienteDAOInterface
         cidade_pac = :cidade_pac,
         bairro_pac = :bairro_pac,
         mae_pac = :mae_pac,
-        ativo_pac = :ativo_pac
+        ativo_pac = :ativo_pac,
+        usuario_create_pac = :usuario_create_pac,
+        data_create_pac = :data_create_pac
 
         WHERE id_paciente = :id_paciente 
       ");
@@ -203,6 +205,8 @@ class PacienteDAO implements PacienteDAOInterface
         $stmt->bindParam(":bairro_pac", $paciente->bairro_pac);
         $stmt->bindParam(":mae_pac", $paciente->mae_pac);
         $stmt->bindParam(":ativo_pac", $paciente->ativo_pac);
+        $stmt->bindParam(":usuario_create_pac", $paciente->usuario_create_pac);
+        $stmt->bindParam(":data_create_pac", $paciente->data_create_pac);
 
         $stmt->bindParam(":id_paciente", $paciente->id_paciente);
         $stmt->execute();

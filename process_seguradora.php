@@ -29,6 +29,8 @@ if ($type === "create") {
     $email02_seg = filter_input(INPUT_POST, "email02_seg");
     $numero_seg = filter_input(INPUT_POST, "numero_seg");
     $bairro_seg = filter_input(INPUT_POST, "bairro_seg");
+    $data_create_seg = filter_input(INPUT_POST, "data_create_seg");
+    $usuario_create_seg = filter_input(INPUT_POST, "usuario_create_seg");
 
     $seguradora = new seguradora();
 
@@ -46,6 +48,8 @@ if ($type === "create") {
         $seguradora->telefone02_seg = $telefone02_seg;
         $seguradora->numero_seg = $numero_seg;
         $seguradora->bairro_seg = $bairro_seg;
+        $seguradora->data_create_seg = $data_create_seg;
+        $seguradora->usuario_create_seg = $usuario_create_seg;
 
         //$seguradora->id_seguradora = $userData->id_seguradora;
 
@@ -114,6 +118,8 @@ if ($type === "create") {
     $telefone02_seg = filter_input(INPUT_POST, "telefone02_seg");
     $numero_seg = filter_input(INPUT_POST, "numero_seg");
     $bairro_seg = filter_input(INPUT_POST, "bairro_seg");
+    $data_create_seg = filter_input(INPUT_POST, "data_create_seg");
+    $usuario_create_seg = filter_input(INPUT_POST, "usuario_create_seg");
 
     $seguradoraData = $seguradoraDao->findById($id_seguradora);
 
@@ -127,6 +133,9 @@ if ($type === "create") {
     $seguradoraData->telefone02_seg = $telefone02_seg;
     $seguradoraData->numero_seg = $numero_seg;
     $seguradoraData->bairro_seg = $bairro_seg;
+    $seguradora->data_create_seg = $data_create_seg;
+    $seguradora->usuario_create_seg = $usuario_create_seg;
+
 
     $seguradoraDao->update($seguradoraData);
 

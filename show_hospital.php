@@ -80,4 +80,5 @@ $hospital = $hospitalDao->findById($id_hospital);
 <?php include_once("diversos/backbtn_hospital.php"); ?>
 
 <?php
-include_once("templates/footer.php");
+require_once("templates/footer.php");
+?>

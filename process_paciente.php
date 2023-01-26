@@ -33,6 +33,8 @@ if ($type === "create") {
     $bairro_pac = filter_input(INPUT_POST, "bairro_pac");
     $ativo_pac = filter_input(INPUT_POST, "ativo_pac");
     $sexo_pac = filter_input(INPUT_POST, "sexo_pac");
+    $usuario_create_pac = filter_input(INPUT_POST, "usuario_create_pac");
+    $data_create_pac = filter_input(INPUT_POST, "data_create_pac");
 
     $paciente = new Paciente();
 
@@ -53,8 +55,10 @@ if ($type === "create") {
         $paciente->numero_pac = $numero_pac;
         $paciente->bairro_pac = $bairro_pac;
         $paciente->ativo_pac = $ativo_pac;
+        $paciente->data_create_pac = $data_create_pac;
+        $paciente->usuario_create_pac = $usuario_create_pac;
 
-        //$paciente->id_paciente = $userData->id_paciente;
+        //$data_create_pac->id_paciente = $userData->id_paciente;
 
         // Upload de imagem do filme ****** nao usaar if para imagem *******
         /* if (isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {

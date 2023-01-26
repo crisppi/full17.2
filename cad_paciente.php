@@ -104,10 +104,11 @@ if (empty($id_hospital)) {
                     </select>
                 </div>
                 <div class="form-group col-sm-4">
-                    <input class="oculto" type="data" type="hidden" class="form-control" value='<?php echo date("d/m/Y"); ?>' id="data_create_pac" name="data_create_pac" placeholder="">
+                    <?php $agora = date('d/m/Y'); ?>
+                    <input class="visible" type="text" class="form-control" value='<?= $agora; ?>' id="data_create_pac" name="data_create_pac" placeholder="">
                 </div>
-                <div class="form-group col-sm-4 oculto">
-                    <input type="text" class="form-control" id="usuario_create_pac" name="usuario_create_pac" placeholder="Digite o usuário">
+                <div class="form-group col-sm-4">
+                    <input type="text" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['username'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
                 </div>
             </div>
             <br>
@@ -214,6 +215,8 @@ if (empty($id_hospital)) {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <?php
-require_once("templates/footer1.php");
+require_once("templates/footer.php");
 ?>

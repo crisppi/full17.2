@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['email_login'])) {
+if (!isset($_SESSION['username'])) {
     header('location: index.php');
     exit;
 }
@@ -19,7 +19,7 @@ if (!isset($_SESSION['email_login'])) {
 </head>
 
 <?php
-include_once("formularios/form_list_estipulante.php");
+include_once("formularios/form_list_seguradora.php");
 include_once("templates/footer.php");
 ?>
 

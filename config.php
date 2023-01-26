@@ -53,24 +53,3 @@ include_once 'conexao.php';
         unset($_SESSION['msg']);
     }
     ?>
-
-    <form method="POST" action="">
-        <label>Usuário</label>
-        <input type="text" name="usuario" placeholder="Digite o usuário" value="<?php if (isset($dados['usuario'])) {
-                                                                                    echo $dados['usuario'];
-                                                                                } ?>"><br><br>
-
-        <label>Senha</label>
-        <input type="password" name="senha_usuario" placeholder="Digite a senha" value="<?php if (isset($dados['senha_usuario'])) {
-                                                                                            echo $dados['senha_usuario'];
-                                                                                        } ?>"><br><br>
-
-        <input type="submit" value="Acessar" name="SendLogin">
-    </form>
-
-    <br><br>
-    Usuário: cesar@celke.com.br<br>
-    Senha: 123456
-</body>
-
-</html>

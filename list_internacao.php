@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header('location: index.php');
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 

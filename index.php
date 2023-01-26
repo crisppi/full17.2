@@ -1,43 +1,42 @@
 <?php
-require_once("templates/header.php");
-
-include_once("app/conf_usuario.php");
+require_once("templates/headerbase.php");
+require_once("dao/usuarioDao.php");
+require_once("models/message.php");
+require_once("models/usuario.php");
+// include_once("conf_usuario.php");
 
 if (isset($_POST['username'])) {
     $_SESSION['username'] = $_POST['username'];
     header("Location: menu.php");
-} else {
-    echo "Você não está logado";
 };
+$usuarioDao = new userDAO($conn, $BASE_URL);
 
-// if (isset($_POST['username']) || isset($_POST['senha_login'])) {
+if (isset($_POST["login"])) {
 
-//     if (strlen($_POST['username']) == 0) {
-//         echo "Preencha seu e-mail";
-//     } else if (strlen($_POST['senha_login']) == 0) {
-//         echo "Preencha sua senha";
-//     } else {
+    if (empty($_POST['username']) || empty($_POST['senha_login'])) {
+        $message = '<label>Todos campos são obrigatórios</label>';
+    } else {
 
-//         $query = "SELECT * FROM tb_user WHERE usuario_user = :username AND senha_user = :senha_login";
+        $query = "SELECT * FROM tb_user WHERE usuario_user = :username AND senha_user = :senha_login";
 
-//         $usuarioDao = $conn->prepare($query);
-//         $usuarioDao->execute(
-//             array(
-//                 'username' =>  $_POST["username"],
-//                 'senha_login' =>  $_POST["senha_login"]
-//             )
-//         );
+        $usuarioDao = $conn->prepare($query);
+        $usuarioDao->execute(
+            array(
+                'username'     =>     $_POST["username"],
+                'senha_login'     =>     $_POST["senha_login"]
+            )
+        );
 
-//         $usuario = $usuarioDao->fetch_assoc();
-//         echo "<br>";
-//         print_r($usuario);
+        $count = $usuarioDao->rowCount();
+        if ($count > 0) {
+            $_SESSION["username"] = $_POST["username"];
+            header("Location: menu.php");
+        } else {
+            $message = '<label>Usuário ou senha incorretas</label>';
+        }
+    }
+}
 
-//         $_SESSION['id_user'] = $usuario['id_usuario'];
-//         $_SESSION['email_user'] = $usuario['email_user'];
-
-//         header("Location: menu.php");
-//     }
-// }
 
 ?>
 <div class="container-fluid">
@@ -53,8 +52,7 @@ if (isset($_POST['username'])) {
                         <input class="input border-0 border-bottom p-2" style="border-radius:10px" name="senha_login" id="senha_login" placeholder="Senha" type="password" />
                         <br />
                         <div class="mt-4 d-flex justify-content-between align-items-center">
-                            <button style="border-radius:15px" type="submit" class="btn btn-danger">Logar</button>
-                            <a href="#" class="text-secondary text-decoration-none">Esqueceu a senha?</a>
+                            <input type="submit" value="Acessar" name="SendLogin">
                         </div>
                     </form>
                 </div>
