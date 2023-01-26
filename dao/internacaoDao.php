@@ -256,6 +256,22 @@ class InternacaoDao implements InternacaoDAOInterface
 
         $stmt->execute();
 
+        $internacao = $stmt->fetch();
+
+        return $internacao;
+    }
+    public function findByIdUpdate($id_internacao)
+    {
+
+        $internacao = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM tb_internacao
+                                    WHERE id_internacao = :id_internacao");
+
+        $stmt->bindValue(":id_internacao", $id_internacao);
+
+        $stmt->execute();
+
         if ($stmt->rowCount() > 0) {
 
             $internacaoArray = $stmt->fetchAll();
@@ -265,5 +281,57 @@ class InternacaoDao implements InternacaoDAOInterface
             }
         }
         return $internacao;
+    }
+
+    public function update(Internacao $internacao)
+    {
+
+        $stmt = $this->conn->prepare("UPDATE tb_internacao SET
+        -- fk_hospital_int = :fk_hospital_int,
+        -- fk_paciente_int = :fk_paciente_int,
+        -- fk_patologia_int = :fk_patologia_int,
+        -- fk_patologia2 = :fk_patologia2,
+        -- internado_int = :internado_int,
+        -- acoes_int = :acoes_int,
+        -- acomodacao_int = :acomodacao_int,
+        -- modo_internacao_int = :modo_internacao_int,
+        -- tipo_admissao_int = :tipo_admissao_int,
+        -- data_intern_int = :data_intern_int,
+        -- data_alta_int = :data_alta_int,
+        usuario_create_int = :usuario_create_int 
+        -- data_visita_int = :data_visita_int,
+        -- especialidade_int = :especialidade_int,
+        -- titular_int = :titular_int,
+        -- rel_int = :rel_int,
+        -- grupo_patologia_int = :grupo_patologia_int
+
+        WHERE id_internacao = :id_internacao 
+      ");
+
+        // $stmt->bindParam(":fk_hospital_int", $internacao->fk_hospital_int);
+        // $stmt->bindParam(":fk_paciente_int", $internacao->fk_paciente_int);
+        // $stmt->bindParam(":fk_patologia_int", $internacao->fk_patologia_int);
+        // $stmt->bindParam(":fk_patologia2", $internacao->fk_patologia2);
+        // $stmt->bindParam(":internado_int", $internacao->internado_int);
+        // $stmt->bindParam(":acoes_int", $internacao->acoes_int);
+        // $stmt->bindParam(":modo_internacao_int", $internacao->modo_internacao_int);
+        // $stmt->bindParam(":acomodacao_int", $internacao->acomodacao_int);
+        // $stmt->bindParam(":modo_internacao_int", $internacao->modo_internacao_int);
+        // $stmt->bindParam(":tipo_admissao_int", $internacao->tipo_admissao_int);
+        // $stmt->bindParam(":data_alta_int", $internacao->data_alta_int);
+        $stmt->bindParam(":usuario_create_int", $internacao->usuario_create_int);
+        // $stmt->bindParam(":data_intern_int", $internacao->data_intern_int);
+        // $stmt->bindParam(":data_visita_int", $internacao->data_visita_int);
+        // $stmt->bindParam(":especialidade_int", $internacao->especialidade_int);
+        // $stmt->bindParam(":titular_int", $internacao->titular_int);
+        // $stmt->bindParam(":rel_int", $internacao->rel_int);
+        // $stmt->bindParam(":grupo_patologia_int", $internacao->grupo_patologia_int);
+        // $stmt->bindParam(":fk_user_int", $internacao->fk_user_int);
+        // $stmt->bindParam(":id_internacao", $internacao->id_internacao);
+
+        $stmt->execute();
+
+        // Mensagem de sucesso por editar internacao
+        $this->message->setMessage("internacao atualizado com sucesso!", "success", "list_internacao.php");
     }
 }

@@ -130,10 +130,10 @@ if (!isset($_SESSION['username'])) {
                                 <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:orange; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>
                                 <a href="<?= $BASE_URL ?>cad_visita.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:black; font-weigth:bold; margin-left:5px;margin-right:5px" name="type" value="visita" class="aparecer-acoes bi bi-file-text"></i></a>
 
-                                <form class="d-inline-block delete-form" action="process_alta.php" method="POST">
+                                <form class="d-inline-block delete-form" action="edit_alta.php" method="GET">
                                     <input type="hidden" name="type" value="alta">
-                                    <input type="hidden" name="alta" value="Não">
-                                    <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
+                                    <!-- <input type="hidden" name="alta" value="alta"> -->
+                                    <input type="text" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
                                     <button type="submit" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block bi bi-door-open"></i></button>
                                 </form>
                                 <form class="d-inline-block delete-form" action="del_internacao.php" method="POST">
