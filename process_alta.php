@@ -31,5 +31,5 @@ if ($type === "alta") {
 
     $internacaoDao->alta($internacaoData);
 
-    // include_once('list_internacao.php');
+    include_once('list_internacao.php');
 }

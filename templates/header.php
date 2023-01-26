@@ -87,6 +87,7 @@ header("Content-type: text/html; charset=utf-8");
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>cad_internacao.php">Internação</a></li>
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>cad_internacao_niveis.php">Niveis</a></li>
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>cad_visita.php">Visita</a></li>
+                <li><a class="dropdown-item" href="<?php $BASE_URL ?>edit_alta.php">Alta Hospitalar</a></li>
 
                 <li>
                   <hr class="dropdown-divider">

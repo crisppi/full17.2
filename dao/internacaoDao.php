@@ -34,7 +34,7 @@ class InternacaoDao implements InternacaoDAOInterface
         $internacao->modo_internacao_int = $data["modo_internacao_int"];
         $internacao->tipo_admissao_int = $data["tipo_admissao_int"];
         $internacao->data_intern_int = $data["data_intern_int"];
-        $internacao->data_visita_int = $data["data_visita_int"];
+        // $internacao->data_visita_int = $data["data_visita_int"];
         $internacao->data_create_int = $internacao["data_create_int"];
         $internacao->usuario_create_int = $internacao["usuario_create_int"];
         $internacao->titular_int = $data["titular_int"];
@@ -243,5 +243,27 @@ class InternacaoDao implements InternacaoDAOInterface
         $where = null;
         $order = null;
         $limite = null;
+    }
+    public function alta($id_internacao)
+    {
+
+        $internacao = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM tb_internacao
+                                    WHERE id_internacao = :id_internacao");
+
+        $stmt->bindValue(":id_internacao", $id_internacao);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+
+            $internacaoArray = $stmt->fetchAll();
+
+            foreach ($internacaoArray as $internacao) {
+                $internacao[] = $this->buildinternacao($internacao);
+            }
+        }
+        return $internacao;
     }
 }

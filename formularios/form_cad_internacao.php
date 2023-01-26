@@ -32,7 +32,6 @@
             <div class="form-group col-sm-2">
                 <label for="data_visita_int">Data Visita</label>
                 <?php $agora = date('d/m/Y'); ?>
-
                 <input type="text" value='<?= $agora; ?>' class="form-control" id="data_visita_int" name="data_visita_int">
             </div>
             <div class="form-group col-sm-1">
@@ -42,9 +41,7 @@
                     <option value="Não">Não</option>
                 </select>
             </div>
-
         </div>
-
         <div class="row">
             <div class="form-group col-sm-2">
                 <label class="control-label" for="acomodacao_int">Acomodação</label>
@@ -86,7 +83,6 @@
                     <option value=""></option>
                     <option value="Eletiva">Eletiva</option>
                     <option value="Urgência">Urgência</option>
-
                 </select>
             </div>
             <div class="form-group col-sm-2">
@@ -118,7 +114,7 @@
             </div>
             <div class="form-group col-sm-3">
                 <label for="usuario_create_int">Usuário</label>
-                <input type="text" class="form-control" id="usuario_create_int" value="<?= $_SESSION['username'] ?>" name="usuario_create_int" placeholder="Digite o nome do médico">
+                <input type="text" class="form-control" id="usuario_create_int" value="<?= $_SESSION['username'] ?>" name="usuario_create_int">
             </div>
             <div class="form-group row">
                 <div>
@@ -133,7 +129,6 @@
                     <?php $agora = date('d/m/Y'); ?>
                     <input type="hidden" class="form-control" id="data_create_int" value='<?= $agora; ?>' name="data_create_int" placeholder="Digite o nome do médico">
                 </div>
-
             </div>
             <br>
             <div> <button style="margin:10px" type="submit" class="btn-sm btn-success">Cadastrar</button>
