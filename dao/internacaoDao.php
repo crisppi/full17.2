@@ -34,7 +34,7 @@ class InternacaoDao implements InternacaoDAOInterface
         $internacao->modo_internacao_int = $data["modo_internacao_int"];
         $internacao->tipo_admissao_int = $data["tipo_admissao_int"];
         $internacao->data_intern_int = $data["data_intern_int"];
-        // $internacao->data_visita_int = $data["data_visita_int"];
+        $internacao->data_visita_int = $data["data_visita_int"];
         $internacao->data_create_int = $internacao["data_create_int"];
         $internacao->usuario_create_int = $internacao["usuario_create_int"];
         $internacao->titular_int = $data["titular_int"];
@@ -128,6 +128,8 @@ class InternacaoDao implements InternacaoDAOInterface
         ac.id_internacao, 
         ac.acoes_int, 
         ac.data_intern_int, 
+        ac.data_create_int, 
+        ac.data_visita_int, 
         ac.rel_int, 
         ac.fk_paciente_int, 
         ac.usuario_create_int, 
@@ -147,19 +149,7 @@ class InternacaoDao implements InternacaoDAOInterface
         ho.nome_hosp,
         pat.patologia_pat 
 
-        FROM tb_internacao ac 
-
-        iNNER JOIN tb_hospital as ho On  
-        ac.fk_hospital_int = ho.id_hospital
-
-        left join tb_paciente as pa on
-        ac.fk_paciente_int = pa.id_paciente
-
-        left join tb_patologia as pat on
-        ac.fk_patologia_int = pat.id_patologia
-
-        WHERE id_internacao = :id_internacao
-        ");
+        FROM tb_internacao ac iNNER JOIN tb_hospital AS ho ON ac.fk_hospital_int = ho.id_hospital left join tb_paciente as pa on ac.fk_paciente_int = pa.id_paciente left join tb_patologia as pat on ac.fk_patologia_int = pat.id_patologia WHERE id_internacao = :id_internacao");
 
         $stmt->bindParam(":id_internacao", $id_internacao);
         $stmt->execute();

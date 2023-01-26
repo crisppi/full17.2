@@ -33,13 +33,21 @@ extract($internacao);
             <div class="form-group row">
                 <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>" placeholder="ID">
             </div>
-            <!-- <div class="form-group col-sm-2">
+            <div class="form-group col-sm-2">
                 <label class="control-label" for="data_alta_int">Data</label>
-                <input type="date" class="form-control" value='<?php echo date("d/m/Y"); ?>' id="data_alta_int" name="data_alta_int" placeholder="">
-            </div> -->
+                <input type="text" class="form-control" value='<?php echo date("d/m/Y"); ?>' id="data_alta_int" name="data_alta_int" placeholder="">
+            </div>
+            <div class="form-group col-sm-2">
+                <label class="control-label" for="data_visita_int">Data</label>
+                <input type="text" class="form-control" value='<?php echo date("d/m/Y"); ?>' id="data_visita_int" name="data_visita_int" placeholder="">
+            </div>
+            <div class="form-group col-sm-2">
+                <label class="control-label" for="data_create_int">Data</label>
+                <input type="text" class="form-control" value='<?php echo date("d/m/Y"); ?>' id="data_create_int" name="data_create_int" placeholder="">
+            </div>
             <div class="form-group col-sm-4">
                 <label class="control-label" for="usuario_create_int">Usuário</label>
-                <input type="text" value="<?= $usuario_crete_int ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
+                <input type="text" value="<?= $usuario_create_int ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
             </div>
     </div>
     <br>
@@ -144,7 +152,7 @@ extract($internacao);
 </script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
-<?php include_once("diversos/backbtn_internacaos.php"); ?>
+<?php include_once("diversos/backbtn_internacao.php"); ?>
 
 <?php
 include_once("templates/footer.php");
