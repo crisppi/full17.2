@@ -18,9 +18,9 @@ $internacaoDao = new internacaoDAO($conn, $BASE_URL);
 // Receber id do usuário
 $id_internacao = filter_input(INPUT_GET, "id_internacao");
 $internacao = $internacaoDao->alta($id_internacao);
-// print_r($internacao);
+
 extract($internacao);
-// print_r($id_internacao);
+// print_r($internacao);
 ?>
 
 <!-- formulario alta -->

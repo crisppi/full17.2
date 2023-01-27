@@ -2,13 +2,14 @@
 require_once("globals.php");
 require_once("db.php");
 require_once("models/internacao.php");
-require_once("models/message.php");
-require_once("dao/usuarioDao.php");
+// require_once("models/message.php");
+// require_once("dao/usuarioDao.php");
 require_once("dao/internacaoDao.php");
 
-$message = new Message($BASE_URL);
-$userDao = new UserDAO($conn, $BASE_URL);
+// $message = new Message($BASE_URL);
+// $userDao = new UserDAO($conn, $BASE_URL);
 $internacaoDao = new InternacaoDAO($conn, $BASE_URL);
+$id_internacao = filter_input(INPUT_POST, "id_internacao");
 
 // Resgata o tipo do formulário
 $type = filter_input(INPUT_POST, "type");
@@ -62,9 +63,9 @@ if ($type === "create") {
         header("Location: javascript:history.back(1)");
         $message->setMessage("Você precisa adicionar pelo menos: nome da internacao!", "error", "list_internacao.php");
     }
-} else if ($type === "update") {
-
-    $internacaoDao = new internacaoDAO($conn, $BASE_URL);
+} else if ($type === "alta") {
+    // echo "<pre>";
+    // print_r($internacaoData);
 
     // Receber os dados dos inputs
     $id_internacao = filter_input(INPUT_POST, "id_internacao");
@@ -77,14 +78,16 @@ if ($type === "create") {
     // $modo_internacao_int = filter_input(INPUT_POST, "modo_internacao_int");
     // $especialidade_int = filter_input(INPUT_POST, "especialidade_int");
     // $grupo_patologia_int = filter_input(INPUT_POST, "grupo_patologia_int");
-    $data_visita_int = filter_input(INPUT_POST, "data_visita_int") ?: null;
+    // $data_visita_int = filter_input(INPUT_POST, "data_visita_int") ?: null;
     // $data_alta_int = filter_input(INPUT_POST, "data_alta_int") ?: NULL;
     // $titular_int = filter_input(INPUT_POST, "titular_int");
     // $acomodacao_int = filter_input(INPUT_POST, "acomodacao_int");
     // $acoes_int = filter_input(INPUT_POST, "acoes_int");
     // $rel_int = filter_input(INPUT_POST, "rel_int");
     $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
-    $data_create_int = filter_input(INPUT_POST, "data_create_int") ?: null;
+    // $data_create_int = filter_input(INPUT_POST, "data_create_int") ?: null;
+
+    $internacao = new internacao();
 
     $internacaoData = $internacaoDao->alta($id_internacao);
 
@@ -98,17 +101,19 @@ if ($type === "create") {
     // $internacaoData->tipo_admissao_int = $tipo_admissao_int;
     // $internacaoData->grupo_patologia_int = $grupo_patologia_int;
     // $internacaoData->especialidade_int = $especialidade_int;
-    $internacaoData->data_visita_int = $data_visita_int;
+    // $internacaoData->data_visita_int = $data_visita_int;
     // $internacaoData->data_alta_int = $data_alta_int;
     // $internacaoData->titular_int = $titular_int;
     // $internacaoData->acomodacao_int = $acomodacao_int;
     // $internacaoData->acoes_int = $acoes_int;
     // $internacaoData->rel_int = $rel_int;
     $internacaoData->usuario_create_int = $usuario_create_int;
-    $internacaoData->data_create_int = $data_create_int;
-
+    // $internacaoData->data_create_int = $data_create_int;
+    // print_r($internacaoData);
     $internacaoDao->update($internacaoData);
+    echo "ola mundo";
 
+    print_r($internacao);
     include_once('list_internacao.php');
 }
 

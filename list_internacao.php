@@ -133,8 +133,8 @@ if (!isset($_SESSION['username'])) {
                                 <form class="d-inline-block delete-form" action="edit_alta.php" method="GET">
                                     <input type="hidden" name="type" value="alta">
                                     <!-- <input type="hidden" name="alta" value="alta"> -->
-                                    <input type="text" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
-                                    <button type="submit" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block bi bi-door-open"></i></button>
+                                    <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
+                                    <button type="hidden" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block bi bi-door-open"></i></button>
                                 </form>
                                 <form class="d-inline-block delete-form" action="del_internacao.php" method="POST">
                                     <input type="hidden" name="type" value="delete">

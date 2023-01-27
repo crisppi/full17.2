@@ -294,7 +294,7 @@ class InternacaoDao implements InternacaoDAOInterface
         -- titular_int = :titular_int,
         -- rel_int = :rel_int,
         -- grupo_patologia_int = :grupo_patologia_int
-
+        
         WHERE id_internacao = :id_internacao 
       ");
 
@@ -317,7 +317,7 @@ class InternacaoDao implements InternacaoDAOInterface
         // $stmt->bindParam(":rel_int", $internacao->rel_int);
         // $stmt->bindParam(":grupo_patologia_int", $internacao->grupo_patologia_int);
         // $stmt->bindParam(":fk_user_int", $internacao->fk_user_int);
-        // $stmt->bindParam(":id_internacao", $internacao->id_internacao);
+        $stmt->bindParam(":id_internacao", $internacao->id_internacao);
 
         $stmt->execute();
 
