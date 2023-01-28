@@ -60,4 +60,18 @@ interface InternacaoDAOInterface
   public function findByIdUpdate($id_internacao);
 
   public function update(Internacao $internacao);
+  public function buildinternacao($internacao);
+  // public function getinternacao();
+
+  //   public function findInternAll($limite, $inicio);
+  //   public function findByIdUpdate($id_internacao);
+
+  //   public function findInternByInternado($pesqInternado);
+  //   public function findInternByHosp($pesquisa_hosp);
+
+  //   public function update(Internacao $internacao);
+  //   public function destroy($id_internacao);
+  //   public function joininternacaoHospital();
+  //   public function joininternacaoHospitalSelect();
+  //   public function joininternacaoHospitalShow($id_internacao);
 }

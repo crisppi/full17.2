@@ -86,7 +86,7 @@ if ($type === "create") {
     $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
     $data_create_int = filter_input(INPUT_POST, "data_create_int") ?: null;
 
-    $internacao = new internacao();
+    // $internacao = new internacao();
 
     $internacaoData = $internacaoDao->findById($id_internacao);
 
