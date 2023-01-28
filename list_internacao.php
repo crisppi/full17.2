@@ -100,7 +100,7 @@ if (!isset($_SESSION['username'])) {
                         <th scope="col">Data visita</th>
                         <th scope="col">Grupo Patologia</th>
                         <th scope="col">Modo Admissão</th>
-                        <th scope="col">Tipo internação</th>
+                        <th scope="col">Tipo Alta</th>
                         <th scope="col">Médico</th>
                         <th scope="col">Especialidade</th>
                         <th scope="col">Relatório</th>
@@ -121,6 +121,7 @@ if (!isset($_SESSION['username'])) {
                             <td scope="row"><?= $intern["data_visita_int"] ?></td>
                             <td scope="row"><?= $intern["grupo_patologia_int"] ?></td>
                             <td scope="row"><?= $intern["tipo_admissao_int"] ?></td>
+                            <td scope="row"><?= $intern["tipo_alta_int"] ?></td>
                             <td scope="row"><?= $intern["modo_internacao_int"] ?></td>
                             <td scope="row"><?= $intern["titular_int"] ?></td>
                             <td scope="row"><?= $intern["especialidade_int"] ?></td>

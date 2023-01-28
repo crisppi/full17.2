@@ -7,3 +7,4 @@ $dados_especialidade = ["Clínica", "Pediatria", "Ginecologia", "Cirurgia Geral"
 $dados_criter = ["Clínica", "Pediatria", "Ginecologia", "Cirurgia Geral", "Cirurgia Vascular", "Cirurgia Torácica"];
 $dados_grupo_pat = ["Cardiológica", "Pediátrica", "Oncológica", "Urológica", "Infecção"];
 $dados_tipo_evento = ["Úlcera pressão", "Queda", "Broncoaspiração", "Infecção hospitalar", "Infecção cirúrgica"];
+$dados_alta = ["Melhorado", "Transferido", "Óbito"];

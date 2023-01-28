@@ -32,6 +32,7 @@ class internacaoDAO implements internacaoDAOInterface
         $internacao->modo_internacao_int = $data["modo_internacao_int"];
         $internacao->tipo_admissao_int = $data["tipo_admissao_int"];
         $internacao->data_intern_int = $data["data_intern_int"];
+        $internacao->data_alta_int = $data["data_alta_int"];
         $internacao->data_visita_int = $data["data_visita_int"];
         $internacao->data_create_int = $data["data_create_int"];
         $internacao->usuario_create_int = $data["usuario_create_int"];
@@ -187,6 +188,7 @@ class internacaoDAO implements internacaoDAOInterface
         data_create_int = :data_create_int,
         especialidade_int = :especialidade_int,
         titular_int = :titular_int,
+        tipo_alta_int = :tipo_alta_int,
         rel_int = :rel_int, 
         grupo_patologia_int = :grupo_patologia_int
         
@@ -208,6 +210,7 @@ class internacaoDAO implements internacaoDAOInterface
         $stmt->bindParam(":data_intern_int", $internacao->data_intern_int);
         $stmt->bindParam(":data_create_int", $internacao->data_create_int);
         $stmt->bindParam(":especialidade_int", $internacao->especialidade_int);
+        $stmt->bindParam(":tipo_alta_int", $internacao->tipo_alta_int);
         $stmt->bindParam(":titular_int", $internacao->titular_int);
         $stmt->bindParam(":rel_int", $internacao->rel_int);
         $stmt->bindParam(":grupo_patologia_int", $internacao->grupo_patologia_int);

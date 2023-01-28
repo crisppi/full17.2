@@ -81,6 +81,7 @@ if ($type === "create") {
     $titular_int = filter_input(INPUT_POST, "titular_int");
     $acomodacao_int = filter_input(INPUT_POST, "acomodacao_int");
     $acoes_int = filter_input(INPUT_POST, "acoes_int");
+    $tipo_alta_int = filter_input(INPUT_POST, "tipo_alta_int");
     $rel_int = filter_input(INPUT_POST, "rel_int");
     $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
     $data_create_int = filter_input(INPUT_POST, "data_create_int") ?: null;
@@ -104,6 +105,7 @@ if ($type === "create") {
     $internacaoData->titular_int = $titular_int;
     $internacaoData->acomodacao_int = $acomodacao_int;
     $internacaoData->acoes_int = $acoes_int;
+    $internacaoData->tipo_alta_int = $tipo_alta_int;
     $internacaoData->rel_int = $rel_int;
     $internacaoData->usuario_create_int = $usuario_create_int;
     $internacaoData->data_create_int = $data_create_int;

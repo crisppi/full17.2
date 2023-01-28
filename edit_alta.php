@@ -10,6 +10,7 @@ require_once("models/usuario.php");
 require_once("models/internacao.php");
 require_once("dao/usuarioDao.php");
 require_once("dao/internacaoDao.php");
+include("array_dados.php");
 
 $internacao = new internacao();
 $userDao = new UserDAO($conn, $BASE_URL);
@@ -18,7 +19,6 @@ $internacaoDao = new internacaoDAO($conn, $BASE_URL);
 // Receber id do usuário
 $id_internacao = filter_input(INPUT_GET, "id_internacao");
 $internacao = $internacaoDao->findById($id_internacao);
-print_r($internacao);
 ?>
 
 <!-- formulario alta -->
@@ -29,28 +29,37 @@ print_r($internacao);
         <form class="formulario" action="<?= $BASE_URL ?>process_internacao.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="type" value="update">
             <div class="form-group row">
-                <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>" placeholder="ID">
+                <input type="hidden" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>" placeholder="ID">
             </div>
             <div class="form-group col-sm-2">
                 <label class="control-label" for="data_alta_int">Data Alta</label>
                 <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_int" name="data_alta_int" placeholder="">
             </div>
             <div class="form-group col-sm-2">
-                <label class="control-label" for="internado_int">Internado</label>
-                <input type="text" class="form-control" value='<?= $internado_int; ?>' id="internado_int" name="internado_int" placeholder="">
+                <input type="hidden" class="form-control" value="Não" id="internado_int" name="internado_int" placeholder="">
             </div>
             <div class="form-group col-sm-2">
-                <label class="control-label" for="data_visita_int">Data</label>
-                <input type="text" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_visita_int" name="data_visita_int" placeholder="">
+                <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_visita_int" name="data_visita_int" placeholder="">
             </div>
             <div class="form-group col-sm-2">
-                <label class="control-label" for="data_create_int">Data</label>
-                <input type="text" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_create_int" name="data_create_int" placeholder="">
+                <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_create_int" name="data_create_int" placeholder="">
             </div>
             <div class="form-group col-sm-4">
                 <label class="control-label" for="usuario_create_int">Usuário</label>
                 <input type="text" value="<?= $_SESSION['username']; ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
             </div>
+            <div class="form-group col-sm-2">
+                <label class="control-label" for="tipo_alta_int">Tipo de alta</label>
+                <select class="form-control" id="tipo_alta_int" name="tipo_alta_int">
+                    <option value=""></option>
+                    <?php
+                    sort($dados_alta, SORT_ASC);
+                    foreach ($dados_alta as $alta) { ?>
+                        <option value="<?= $alta; ?>"><?= $alta; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <br>
     </div>
     <br>
     <button style="margin:10px" type="submit" class="btn-sm btn-info">Atualizar</button>
