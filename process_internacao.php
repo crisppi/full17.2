@@ -65,7 +65,6 @@ if ($type === "create") {
     }
 } else if ($type === "update") {
 
-    print_r($internacao);
     // Receber os dados dos inputs
     $id_internacao = filter_input(INPUT_POST, "id_internacao");
     $fk_hospital_int = filter_input(INPUT_POST, "fk_hospital_int");

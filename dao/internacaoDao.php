@@ -211,7 +211,6 @@ class internacaoDAO implements internacaoDAOInterface
         $stmt->bindParam(":titular_int", $internacao->titular_int);
         $stmt->bindParam(":rel_int", $internacao->rel_int);
         $stmt->bindParam(":grupo_patologia_int", $internacao->grupo_patologia_int);
-        $stmt->bindParam(":fk_user_int", $internacao->fk_user_int);
         $stmt->bindParam(":id_internacao", $internacao->id_internacao);
         $stmt->execute();
 

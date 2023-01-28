@@ -18,7 +18,7 @@ $internacaoDao = new internacaoDAO($conn, $BASE_URL);
 // Receber id do usuário
 $id_internacao = filter_input(INPUT_GET, "id_internacao");
 $internacao = $internacaoDao->findById($id_internacao);
-
+print_r($internacao);
 ?>
 
 <!-- formulario alta -->
@@ -32,20 +32,24 @@ $internacao = $internacaoDao->findById($id_internacao);
                 <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>" placeholder="ID">
             </div>
             <div class="form-group col-sm-2">
-                <label class="control-label" for="data_alta_int">Data</label>
-                <input type="text" class="form-control" value='<?php 1000 ?>' id="data_alta_int" name="data_alta_int" placeholder="">
+                <label class="control-label" for="data_alta_int">Data Alta</label>
+                <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_int" name="data_alta_int" placeholder="">
+            </div>
+            <div class="form-group col-sm-2">
+                <label class="control-label" for="internado_int">Internado</label>
+                <input type="text" class="form-control" value='<?= $internado_int; ?>' id="internado_int" name="internado_int" placeholder="">
             </div>
             <div class="form-group col-sm-2">
                 <label class="control-label" for="data_visita_int">Data</label>
-                <input type="text" class="form-control" value='<?php 1000 ?>' id="data_visita_int" name="data_visita_int" placeholder="">
+                <input type="text" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_visita_int" name="data_visita_int" placeholder="">
             </div>
             <div class="form-group col-sm-2">
                 <label class="control-label" for="data_create_int">Data</label>
-                <input type="text" class="form-control" value='<?php 1000 ?>' id="data_create_int" name="data_create_int" placeholder="">
+                <input type="text" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_create_int" name="data_create_int" placeholder="">
             </div>
             <div class="form-group col-sm-4">
                 <label class="control-label" for="usuario_create_int">Usuário</label>
-                <input type="text" value="<?= $usuario_create_int ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
+                <input type="text" value="<?= $_SESSION['username']; ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
             </div>
     </div>
     <br>
