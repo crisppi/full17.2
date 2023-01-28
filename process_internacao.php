@@ -63,9 +63,9 @@ if ($type === "create") {
         header("Location: javascript:history.back(1)");
         $message->setMessage("Você precisa adicionar pelo menos: nome da internacao!", "error", "list_internacao.php");
     }
-} else if ($type === "alta") {
-    echo "<pre>";
+} else if ($type === "update") {
 
+    print_r($internacao);
     // Receber os dados dos inputs
     $id_internacao = filter_input(INPUT_POST, "id_internacao");
     $fk_hospital_int = filter_input(INPUT_POST, "fk_hospital_int");
@@ -108,11 +108,8 @@ if ($type === "create") {
     $internacaoData->rel_int = $rel_int;
     $internacaoData->usuario_create_int = $usuario_create_int;
     $internacaoData->data_create_int = $data_create_int;
-    print_r($internacaoData);
     $internacaoDao->update($internacaoData);
-    echo "ola mundo";
 
-    print_r($internacao);
     include_once('list_internacao.php');
 }
 

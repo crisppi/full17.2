@@ -19,7 +19,6 @@ $internacaoDao = new internacaoDAO($conn, $BASE_URL);
 $id_internacao = filter_input(INPUT_GET, "id_internacao");
 $internacao = $internacaoDao->findById($id_internacao);
 
-print_r($internacao);
 ?>
 
 <!-- formulario alta -->
@@ -28,9 +27,9 @@ print_r($internacao);
         <h1 class="page-title">Atualizar internacao</h1>
         <p class="page-description">Adicione informações sobre o internacao</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_internacao.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="type" value="alta">
+            <input type="hidden" name="type" value="update">
             <div class="form-group row">
-                <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= $internacao['id_internacao'] ?>" placeholder="ID">
+                <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>" placeholder="ID">
             </div>
             <div class="form-group col-sm-2">
                 <label class="control-label" for="data_alta_int">Data</label>
@@ -46,7 +45,7 @@ print_r($internacao);
             </div>
             <div class="form-group col-sm-4">
                 <label class="control-label" for="usuario_create_int">Usuário</label>
-                <input type="text" value="<?= $internacao['usuario_create_int'] ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
+                <input type="text" value="<?= $usuario_create_int ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
             </div>
     </div>
     <br>

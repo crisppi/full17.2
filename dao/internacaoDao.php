@@ -23,8 +23,6 @@ class internacaoDAO implements internacaoDAOInterface
     {
         $internacao = new internacao();
         $internacao->id_internacao = $data['id_internacao'];
-        print_r($internacao);
-
         $internacao->fk_hospital_int = $data["fk_hospital_int"];
         $internacao->fk_paciente_int = $data["fk_paciente_int"];
         $internacao->acoes_int = $data["acoes_int"];
@@ -35,15 +33,13 @@ class internacaoDAO implements internacaoDAOInterface
         $internacao->tipo_admissao_int = $data["tipo_admissao_int"];
         $internacao->data_intern_int = $data["data_intern_int"];
         $internacao->data_visita_int = $data["data_visita_int"];
-        $internacao->data_create_int = $internacao["data_create_int"];
-        $internacao->usuario_create_int = $internacao["usuario_create_int"];
-
+        $internacao->data_create_int = $data["data_create_int"];
+        $internacao->usuario_create_int = $data["usuario_create_int"];
         $internacao->titular_int = $data["titular_int"];
         $internacao->especialidade_int = $data["especialidade_int"];
         $internacao->grupo_patologia_int = $data["grupo_patologia_int"];
         $internacao->internado_int = $data["internado_int"];
         $internacao->rel_int = $data['rel_int'];
-
 
         return $internacao;
     }
