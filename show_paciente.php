@@ -67,7 +67,7 @@ $paciente = $pacienteDao->findById($id_paciente);
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'none';
         console.log("chegou no cancelar");
-        window.location = "<?= $BASE_URL ?>del_paciente.php?id_paciente=<?= $id_paciente ?>";
+        window.location = "<?= $BASE_URL ?>list_paciente.php?>";
 
 
     };

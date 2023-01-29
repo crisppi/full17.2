@@ -84,18 +84,18 @@ class PacienteDAO implements PacienteDAOInterface
         $stmt->execute();
 
         $data = $stmt->fetch();
-        //var_dump($data);
+        // var_dump($data);
         $paciente = $this->buildPaciente($data);
 
         return $paciente;
     }
 
-    public function findByPac($pesquisa_nome)
+    public function findByPac($pesquisa_nome, $limite, $inicio)
     {
         $paciente = [];
 
         $stmt = $this->conn->prepare("SELECT * FROM tb_paciente
-                                    WHERE nome_pac LIKE :nome_pac ");
+                                    WHERE nome_pac LIKE :nome_pac order by nome_pac asc limit $inicio, $limite");
 
         $stmt->bindValue(":nome_pac", '%' . $pesquisa_nome . '%');
 
@@ -217,7 +217,8 @@ class PacienteDAO implements PacienteDAOInterface
 
     public function destroy($id_paciente)
     {
-        $stmt = $this->conn->prepare("DELETE FROM tb_paciente WHERE id_paciente = :id_paciente");
+        // echo "chegou no destroy  ID = " . $id_paciente;
+        $stmt = $this->conn->prepare("DELETE FROM tb_paciente WHERE id_paciente = $id_paciente");
 
         $stmt->bindParam(":id_paciente", $id_paciente);
 
@@ -228,12 +229,12 @@ class PacienteDAO implements PacienteDAOInterface
     }
 
 
-    public function findGeral()
+    public function findGeral($limite, $inicio)
     {
 
         $pacientes = [];
 
-        $stmt = $this->conn->query("SELECT * FROM tb_paciente ORDER BY id_paciente asc");
+        $stmt = $this->conn->query("SELECT * FROM tb_paciente ORDER BY id_paciente asc limit $inicio, $limite");
 
         $stmt->execute();
 
@@ -242,8 +243,6 @@ class PacienteDAO implements PacienteDAOInterface
         return $pacientes;
     }
 }
-
-
 
 # Limita o número de registros a serem mostrados por página
 $limite = 10;
@@ -254,6 +253,6 @@ $pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
 # Atribui a variável inicio o inicio de onde os registros vão ser
 # mostrados por página, exemplo 0 à 10, 11 à 20 e assim por diante
 $inicio = ($pg * $limite) - $limite;
-$pesquisa_pac = "";
+$pesquisa_nome = "";
 # seleciona o total de registros  
 $sql_Total = 'SELECT id_paciente FROM tb_paciente';

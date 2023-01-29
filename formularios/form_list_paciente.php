@@ -15,7 +15,7 @@
 
     //Instanciar o metodo listar evento
     $pesquisa_ativo = "";
-    $pacientes = $paciente->findGeral();
+    $pacientes = $paciente->findGeral($limite, $inicio);
     $pesquisa_nome = "";
     $pesquisa_ativo = "";
     $pesquisa_paciente = "";
@@ -30,7 +30,7 @@
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <input type="hidden" name="pesquisa" id="pesquisa" value="sim">
                     <div class="form-group col-sm-2">
-                        <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por paciente">
+                        <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" value="<?= $_POST['pesquisa_nome'] ?>" id="pesquisa_nome" placeholder="Pesquisa por paciente">
                     </div>
 
                     <!-- <div class="form-group col-sm-1">
@@ -57,13 +57,12 @@
 
             // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
             if (($pesquisa_nome != "")) {
-                $query = $paciente->findByPac($pesquisa_nome);
+                $query = $paciente->findByPac($pesquisa_nome, $limite, $inicio);
             }
 
             if ($pesquisa_nome == "") {
-                $query = $paciente->findAll();
+                $query = $paciente->findGeral($limite, $inicio);
             };
-
 
             ?>
         </div>
@@ -108,10 +107,11 @@
         </table>
 
         <div id="id-confirmacao" class="btn_acoes oculto">
-            <p>Deseja deletar este paciente: <?= $paciente_ant ?>?</p>
+            <p>Deseja deletar este paciente: ?</p>
             <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
             <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
         </div>
+
     </div>
 
     <?php
@@ -183,16 +183,19 @@
         idAcoes.style.display = 'none';
         let mudancaStatus = ($('#deletar-btn').val())
         console.log(mudancaStatus);
-        window.location = "<?= $BASE_URL ?>del_paciente.php?id_paciente=<?= $id_paciente ?>";
+        window.location = "<?= $BASE_URL ?>del_evento.php?id_evento=<?= $id_evento ?>";
     };
 
     function cancelar() {
         let idAcoes = (document.getElementById('id-confirmacao'));
-        idAcoes.style.display = 'none';
         console.log("chegou no cancelar");
+        idAcoes.style.display = 'none';
 
     };
     src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js";
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js";
+</script>

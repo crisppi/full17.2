@@ -27,9 +27,9 @@ interface PacienteDAOInterface
   public function buildPaciente($paciente);
   public function findAll();
   public function findById($id_paciente);
-  public function findByPac($pesquisa_nome);
+  public function findByPac($pesquisa_nome, $limite, $inicio);
   public function create(Paciente $paciente);
   public function update(Paciente $paciente);
   public function destroy($id_paciente);
-  public function findGeral();
+  public function findGeral($limite, $inicio);
 };
