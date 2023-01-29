@@ -31,5 +31,5 @@ interface PacienteDAOInterface
   public function create(Paciente $paciente);
   public function update(Paciente $paciente);
   public function destroy($id_paciente);
-  public function findGeral();
+  public function findGeral($limite, $inicio);
 };

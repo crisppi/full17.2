@@ -228,12 +228,12 @@ class PacienteDAO implements PacienteDAOInterface
     }
 
 
-    public function findGeral()
+    public function findGeral($limite, $inicio)
     {
 
         $pacientes = [];
 
-        $stmt = $this->conn->query("SELECT * FROM tb_paciente ORDER BY id_paciente asc");
+        $stmt = $this->conn->query("SELECT * FROM tb_paciente ORDER BY id_paciente asc limit $inicio, $limite");
 
         $stmt->execute();
 
@@ -242,8 +242,6 @@ class PacienteDAO implements PacienteDAOInterface
         return $pacientes;
     }
 }
-
-
 
 # Limita o número de registros a serem mostrados por página
 $limite = 10;

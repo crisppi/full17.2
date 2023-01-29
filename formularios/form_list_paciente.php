@@ -15,7 +15,7 @@
 
     //Instanciar o metodo listar evento
     $pesquisa_ativo = "";
-    $pacientes = $paciente->findGeral();
+    $pacientes = $paciente->findGeral($limite, $inicio);
     $pesquisa_nome = "";
     $pesquisa_ativo = "";
     $pesquisa_paciente = "";
@@ -61,7 +61,7 @@
             }
 
             if ($pesquisa_nome == "") {
-                $query = $paciente->findAll();
+                $query = $paciente->findGeral($limite, $inicio);
             };
 
 
