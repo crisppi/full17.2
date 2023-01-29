@@ -217,10 +217,9 @@ class PacienteDAO implements PacienteDAOInterface
 
     public function destroy($id_paciente)
     {
-        // echo "chegou no destroy  ID = " . $id_paciente;
         $stmt = $this->conn->prepare("DELETE FROM tb_paciente WHERE id_paciente = $id_paciente");
 
-        $stmt->bindParam(":id_paciente", $id_paciente);
+        // $stmt->bindParam(":id_paciente", $id_paciente);
 
         $stmt->execute();
 

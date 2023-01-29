@@ -331,6 +331,8 @@ class internacaoDAO implements internacaoDAOInterface
 
         return $internacao;
     }
+
+
     public function findByIdUpdate($id_internacao)
     {
 

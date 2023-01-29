@@ -30,7 +30,7 @@
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <input type="hidden" name="pesquisa" id="pesquisa" value="sim">
                     <div class="form-group col-sm-2">
-                        <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" value="<?= $_POST['pesquisa_nome'] ?>" id="pesquisa_nome" placeholder="Pesquisa por paciente">
+                        <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por paciente">
                     </div>
 
                     <!-- <div class="form-group col-sm-1">
