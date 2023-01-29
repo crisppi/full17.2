@@ -61,6 +61,27 @@ interface InternacaoDAOInterface
 
   public function update(Internacao $internacao);
   public function buildinternacao($internacao);
+
+  // PUBLIC DE SELECAO DE FILTROS
+  // public 1 -> selecao de hospital
+  // public 2 -> selecao de internados
+  // public 3 -> selecao de ambos filtros
+
+
+  // public 1 -> selecao de hospital
+  public function findByHospital($where_hosp, $limite, $inicio);
+  // public 2 -> selecao de internados
+  public function findByInternado($ativo, $limite, $inicio);
+  // public 3 -> selecao de ambos filtros
+  public function findByAmbos($pesquisa_hosp, $ativo, $limite, $inicio);
+  // public 4 -> selecao de ambos filtros
+  public function findByAll($limite, $inicio);
+
+
+
+
+
+
   // public function getinternacao();
 
   //   public function findInternAll($limite, $inicio);

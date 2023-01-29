@@ -355,9 +355,138 @@ class internacaoDAO implements internacaoDAOInterface
         }
         return $internacao;
     }
+
+    // PUBLIC DE SELECAO DE FILTROS
+    // public 1 -> selecao de hospital
+    // public 2 -> selecao de internados
+    // public 3 -> selecao de ambos filtros
+    // public 4 -> selecao sem filtros
+
+
+    // public 1 -> selecao de hospital
+    public function findByHospital($where_hosp, $limite, $inicio)
+    {
+        $stmt = $this->conn->query("SELECT 
+        ac.id_internacao, 
+        ac.acoes_int, 
+        ac.data_intern_int, 
+        ac.data_visita_int, 
+        ac.rel_int, 
+        ac.fk_paciente_int, 
+        ac.usuario_create_int, 
+        ac.fk_hospital_int, 
+        ac.modo_internacao_int, 
+        ac.tipo_admissao_int,
+        ac.tipo_alta_int,
+        ac.especialidade_int, 
+        ac.titular_int, 
+        ac.grupo_patologia_int, 
+        ac.acomodacao_int, 
+        ac.fk_patologia_int, 
+        ac.fk_patologia2, 
+        ac.internado_int,
+        pa.id_paciente,
+        pa.nome_pac,
+        ho.id_hospital, 
+        ho.nome_hosp
+
+        FROM tb_internacao ac 
+
+        iNNER JOIN tb_hospital as ho On  
+        ac.fk_hospital_int = ho.id_hospital
+
+        left join tb_paciente as pa on
+        ac.fk_paciente_int = pa.id_paciente
+
+        WHERE nome_hosp = $where_hosp LIMIT $inicio, $limite");
+
+        $stmt->execute();
+
+        $internacao = $stmt->fetchAll();
+
+        return $internacao;
+    }
+    // public 2 -> selecao de internados
+    public function findByInternado($ativo, $limite, $inicio)
+    {
+        $stmt = $this->conn->query("SELECT 
+        ac.id_internacao, 
+        ac.acoes_int, 
+        ac.data_intern_int, 
+        ac.data_visita_int, 
+        ac.rel_int, 
+        ac.fk_paciente_int, 
+        ac.usuario_create_int, 
+        ac.fk_hospital_int, 
+        ac.modo_internacao_int, 
+        ac.tipo_admissao_int,
+        ac.tipo_alta_int,
+        ac.especialidade_int, 
+        ac.titular_int, 
+        ac.grupo_patologia_int, 
+        ac.acomodacao_int, 
+        ac.fk_patologia_int, 
+        ac.fk_patologia2, 
+        ac.internado_int,
+        pa.id_paciente,
+        pa.nome_pac,
+        ho.id_hospital, 
+        ho.nome_hosp
+
+        FROM tb_internacao ac 
+
+        iNNER JOIN tb_hospital as ho On  
+        ac.fk_hospital_int = ho.id_hospital
+
+        left join tb_paciente as pa on
+        ac.fk_paciente_int = pa.id_paciente
+
+        WHERE internado_int = '$ativo' LIMIT $inicio, $limite");
+
+        $stmt->execute();
+
+        $internacao = $stmt->fetchAll();
+
+        return $internacao;
+    }
+    // public 3 -> selecao de ambos filtros
+    public function findByAmbos($pesquisa_hosp, $ativo, $limite, $inicio)
+    {
+    }
+    // public 4 -> selecao de ambos filtros
+    // public 4 -> selecao sem filtros
+
+    public function findByAll($limite, $inicio)
+
+    {
+        $internacao = [];
+        $stmt = $this->conn->query("SELECT ac.id_internacao, ac.acoes_int,  ac.internado_int, ac.fk_patologia_int, ac.data_intern_int, ac.rel_int, ac.fk_paciente_int, ac.acomodacao_int, pa.id_paciente, pa.nome_pac, ac.usuario_create_int, ac.fk_hospital_int, ac.modo_internacao_int, ac.tipo_admissao_int, ho.id_hospital, ho.nome_hosp, ac.especialidade_int, ac.titular_int, ac.data_visita_int, ac.grupo_patologia_int, ac.acomodacao_int, ac.fk_patologia_int
+        FROM tb_internacao ac 
+
+        iNNER JOIN tb_hospital as ho On  
+        ac.fk_hospital_int = ho.id_hospital
+
+        left join tb_paciente as pa on
+        ac.fk_paciente_int = pa.id_paciente ORDER BY id_internacao asc limit $inicio, $limite");
+
+        $stmt->execute();
+
+        $internacao = $stmt->fetchAll();
+        return $internacao;
+    }
+    public function findTotal()
+
+    {
+        $internacao = [];
+        $stmt = $this->conn->query("SELECT COUNT(id_internacao) FROM tb_internacao");
+
+        $stmt->execute();
+
+        $QtdTotal = $stmt->fetchAll();
+
+        return $QtdTotal;
+    }
 }
-
-
 
 # Limita o número de registros a serem mostrados por página
 $limite = 10;
@@ -372,3 +501,5 @@ $pesquisa_hosp = "";
 $pesqInternado = "";
 # seleciona o total de registros  
 $sql_Total = 'SELECT id_internacao FROM tb_internacao';
+
+// $sql_Total = 'SELECT COUNT(id_internacao) FROM tb_internacao';

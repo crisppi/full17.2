@@ -34,7 +34,7 @@ if (!isset($_SESSION['username'])) {
     $hospital_geral = new hospitalDAO($conn, $BASE_URL);
     $hospitals = $hospital_geral->findGeral();
     $pacienteDao = new pacienteDAO($conn, $BASE_URL);
-    $pacientes = $pacienteDao->findGeral($limite, $inicio);
+    $pacientes = $pacienteDao->findGeral();
     $patologiaDao = new patologiaDAO($conn, $BASE_URL);
     $patologias = $patologiaDao->findGeral();
 
@@ -44,21 +44,19 @@ if (!isset($_SESSION['username'])) {
     $pesquisa_hosp = filter_input(INPUT_GET, 'pesquisa_hosp');
     isset($_GET['pesqInternado']) ? $pesqInternado = filter_input(INPUT_GET, 'pesqInternado') : "";
     $ativo = filter_input(INPUT_GET, 'pesqInternado');
-    $pesquisando = "";
+
     ?>
     <!-- FORMULARIO DE PESQUISAS -->
     <div class="container">
         <div class="container py-2">
-            <form class="formulario visible" action="" id="select-internacao-form" method="POST">
+            <form class="formulario visible" action="" id="select-internacao-form" method="GET">
                 <h6 style="margin-left: 30px; padding-top:10px" class="page-title">Pesquisa internações</h6>
 
                 <div class="form-group row">
-                    <div class="form-group col-sm-3">
+                    <div class="form-group col-sm-4">
                         <input style="margin-left: 30px;" type="text" name="pesquisa_hosp" placeholder="Selecione o Hospital" value="<?= $pesquisa_hosp ?>">
                     </div>
-                    <div class="form-group col-sm-1">
-                        <input style="margin-left: 30px;" type="hidden" name="pesquisando" id="pesquisando" value="s" placeholder="Selecione o Hospital">
-                    </div>
+
                     <div class="form-group col-sm-4">
                         <select class="form-control mb-3" id="pesqInternado" name="pesqInternado">
                             <option value="">Busca por Internados</option>
@@ -76,45 +74,17 @@ if (!isset($_SESSION['username'])) {
         <!-- BASE DAS PESQUISAS -->
 
         <?php
+        // $condicoes = [
+        //     strlen($pesquisa_hosp) ? ' "%' . $pesquisa_hosp . '%" ' : null
 
-        // validacao do formulario
-        if (isset($_POST['pesqInternado'])) {
-            $pesqInternado = $_POST['pesqInternado'];
-        }
+        // ];
+        // // clausula where
+        // $where = implode(' ', $condicoes);
+        $where = '%' . $pesquisa_hosp . '%';
 
-        if (isset($_POST['pesquisa_hosp'])) {
-            $pesquisa_hosp = $_POST['pesquisa_hosp'];
-        }
 
-        if (isset($_POST['pesquisando'])) {
-            $pesquisando = $_POST['pesquisando'];
-        }
+        $internacaoList = $internacao->findInternByInternado($where, $ativo, $limite, $inicio);
 
-        // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
-
-        // filtro limpo
-        if (($pesquisando === "")) {
-            $internacaoList = $internacao->findByAll($limite, $inicio);
-            // echo "chegou no filtro limpo. Limite = " . $limite . "Inicio = " . $inicio . "pesquisa = " . $pesquisando . ".";
-        }
-
-        // filtro de hospital
-        if (($pesquisa_hosp != "")) {
-            $where_hosp = "%$pesquisa_hosp%";
-            $internacaoList = $internacao->findByHospital($where_hosp, $limite, $inicio);
-        }
-
-        // filtro de internados
-        if (($pesqInternado != "")) {
-            $internacaoList = $internacao->findByInternado($pesqInternado, $limite, $inicio);
-            // print_r($internacaoList);
-        }
-
-        // // filtro vazio
-        // if (($pesqInternado === "") || ($pesquisa_hosp === "")) {
-        //     $internacaoList = $internacao->findAll($limite, $inicio);
-        //     print_r($query);
-        // }
         ?>
         <div class="container">
             <h6 class="page-title">Relatório de internações</h6>
@@ -185,12 +155,6 @@ if (!isset($_SESSION['username'])) {
         //modo cadastro
         $formData = "0";
         $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $total = $internacao->findTotal();
-
-        $totalcasos = $total['0'];
-        // echo $totalcasos['0'];
-        $reg = ($totalcasos['0']);
-        // echo $reg;
 
         if ($formData !== "0") {
             $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
@@ -204,11 +168,12 @@ if (!isset($_SESSION['username'])) {
             $query_Total = $conn->prepare($sql_Total);
             $query_Total->execute();
             $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
+
             # conta quantos registros tem no banco de dados
             $query_count = $query_Total->rowCount();
 
             # calcula o total de paginas a serem exibidas
-            $qtdPag = ceil($reg / $limite);
+            $qtdPag = ceil($query_count / $limite);
         } catch (PDOexception $error_Total) {
 
             echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
