@@ -59,7 +59,7 @@ if (!isset($_SESSION['username'])) {
 
                     <div class="form-group col-sm-4">
                         <select class="form-control mb-3" id="pesqInternado" name="pesqInternado">
-                            <option value="Sim">Busca por Internados</option>
+                            <option value="">Busca por Internados</option>
                             <option value="Sim">Sim</option>
                             <option value="Não">Não</option>
                         </select>

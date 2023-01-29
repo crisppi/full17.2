@@ -33,6 +33,7 @@ class internacaoDAO implements internacaoDAOInterface
         $internacao->tipo_admissao_int = $data["tipo_admissao_int"];
         $internacao->data_intern_int = $data["data_intern_int"];
         $internacao->data_alta_int = $data["data_alta_int"];
+        $internacao->tipo_alta_int = $data["tipo_alta_int"];
         $internacao->data_visita_int = $data["data_visita_int"];
         $internacao->data_create_int = $data["data_create_int"];
         $internacao->usuario_create_int = $data["usuario_create_int"];
@@ -285,6 +286,7 @@ class internacaoDAO implements internacaoDAOInterface
         ac.fk_hospital_int, 
         ac.modo_internacao_int, 
         ac.tipo_admissao_int,
+        ac.tipo_alta_int,
         ac.especialidade_int, 
         ac.titular_int, 
         ac.grupo_patologia_int, 
@@ -305,7 +307,7 @@ class internacaoDAO implements internacaoDAOInterface
         left join tb_paciente as pa on
         ac.fk_paciente_int = pa.id_paciente
 
-        WHERE nome_hosp LIKE '$where' AND internado_int = '$ativo' LIMIT $limite ");
+        WHERE nome_hosp LIKE '$where' AND internado_int = '$ativo' LIMIT $inicio, $limite");
 
         $stmt->execute();
 
@@ -364,6 +366,7 @@ $pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
 # Atribui a variável inicio o inicio de onde os registros vão ser
 # mostrados por página, exemplo 0 à 10, 11 à 20 e assim por diante
 $inicio = ($pg * $limite) - $limite;
-$pesquisa_pac = "";
+$pesquisa_hosp = "";
+$pesqInternado = "";
 # seleciona o total de registros  
 $sql_Total = 'SELECT id_internacao FROM tb_internacao';
