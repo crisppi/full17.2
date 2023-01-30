@@ -49,7 +49,7 @@ if (!isset($_SESSION['username'])) {
     <!-- FORMULARIO DE PESQUISAS -->
     <div class="container">
         <div class="container py-2">
-            <form class="formulario visible" action="" id="select-internacao-form" method="POST">
+            <form class="formulario visible" action="" id="select-internacao-form" method="GET">
                 <h6 style="margin-left: 30px; padding-top:10px" class="page-title">Pesquisa internações</h6>
 
                 <div class="form-group row">
@@ -57,7 +57,7 @@ if (!isset($_SESSION['username'])) {
                         <input style="margin-left: 30px;" type="text" name="pesquisa_hosp" placeholder="Selecione o Hospital" value="<?= $pesquisa_hosp ?>">
                     </div>
                     <div class="form-group col-sm-1">
-                        <input style="margin-left: 30px;" type="hidden" name="pesquisando" id="pesquisando" value="s" placeholder="Selecione o Hospital">
+                        <input style="margin-left: 30px;" type="hidden" name="pesquisando" id="pesquisando" value="" placeholder="Selecione o Hospital">
                     </div>
                     <div class="form-group col-sm-4">
                         <select class="form-control mb-3" id="pesqInternado" name="pesqInternado">
@@ -76,18 +76,20 @@ if (!isset($_SESSION['username'])) {
         <!-- BASE DAS PESQUISAS -->
 
         <?php
-
+        $_GET['pesqInternado'];
+        $_GET['pesquisa_hosp'];
+        $_GET['pesquisando'];
         // validacao do formulario
-        if (isset($_POST['pesqInternado'])) {
-            $pesqInternado = $_POST['pesqInternado'];
+        if (isset($_GET['pesqInternado'])) {
+            $pesqInternado = $_GET['pesqInternado'];
         }
 
-        if (isset($_POST['pesquisa_hosp'])) {
-            $pesquisa_hosp = $_POST['pesquisa_hosp'];
+        if (isset($_GET['pesquisa_hosp'])) {
+            $pesquisa_hosp = $_GET['pesquisa_hosp'];
         }
 
-        if (isset($_POST['pesquisando'])) {
-            $pesquisando = $_POST['pesquisando'];
+        if (isset($_GET['pesquisando'])) {
+            $pesquisando = $_GET['pesquisando'];
         }
 
         // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
@@ -100,8 +102,8 @@ if (!isset($_SESSION['username'])) {
 
         // filtro de hospital
         if (($pesquisa_hosp != "")) {
-            $where_hosp = "%$pesquisa_hosp%";
-            $internacaoList = $internacao->findByHospital($where_hosp, $limite, $inicio);
+            $internacaoList = $internacao->findByHospital($pesquisa_hosp, $limite, $inicio);
+            echo "chegou no filtro hospital. Limite = " . $limite . "Inicio = " . $inicio . "pesquisa = " . $pesquisa_hosp . ".";
         }
 
         // filtro de internados
