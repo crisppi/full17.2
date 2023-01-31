@@ -76,9 +76,7 @@ if (!isset($_SESSION['username'])) {
         <!-- BASE DAS PESQUISAS -->
 
         <?php
-        $_GET['pesqInternado'];
-        $_GET['pesquisa_hosp'];
-        $_GET['pesquisando'];
+
         // validacao do formulario
         if (isset($_GET['pesqInternado'])) {
             $pesqInternado = $_GET['pesqInternado'];
