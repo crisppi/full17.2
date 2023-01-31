@@ -42,7 +42,7 @@ $paciente = $pacienteDao->findById($id_paciente);
         <hr>
     </div>
     <div id="id-confirmacao" class="btn_acoes visible">
-        <p>Deseja mesmo deletar este paciente? <?= $nome_pac ?></p>
+        <p>Deseja mesmo deletar este paciente? <?= $paciente->nome_pac ?></p>
         <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
         <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
     </div>

@@ -41,10 +41,10 @@ if (!isset($_SESSION['username'])) {
     $internacao = new internacaoDAO($conn, $BASE_URL);
     // $internacaoSel = $internacao->findGeral();
 
-    $pesquisa_hosp = filter_input(INPUT_GET, 'pesquisa_hosp');
-    isset($_GET['pesqInternado']) ? $pesqInternado = filter_input(INPUT_GET, 'pesqInternado') : "";
-    $ativo = filter_input(INPUT_GET, 'pesqInternado');
-    $pesquisando = "";
+    // $pesquisa_hosp = filter_input(INPUT_GET, 'pesquisa_hosp');
+    // isset($_GET['pesqInternado']) ? $pesqInternado = filter_input(INPUT_GET, 'pesqInternado') : "";
+    // $ativo = filter_input(INPUT_GET, 'pesqInternado');
+    // $pesquisando = "";
     ?>
     <!-- FORMULARIO DE PESQUISAS -->
     <div class="container">
@@ -225,11 +225,11 @@ if (!isset($_SESSION['username'])) {
                 if ($i == $pg) {
                     echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
                 } else {
-                    echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pg=$i&pesquisa_hosp=&pesquisando=&pesqInternado=$pesquisando'>" . $i . "</a></li>";
+                    echo "<li class='page-item '><a class='page-link' href='list_internacao_pg.php?pg=$i&pesquisa_hosp=&pesquisando=&pesqInternado=$pesquisando'>" . $i . "</a></li>";
                 }
             }
         }
-        echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$qtdPag&pesquisa_hosp=&pesquisando=&pesqInternado=$pesquisando'><span aria-hidden='true'>&raquo;</span></a></li>";
+        echo "<li class='page-item'><a class='page-link' href='list_internacao_pg.php?pg=$qtdPag&pesquisa_hosp=&pesquisando=&pesqInternado=$pesquisando'><span aria-hidden='true'>&raquo;</span></a></li>";
         echo " </ul>";
         echo "</nav>";
         echo "</div>"; ?>
