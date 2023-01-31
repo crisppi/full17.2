@@ -56,7 +56,6 @@ $usuario = $usuarioDao->findById_user($id_usuario);
 <!-- <div styled="margin:0 auto" class="mensagem-apgar">
     <p styled="margin:0 auto">Apagado</p>
 </div> -->
-<?php include_once("diversos/backbtn_usuario.php"); ?>
 <script>
     function apareceOpcoes() {
         $('#deletar-btn').val('nao');

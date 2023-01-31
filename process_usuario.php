@@ -32,9 +32,13 @@ if ($type === "create") {
     $data_create_user = filter_input(INPUT_POST, "data_create_user");
     $data_adm = filter_input(INPUT_POST, "data_adm");
     $cpf_user = filter_input(INPUT_POST, "cpf_user");
-    $senha_user = filter_input(INPUT_POST, "senha_user");
+    $hash_user = filter_input(INPUT_POST, "senha_user");
     $cargo_user = filter_input(INPUT_POST, "cargo_user");
     $reg_profissional_user = filter_input(INPUT_POST, "reg_profissional_user");
+
+    $senha_user = password_hash($hash_user, PASSWORD_DEFAULT);
+
+    print_r($senha_user);
 
     $usuario = new Usuario();
 
@@ -55,7 +59,7 @@ if ($type === "create") {
         $usuario->cpf_user = $cpf_user;
         $usuario->senha_user = $senha_user;
         $usuario->usuario_create_user = $usuario_create_user;
-        $usuario->data_adm = $data_adm_user;
+        $usuario->data_adm_user = $data_adm_user;
         $usuario->vinculo_user = $vinculo_user;
         $usuario->cargo_user = $cargo_user;
 
@@ -107,7 +111,7 @@ if ($type === "create") {
     $usuarioData->cargo_user = $cargo_user;
     $usuarioData->senha_user = $senha_user;
     $usuarioData->reg_profissional_user = $reg_profissional_user;
-    $usuarioData->data_adm = $data_adm;
+    $usuarioData->data_adm_user = $data_adm_user;
     $usuarioData->ativo_user = $ativo_user;
     $usuarioData->nivel_user = $nivel_user;
 
