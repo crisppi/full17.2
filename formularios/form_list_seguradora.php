@@ -81,11 +81,10 @@
             // PAGINACAO
             $paginacao = '';
             $paginas = $obPagination->getPages();
+
             foreach ($paginas as $pagina)
-                $paginacao .= '<a href="?pag=' . $pagina['pagina'] . '">
-                <button type="button" class="btn btn-light">' . $pagina['pagina'] . '</button>
-                </a>
-                ';
+                $paginacao .= '<a href="?pag=' . $pagina['pag'] . '">
+                <button type="button" class="btn btn-primary ">' . $pagina['pag'] . '</button></a>';
             ?>
         </div>
         <div>
@@ -132,9 +131,9 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <section>
-            <?php $paginacao ?>
-        </section>
+        <div>
+            <?= $paginacao ?>
+        </div>
         <div id="id-confirmacao" class="btn_acoes oculto">
             <p>Deseja deletar este hospital: <?= $hospital_ant ?>?</p>
             <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
@@ -190,6 +189,8 @@
     echo " </ul>";
     echo "</nav>";
     echo "</div>"; ?>
+
+
     <div>
         <hr>
         <a class="btn btn-success styled" style="margin-left:120px" href="cad_seguradora.php">Nova seguradora</a>
