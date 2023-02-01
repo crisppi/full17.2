@@ -78,13 +78,25 @@
             // PREENCHIMENTO DO FORMULARIO COM QUERY
             $query = $seguradora->selectAll($where, $order, $obLimite);
 
+
+            // GETS
+
+            unset($_GET['pag']);
+            $gets = http_build_query($_GET);
+
+            print_r($gets);
+
+
             // PAGINACAO
             $paginacao = '';
             $paginas = $obPagination->getPages();
 
-            foreach ($paginas as $pagina)
-                $paginacao .= '<a href="?pag=' . $pagina['pag'] . '">
-                <button type="button" class="btn btn-primary ">' . $pagina['pag'] . '</button></a>';
+            foreach ($paginas as $pagina) {
+                $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
+                $paginacao .= '<a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
+                <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
+                </a>';
+            }
             ?>
         </div>
         <div>
