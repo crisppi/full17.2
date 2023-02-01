@@ -27,18 +27,13 @@
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
 
-    // QUANTIDADE VAGAS
+    // QUANTIDADE SEGURADORAS
     $qtdSegItens1 = $QtdTotalSeg->QtdSeguradora($where);
 
     $qtdSegItens = ($qtdSegItens1['0']);
     // PAGINACAO
     $obPagination = new pagination($qtdSegItens, $_GET['pag'] ?? 1, 10);
     $obLimite = $obPagination->getLimit();
-    // echo "<pre>";
-    // print_r($obPagination);
-
-    // echo "<pre>";
-    // print_r($obLimite);
 
     ?>
 
@@ -75,11 +70,12 @@
             <?php
 
             // PREENCHIMENTO DO FORMULARIO COM QUERY
-            $query = $seguradora->selectAll($where, $order, $obLimite);
+            $query = $seguradora->selectAllSeguradora($where, $order, $obLimite);
 
 
             // GETS 
             unset($_GET['pag']);
+            unset($_GET['pg']);
             $gets = http_build_query($_GET);
 
             // PAGINACAO
@@ -141,61 +137,62 @@
         <div>
             <?= $paginacao ?>
         </div>
+        <?php
+
+        //modo cadastro
+        $formData = "0";
+        $formData = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+
+        // PAGINACAO MODELO ANTERIOR
+        if ($formData !== "0") {
+            $_SESSION['msg'] = "<p style='color: green;'>seguradora cadastrado com sucesso!</p>";
+            //header("Location: index.php");
+        } else {
+            echo "<p style='color: #f00;'>Erro: seguradora não cadastrado!</p>";
+        };
+
+        try {
+
+            $query_Total = $conn->prepare($sql_Total);
+            $query_Total->execute();
+
+            $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
+
+            # conta quantos registros tem no banco de dados
+            $query_count = $query_Total->rowCount();
+
+            # calcula o total de paginas a serem exibidas
+            $qtdPag = ceil($query_count / $limite);
+        } catch (PDOexception $error_Total) {
+
+            echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
+        }
+        echo "<div style=margin-left:10px;>";
+        echo "<div style='color:blue; margin-top:20px;'>";
+        echo "</div>";
+        echo "<nav aria-label='Page navigation example'>";
+        echo " <ul class='pagination'>";
+        echo " <li class='page-item'><a class='page-link' href='list_seguradora.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
+        if ($qtdPag > 1 && $pg <= $qtdPag) {
+            for ($i = 1; $i <= $qtdPag; $i++) {
+                if ($i == $pg) {
+                    echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
+                } else {
+                    echo "<li class='page-item '><a class='page-link' href='list_seguradora.php?pg=$i&" . $gets . "'>" . $i . "</a></li>";
+                }
+            }
+        }
+        echo "<li class='page-item'><a class='page-link' href='list_seguradora.php?pg=$qtdPag&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+        echo " </ul>";
+        echo "</nav>";
+        echo "</div>"; ?>
+
         <div id="id-confirmacao" class="btn_acoes oculto">
             <p>Deseja deletar este hospital: <?= $hospital_ant ?>?</p>
             <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
             <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
         </div>
     </div>
-
-    <?php
-
-    //modo cadastro
-    $formData = "0";
-    $formData = filter_input_array(INPUT_GET, FILTER_DEFAULT);
-
-    if ($formData !== "0") {
-        $_SESSION['msg'] = "<p style='color: green;'>seguradora cadastrado com sucesso!</p>";
-        //header("Location: index.php");
-    } else {
-        echo "<p style='color: #f00;'>Erro: seguradora não cadastrado!</p>";
-    };
-
-    try {
-
-        $query_Total = $conn->prepare($sql_Total);
-        $query_Total->execute();
-
-        $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
-
-        # conta quantos registros tem no banco de dados
-        $query_count = $query_Total->rowCount();
-
-        # calcula o total de paginas a serem exibidas
-        $qtdPag = ceil($query_count / $limite);
-    } catch (PDOexception $error_Total) {
-
-        echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
-    }
-    echo "<div style=margin-left:20px;>";
-    echo "<div style='color:blue; margin-left:20px;'>";
-    echo "</div>";
-    echo "<nav aria-label='Page navigation example'>";
-    echo " <ul class='pagination'>";
-    echo " <li class='page-item'><a class='page-link' href='list_seguradora.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
-    if ($qtdPag > 1 && $pg <= $qtdPag) {
-        for ($i = 1; $i <= $qtdPag; $i++) {
-            if ($i == $pg) {
-                echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
-            } else {
-                echo "<li class='page-item '><a class='page-link' href='list_seguradora.php?pg=$i&" . $gets . "'>" . $i . "</a></li>";
-            }
-        }
-    }
-    echo "<li class='page-item'><a class='page-link' href='list_seguradora.php?pg=$qtdPag'><span aria-hidden='true'>&raquo;</span></a></li>";
-    echo " </ul>";
-    echo "</nav>";
-    echo "</div>"; ?>
 
 
     <div>

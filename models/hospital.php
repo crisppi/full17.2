@@ -34,4 +34,7 @@ interface HospitalDAOInterface
   public function update(Hospital $hospital);
   public function destroy($id_hospital);
   public function findGeral();
+
+  public function selectAllHospital($where = null, $order = null, $limit = null);
+  public function QtdHospital();
 };

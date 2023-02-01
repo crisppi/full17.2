@@ -1,11 +1,6 @@
 <?php
 require_once("templates/header.php");
 
-require_once('app/session.php');
-
-$logado->requireLogin();
-// Login::requireLogin();
-
 ?>
 
 <div class="container">

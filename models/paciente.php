@@ -32,4 +32,7 @@ interface PacienteDAOInterface
   public function update(Paciente $paciente);
   public function destroy($id_paciente);
   public function findGeral($limite, $inicio);
+
+  public function selectAllPaciente($where = null, $order = null, $limit = null);
+  public function QtdPaciente();
 };

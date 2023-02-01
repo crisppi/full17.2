@@ -16,4 +16,6 @@ interface antecedenteDAOInterface
   public function update(antecedente $antecedente);
   public function destroy($id_antecedente);
   public function findGeral();
+  public function selectAllAntecedente($where = null, $order = null, $limit = null);
+  public function QtdAntecedente();
 };

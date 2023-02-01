@@ -62,4 +62,7 @@ interface UserDAOInterface
     public function changePassword(Usuario $user);
     public function findGeral();
     public function findAll();
+
+    public function selectAllUsuario($where = null, $order = null, $limit = null);
+    public function QtdUsuario();
 }

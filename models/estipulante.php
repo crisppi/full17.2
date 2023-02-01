@@ -34,4 +34,7 @@ interface EstipulanteDAOInterface
   public function update(Estipulante $estipulante);
   public function destroy($id_estipulante);
   public function findGeral();
+
+  public function selectAllSeguradora($where = null, $order = null, $limit = null);
+  public function QtdSeguradora();
 };

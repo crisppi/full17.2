@@ -352,7 +352,7 @@ class UserDAO implements UserDAOInterface
 
         $stmt->execute();
 
-        $pacientes = $stmt->fetchAll();
+        $usuarios = $stmt->fetchAll();
 
         return $usuarios;
     }
@@ -375,7 +375,7 @@ class UserDAO implements UserDAOInterface
     public function findGeralUsuario()
     {
 
-        $pacientes = [];
+        $usuarios = [];
 
         $stmt = $this->conn->query("SELECT * FROM tb_user ORDER BY id_usuario asc");
 
@@ -384,6 +384,36 @@ class UserDAO implements UserDAOInterface
         $usuarios = $stmt->fetchAll();
 
         return $usuarios;
+    }
+
+    public function selectAllusuario($where = null, $order = null, $limit = null)
+    {
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+
+        //MONTA A QUERY
+        $query = $this->conn->query('SELECT * FROM tb_usuario ' . $where . ' ' . $order . ' ' . $limit);
+
+        $query->execute();
+
+        $usuario = $query->fetchAll();
+
+        return $usuario;
+    }
+
+    public function Qtdusuario()
+    {
+        $usuario = [];
+
+        $stmt = $this->conn->query("SELECT COUNT(id_usuario) FROM tb_usuario");
+
+        $stmt->execute();
+
+        $QtdTotalUser = $stmt->fetch();
+
+        return $QtdTotalUser;
     }
 }
 

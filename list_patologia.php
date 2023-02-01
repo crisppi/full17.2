@@ -19,6 +19,10 @@ if (!isset($_SESSION['username'])) {
 </head>
 
 <?php
+
+$busca = filter_input(INPUT_GET, 'pesquisa_nome');
+$ativo_pat = filter_input(INPUT_GET, 'ativo_pat');
+
 include_once("formularios/form_list_patologia.php");
 include_once("templates/footer.php");
 ?>

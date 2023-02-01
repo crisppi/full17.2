@@ -268,6 +268,36 @@ class EstipulanteDAO implements EstipulanteDAOInterface
 
         return $estipulante;
     }
+
+    public function selectAllestipulante($where = null, $order = null, $limit = null)
+    {
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+
+        //MONTA A QUERY
+        $query = $this->conn->query('SELECT * FROM tb_estipulante ' . $where . ' ' . $order . ' ' . $limit);
+
+        $query->execute();
+
+        $estipulante = $query->fetchAll();
+
+        return $estipulante;
+    }
+
+    public function Qtdestipulante()
+    {
+        $estipulante = [];
+
+        $stmt = $this->conn->query("SELECT COUNT(id_estipulante) FROM tb_estipulante");
+
+        $stmt->execute();
+
+        $QtdTotalEst = $stmt->fetch();
+
+        return $QtdTotalEst;
+    }
 }
 
 

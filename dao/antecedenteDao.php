@@ -145,6 +145,35 @@ class antecedenteDAO implements antecedenteDAOInterface
 
         return $antecedente;
     }
+    public function selectAllantecedente($where = null, $order = null, $limit = null)
+    {
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+
+        //MONTA A QUERY
+        $query = $this->conn->query('SELECT * FROM tb_antecedente ' . $where . ' ' . $order . ' ' . $limit);
+
+        $query->execute();
+
+        $antecedente = $query->fetchAll();
+
+        return $antecedente;
+    }
+
+    public function Qtdantecedente()
+    {
+        $antecedente = [];
+
+        $stmt = $this->conn->query("SELECT COUNT(id_antecedente) FROM tb_antecedente");
+
+        $stmt->execute();
+
+        $QtdTotalAnt = $stmt->fetch();
+
+        return $QtdTotalAnt;
+    }
 }
 
 

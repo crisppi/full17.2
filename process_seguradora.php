@@ -51,37 +51,7 @@ if ($type === "create") {
         $seguradora->data_create_seg = $data_create_seg;
         $seguradora->usuario_create_seg = $usuario_create_seg;
 
-        //$seguradora->id_seguradora = $userData->id_seguradora;
 
-        // Upload de imagem do filme ****** nao usaar if para imagem *******
-        /* if (isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {
-
-            $image = $_FILES["image"];
-            $imageTypes = ["image/jpeg", "image/jpg", "image/png"];
-            $jpgArray = ["image/jpeg", "image/jpg"];
-
-            // Checando tipo da imagem
-            if (in_array($image["type"], $imageTypes)) {
-
-                // Checa se imagem é jpg
-                if (in_array($image["type"], $jpgArray)) {
-                    $imageFile = imagecreatefromjpeg($image["tmp_name"]);
-                } else {
-                    $imageFile = imagecreatefrompng($image["tmp_name"]);
-                }
-
-                // Gerando o seguradora_seg da imagem
-                $imageName = $movie->imageGenerateName();
-
-                imagejpeg($imageFile, "./img/movies/" . $imageName, 100);
-
-                $movie->image = $imageName;
-            } else {
-
-                $message->setMessage("Tipo inválido de imagem, insira png ou jpg!", "error", "back");
-            }
-        }
-*/
         $seguradoraDao->create($seguradora);
     } else {
 

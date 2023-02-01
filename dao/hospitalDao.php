@@ -238,6 +238,36 @@ class HospitalDAO implements HospitalDAOInterface
 
         return $hospital;
     }
+
+    public function selectAllhospital($where = null, $order = null, $limit = null)
+    {
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+
+        //MONTA A QUERY
+        $query = $this->conn->query('SELECT * FROM tb_hospital ' . $where . ' ' . $order . ' ' . $limit);
+
+        $query->execute();
+
+        $hospital = $query->fetchAll();
+
+        return $hospital;
+    }
+
+    public function Qtdhospital()
+    {
+        $hospital = [];
+
+        $stmt = $this->conn->query("SELECT COUNT(id_hospital) FROM tb_hospital");
+
+        $stmt->execute();
+
+        $QtdTotalHos = $stmt->fetch();
+
+        return $QtdTotalHos;
+    }
 }
 
 # Limita o número de registros a serem mostrados por página

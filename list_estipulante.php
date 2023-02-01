@@ -19,6 +19,11 @@ if (!isset($_SESSION['username'])) {
 </head>
 
 <?php
+
+$busca = filter_input(INPUT_GET, 'pesquisa_nome');
+$ativo_est = filter_input(INPUT_GET, 'ativo_est');
+
+
 include_once("formularios/form_list_estipulante.php");
 include_once("templates/footer.php");
 ?>

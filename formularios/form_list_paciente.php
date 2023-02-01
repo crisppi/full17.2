@@ -9,16 +9,43 @@
     include_once("templates/header.php");
     include_once("array_dados.php");
 
+    // //Instanciando a classe
+    // //Criado o objeto $listareventos
+    // $paciente = new pacienteDAO($conn, $BASE_URL);
+
+    // //Instanciar o metodo listar evento
+    // $pesquisa_ativo = "";
+    // $pacientes = $paciente->findGeral($limite, $inicio);
+    // $pesquisa_nome = "";
+    // $pesquisa_ativo = "";
+    // $pesquisa_paciente = "";
+    // 
+
     //Instanciando a classe
     //Criado o objeto $listareventos
-    $paciente = new pacienteDAO($conn, $BASE_URL);
+    $paciente = new PacienteDAO($conn, $BASE_URL);
+    $QtdTotalpac = new PacienteDAO($conn, $BASE_URL);
 
-    //Instanciar o metodo listar evento
-    $pesquisa_ativo = "";
-    $pacientes = $paciente->findGeral($limite, $inicio);
-    $pesquisa_nome = "";
-    $pesquisa_ativo = "";
-    $pesquisa_paciente = "";
+    // METODO DE BUSCA DE PAGINACAO
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
+    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+
+    $condicoes = [
+        strlen($busca) ? 'nome_pac LIKE "%' . $busca . '%"' : null,
+        strlen($buscaAtivo) ? 'ativo_pac = "' . $buscaAtivo . '"' : null
+    ];
+    $condicoes = array_filter($condicoes);
+    // REMOVE POSICOES VAZIAS DO FILTRO
+    $where = implode(' AND ', $condicoes);
+
+    // QUANTIDADE PacienteS
+    $qtdpacItens1 = $QtdTotalpac->QtdPaciente($where);
+
+    $qtdpacItens = ($qtdpacItens1['0']);
+    // PAGINACAO
+    $obPagination = new pagination($qtdpacItens, $_GET['pag'] ?? 1, 10);
+    $obLimite = $obPagination->getLimit();
     ?>
 
     <!--tabela evento-->
@@ -46,24 +73,45 @@
             </form>
 
             <?php
-            // validacao do formulario
-            if (isset($_POST['ativo'])) {
-                $pesquisa_ativo = $_POST['ativo'];
+            // // validacao do formulario
+            // if (isset($_POST['ativo'])) {
+            //     $pesquisa_ativo = $_POST['ativo'];
+            // }
+
+            // if (isset($_POST['pesquisa_nome'])) {
+            //     $pesquisa_nome = $_POST['pesquisa_nome'];
+            // }
+
+            // // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
+            // if (($pesquisa_nome != "")) {
+            //     $query = $paciente->findByPac($pesquisa_nome, $limite, $inicio);
+            // }
+
+            // if ($pesquisa_nome == "") {
+            //     $query = $paciente->findGeral($limite, $inicio);
+            // };
+            ?>
+            <?php
+
+            // PREENCHIMENTO DO FORMULARIO COM QUERY
+            $query = $paciente->selectAllpaciente($where, $order, $obLimite);
+
+
+            // GETS 
+            unset($_GET['pag']);
+            unset($_GET['pg']);
+            $gets = http_build_query($_GET);
+
+            // PAGINACAO
+            $paginacao = '';
+            $paginas = $obPagination->getPages();
+
+            foreach ($paginas as $pagina) {
+                $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
+                $paginacao .= '<a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
+    <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
+    </a>';
             }
-
-            if (isset($_POST['pesquisa_nome'])) {
-                $pesquisa_nome = $_POST['pesquisa_nome'];
-            }
-
-            // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
-            if (($pesquisa_nome != "")) {
-                $query = $paciente->findByPac($pesquisa_nome, $limite, $inicio);
-            }
-
-            if ($pesquisa_nome == "") {
-                $query = $paciente->findGeral($limite, $inicio);
-            };
-
             ?>
         </div>
         <div>

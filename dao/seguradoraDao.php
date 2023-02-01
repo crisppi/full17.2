@@ -270,7 +270,7 @@ class seguradoraDAO implements seguradoraDAOInterface
         return $seguradora;
     }
 
-    public function selectAll($where = null, $order = null, $limit = null)
+    public function selectAllSeguradora($where = null, $order = null, $limit = null)
     {
         //DADOS DA QUERY
         $where = strlen($where) ? 'WHERE ' . $where : '';

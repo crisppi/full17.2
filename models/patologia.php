@@ -19,4 +19,7 @@ interface patologiaDAOInterface
   public function update(patologia $patologia);
   public function destroy($id_patologia);
   public function findGeral();
+
+  public function selectAllPatologia($where = null, $order = null, $limit = null);
+  public function QtdPatologia();
 };
