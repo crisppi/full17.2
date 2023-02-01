@@ -11,14 +11,32 @@
 
     //Instanciando a classe
     //Criado o objeto $listareventos
-    $usuario = new UserDAO($conn, $BASE_URL);
+    //Instanciando a classe
+    $usuario = new userDAO($conn, $BASE_URL);
+    $QtdTotaluser = new userDAO($conn, $BASE_URL);
 
-    //Instanciar o metodo listar evento
-    $pesquisa_ativo = "";
-    $usuarios = $usuario->findGeral();
-    $pesquisa_nome = "";
-    $pesquisa_ativo = "";
-    $pesquisa_hospital = "";
+    // METODO DE BUSCA DE PAGINACAO
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $buscaAtivo = filter_input(INPUT_GET, 'ativo_user');
+    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+
+    $condicoes = [
+        strlen($busca) ? 'nome_user LIKE "%' . $busca . '%"' : null,
+        strlen($buscaAtivo) ? 'ativo_user = "' . $buscaAtivo . '"' : null
+    ];
+    $condicoes = array_filter($condicoes);
+
+    // REMOVE POSICOES VAZIAS DO FILTRO
+    $where = implode(' AND ', $condicoes);
+
+    // QUANTIDADE usuarioS
+    $qtduserItens1 = $QtdTotaluser->Qtdusuario($where);
+
+    $qtduserItens = ($qtduserItens1['0']);
+
+    // PAGINACAO
+    $obPagination = new pagination($qtduserItens, $_GET['pag'] ?? 1, 10);
+    $obLimite = $obPagination->getLimit();
     ?>
 
     <!--tabela evento-->

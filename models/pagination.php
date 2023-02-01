@@ -54,7 +54,6 @@ class pagination
             ];
         };
 
-
         return $paginas;
     }
 }

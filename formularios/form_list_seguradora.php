@@ -10,7 +10,6 @@
     include_once("array_dados.php");
 
     //Instanciando a classe
-    //Criado o objeto $listareventos
     $seguradora = new seguradoraDAO($conn, $BASE_URL);
     $QtdTotalSeg = new seguradoraDAO($conn, $BASE_URL);
 
@@ -24,6 +23,7 @@
         strlen($buscaAtivo) ? 'ativo_seg = "' . $buscaAtivo . '"' : null
     ];
     $condicoes = array_filter($condicoes);
+
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
 
@@ -55,12 +55,6 @@
                         </select>
                     </div>
 
-                    <!-- <div class="form-group col-sm-1">
-                        <input type="radio" checked name="ativo_seg" value="s" id="ativo_seg" placeholder="Pesquisa por evento">
-                        <label for="ativo_seg">Ativo</label><br>
-                        <input type="radio" style="margin-top:-5px" name="ativo_seg" value="n" id="ativo_seg" placeholder="Pesquisa ativos">
-                        <label for="ativo_seg">Inativo</label><br>
-                    </div> -->
                     <div class="form-group col-sm-1 d-flex align-itens-end">
                         <button style="margin:10px; font-weight:600" type="submit" class="btn-sm btn-light">Pesquisar</button>
                     </div>
@@ -71,7 +65,6 @@
 
             // PREENCHIMENTO DO FORMULARIO COM QUERY
             $query = $seguradora->selectAllSeguradora($where, $order, $obLimite);
-
 
             // GETS 
             unset($_GET['pag']);

@@ -11,8 +11,32 @@
     //Criado o objeto $listarantecedentes
     $antecedente_geral = new antecedenteDAO($conn, $BASE_URL);
 
-    //Instanciar o metodo listar antecedente
-    $antecedentes = $antecedente_geral->findGeral();
+    //Instanciando a classe
+    $antecedente = new antecedenteDAO($conn, $BASE_URL);
+    $QtdTotalant = new antecedenteDAO($conn, $BASE_URL);
+
+    // METODO DE BUSCA DE PAGINACAO
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $buscaAtivo = filter_input(INPUT_GET, 'ativo_ant');
+    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+
+    $condicoes = [
+        strlen($busca) ? 'nome_ant LIKE "%' . $busca . '%"' : null,
+        strlen($buscaAtivo) ? 'ativo_ant = "' . $buscaAtivo . '"' : null
+    ];
+    $condicoes = array_filter($condicoes);
+
+    // REMOVE POSICOES VAZIAS DO FILTRO
+    $where = implode(' AND ', $condicoes);
+
+    // QUANTIDADE antecedenteS
+    $qtdantItens1 = $QtdTotalant->Qtdantecedente($where);
+
+    $qtdantItens = ($qtdantItens1['0']);
+
+    // PAGINACAO
+    $obPagination = new pagination($qtdantItens, $_GET['pag'] ?? 1, 10);
+    $obLimite = $obPagination->getLimit();
     ?>
 
     <!--tabela antecedente-->

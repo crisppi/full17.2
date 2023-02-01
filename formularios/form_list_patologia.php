@@ -10,15 +10,31 @@
     include_once("array_dados.php");
 
     //Instanciando a classe
-    //Criado o objeto $listareventos
     $patologia = new patologiaDAO($conn, $BASE_URL);
+    $QtdTotalpat = new patologiaDAO($conn, $BASE_URL);
 
-    //Instanciar o metodo listar evento
-    $pesquisa_ativo = "";
-    $patologias = $patologia->findGeral();
-    $pesquisa_nome = "";
-    $pesquisa_ativo = "";
-    $pesquisa_patologia = "";
+    // METODO DE BUSCA DE PAGINACAO
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $buscaAtivo = filter_input(INPUT_GET, 'ativo_pat');
+    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+
+    $condicoes = [
+        strlen($busca) ? 'nome_pat LIKE "%' . $busca . '%"' : null,
+        strlen($buscaAtivo) ? 'ativo_pat = "' . $buscaAtivo . '"' : null
+    ];
+    $condicoes = array_filter($condicoes);
+
+    // REMOVE POSICOES VAZIAS DO FILTRO
+    $where = implode(' AND ', $condicoes);
+
+    // QUANTIDADE patologiaS
+    $qtdpatItens1 = $QtdTotalpat->Qtdpatologia($where);
+
+    $qtdpatItens = ($qtdpatItens1['0']);
+
+    // PAGINACAO
+    $obPagination = new pagination($qtdpatItens, $_GET['pag'] ?? 1, 10);
+    $obLimite = $obPagination->getLimit();
     ?>
 
     <!--tabela evento-->

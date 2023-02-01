@@ -10,15 +10,31 @@
     include_once("array_dados.php");
 
     //Instanciando a classe
-    //Criado o objeto $listareventos
     $estipulante = new estipulanteDAO($conn, $BASE_URL);
+    $QtdTotalest = new estipulanteDAO($conn, $BASE_URL);
 
-    //Instanciar o metodo listar evento
-    $pesquisa_ativo = "";
-    $estipulantes = $estipulante->findGeral();
-    $pesquisa_nome = "";
-    $pesquisa_ativo = "";
-    $pesquisa_estipulante = "";
+    // METODO DE BUSCA DE PAGINACAO
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $buscaAtivo = filter_input(INPUT_GET, 'ativo_est');
+    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+
+    $condicoes = [
+        strlen($busca) ? 'nome_est LIKE "%' . $busca . '%"' : null,
+        strlen($buscaAtivo) ? 'ativo_est = "' . $buscaAtivo . '"' : null
+    ];
+    $condicoes = array_filter($condicoes);
+
+    // REMOVE POSICOES VAZIAS DO FILTRO
+    $where = implode(' AND ', $condicoes);
+
+    // QUANTIDADE estipulanteS
+    $qtdestItens1 = $QtdTotalest->Qtdestipulante($where);
+
+    $qtdestItens = ($qtdestItens1['0']);
+
+    // PAGINACAO
+    $obPagination = new pagination($qtdestItens, $_GET['pag'] ?? 1, 10);
+    $obLimite = $obPagination->getLimit();
     ?>
 
     <!--tabela evento-->
@@ -32,13 +48,6 @@
                     <div class="form-group col-sm-2">
                         <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por estipulante">
                     </div>
-
-                    <!-- <div class="form-group col-sm-1">
-                        <input type="radio" checked name="ativo" value="s" id="ativo" placeholder="Pesquisa por evento">
-                        <label for="ativo">Ativo</label><br>
-                        <input type="radio" style="margin-top:-5px" name="ativo" value="n" id="ativo" placeholder="Pesquisa por evento">
-                        <label for="ativo">Inativo</label><br>
-                    </div> -->
                     <div class="form-group col-sm-1">
                         <button style="margin:10px; font-weight:600" type="submit" class="btn-sm btn-light">Pesquisar</button>
                     </div>
@@ -46,25 +55,25 @@
             </form>
 
             <?php
-            // validacao do formulario
-            if (isset($_POST['ativo'])) {
-                $pesquisa_ativo = $_POST['ativo'];
+
+            // PREENCHIMENTO DO FORMULARIO COM QUERY
+            $query = $seguradora->selectAllSeguradora($where, $order, $obLimite);
+
+            // GETS 
+            unset($_GET['pag']);
+            unset($_GET['pg']);
+            $gets = http_build_query($_GET);
+
+            // PAGINACAO
+            $paginacao = '';
+            $paginas = $obPagination->getPages();
+
+            foreach ($paginas as $pagina) {
+                $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
+                $paginacao .= '<a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
+                <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
+                </a>';
             }
-
-            if (isset($_POST['pesquisa_nome'])) {
-                $pesquisa_nome = $_POST['pesquisa_nome'];
-            }
-
-            // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
-            if (($pesquisa_nome != "")) {
-                $query = $estipulante->findByEstipulante($pesquisa_nome);
-            }
-
-            if ($pesquisa_nome == "") {
-                $query = $estipulante->findAll();
-            };
-
-
             ?>
         </div>
         <div>

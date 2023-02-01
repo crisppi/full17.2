@@ -9,20 +9,7 @@
     include_once("templates/header.php");
     include_once("array_dados.php");
 
-    // //Instanciando a classe
-    // //Criado o objeto $listareventos
-    // $paciente = new pacienteDAO($conn, $BASE_URL);
-
-    // //Instanciar o metodo listar evento
-    // $pesquisa_ativo = "";
-    // $pacientes = $paciente->findGeral($limite, $inicio);
-    // $pesquisa_nome = "";
-    // $pesquisa_ativo = "";
-    // $pesquisa_paciente = "";
-    // 
-
     //Instanciando a classe
-    //Criado o objeto $listareventos
     $paciente = new PacienteDAO($conn, $BASE_URL);
     $QtdTotalpac = new PacienteDAO($conn, $BASE_URL);
 
@@ -36,6 +23,7 @@
         strlen($buscaAtivo) ? 'ativo_pac = "' . $buscaAtivo . '"' : null
     ];
     $condicoes = array_filter($condicoes);
+
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
 
@@ -43,6 +31,7 @@
     $qtdpacItens1 = $QtdTotalpac->QtdPaciente($where);
 
     $qtdpacItens = ($qtdpacItens1['0']);
+
     // PAGINACAO
     $obPagination = new pagination($qtdpacItens, $_GET['pag'] ?? 1, 10);
     $obLimite = $obPagination->getLimit();

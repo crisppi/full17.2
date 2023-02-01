@@ -10,16 +10,31 @@
     include_once("array_dados.php");
 
     //Instanciando a classe
-    //Criado o objeto $listareventos
-    $hospital = new HospitalDAO($conn, $BASE_URL);
+    $hospital = new hospitalDAO($conn, $BASE_URL);
+    $QtdTotalhos = new hospitalDAO($conn, $BASE_URL);
 
-    //Instanciar o metodo listar evento
-    $pesquisa_ativo = "";
-    $hospitals = $hospital->findGeral();
-    $pesquisa_nome = "";
-    $pesquisa_ativo = "";
-    $pesquisa_hospital = "";
-    ?>
+    // METODO DE BUSCA DE PAGINACAO
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $buscaAtivo = filter_input(INPUT_GET, 'ativo_hos');
+    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+
+    $condicoes = [
+        strlen($busca) ? 'nome_hos LIKE "%' . $busca . '%"' : null,
+        strlen($buscaAtivo) ? 'ativo_hos = "' . $buscaAtivo . '"' : null
+    ];
+    $condicoes = array_filter($condicoes);
+
+    // REMOVE POSICOES VAZIAS DO FILTRO
+    $where = implode(' AND ', $condicoes);
+
+    // QUANTIDADE hospitalS
+    $qtdhosItens1 = $QtdTotalhos->Qtdhospital($where);
+
+    $qtdhosItens = ($qtdhosItens1['0']);
+
+    // PAGINACAO
+    $obPagination = new pagination($qtdhosItens, $_GET['pag'] ?? 1, 10);
+    $obLimite = $obPagination->getLimit(); ?>
 
     <!--tabela evento-->
     <div class="container py-2">

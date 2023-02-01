@@ -5,6 +5,8 @@ if (!isset($_SESSION['username'])) {
     header('location: index.php');
     exit;
 }
+include_once("models/pagination.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
