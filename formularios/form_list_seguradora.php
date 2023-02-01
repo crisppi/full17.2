@@ -49,7 +49,6 @@
             <form class="formulario" id="form_pesquisa" method="GET">
                 <div class="form-group row">
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
-                    <input type="hidden" name="pesquisa" id="pesquisa" value="sim">
                     <div class="form-group col-sm-2 ">
                         <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" value="<?= $busca ?>" placeholder="Pesquisa por seguradora">
                     </div>
@@ -79,13 +78,9 @@
             $query = $seguradora->selectAll($where, $order, $obLimite);
 
 
-            // GETS
-
+            // GETS 
             unset($_GET['pag']);
             $gets = http_build_query($_GET);
-
-            print_r($gets);
-
 
             // PAGINACAO
             $paginacao = '';
@@ -187,13 +182,13 @@
     echo "</div>";
     echo "<nav aria-label='Page navigation example'>";
     echo " <ul class='pagination'>";
-    echo " <li class='page-item'><a class='page-link' href='list_seguradora.php?pg=1'><span aria-hidden='true'>&laquo;</span></a></li>";
+    echo " <li class='page-item'><a class='page-link' href='list_seguradora.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
     if ($qtdPag > 1 && $pg <= $qtdPag) {
         for ($i = 1; $i <= $qtdPag; $i++) {
             if ($i == $pg) {
                 echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
             } else {
-                echo "<li class='page-item '><a class='page-link' href='list_seguradora.php?pg=$i'>" . $i . "</a></li>";
+                echo "<li class='page-item '><a class='page-link' href='list_seguradora.php?pg=$i&" . $gets . "'>" . $i . "</a></li>";
             }
         }
     }
