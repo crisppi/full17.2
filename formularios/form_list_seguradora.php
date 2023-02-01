@@ -12,59 +12,80 @@
     //Instanciando a classe
     //Criado o objeto $listareventos
     $seguradora = new seguradoraDAO($conn, $BASE_URL);
+    $QtdTotalSeg = new seguradoraDAO($conn, $BASE_URL);
 
-    //Instanciar o metodo listar evento
-    $pesquisa_ativo = "";
-    $seguradoras = $seguradora->findGeral();
-    $pesquisa_nome = "";
-    $pesquisa_ativo = "";
-    $pesquisa_seguradora = "";
+    // METODO DE BUSCA DE PAGINACAO
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $buscaAtivo = filter_input(INPUT_GET, 'ativo_seg');
+    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+
+    $condicoes = [
+        strlen($busca) ? 'seguradora_seg LIKE "%' . $busca . '%"' : null,
+        strlen($buscaAtivo) ? 'ativo_seg = "' . $buscaAtivo . '"' : null
+    ];
+    $condicoes = array_filter($condicoes);
+    // REMOVE POSICOES VAZIAS DO FILTRO
+    $where = implode(' AND ', $condicoes);
+
+    // QUANTIDADE VAGAS
+    $qtdSegItens1 = $QtdTotalSeg->QtdSeguradora($where);
+
+    $qtdSegItens = ($qtdSegItens1['0']);
+    // PAGINACAO
+    $obPagination = new pagination($qtdSegItens, $_GET['pag'] ?? 1, 10);
+    $obLimite = $obPagination->getLimit();
+    // echo "<pre>";
+    // print_r($obPagination);
+
+    // echo "<pre>";
+    // print_r($obLimite);
+
     ?>
 
     <!--tabela evento-->
     <div class="container py-2">
 
         <div class="row" style="background-color: #d3d3d3">
-            <form class="formulario" id="form_pesquisa" method="POST">
+            <form class="formulario" id="form_pesquisa" method="GET">
                 <div class="form-group row">
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <input type="hidden" name="pesquisa" id="pesquisa" value="sim">
-                    <div class="form-group col-sm-2">
-                        <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por seguradora">
+                    <div class="form-group col-sm-2 ">
+                        <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" value="<?= $busca ?>" placeholder="Pesquisa por seguradora">
+                    </div>
+                    <div class="form-group col-sm-3 d-flex align-itens-end">
+                        <select class="form-control mb-3" id="ativo_seg" name="ativo_seg">
+                            <option value="">Busca por Ativos</option>
+                            <option value="s" <?= $ativo_seg == 's' ? 'selected' : null ?>>Sim</option>
+                            <option value="n" <?= $ativo_seg == 'n' ? 'selected' : null ?>>Não</option>
+                        </select>
                     </div>
 
                     <!-- <div class="form-group col-sm-1">
-                        <input type="radio" checked name="ativo" value="s" id="ativo" placeholder="Pesquisa por evento">
-                        <label for="ativo">Ativo</label><br>
-                        <input type="radio" style="margin-top:-5px" name="ativo" value="n" id="ativo" placeholder="Pesquisa por evento">
-                        <label for="ativo">Inativo</label><br>
+                        <input type="radio" checked name="ativo_seg" value="s" id="ativo_seg" placeholder="Pesquisa por evento">
+                        <label for="ativo_seg">Ativo</label><br>
+                        <input type="radio" style="margin-top:-5px" name="ativo_seg" value="n" id="ativo_seg" placeholder="Pesquisa ativos">
+                        <label for="ativo_seg">Inativo</label><br>
                     </div> -->
-                    <div class="form-group col-sm-1">
+                    <div class="form-group col-sm-1 d-flex align-itens-end">
                         <button style="margin:10px; font-weight:600" type="submit" class="btn-sm btn-light">Pesquisar</button>
                     </div>
                 </div>
             </form>
 
             <?php
-            // validacao do formulario
-            if (isset($_POST['ativo'])) {
-                $pesquisa_ativo = $_POST['ativo'];
-            }
 
-            if (isset($_POST['pesquisa_nome'])) {
-                $pesquisa_nome = $_POST['pesquisa_nome'];
-            }
+            // PREENCHIMENTO DO FORMULARIO COM QUERY
+            $query = $seguradora->selectAll($where, $order, $obLimite);
 
-            // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
-            if (($pesquisa_nome != "")) {
-                $query = $seguradora->findBySeguradora($pesquisa_nome);
-            }
-
-            if ($pesquisa_nome == "") {
-                $query = $seguradora->findAll();
-            };
-
-
+            // PAGINACAO
+            $paginacao = '';
+            $paginas = $obPagination->getPages();
+            foreach ($paginas as $pagina)
+                $paginacao .= '<a href="?pag=' . $pagina['pagina'] . '">
+                <button type="button" class="btn btn-light">' . $pagina['pagina'] . '</button>
+                </a>
+                ';
             ?>
         </div>
         <div>
@@ -77,20 +98,25 @@
                     <th scope="col">seguradora</th>
                     <th scope="col">Endereço</th>
                     <th scope="col">Cidade</th>
+                    <th scope="col">Ativo</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
 
+
+                //TABELA
                 foreach ($query as $seguradora) :
                     extract($seguradora);
+
                 ?>
                     <tr>
                         <td scope="row" class="col-id"><?= $id_seguradora ?></td>
                         <td scope="row" class="nome-coluna-table"><?= $seguradora_seg ?></td>
                         <td scope="row" class="nome-coluna-table"><?= $endereco_seg ?></td>
                         <td scope="row" class="nome-coluna-table"><?= $cidade_seg ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $ativo_seg ?></td>
 
                         <td class="action">
                             <!-- <a href="cad_seguradora.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a> -->
@@ -106,7 +132,9 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-
+        <section>
+            <?php $paginacao ?>
+        </section>
         <div id="id-confirmacao" class="btn_acoes oculto">
             <p>Deseja deletar este hospital: <?= $hospital_ant ?>?</p>
             <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>

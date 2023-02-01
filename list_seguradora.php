@@ -5,6 +5,7 @@ if (!isset($_SESSION['username'])) {
     header('location: index.php');
     exit;
 }
+include_once("models/pagination.php");
 
 ?>
 <!DOCTYPE html>
@@ -19,6 +20,9 @@ if (!isset($_SESSION['username'])) {
 </head>
 
 <?php
+$busca = filter_input(INPUT_GET, 'pesquisa_nome');
+$ativo_seg = filter_input(INPUT_GET, 'ativo_seg');
+
 include_once("formularios/form_list_seguradora.php");
 include_once("templates/footer.php");
 ?>

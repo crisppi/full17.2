@@ -269,6 +269,36 @@ class seguradoraDAO implements seguradoraDAOInterface
 
         return $seguradora;
     }
+
+    public function selectAll($where = null, $order = null, $limit = null)
+    {
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+
+        //MONTA A QUERY
+        $query = $this->conn->query('SELECT * FROM tb_seguradora ' . $where . ' ' . $order . ' ' . $limit);
+
+        $query->execute();
+
+        $seguradora = $query->fetchAll();
+
+        return $seguradora;
+    }
+
+    public function QtdSeguradora()
+    {
+        $seguradora = [];
+
+        $stmt = $this->conn->query("SELECT COUNT(id_seguradora) FROM tb_seguradora");
+
+        $stmt->execute();
+
+        $QtdTotalSeg = $stmt->fetch();
+
+        return $QtdTotalSeg;
+    }
 }
 
 
