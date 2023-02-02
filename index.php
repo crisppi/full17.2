@@ -7,7 +7,6 @@ require_once("models/message.php");
 require_once("models/usuario.php");
 
 $usuarioDao = new userDAO($conn, $BASE_URL);
-
 if (isset($_POST["login"])) {
 
     if (empty($_POST['username']) || empty($_POST['senha_login'])) {
@@ -28,8 +27,22 @@ if (isset($_POST["login"])) {
         $count = $usuarioDao->rowCount();
 
         if ($count > 0) {
+            echo "<pre>";
+            echo "session" . "<>";
+            print_r($_SESSION);
+            echo "post" . "<>";
+            print_r($_POST);
+
             $_SESSION["username"] = $_POST["username"];
-            $_SESSION["senhauser"] = $_POST["senhauser"];
+            $_SESSION["senha_login"] = $_POST["senha_login"];
+            $user = $_POST["username"];
+            $senha = $_POST['senha_login'];
+            $post = $_POST;
+            echo "<pre>";
+            echo "session" . "<>";
+            print_r($_SESSION);
+            echo "post" . "<>";
+            print_r($post);
             header("Location: menu.php");
         } else {
             $message = '<label>Usuário ou senha incorretas</label>';

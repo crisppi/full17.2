@@ -1,19 +1,20 @@
 <?php
+
 session_start();
 
 if (!isset($_SESSION['username'])) {
     header('location:index.php');
 }
 require_once("templates/header.php");
-// echo "<pre>";
-// print_r($_SESSION);
+// $usuarios = new userDAO($conn, $BASE_URL);
+// $usuarios = $usuarioDao->findGeral();
 
 // $user = "";
-// print_r($user);
-print_r($_POST);
-print_r($usuarioDao);
-$user = filter_input(INPUT_POST, "username");
-print_r($user);
+// print_r($_POST);
+// $usuarios = filter_input(INPUT_POST, "username");
+// print_r($usuarios);
+print_r($post);
+print_r($senha);
 
 // $user->findByEmail($user);
 
@@ -73,14 +74,14 @@ print_r($user);
             <hr>
 
             <li>
-                <a href="cad_patologia.php">Cadastro Patologias</a>
+                <a href="cad_usuario.php">Cadastro usuarios</a>
             </li>
             <li>
                 <a href="cad_acomodacao.php">Cadastro Acomodação</a>
             </li>
             <hr>
             <li>
-                <a href="list_patologia.php">Relação Patologias</a>
+                <a href="list_usuario.php">Relação usuarios</a>
             </li>
             <li>
                 <a href="list_acomodacao.php">Relação Acomodação</a>
