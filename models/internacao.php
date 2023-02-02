@@ -78,9 +78,8 @@ interface InternacaoDAOInterface
   public function findByAll($limite, $inicio);
 
 
-
-
-
+  public function selectAllInternacao($where = null, $order = null, $limit = null);
+  public function QtdInternacao();
 
   // public function getinternacao();
 

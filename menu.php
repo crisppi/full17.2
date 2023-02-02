@@ -6,19 +6,8 @@ if (!isset($_SESSION['username'])) {
     header('location:index.php');
 }
 require_once("templates/header.php");
-// $usuarios = new userDAO($conn, $BASE_URL);
-// $usuarios = $usuarioDao->findGeral();
 
-// $user = "";
-// print_r($_POST);
-// $usuarios = filter_input(INPUT_POST, "username");
-// print_r($usuarios);
-print_r($post);
-print_r($senha);
 
-// $user->findByEmail($user);
-
-// print_r($user);
 ?>
 
 <div class="container">
@@ -26,7 +15,7 @@ print_r($senha);
         <div style="height: 10px;">
         </div>
         <div class="col lista_menu">
-            <div>
+            <div >
                 <h4>CADASTRO</h4>
             </div>
             <hr>

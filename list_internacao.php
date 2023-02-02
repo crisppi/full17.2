@@ -5,6 +5,7 @@ if (!isset($_SESSION['username'])) {
     header('location: index.php');
     exit;
 }
+include_once("models/pagination.php");
 
 ?>
 <!DOCTYPE html>
@@ -15,24 +16,25 @@ if (!isset($_SESSION['username'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+ 
 </head>
 
 <body>
     <?php
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $ativo_pac = filter_input(INPUT_GET, 'ativo_pac');
     include_once("globals.php");
     require_once("templates/header.php");
     require_once("dao/internacaoDao.php");
     require_once("models/message.php");
-    include_once("models/hospital.php");
-    include_once("dao/hospitalDao.php");
+    include_once("models/Internacao.php");
+    include_once("dao/InternacaoDao.php");
     include_once("models/patologia.php");
     include_once("dao/patologiaDao.php");
     require_once("dao/pacienteDAO.php");
 
-
-    $hospital_geral = new hospitalDAO($conn, $BASE_URL);
-    $hospitals = $hospital_geral->findGeral();
+    $Internacao_geral = new InternacaoDAO($conn, $BASE_URL);
+    $Internacaos = $Internacao_geral->findGeral();
     $pacienteDao = new pacienteDAO($conn, $BASE_URL);
     $pacientes = $pacienteDao->findGeral($limite, $inicio);
     $patologiaDao = new patologiaDAO($conn, $BASE_URL);
@@ -54,10 +56,10 @@ if (!isset($_SESSION['username'])) {
 
                 <div class="form-group row">
                     <div class="form-group col-sm-3">
-                        <input style="margin-left: 30px;" type="text" name="pesquisa_hosp" placeholder="Selecione o Hospital" value="<?= $pesquisa_hosp ?>">
+                        <input style="margin-left: 30px;" type="text" name="pesquisa_hosp" placeholder="Selecione o Internacao" value="<?= $pesquisa_hosp ?>">
                     </div>
                     <div class="form-group col-sm-1">
-                        <input style="margin-left: 30px;" type="hidden" name="pesquisando" id="pesquisando" value="" placeholder="Selecione o Hospital">
+                        <input style="margin-left: 30px;" type="hidden" name="pesquisando" id="pesquisando" value="" placeholder="Selecione o Internacao">
                     </div>
                     <div class="form-group col-sm-4">
                         <select class="form-control mb-3" id="pesqInternado" name="pesqInternado">
@@ -74,48 +76,38 @@ if (!isset($_SESSION['username'])) {
         </div>
 
         <!-- BASE DAS PESQUISAS -->
-
         <?php
+        //Instanciando a classe
+        $Internacao = new InternacaoDAO($conn, $BASE_URL);
+        $QtdTotalhos = new InternacaoDAO($conn, $BASE_URL);
 
-        // validacao do formulario
-        if (isset($_GET['pesqInternado'])) {
-            $pesqInternado = $_GET['pesqInternado'];
-        }
+        // METODO DE BUSCA DE PAGINACAO
+        $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+        $buscaAtivo = filter_input(INPUT_GET, 'ativo_hos');
+        // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
-        if (isset($_GET['pesquisa_hosp'])) {
-            $pesquisa_hosp = $_GET['pesquisa_hosp'];
-        }
+        $condicoes = [
+        strlen($busca) ? 'nome_hosp LIKE "%' . $busca . '%"' : null,
+        strlen($buscaAtivo) ? 'ativo_hos = "' . $buscaAtivo . '"' : null
+        ];
+    $condicoes = array_filter($condicoes);
 
-        if (isset($_GET['pesquisando'])) {
-            $pesquisando = $_GET['pesquisando'];
-        }
+    // REMOVE POSICOES VAZIAS DO FILTRO
+    $where = implode(' AND ', $condicoes);
 
-        // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
+    // QUANTIDADE InternacaoS
+    $qtdIntItens1 = $QtdTotalInt->QtdInternacao($where);
 
-        // filtro limpo
-        if (($pesquisando === "")) {
-            $internacaoList = $internacao->findByAll($limite, $inicio);
-            // echo "chegou no filtro limpo. Limite = " . $limite . "Inicio = " . $inicio . "pesquisa = " . $pesquisando . ".";
-        }
+    $qtdIntItens = ($qtdIntItens1['0']);
 
-        // filtro de hospital
-        if (($pesquisa_hosp != "")) {
-            $internacaoList = $internacao->findByHospital($pesquisa_hosp, $limite, $inicio);
-            echo "chegou no filtro hospital. Limite = " . $limite . "Inicio = " . $inicio . "pesquisa = " . $pesquisa_hosp . ".";
-        }
-
-        // filtro de internados
-        if (($pesqInternado != "")) {
-            $internacaoList = $internacao->findByInternado($pesqInternado, $limite, $inicio);
-            // print_r($internacaoList);
-        }
-
-        // // filtro vazio
-        // if (($pesqInternado === "") || ($pesquisa_hosp === "")) {
-        //     $internacaoList = $internacao->findAll($limite, $inicio);
-        //     print_r($query);
-        // }
-        ?>
+    // PAGINACAO
+    $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, 10);
+    $obLimite = $obPagination->getLimit(); 
+    
+    // PREENCHIMENTO DO FORMULARIO COM QUERY
+    $order='nome_hosp';
+    $query = $Internacao->selectAllInternacao($where, $order, $obLimite);
+    ?>
         <div class="container">
             <h6 class="page-title">Relatório de internações</h6>
             <table class="table table-sm table-striped table-bordered table-hover table-condensed">
@@ -123,7 +115,7 @@ if (!isset($_SESSION['username'])) {
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Internado</th>
-                        <th scope="col">Hospital</th>
+                        <th scope="col">Internacao</th>
                         <th scope="col">Paciente</th>
                         <th scope="col">Data internação</th>
                         <th scope="col">Acomodação</th>
@@ -139,7 +131,8 @@ if (!isset($_SESSION['username'])) {
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($internacaoList as $intern) :
+                    foreach ($query as $intern) :
+                        extract($query);
                     ?>
                         <tr>
                             <td scope="row" class="col-id"><?= $intern["id_internacao"] ?></td>

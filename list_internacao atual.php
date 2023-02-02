@@ -5,6 +5,7 @@ if (!isset($_SESSION['username'])) {
     header('location: index.php');
     exit;
 }
+include_once("models/pagination.php");
 
 ?>
 <!DOCTYPE html>
@@ -15,11 +16,13 @@ if (!isset($_SESSION['username'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+ 
 </head>
 
 <body>
     <?php
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $ativo_pac = filter_input(INPUT_GET, 'ativo_pac');
     include_once("globals.php");
     require_once("templates/header.php");
     require_once("dao/internacaoDao.php");
@@ -30,11 +33,10 @@ if (!isset($_SESSION['username'])) {
     include_once("dao/patologiaDao.php");
     require_once("dao/pacienteDAO.php");
 
-
     $hospital_geral = new hospitalDAO($conn, $BASE_URL);
     $hospitals = $hospital_geral->findGeral();
     $pacienteDao = new pacienteDAO($conn, $BASE_URL);
-    $pacientes = $pacienteDao->findGeral();
+    $pacientes = $pacienteDao->findGeral($limite, $inicio);
     $patologiaDao = new patologiaDAO($conn, $BASE_URL);
     $patologias = $patologiaDao->findGeral();
 
@@ -44,7 +46,7 @@ if (!isset($_SESSION['username'])) {
     $pesquisa_hosp = filter_input(INPUT_GET, 'pesquisa_hosp');
     isset($_GET['pesqInternado']) ? $pesqInternado = filter_input(INPUT_GET, 'pesqInternado') : "";
     $ativo = filter_input(INPUT_GET, 'pesqInternado');
-
+    $pesquisando = "";
     ?>
     <!-- FORMULARIO DE PESQUISAS -->
     <div class="container">
@@ -53,10 +55,12 @@ if (!isset($_SESSION['username'])) {
                 <h6 style="margin-left: 30px; padding-top:10px" class="page-title">Pesquisa internações</h6>
 
                 <div class="form-group row">
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-3">
                         <input style="margin-left: 30px;" type="text" name="pesquisa_hosp" placeholder="Selecione o Hospital" value="<?= $pesquisa_hosp ?>">
                     </div>
-
+                    <div class="form-group col-sm-1">
+                        <input style="margin-left: 30px;" type="hidden" name="pesquisando" id="pesquisando" value="" placeholder="Selecione o Hospital">
+                    </div>
                     <div class="form-group col-sm-4">
                         <select class="form-control mb-3" id="pesqInternado" name="pesqInternado">
                             <option value="">Busca por Internados</option>
@@ -74,17 +78,45 @@ if (!isset($_SESSION['username'])) {
         <!-- BASE DAS PESQUISAS -->
 
         <?php
-        // $condicoes = [
-        //     strlen($pesquisa_hosp) ? ' "%' . $pesquisa_hosp . '%" ' : null
 
-        // ];
-        // // clausula where
-        // $where = implode(' ', $condicoes);
-        $where = '%' . $pesquisa_hosp . '%';
+        // validacao do formulario
+        if (isset($_GET['pesqInternado'])) {
+            $pesqInternado = $_GET['pesqInternado'];
+        }
 
+        if (isset($_GET['pesquisa_hosp'])) {
+            $pesquisa_hosp = $_GET['pesquisa_hosp'];
+        }
 
-        $internacaoList = $internacao->findInternByInternado($where, $ativo, $limite, $inicio);
+        if (isset($_GET['pesquisando'])) {
+            $pesquisando = $_GET['pesquisando'];
+        }
 
+        // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
+
+        // filtro limpo
+        if (($pesquisando === "")) {
+            $internacaoList = $internacao->findByAll($limite, $inicio);
+            // echo "chegou no filtro limpo. Limite = " . $limite . "Inicio = " . $inicio . "pesquisa = " . $pesquisando . ".";
+        }
+
+        // filtro de hospital
+        if (($pesquisa_hosp != "")) {
+            $internacaoList = $internacao->findByHospital($pesquisa_hosp, $limite, $inicio);
+            echo "chegou no filtro hospital. Limite = " . $limite . "Inicio = " . $inicio . "pesquisa = " . $pesquisa_hosp . ".";
+        }
+
+        // filtro de internados
+        if (($pesqInternado != "")) {
+            $internacaoList = $internacao->findByInternado($pesqInternado, $limite, $inicio);
+            // print_r($internacaoList);
+        }
+
+        // // filtro vazio
+        // if (($pesqInternado === "") || ($pesquisa_hosp === "")) {
+        //     $internacaoList = $internacao->findAll($limite, $inicio);
+        //     print_r($query);
+        // }
         ?>
         <div class="container">
             <h6 class="page-title">Relatório de internações</h6>
@@ -155,6 +187,12 @@ if (!isset($_SESSION['username'])) {
         //modo cadastro
         $formData = "0";
         $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $total = $internacao->findTotal();
+
+        $totalcasos = $total['0'];
+        // echo $totalcasos['0'];
+        $reg = ($totalcasos['0']);
+        // echo $reg;
 
         if ($formData !== "0") {
             $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
@@ -168,12 +206,12 @@ if (!isset($_SESSION['username'])) {
             $query_Total = $conn->prepare($sql_Total);
             $query_Total->execute();
             $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
-
             # conta quantos registros tem no banco de dados
             $query_count = $query_Total->rowCount();
 
             # calcula o total de paginas a serem exibidas
-            $qtdPag = ceil($query_count / $limite);
+            $qtdPag = ceil($reg / $limite);
+            echo $pesqInternado;
         } catch (PDOexception $error_Total) {
 
             echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
@@ -189,11 +227,11 @@ if (!isset($_SESSION['username'])) {
                 if ($i == $pg) {
                     echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
                 } else {
-                    echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pg=$i'>" . $i . "</a></li>";
+                    echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pg=$i&pesquisa_hosp=&pesquisando=&pesqInternado=$pesquisando'>" . $i . "</a></li>";
                 }
             }
         }
-        echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$qtdPag'><span aria-hidden='true'>&raquo;</span></a></li>";
+        echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$qtdPag&pesquisa_hosp=&pesquisando=&pesqInternado=$pesquisando'><span aria-hidden='true'>&raquo;</span></a></li>";
         echo " </ul>";
         echo "</nav>";
         echo "</div>"; ?>

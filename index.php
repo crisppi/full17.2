@@ -27,23 +27,14 @@ if (isset($_POST["login"])) {
         $count = $usuarioDao->rowCount();
 
         if ($count > 0) {
-            echo "<pre>";
-            echo "session" . "<>";
-            print_r($_SESSION);
-            echo "post" . "<>";
-            print_r($_POST);
-
+           
             $_SESSION["username"] = $_POST["username"];
             $_SESSION["senha_login"] = $_POST["senha_login"];
             $user = $_POST["username"];
             $senha = $_POST['senha_login'];
             $post = $_POST;
-            echo "<pre>";
-            echo "session" . "<>";
-            print_r($_SESSION);
-            echo "post" . "<>";
-            print_r($post);
-            header("Location: menu.php");
+            
+            header("location: menu.php");
         } else {
             $message = '<label>Usuário ou senha incorretas</label>';
         }

@@ -9,7 +9,7 @@
     include_once("templates/header.php");
     include_once("array_dados.php");
 
-    //Instanciando a classe
+    //Instanciando a classe 
     $paciente = new PacienteDAO($conn, $BASE_URL);
     $QtdTotalpac = new PacienteDAO($conn, $BASE_URL);
 
