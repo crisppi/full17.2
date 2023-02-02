@@ -79,7 +79,7 @@ include_once("models/pagination.php");
         <?php
         //Instanciando a classe
         $Internacao = new InternacaoDAO($conn, $BASE_URL);
-        $QtdTotalhos = new InternacaoDAO($conn, $BASE_URL);
+        $QtdTotalInt = new InternacaoDAO($conn, $BASE_URL);
 
         // METODO DE BUSCA DE PAGINACAO
         $busca = filter_input(INPUT_GET, 'pesquisa_nome');
@@ -107,6 +107,22 @@ include_once("models/pagination.php");
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $order='nome_hosp';
     $query = $Internacao->selectAllInternacao($where, $order, $obLimite);
+
+    // GETS 
+    unset($_GET['pag']);
+    unset($_GET['pg']);
+    $gets = http_build_query($_GET);
+
+    // PAGINACAO
+    $paginacao = '';
+    $paginas = $obPagination->getPages();
+
+    foreach ($paginas as $pagina) {
+        $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
+        $paginacao .= '<a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
+        <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
+        </a>';
+    }
     ?>
         <div class="container">
             <h6 class="page-title">Relatório de internações</h6>
@@ -212,17 +228,17 @@ include_once("models/pagination.php");
         echo "</div>";
         echo "<nav aria-label='Page navigation example'>";
         echo " <ul class='pagination'>";
-        echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pg=1'><span aria-hidden='true'>&laquo;</span></a></li>";
+        echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pag=1'><span aria-hidden='true'>&laquo;</span></a></li>";
         if ($qtdPag > 1 && $pg <= $qtdPag) {
             for ($i = 1; $i <= $qtdPag; $i++) {
                 if ($i == $pg) {
                     echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
                 } else {
-                    echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pg=$i&pesquisa_hosp=&pesquisando=&pesqInternado=$pesquisando'>" . $i . "</a></li>";
+                    echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pag=$i&pesquisa_hosp=&pesquisando=&pesqInternado=$pesquisando'>" . $i . "</a></li>";
                 }
             }
         }
-        echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$qtdPag&pesquisa_hosp=&pesquisando=&pesqInternado=$pesquisando'><span aria-hidden='true'>&raquo;</span></a></li>";
+        echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pag=$qtdPag&pesquisa_hosp=&pesquisando=&pesqInternado=$pesquisando'><span aria-hidden='true'>&raquo;</span></a></li>";
         echo " </ul>";
         echo "</nav>";
         echo "</div>"; ?>
