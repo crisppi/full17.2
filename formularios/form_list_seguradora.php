@@ -12,7 +12,7 @@
     //Instanciando a classe
     $seguradora = new seguradoraDAO($conn, $BASE_URL);
     $QtdTotalSeg = new seguradoraDAO($conn, $BASE_URL);
-
+ 
     // METODO DE BUSCA DE PAGINACAO
     $busca = filter_input(INPUT_GET, 'pesquisa_nome');
     $buscaAtivo = filter_input(INPUT_GET, 'ativo_seg');
