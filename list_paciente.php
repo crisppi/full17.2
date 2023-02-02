@@ -6,8 +6,6 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 include_once("models/pagination.php");
-
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -21,10 +19,8 @@ include_once("models/pagination.php");
 </head>
 
 <?php
-
 $busca = filter_input(INPUT_GET, 'pesquisa_nome');
 $ativo_pac = filter_input(INPUT_GET, 'ativo_pac');
-
 include_once("formularios/form_list_paciente.php");
 include_once("templates/footer.php");
 ?>

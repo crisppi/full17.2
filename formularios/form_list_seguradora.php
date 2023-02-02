@@ -76,7 +76,7 @@
             $paginas = $obPagination->getPages();
 
             foreach ($paginas as $pagina) {
-                $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
+                // $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
                 $paginacao .= '<a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
                 <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
                 </a>';
@@ -99,12 +99,9 @@
             </thead>
             <tbody>
                 <?php
-
-
                 //TABELA
                 foreach ($query as $seguradora) :
                     extract($seguradora);
-
                 ?>
                     <tr>
                         <td scope="row" class="col-id"><?= $id_seguradora ?></td>
@@ -116,20 +113,17 @@
                         <td class="action">
                             <!-- <a href="cad_seguradora.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a> -->
                             <a href="<?= $BASE_URL ?>show_seguradora.php?id_seguradora=<?= $id_seguradora ?>"><i style="color:green; margin-right:10px" class="fas fa-eye check-icon"></i></a>
-
                             <a href="<?= $BASE_URL ?>edit_seguradora.php?id_seguradora=<?= $id_seguradora ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>
-
                             <a href="<?= $BASE_URL ?>show_seguradora.php?id_seguradora=<?= $id_seguradora ?>"><i style="color:red; margin-left:10px" name="type" value="edite" class="d-inline-block bi bi-x-square-fill delete-icon"></i></a>
-
                             <div id="info"></div>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <div>
+        <!-- <div>
             <?= $paginacao ?>
-        </div>
+        </div> -->
         <?php
 
         //modo cadastro
@@ -143,9 +137,7 @@
         } else {
             echo "<p style='color: #f00;'>Erro: seguradora não cadastrado!</p>";
         };
-
         try {
-
             $query_Total = $conn->prepare($sql_Total);
             $query_Total->execute();
 
@@ -157,10 +149,9 @@
             # calcula o total de paginas a serem exibidas
             $qtdPag = ceil($query_count / $limite);
         } catch (PDOexception $error_Total) {
-
             echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
         }
-        echo "<div style=margin-left:10px;>";
+        echo "<div style=margin-left:0px;>";
         echo "<div style='color:blue; margin-top:20px;'>";
         echo "</div>";
         echo "<nav aria-label='Page navigation example'>";

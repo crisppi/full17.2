@@ -394,7 +394,7 @@ class UserDAO implements UserDAOInterface
         $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
 
         //MONTA A QUERY
-        $query = $this->conn->query('SELECT * FROM tb_usuario ' . $where . ' ' . $order . ' ' . $limit);
+        $query = $this->conn->query('SELECT * FROM tb_user ' . $where . ' ' . $order . ' ' . $limit);
 
         $query->execute();
 
@@ -407,7 +407,7 @@ class UserDAO implements UserDAOInterface
     {
         $usuario = [];
 
-        $stmt = $this->conn->query("SELECT COUNT(id_usuario) FROM tb_usuario");
+        $stmt = $this->conn->query("SELECT COUNT(id_usuario) FROM tb_user");
 
         $stmt->execute();
 
@@ -421,7 +421,7 @@ class UserDAO implements UserDAOInterface
 $limite = 10;
 
 # Se pg não existe atribui 1 a variável pg
-$pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
+$pg = (isset($_GET['pag'])) ? (int)$_GET['pag'] : 1;
 
 # Atribui a variável inicio o inicio de onde os registros vão ser
 # mostrados por página, exemplo 0 à 10, 11 à 20 e assim por diante

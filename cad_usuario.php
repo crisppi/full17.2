@@ -26,7 +26,6 @@ if (empty($id_usuario)) {
         $message->setMessage("Usuário não encontrado!", "error", "index.php");
     }
 }
-
 ?>
 <div id="main-container" class="container-fluid">
     <div class="row">

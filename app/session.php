@@ -1,6 +1,6 @@
 <?php
 
-namespace session;
+namespace Session;
 
 class Login
 {

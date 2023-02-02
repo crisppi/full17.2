@@ -15,12 +15,10 @@
 
     // METODO DE BUSCA DE PAGINACAO
     $busca = filter_input(INPUT_GET, 'pesquisa_nome');
-    $buscaAtivo = filter_input(INPUT_GET, 'ativo_pat');
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
     $condicoes = [
-        strlen($busca) ? 'nome_pat LIKE "%' . $busca . '%"' : null,
-        strlen($buscaAtivo) ? 'ativo_pat = "' . $buscaAtivo . '"' : null
+        strlen($busca) ? 'patologia_pat LIKE "%' . $busca . '%"' : null,
     ];
     $condicoes = array_filter($condicoes);
 
@@ -41,12 +39,11 @@
     <div class="container py-2">
 
         <div class="row" style="background-color: #d3d3d3">
-            <form class="formulario" id="form_pesquisa" method="POST">
+            <form class="formulario" id="form_pesquisa" method="GET">
                 <div class="form-group row">
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
-                    <input type="hidden" name="pesquisa" id="pesquisa" value="sim">
                     <div class="form-group col-sm-2">
-                        <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por patologia">
+                        <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por patologia">
                     </div>
                     <div class="form-group col-sm-1">
                         <button style="margin:10px; font-weight:600" type="submit" class="btn-sm btn-light">Pesquisar</button>
@@ -55,24 +52,24 @@
             </form>
 
             <?php
-            // validacao do formulario
-            if (isset($_POST['ativo'])) {
-                $pesquisa_ativo = $_POST['ativo'];
+            // PREENCHIMENTO DO FORMULARIO COM QUERY
+            $query = $patologia->selectAllpatologia($where, $order, $obLimite);
+
+            // GETS 
+            unset($_GET['pag']);
+            unset($_GET['pg']);
+            $gets = http_build_query($_GET);
+
+            // PAGINACAO
+            $paginacao = '';
+            $paginas = $obPagination->getPages();
+
+            foreach ($paginas as $pagina) {
+                $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
+                $paginacao .= '<a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
+               <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
+               </a>';
             }
-
-            if (isset($_POST['pesquisa_nome'])) {
-                $pesquisa_nome = $_POST['pesquisa_nome'];
-            }
-
-            // ENCAMINHAMENTO DOS INPUTS DO FORMULARIO
-            if (($pesquisa_nome != "")) {
-                $query = $patologia->findBypatologia($pesquisa_nome);
-            }
-
-            if ($pesquisa_nome == "") {
-                $query = $patologia->findAll();
-            };
-
 
             ?>
         </div>
@@ -150,22 +147,22 @@
 
         echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
     }
-    echo "<div style=margin-left:20px;>";
-    echo "<div style='color:blue; margin-left:20px;'>";
+    echo "<div style=margin-left:10px;>";
+    echo "<div style='color:blue; margin-top:20px;'>";
     echo "</div>";
     echo "<nav aria-label='Page navigation example'>";
     echo " <ul class='pagination'>";
-    echo " <li class='page-item'><a class='page-link' href='list_patologia.php?pg=1'><span aria-hidden='true'>&laquo;</span></a></li>";
+    echo " <li class='page-item'><a class='page-link' href='list_patologia.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
     if ($qtdPag > 1 && $pg <= $qtdPag) {
         for ($i = 1; $i <= $qtdPag; $i++) {
             if ($i == $pg) {
                 echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
             } else {
-                echo "<li class='page-item '><a class='page-link' href='list_patologia.php?pg=$i'>" . $i . "</a></li>";
+                echo "<li class='page-item '><a class='page-link' href='list_patologia.php?pag=$i&" . $gets . "'>" . $i . "</a></li>";
             }
         }
     }
-    echo "<li class='page-item'><a class='page-link' href='list_patologia.php?pg=$qtdPag'><span aria-hidden='true'>&raquo;</span></a></li>";
+    echo "<li class='page-item'><a class='page-link' href='list_patologia.php?pag=$qtdPag&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
     echo " </ul>";
     echo "</nav>";
     echo "</div>"; ?>
