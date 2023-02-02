@@ -1,27 +1,42 @@
 <?php
-class Login
+
+class login
 {
-
-    // metodo responsavel por saber se o usuario esta logado.
-    public static function islogged()
+    public function logaFuncionario($dados)
     {
-        return false;
+        $this->email = $dados['email'];
+        $this->senha = sha1($dados['senha']);
+        try {
+            $cst = $this->con->conectar()->prepare("SELECT `idFuncionario`, `email`, `senha` FROM `funcionario` WHERE `email` = :email AND `senha` = :senha;");
+            $cst->bindParam(':email', $this->email, PDO::PARAM_STR);
+            $cst->bindParam(':senha', $this->senha, PDO::PARAM_STR);
+            $cst->execute();
+            if ($cst->rowCount() == 0) {
+                header('location: login/?login=error');
+            } else {
+                session_start();
+                $rst = $cst->fetch();
+                $_SESSION['logado'] = "sim";
+                $_SESSION['func'] = $rst['idFuncionario'];
+                header("location: login/admin");
+            }
+        } catch (PDOException $e) {
+            return 'Error: ' . $e->getMessage();
+        }
     }
 
-    // metodo responsavel por obrigar usuario estar logado
-    public static function requireLogin()
+    public function funcionarioLogado($dado)
     {
-        if (!self::isLogged()) {
-            header('location: index.php');
-            exit;
-        };
+        $cst = $this->con->conectar()->prepare("SELECT `idFuncionario`, `nome`, `email` FROM `funcionario` WHERE `idFuncionario` = :idFunc;");
+        $cst->bindParam(':idFunc', $dado, PDO::PARAM_INT);
+        $cst->execute();
+        $rst = $cst->fetch();
+        $_SESSION['nome'] = $rst['nome'];
     }
-    // metodo responsavel por obrigar usuario estar deslogado
-    public static function requireLogout()
+
+    public function sairFuncionario()
     {
-        if (self::isLogged()) {
-            header('location: menu.php');
-            exit;
-        };
+        session_destroy();
+        header('location: http://localhost/login');
     }
-};
+}

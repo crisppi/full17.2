@@ -19,15 +19,17 @@ if (isset($_POST["login"])) {
         $usuarioDao = $conn->prepare($query);
         $usuarioDao->execute(
             array(
-                'username'     =>     $_POST["username"],
-                'senha_login'     =>     $_POST["senha_login"]
+                'username'     =>   $_POST["username"],
+                'senha_login'  =>   $_POST["senha_login"]
             )
+
         );
 
         $count = $usuarioDao->rowCount();
 
         if ($count > 0) {
             $_SESSION["username"] = $_POST["username"];
+            $_SESSION["senhauser"] = $_POST["senhauser"];
             header("Location: menu.php");
         } else {
             $message = '<label>Usuário ou senha incorretas</label>';
@@ -85,6 +87,7 @@ if (isset($_POST["login"])) {
                         </div>
                 </form>
             </div>
+
         </div>
     </div>
 </body>

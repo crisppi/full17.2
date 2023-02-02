@@ -5,19 +5,8 @@ if (!isset($_SESSION['username'])) {
     header('location:index.php');
 }
 require_once("templates/header.php");
-// echo "<pre>";
-// print_r($_SESSION);
-
-// $user = "";
-// print_r($user);
-print_r($_POST);
-print_r($usuarioDao);
-$user = filter_input(INPUT_POST, "username");
-print_r($user);
-
-// $user->findByEmail($user);
-
-// print_r($user);
+echo "<pre>";
+print_r($_SESSION);
 ?>
 
 <div class="container">
@@ -68,7 +57,6 @@ print_r($user);
             </li>
         </div>
         <div class="col lista_menu">
-
             <h4>ADMINISTRATIVO</h4>
             <hr>
 

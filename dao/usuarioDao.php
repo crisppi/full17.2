@@ -6,6 +6,12 @@ require_once("models/message.php");
 class UserDAO implements UserDAOInterface
 {
 
+    private $objfc;
+    private $idFuncionario;
+    private $nome;
+    private $email_user;
+    private $senha_user;
+
     private $conn;
     private $url;
     private $message;
@@ -414,6 +420,45 @@ class UserDAO implements UserDAOInterface
         $QtdTotalUser = $stmt->fetch();
 
         return $QtdTotalUser;
+    }
+
+    //SISTEMA DE LOGIN
+    public function logaFuncionario($dados)
+    {
+        $this->email_user = $dados['email_login'];
+        $this->senha_user = sha1($dados['senha_login']);
+        try {
+            $cst = $this->conn->prepare("SELECT `idFuncionario`, `email`, `senha` FROM `funcionario` WHERE `email` = :email AND `senha` = :senha;");
+            $cst->bindParam(':email', $this->email_user, PDO::PARAM_STR);
+            $cst->bindParam(':senha', $this->senha_user, PDO::PARAM_STR);
+            $cst->execute();
+            if ($cst->rowCount() == 0) {
+                header('location: login/?login=error');
+            } else {
+                session_start();
+                $rst = $cst->fetch();
+                $_SESSION['logado'] = "sim";
+                $_SESSION['func'] = $rst['idFuncionario'];
+                header("location: login/admin");
+            }
+        } catch (PDOException $e) {
+            return 'Error: ' . $e->getMessage();
+        }
+    }
+
+    public function funcionarioLogado($dado)
+    {
+        $cst = $this->conn->prepare("SELECT `idFuncionario`, `nome`, `email` FROM `funcionario` WHERE `idFuncionario` = :idFunc;");
+        $cst->bindParam(':idFunc', $dado, PDO::PARAM_INT);
+        $cst->execute();
+        $rst = $cst->fetch();
+        $_SESSION['nome'] = $rst['nome'];
+    }
+
+    public function sairFuncionario()
+    {
+        session_destroy();
+        header('location: http://localhost/login');
     }
 }
 
