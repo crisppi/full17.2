@@ -1,16 +1,21 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header('location:index.php');
+}
 require_once("templates/header.php");
 
 ?>
 
 <div class="container">
-
     <div class="row" style="margin-top:10px; background-color:#F1F0EF">
         <div style="height: 10px;">
-
         </div>
-        <div class="margin-top:10px; col lista_menu">
-            <h4>CADASTRO</h4>
+        <div class="col lista_menu">
+            <div>
+                <h4>CADASTRO</h4>
+            </div>
             <hr>
             <li>
                 <a href="cad_paciente.php">Pacientes</a>
@@ -72,7 +77,6 @@ require_once("templates/header.php");
         <div class="col lista_menu">
             <h4>PRODUÇÃO</h4>
             <hr>
-
             <li>
                 <a href="cad_internacao.php">Nova Internação</a>
             </li>

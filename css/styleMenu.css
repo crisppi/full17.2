@@ -4,15 +4,20 @@
     --select-arrow: var(--select-border);
 }
 
+
 /* lista lista_menu */
+
 .lista_menu {
     width: 30%;
-    height: 400px;
-    margin: 10px;
+    height: 600px;
     font-weight: 300;
-    margin-top: 10px;
     text-decoration: none;
     list-style-type: none;
+}
+
+.lista_menu h4 {
+    color: blue;
+    background-color: #777;
 }
 
 li {
@@ -28,13 +33,12 @@ li {
 }
 
 .lista_menu a:hover {
-    color: rgb(221, 106, 6);
+    color: rgb(6, 221, 157);
 }
 
 .menu_pesquisa {
     background-color: rgb(220, 217, 217);
     margin-bottom: 10px;
-
 }
 
 .menu_pesquisa input[type="text"] {
