@@ -95,7 +95,7 @@
             $paginacao .= '<a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
         <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
         </a>';
-            $paginacao2 .= "<div style='color:blue; margin-top:20px;'></div><nav aria-label='Page navigation example'><ul class='pagination'><li class='page-item'><a class='page-link' href='list_seguradora.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li><li class='page-item'><a class='page-link' href='list_seguradora.php?pg=$qtdPag&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li></ul></nav></div>";
+            // $paginacao2 .= "<div style='color:blue; margin-top:20px;'></div><nav aria-label='Page navigation example'><ul class='pagination'><li class='page-item'><a class='page-link' href='list_seguradora.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li><li class='page-item'><a class='page-link' href='list_seguradora.php?pg=$qtdPag&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li></ul></nav></div>";
         }
         ?>
         <div class="container">
@@ -160,10 +160,8 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <div>
-                <?= $paginacao2 ?>
-
-            </div>
+            <div><?= $paginacao ?></div>
+            <hr>
         </div>
         <?php
 
@@ -218,7 +216,6 @@
         echo "</nav>";
         echo "</div>"; ?>
         <div>
-            <div><?= $paginacao ?></div>
             <hr>
             <a class="btn btn-success styled" style="margin-left:120px" href="cad_internacao.php">Nova internação</a>
         </div>
