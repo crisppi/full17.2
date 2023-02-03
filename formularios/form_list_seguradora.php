@@ -12,7 +12,7 @@
     //Instanciando a classe
     $seguradora = new seguradoraDAO($conn, $BASE_URL);
     $QtdTotalSeg = new seguradoraDAO($conn, $BASE_URL);
- 
+
     // METODO DE BUSCA DE PAGINACAO
     $busca = filter_input(INPUT_GET, 'pesquisa_nome');
     $buscaAtivo = filter_input(INPUT_GET, 'ativo_seg');
@@ -80,7 +80,7 @@
                 $paginacao .= '<a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
                 <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
                 </a>';
-            }
+            };
             ?>
         </div>
         <div>
@@ -121,11 +121,8 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <!-- <div>
-            <?= $paginacao ?>
-        </div> -->
-        <?php
 
+        <?php
         //modo cadastro
         $formData = "0";
         $formData = filter_input_array(INPUT_GET, FILTER_DEFAULT);
