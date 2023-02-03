@@ -15,8 +15,8 @@
     $Internacaos = $Internacao_geral->findGeral();
     $pacienteDao = new pacienteDAO($conn, $BASE_URL);
     $pacientes = $pacienteDao->findGeral($limite, $inicio);
-    $patologiaDao = new patologiaDAO($conn, $BASE_URL);
-    $patologias = $patologiaDao->findGeral();
+    // $patologiaDao = new patologiaDAO($conn, $BASE_URL);
+    // $patologias = $patologiaDao->findGeral();
 
     $internacao = new internacaoDAO($conn, $BASE_URL);
 
