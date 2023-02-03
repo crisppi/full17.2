@@ -13,8 +13,12 @@
 
     $Internacao_geral = new InternacaoDAO($conn, $BASE_URL);
     $Internacaos = $Internacao_geral->findGeral();
+
     $pacienteDao = new pacienteDAO($conn, $BASE_URL);
     $pacientes = $pacienteDao->findGeral($limite, $inicio);
+
+    $hospital_geral = new hospitalDAO($conn, $BASE_URL);
+    $hospitals = $hospital_geral->findGeral();
     // $patologiaDao = new patologiaDAO($conn, $BASE_URL);
     // $patologias = $patologiaDao->findGeral();
 
@@ -28,12 +32,17 @@
                 <h6 style="margin-left: 30px; padding-top:10px" class="page-title">Pesquisa internações</h6>
                 <?php $pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
                 $pesqInternado = filter_input(INPUT_GET, 'pesqInternado');
+                $limite_pag = filter_input(INPUT_GET, 'limite_pag');
+                $pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
+                $ordenar = filter_input(INPUT_GET, 'ordenar');
                 ?>
                 <div class="form-group row">
                     <div class="form-group col-sm-3">
                         <input style="margin-left: 30px;" type="text" name="pesquisa_nome" placeholder="Selecione o Hospital" value="<?= $pesquisa_nome ?>">
                     </div>
-
+                    <div class="form-group col-sm-3">
+                        <input style="margin-left: 30px;" type="text" name="pesquisa_pac" placeholder="Pesquisa por Paciente" value="<?= $pesquisa_nome ?>">
+                    </div>
                     <div class="form-group col-sm-4">
                         <select class="form-control mb-3" id="pesqInternado" name="pesqInternado">
                             <option value="">Busca por Internados</option>
@@ -41,9 +50,31 @@
                             <option value="n" <?= $pesqInternado == 'n' ? 'selected' : null ?>>Não</option>
                         </select>
                     </div>
-                    <div class="form-group col-sm-3">
-                        <button type="submit" class="btn btn-primary mb-1">Buscar</button>
+                </div>  
+                <div class="form-group row">
+                    <div class="form-group col-sm-2">
+                        <select style="margin-left: 30px;" class="form-control mb-2" id="limite_pag" name="limite_pag">
+                            <option value="">Limite por página</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
                     </div>
+                    <div class="form-group col-sm-2">
+                        <select style="margin-left: 30px;" class="form-control mb-2" id="ordenar" name="ordenar">
+                            <option value="">Classificar por:</option>
+                            <option value="nome_pac">Paciente</option>
+                            <option value="nome_hosp">Hospital</option>
+                            <option value="id_internacao">Reg. Internação</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-sm-2">
+                        <button style="margin-left: 30px;" type="submit" class="btn btn-primary sm-1">Buscar</button>
+                    </div>
+                </div>  
+
                 </div>
             </form>
         </div>
@@ -57,10 +88,14 @@
         // METODO DE BUSCA DE PAGINACAO
         $pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
         $pesqInternado = filter_input(INPUT_GET, 'pesqInternado');
+        $limite_pag = filter_input(INPUT_GET, 'limite_pag')? filter_input(INPUT_GET, 'limite_pag'): 10;
+        $pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
+        $ordenar = filter_input(INPUT_GET, 'ordenar')? filter_input(INPUT_GET, 'ordenar'):1;
         // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
         $condicoes = [
             strlen($pesquisa_nome) ? 'ho.nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
+            strlen($pesquisa_pac) ? 'pa.nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
             strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : null
         ];
         $condicoes = array_filter($condicoes);
@@ -74,11 +109,11 @@
         $qtdIntItens = ($qtdIntItens1['0']);
 
         // PAGINACAO
-        $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, 10);
+        $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, $limite_pag);
         $obLimite = $obPagination->getLimit();
 
         // PREENCHIMENTO DO FORMULARIO COM QUERY
-        $order = 'id_internacao';
+        $order = $ordenar;
         $query = $Internacao->selectAllInternacao($where, $order, $obLimite);
 
         // GETS 
