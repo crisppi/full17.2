@@ -195,13 +195,14 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <div><?php
-                    "<div style=margin-left:20px;>";
-                    echo "<div style='color:blue; margin-left:20px;'>";
-                    echo "</div>";
-                    echo "<nav aria-label='Page navigation example'>";
-                    echo " <ul class='pagination'>";
-                    echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
+            <div>
+                <?php
+                "<div style=margin-left:20px;>";
+                echo "<div style='color:blue; margin-left:20px;'>";
+                echo "</div>";
+                echo "<nav aria-label='Page navigation example'>";
+                echo " <ul class='pagination'>";
+                echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
                 <?= $paginacao ?>
                 <?php echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$qtdIntItens&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
                 echo " </ul>";
