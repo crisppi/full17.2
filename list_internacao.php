@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
     header('location: index.php');
     exit;
 }
-include_once("models/pagination.php");
+// include_once("models/pagination.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -19,9 +19,9 @@ include_once("models/pagination.php");
 </head>
 
 <?php
+include_once("formularios/form_list_internacao.php");
 $pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
 $pesqInternado = filter_input(INPUT_GET, 'pesqInternado');
-include_once("formularios/form_list_internacao.php");
 include_once("templates/footer.php");
 ?>
 
