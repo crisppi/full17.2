@@ -8,7 +8,11 @@
     include_once("dao/InternacaoDao.php");
     include_once("models/patologia.php");
     include_once("dao/patologiaDao.php");
+
     require_once("dao/pacienteDAO.php");
+    include_once("models/pagination.php");
+
+    require_once("dao/hospitalDAO.php");
     include_once("models/pagination.php");
 
     $Internacao_geral = new InternacaoDAO($conn, $BASE_URL);
@@ -18,7 +22,7 @@
     $pacientes = $pacienteDao->findGeral($limite, $inicio);
 
     $hospital_geral = new hospitalDAO($conn, $BASE_URL);
-    $hospitals = $hospital_geral->findGeral();
+    $hospitals = $hospital_geral->findGeral($limite, $inicio);
     // $patologiaDao = new patologiaDAO($conn, $BASE_URL);
     // $patologias = $patologiaDao->findGeral();
 
