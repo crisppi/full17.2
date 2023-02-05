@@ -22,7 +22,7 @@ $internacaoDao = new internacaoDAO($conn, $BASE_URL);
 $hospital_geral = new hospitalDAO($conn, $BASE_URL);
 $hospitals = $hospital_geral->findGeral($limite, $inicio);
 $pacienteDao = new pacienteDAO($conn, $BASE_URL);
-$pacientes = $pacienteDao->findGeral($limite, $inicio);
+$pacientes = $pacienteDao->findGeral();
 $patologiaDao = new patologiaDAO($conn, $BASE_URL);
 $patologias = $patologiaDao->findGeral();
 $gestao = new gestaoDAO($conn, $BASE_URL);
@@ -53,9 +53,8 @@ $gestaoIdMax = $gestao->findMax();
     <!-- <FORMULARO DE NEGOCIACOES -->
     <?php include_once('formularios/form_cad_internacao_negoc.php'); ?>
 
-
     <script type="text/javascript">
-        // script div  de gestao -->
+        // script div de gestao -->
 
         var btn = document.querySelector("#btn-gestao");
 
@@ -142,20 +141,6 @@ $gestaoIdMax = $gestao->findMax();
 
         });
 
-        // div de botao prorrog 1
-        // var btn2 = document.querySelector("#btn-gp1");
-
-        // btn2.addEventListener("mouseover", function() {
-
-        //     var divGp1 = document.querySelector("#container-prog2");
-
-        //     if (divGp1.style.display === "none") {
-        //         divGp1.style.display = "block";
-
-        //     } else {
-        //         divGp1.style.display = "none";
-        //     }
-        // });
         //*** ADICIONAR PRORROGACAO */
         function mostrarGrupo2(el) {
             var display = document.getElementById(el).style.display;
