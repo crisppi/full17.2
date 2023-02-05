@@ -20,16 +20,14 @@ class visitaDAO implements visitaDAOInterface
         $this->message = new Message($url);
     }
 
-    public function buildvisita($visita)
+    public function buildvisita($data)
     {
-        $acomod = new visita();
+        $visita = new visita();
 
-        $acomod->id_visita = $visita["id_visita"];
-        $acomod->visitaNome = $visita["visitaNome"];
-        $acomod->fk_hospital = $visita["fk_hospital"];
-        $acomod->valor_diaria = $visita["valor_diaria"];
-        $acomod->data_create = $visita["data_create"];
-        //$visita->usuario_create = $visita["usuario_create"];
+        $visita->fk_internacao_vis = $data["fk_internacao_vis"];
+        $visita->rel_visita_vis = $data["rel_visita_vis"];
+        $visita->acoes_int_vis = $data["acoes_int_vis"];
+        $visita->usuario_create = $data["usuario_create"];
 
         return $visita;
     }
@@ -150,15 +148,15 @@ class visitaDAO implements visitaDAOInterface
     {
 
         $stmt = $this->conn->prepare("INSERT INTO tb_visita (
-        visitaNome, fk_hospital, valor_diaria, data_create, usuario_create
+        fk_internacao_vis, rel_visita_vis, acoes_int_vis, usuario_create
+
       ) VALUES (
-        :visitaNome, :fk_hospital, :valor_diaria, :data_create, :usuario_create
+        :fk_internacao_vis, :rel_visita_vis, :acoes_int_vis, :usuario_create
      )");
 
-        $stmt->bindParam(":visitaNome", $visita->visitaNome);
-        $stmt->bindParam(":fk_hospital", $visita->fk_hospital);
-        $stmt->bindParam(":valor_diaria", $visita->valor_diaria);
-        $stmt->bindParam(":data_create", $visita->data_create);
+        $stmt->bindParam(":fk_internacao_vis", $visita->fk_internacao_vis);
+        $stmt->bindParam(":rel_visita_vis", $visita->rel_visita_vis);
+        $stmt->bindParam(":acoes_int_vis", $visita->acoes_int_vis);
         $stmt->bindParam(":usuario_create", $visita->usuario_create);
 
         $stmt->execute();

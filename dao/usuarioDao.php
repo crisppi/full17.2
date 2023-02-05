@@ -392,36 +392,6 @@ class UserDAO implements UserDAOInterface
         return $usuarios;
     }
 
-    public function selectAllusuario($where = null, $order = null, $limit = null)
-    {
-        //DADOS DA QUERY
-        $where = strlen($where) ? 'WHERE ' . $where : '';
-        $order = strlen($order) ? 'ORDER BY ' . $order : '';
-        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
-
-        //MONTA A QUERY
-        $query = $this->conn->query('SELECT * FROM tb_user ' . $where . ' ' . $order . ' ' . $limit);
-
-        $query->execute();
-
-        $usuario = $query->fetchAll();
-
-        return $usuario;
-    }
-
-    public function Qtdusuario()
-    {
-        $usuario = [];
-
-        $stmt = $this->conn->query("SELECT COUNT(id_usuario) FROM tb_user");
-
-        $stmt->execute();
-
-        $QtdTotalUser = $stmt->fetch();
-
-        return $QtdTotalUser;
-    }
-
     //SISTEMA DE LOGIN
     public function logaFuncionario($dados)
     {
@@ -459,6 +429,37 @@ class UserDAO implements UserDAOInterface
     {
         session_destroy();
         header('location: http://localhost/login');
+    }
+
+    # METODO DE SELECAO COM VARIAVEIS NO QUERY
+    public function selectAllUsuario($where = null, $order = null, $limit = null)
+    {
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+
+        //MONTA A QUERY
+        $query = $this->conn->query('SELECT * FROM tb_user ' . $where . ' ' . $order . ' ' . $limit);
+
+        $query->execute();
+
+        $usuario = $query->fetchAll();
+
+        return $usuario;
+    }
+
+    public function QtdUsuario()
+    {
+        $usuario = [];
+
+        $stmt = $this->conn->query("SELECT COUNT(id_usuario) FROM tb_user");
+
+        $stmt->execute();
+
+        $QtdTotalUser = $stmt->fetch();
+
+        return $QtdTotalUser;
     }
 }
 

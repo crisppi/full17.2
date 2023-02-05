@@ -31,7 +31,7 @@ header("Content-type: text/html; charset=utf-8");
     <nav style="background-image: linear-gradient(to right, #949494, #d3d3d3 , #e9e9e9)" class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.php">
-          <img src="img/full-03.jpeg" style="width:70px; height:70px " alt="Full">
+          <img src="img/logo.png" style="width:50px; height:50px " alt="Full">
         </a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -101,10 +101,20 @@ header("Content-type: text/html; charset=utf-8");
           </ul>
         </div>
       </div>
-      <div class="col-md-4" style="margin-left:20px; font-size:12px">
+      <div class="col-md-2" style="margin-left:200px; font-weight:600 ;font-size:12px">
         <?php
+        if ($_SESSION) {
+          echo "<span style='color:green; font-size:1.2em'>Bem vindo!!  " . $_SESSION['username'] . "</span><br>";
+          $agora = date('d/m/Y H:i');
+        } else {
+          echo "<span style='color:red'> Você não esta logado!!</span>" . "<br>";
+        }
+
         $agora = date('d/m/Y H:i');
-        echo "Bem vindo:  " . $_SESSION['username'] . "  " . "<br>" . $agora ?>
+        echo "Local: " . $agora ?>
+        <div>
+          <a class="dropdown-item" style="margin-left:20px; color:red; font-size:larger; font-weight:600" href="<?php $BASE_URL ?>destroi.php"> Sair</a>
+        </div>
       </div>
   </div>
   </nav>

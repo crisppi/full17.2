@@ -8,6 +8,9 @@ class visita
   public $fk_hospital;
   public $data_create;
   public $usuario_create;
+  public $rel_visita_vis;
+  public $acoes_int_vis;
+  public $fk_internacao_vis;
 }
 
 interface visitaDAOInterface

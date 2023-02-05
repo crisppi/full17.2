@@ -31,17 +31,17 @@
                 ?>
                 <div class="form-group row">
                     <div class="form-group col-sm-3">
-                        <input style="margin-left: 30px;" type="text" name="pesquisa_nome" placeholder="Selecione o Hospital" value="<?= $pesquisa_nome ?>">
+                        <input style="margin-left: 30px;" class="form-control" type="text" name="pesquisa_nome" placeholder="Selecione o Hospital" value="<?= $pesquisa_nome ?>">
                     </div>
 
-                    <div class="form-group col-sm-4">
+                    <div style="margin-left:20px" class="form-group col-sm-3">
                         <select class="form-control mb-3" id="pesqInternado" name="pesqInternado">
                             <option value="">Busca por Internados</option>
                             <option value="s" <?= $pesqInternado == 's' ? 'selected' : null ?>>Sim</option>
                             <option value="n" <?= $pesqInternado == 'n' ? 'selected' : null ?>>Não</option>
                         </select>
                     </div>
-                    <div class="form-group col-sm-3">
+                    <div class="form-group col-sm-2">
                         <button type="submit" class="btn btn-primary mb-1">Buscar</button>
                     </div>
                 </div>
@@ -231,3 +231,6 @@
                 <a class="btn btn-success styled" style="margin-left:120px" href="cad_internacao.php">Nova internação</a>
             </div>
         </div>
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

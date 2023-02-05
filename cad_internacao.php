@@ -20,35 +20,13 @@ include_once("array_dados.php");
 
 $internacaoDao = new internacaoDAO($conn, $BASE_URL);
 $hospital_geral = new hospitalDAO($conn, $BASE_URL);
-$hospitals = $hospital_geral->findGeral();
+$hospitals = $hospital_geral->findGeral($limite, $inicio);
 $pacienteDao = new pacienteDAO($conn, $BASE_URL);
-$pacientes = $pacienteDao->findGeral();
+$pacientes = $pacienteDao->findGeral($limite, $inicio);
 $patologiaDao = new patologiaDAO($conn, $BASE_URL);
 $patologias = $patologiaDao->findGeral();
 $gestao = new gestaoDAO($conn, $BASE_URL);
 $gestaoIdMax = $gestao->findMax();
-
-// Receber id do usuário
-// $id_internacao = filter_input(INPUT_GET, "id_internacao");
-
-// if (empty($id_internacao)) {
-
-//     if (!empty($userData)) {
-
-//         $id = $userData->id_internacao;
-//     } else {
-
-//         //$message->setMessage("Usuário não encontrado!", "error", "index.php");
-//     }
-// } else {
-
-//     $userData = $userDao->findById($id_internacao);
-
-//     // Se não encontrar usuário
-//     if (!$userData) {
-//         $message->setMessage("internacao não encontrada!", "error", "index.php");
-//     }
-// }
 
 ?>
 <div id="main-container" class="container">
@@ -65,7 +43,6 @@ $gestaoIdMax = $gestao->findMax();
 
     <!-- FORMULARIO DE GESTÃO -->
     <?php include_once('formularios/form_cad_internacao_gestao.php'); ?>
-
 
     <!-- FORMULARIO DE UTI -->
     <?php include_once('formularios/form_cad_internacao_uti.php'); ?>

@@ -61,6 +61,7 @@
 
             <?php
             // PREENCHIMENTO DO FORMULARIO COM QUERY
+            $order = null;
             $query = $usuario->selectAllusuario($where, $order, $obLimite);
 
             // GETS 

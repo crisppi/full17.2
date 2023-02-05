@@ -19,26 +19,25 @@ $type = filter_input(INPUT_POST, "type");
 if ($type === "create") {
 
     // Receber os dados dos inputs
-    $visitaNome = filter_input(INPUT_POST, "visitaNome");
     $usuario_create = filter_input(INPUT_POST, "usuario_create");
-    $valor_diaria = filter_input(INPUT_POST, "valor_diaria");
-    $data_create = filter_input(INPUT_POST, "data_create");
-    $fk_hospital = filter_input(INPUT_POST, "fk_hospital");
+    $fk_internacao_vis = filter_input(INPUT_POST, "fk_internacao_vis");
+    $rel_visita_vis = filter_input(INPUT_POST, "rel_visita_vis");
+    $acoes_int_vis = filter_input(INPUT_POST, "acoes_int_vis");
 
     $visita = new visita();
 
     // Validação mínima de dados
-    if (!empty($visitaNome)) {
+    if (3 < 4) {
 
-        $visita->visitaNome = $visitaNome;
-        $visita->valor_diaria = $valor_diaria;
+        $visita->fk_internacao_vis = $fk_internacao_vis;
+        $visita->rel_visita_vis = $rel_visita_vis;
+        $visita->acoes_int_vis = $acoes_int_vis;
         $visita->usuario_create = $usuario_create;
-        $visita->fk_hospital = $fk_hospital;
 
         $visitaDao->create($visita);
     } else {
 
-        $message->setMessage("Você precisa adicionar pelo menos: visitaNome do visita!", "error", "back");
+        $message->setMessage("Você precisa adicionar pelo menos: visita!", "error", "back");
     }
 } else if ($type === "update") {
 
@@ -57,7 +56,7 @@ if ($type === "create") {
 
     $visitaDao->update($visita);
 
-    include_once('list_visita.php');
+    include_once('list_internacao.php');
 }
 
 $type = filter_input(INPUT_POST, "type");
@@ -73,7 +72,7 @@ if ($type === "delete") {
 
         $visitaDao->destroy($id_visita);
 
-        include_once('list_visita.php');
+        include_once('list_internacao.php');
     } else {
 
         $message->setMessage("Informações inválidas!", "error", "index.php");

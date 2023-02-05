@@ -32,9 +32,10 @@ if ($type === "create") {
     $data_create_user = filter_input(INPUT_POST, "data_create_user");
     $data_adm = filter_input(INPUT_POST, "data_adm");
     $cpf_user = filter_input(INPUT_POST, "cpf_user");
-    $hash_user = filter_input(INPUT_POST, "senha_user");
     $cargo_user = filter_input(INPUT_POST, "cargo_user");
     $reg_profissional_user = filter_input(INPUT_POST, "reg_profissional_user");
+    $senha_user = password_hash(filter_input(INPUT_POST, "senha_user"), PASSWORD_DEFAULT);
+
 
     $senha_user = password_hash($hash_user, PASSWORD_DEFAULT);
 
