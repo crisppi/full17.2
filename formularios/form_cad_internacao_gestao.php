@@ -6,7 +6,7 @@
         <input type="hidden" name="type" value="create">
         <div class="form-group row">
             <?php
-            $a = ($gestaoIdMax[0]);
+            $a = ($gestaoIdMaxVis[0]);
             $ultimoReg = ($a["ultimoReg"]);
             ?>
             <div>

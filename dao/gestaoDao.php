@@ -287,6 +287,19 @@ class gestaoDAO implements gestaoDAOInterface
 
         return $gestaoIdMax;
     }
+    public function findMaxVis()
+    {
+
+        $gestao = [];
+
+        $stmt = $this->conn->query("SELECT max(id_visita) as ultimoReg from tb_visita");
+
+        $stmt->execute();
+
+        $gestaoIdMaxVis = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $gestaoIdMaxVis;
+    }
 }
 
 # Limita o número de registros a serem mostrados por página
