@@ -1,3 +1,8 @@
+<?php
+
+date_default_timezone_set('America/Sao_Paulo');
+header("Content-type: text/html; charset=utf-8");
+?>
 <div id="container-prorrog" class="container" style="display:none">
     <br>
     <h4 class="page-title">Cadastrar dados de prorrogação</h4>
@@ -34,8 +39,8 @@
             <div class="form-group col-sm-1">
                 <label class="control-label" for="isol_1_pror">Isolamento</label>
                 <select class="form-control" id="isol_1_pror" name="isol_1_pror">
-                    <option value="Não">Não</option>
-                    <option value="Sim">Sim</option>
+                    <option value="n">Não</option>
+                    <option value="s">Sim</option>
                 </select>
             </div>
         </div>

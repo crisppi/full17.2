@@ -59,7 +59,9 @@ if ($type === "create") {
 
         $internacaoDao->create($internacao);
         include_once('cad_internacao.php');
+
     } else {
+        print_r('deu erro');
         header("Location: javascript:history.back(1)");
         $message->setMessage("Você precisa adicionar pelo menos: nome da internacao!", "error", "list_internacao.php");
     }

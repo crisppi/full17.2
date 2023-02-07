@@ -56,22 +56,7 @@ if ($type === "create") {
     } else {
 
         $message->setMessage("Você precisa adicionar pelo menos: seguradora_seg do seguradora!", "error", "back");
-    }/*
-} else if ($type === "delete") {
-    // Recebe os dados do form
-    $id_seguradora = filter_input(INPUT_POST, "id_seguradora");
-
-    $seguradoraDao = new seguradoraDAO($conn, $BASE_URL);
-
-    $seguradora = $seguradoraDao->findById($id_seguradora);
-
-    if ($seguradora) {
-
-        $seguradoraDao->destroy($id_seguradora);
-    } else {
-
-        //$message->setMessage("Informações inválidas!", "error", "index.php");
-    }*/
+    }
 } else if ($type === "update") {
 
     $seguradoraDao = new seguradoraDAO($conn, $BASE_URL);

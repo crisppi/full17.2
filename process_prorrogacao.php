@@ -55,7 +55,7 @@ if ($type === "create") {
         $prorrogacaoDao->create($prorrogacao);
     } else {
 
-        $message->setMessage("Você precisa adicionar pelo menos: prorrogacao do prorrogacao!", "error", "back");
+        $message->setMessage("Você precisa adicionar pelo menos: prorrogacao!", "error", "back");
     }
 } else if ($type === "update") {
 
@@ -76,7 +76,7 @@ if ($type === "create") {
 
     $prorrogacaoDao->update($prorrogacao);
 
-    include_once('cad_internacao_niveis.php');
+    include_once('cad_internacao.php');
 }
 
 $type = filter_input(INPUT_GET, "type");
