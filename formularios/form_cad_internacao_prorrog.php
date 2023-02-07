@@ -16,7 +16,7 @@
             <div class="form-group col-sm-2">
                 <label class="control-label" for="acomod1_pror">Acomodação</label>
                 <select class="form-control" id="acomod1_pror" name="acomod1_pror">
-                    <option value=""></option>
+                    <option value="">Selecione acomodação</option>
                     <?php sort($dados_acomodacao, SORT_ASC);
                     foreach ($dados_acomodacao as $acomd) { ?>
                         <option value="<?= $acomd; ?>"><?= $acomd; ?></option>
@@ -45,7 +45,7 @@
                 <div class="form-group col-sm-2">
                     <label class="control-label" for="acomod2_pror">Acomodação</label>
                     <select class="form-control" id="acomod2_pror" name="acomod2_pror">
-                        <option value=""></option>
+                        <option value="">Selecione acomodação</option>
                         <?php sort($dados_acomodacao, SORT_ASC);
                         foreach ($dados_acomodacao as $acomd) { ?>
                             <option value="<?= $acomd; ?>"><?= $acomd; ?></option>
@@ -77,7 +77,7 @@
                 <div class="form-group col-sm-2">
                     <label class="control-label" for="acomod3_pror">Acomodação (3)</label>
                     <select class="form-control" id="acomod3_pror" name="acomod3_pror">
-                        <option value=""></option>
+                        <option value="">Selecione acomodação</option>
                         <?php sort($dados_acomodacao, SORT_ASC);
                         foreach ($dados_acomodacao as $acomd) { ?>
                             <option value="<?= $acomd; ?>"><?= $acomd; ?></option>
