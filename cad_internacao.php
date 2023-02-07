@@ -1,8 +1,10 @@
 <?php
 
 require_once("templates/header.php");
+
 include_once("models/internacao.php");
 require_once("dao/internacaoDao.php");
+
 require_once("models/message.php");
 
 include_once("models/hospital.php");
