@@ -10,7 +10,7 @@
             <div class="form-group col-sm-3">
                 <label class="control-label col-sm-3 " for="fk_hospital_int">Hospital</label>
                 <select class="form-control" id="fk_hospital_int" name="fk_hospital_int">
-                    <option value="<?= $hospital["nome_hosp"] ?>"></option>
+                    <option value="<?= $hospital["nome_hosp"] ?>">Selecione o Hospital</option>
                     <?php foreach ($hospitals as $hospital) : ?>
                         <option value="<?= $hospital["id_hospital"] ?>"><?= $hospital["nome_hosp"] ?></option>
                     <?php endforeach; ?>
@@ -19,7 +19,7 @@
             <div class="form-group col-sm-3">
                 <label class="control-label" for="fk_paciente_int">Paciente</label>
                 <select class="form-control" id="fk_paciente_int" name="fk_paciente_int">
-                    <option value=""></option>
+                    <option value="">Selecione o paciente</option>
                     <?php foreach ($pacientes as $paciente) : ?>
                         <option value="<?= $paciente["id_paciente"] ?>"><?= $paciente["nome_pac"] ?></option>
                     <?php endforeach; ?>
@@ -46,7 +46,7 @@
             <div class="form-group col-sm-2">
                 <label class="control-label" for="acomodacao_int">Acomodação</label>
                 <select class="form-control" id="acomodacao_int" name="acomodacao_int">
-                    <option value=""></option>
+                    <option value="">Selecione acomodação</option>
                     <?php
                     sort($dados_acomodacao, SORT_ASC);
                     foreach ($dados_acomodacao as $acomd) { ?>
@@ -57,7 +57,7 @@
             <div class="form-group col-sm-2">
                 <label class="control-label" for="especialidade_int">Especialidade</label>
                 <select class="form-control" id="especialidade_int" name="especialidade_int">
-                    <option value=""></option>
+                    <option value="">Selecione a especialidade</option>
                     <option value="Ginecologia">Ginecologia</option>
                     <option value="Cardiologia">Cardiologia</option>
                     <option value="Ortopedia">Ortopedia</option>
@@ -70,7 +70,7 @@
             <div class="form-group col-sm-2">
                 <label class="control-label" for="modo_internacao_int">Modo Admissão</label>
                 <select class="form-control" id="modo_internacao_int" name="modo_internacao_int">
-                    <option value=""></option>
+                    <option value="">Selecione o modo internação</option>
                     <option value="Clínica">Clínica</option>
                     <option value="Pediatria">Pediatria</option>
                     <option value="Ortopedia">Ortopedia</option>
@@ -80,7 +80,7 @@
             <div class="form-group col-sm-2">
                 <label class="control-label" for="modo_internacao_int">Tipo Internação</label>
                 <select class="form-control" id="modo_internacao_int" name="modo_internacao_int">
-                    <option value=""></option>
+                    <option value="">Selecione o tipo de admissão</option>
                     <option value="Eletiva">Eletiva</option>
                     <option value="Urgência">Urgência</option>
                 </select>
@@ -88,7 +88,7 @@
             <div class="form-group col-sm-2">
                 <label class="control-label" for="fk_patologia_int">Patologia</label>
                 <select class="form-control" id="fk_patologia_int" name="fk_patologia_int">
-                    <option value=""></option>
+                    <option value="">Selecione a patologia</option>
                     <?php foreach ($patologias as $patologia) : ?>
                         <option value="<?= $patologia["id_patologia"] ?>"><?= $patologia["patologia_pat"] ?></option>
                     <?php endforeach; ?>
@@ -137,5 +137,7 @@
         </div>
     </form>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

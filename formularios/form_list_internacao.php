@@ -13,7 +13,6 @@
     include_once("models/paciente.php");
     require_once("dao/pacienteDAO.php");
 
-
     include_once("models/hospital.php");
     require_once("dao/hospitalDAO.php");
 
@@ -27,10 +26,11 @@
 
     $hospital_geral = new hospitalDAO($conn, $BASE_URL);
     $hospitals = $hospital_geral->findGeral($limite, $inicio);
-    // $patologiaDao = new patologiaDAO($conn, $BASE_URL);
-    // $patologias = $patologiaDao->findGeral();
 
-    // $internacao = new internacaoDAO($conn, $BASE_URL);
+    $patologiaDao = new patologiaDAO($conn, $BASE_URL);
+    $patologias = $patologiaDao->findGeral();
+
+    $internacao = new internacaoDAO($conn, $BASE_URL);
 
     ?>
     <!-- FORMULARIO DE PESQUISAS -->

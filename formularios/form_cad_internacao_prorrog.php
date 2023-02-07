@@ -1,3 +1,8 @@
+<?php
+
+date_default_timezone_set('America/Sao_Paulo');
+header("Content-type: text/html; charset=utf-8");
+?>
 <div id="container-prorrog" class="container" style="display:none">
     <br>
     <h4 class="page-title">Cadastrar dados de prorrogação</h4>
@@ -16,7 +21,7 @@
             <div class="form-group col-sm-2">
                 <label class="control-label" for="acomod1_pror">Acomodação</label>
                 <select class="form-control" id="acomod1_pror" name="acomod1_pror">
-                    <option value=""></option>
+                    <option value="">Selecione acomodação</option>
                     <?php sort($dados_acomodacao, SORT_ASC);
                     foreach ($dados_acomodacao as $acomd) { ?>
                         <option value="<?= $acomd; ?>"><?= $acomd; ?></option>
@@ -34,8 +39,8 @@
             <div class="form-group col-sm-1">
                 <label class="control-label" for="isol_1_pror">Isolamento</label>
                 <select class="form-control" id="isol_1_pror" name="isol_1_pror">
-                    <option value="Não">Não</option>
-                    <option value="Sim">Sim</option>
+                    <option value="n">Não</option>
+                    <option value="s">Sim</option>
                 </select>
             </div>
         </div>
@@ -45,7 +50,7 @@
                 <div class="form-group col-sm-2">
                     <label class="control-label" for="acomod2_pror">Acomodação</label>
                     <select class="form-control" id="acomod2_pror" name="acomod2_pror">
-                        <option value=""></option>
+                        <option value="">Selecione acomodação</option>
                         <?php sort($dados_acomodacao, SORT_ASC);
                         foreach ($dados_acomodacao as $acomd) { ?>
                             <option value="<?= $acomd; ?>"><?= $acomd; ?></option>
@@ -77,7 +82,7 @@
                 <div class="form-group col-sm-2">
                     <label class="control-label" for="acomod3_pror">Acomodação (3)</label>
                     <select class="form-control" id="acomod3_pror" name="acomod3_pror">
-                        <option value=""></option>
+                        <option value="">Selecione acomodação</option>
                         <?php sort($dados_acomodacao, SORT_ASC);
                         foreach ($dados_acomodacao as $acomd) { ?>
                             <option value="<?= $acomd; ?>"><?= $acomd; ?></option>
