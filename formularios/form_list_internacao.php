@@ -99,7 +99,7 @@
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $order = $ordenar;
-    $query = $Internacao->selectAllInternacao($where, $order, $obLimite);
+    $query = $i8nternacao->selectAllInternacao($where, $order, $obLimite);
 
     // GETS 
     unset($_GET['pag']);
@@ -145,7 +145,11 @@
                 ?>
                     <tr>
                         <td scope="row" class="col-id"><?= $intern["id_internacao"] ?></td>
-                        <td scope="row" class="nome-coluna-table"><?php if($intern["internado_int"] == "s") {echo "Sim";} else {echo "Não";}; ?></td>
+                        <td scope="row" class="nome-coluna-table"><?php if ($intern["internado_int"] == "s") {
+                                                                        echo "Sim";
+                                                                    } else {
+                                                                        echo "Não";
+                                                                    }; ?></td>
                         <td scope="row" class="nome-coluna-table"><?= $intern["nome_hosp"] ?></td>
                         <td scope="row"><?= $intern["nome_pac"] ?></td>
                         <td scope="row"><?= $intern["data_intern_int"] ?></td>
@@ -199,7 +203,7 @@
                 //modo cadastro
                 $formData = "0";
                 $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-                $total = $Internacao->findTotal();
+                $total = $internacao->findTotal();
 
                 $totalcasos = $total['0'];
                 // echo $totalcasos['0'];
