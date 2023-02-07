@@ -19,18 +19,38 @@ $type = filter_input(INPUT_POST, "type");
 if ($type === "create") {
 
     // Receber os dados dos inputs
+    $fk_internacao_ges = filter_input(INPUT_POST, "fk_internacao_ges");
+    $fk_visita_ges = filter_input(INPUT_POST, "fk_visita_ges");
     $alto_custo_ges = filter_input(INPUT_POST, "alto_custo_ges");
     $rel_alto_custo_ges = filter_input(INPUT_POST, "rel_alto_custo_ges");
-    $fk_internacao_ges = filter_input(INPUT_POST, "fk_internacao_ges");
+    $evento_adverso_ges = filter_input(INPUT_POST, "evento_adverso_ges");
+    $rel_evento_adverso_ges = filter_input(INPUT_POST, "rel_evento_adverso_ges");
+    $tipo_evento_adverso_gest = filter_input(INPUT_POST, "tipo_evento_adverso_gest");
+    $opme_ges = filter_input(INPUT_POST, "opme_ges");
+    $rel_opme_ges = filter_input(INPUT_POST, "rel_opme_ges");
+    $home_care_ges = filter_input(INPUT_POST, "home_care_ges");
+    $rel_home_care_ges = filter_input(INPUT_POST, "rel_home_care_ges");
+    $desospitalizacao_ges = filter_input(INPUT_POST, "desospitalizacao_ges");
+    $rel_desospitalizacao_ges = filter_input(INPUT_POST, "rel_desospitalizacao_ges");
 
     $gestao = new gestao();
 
     // Validação mínima de dados
     if (!empty($alto_custo_ges)) {
 
+        $gestao->fk_internacao_ges = $fk_internacao_ges;
+        $gestao->fk_visita_ges = $fk_visita_ges;
         $gestao->alto_custo_ges = $alto_custo_ges;
         $gestao->rel_alto_custo_ges = $rel_alto_custo_ges;
-        $gestao->fk_internacao_ges = $fk_internacao_ges;
+        $gestao->evento_adverso_ges = $evento_adverso_ges;
+        $gestao->rel_evento_adverso_ges = $rel_evento_adverso_ges;
+        $gestao->tipo_evento_adverso_gest = $tipo_evento_adverso_gest;
+        $gestao->opme_ges = $opme_ges;
+        $gestao->rel_opme_ges = $rel_opme_ges;
+        $gestao->home_care_ges = $home_care_ges;
+        $gestao->rel_home_care_ges = $rel_home_care_ges;
+        $gestao->desospitalizacao_ges = $desospitalizacao_ges;
+        $gestao->rel_desospitalizacao_ges = $rel_desospitalizacao_ges;
 
         $gestaoDao->create($gestao);
     } else {

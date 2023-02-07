@@ -9,7 +9,6 @@
             $a = ($gestaoIdMax[0]);
             $ultimoReg = ($a["ultimoReg"]);
             ?>
-            <label for="fk_internacao_pror">ID Int</label>
             <input type="hidden" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= $ultimoReg ?>" placeholder="Relatório da auditoria">
         </div>
         <!-- PRORROGACAO 1 -->
@@ -116,3 +115,5 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

@@ -6,11 +6,13 @@
         <input type="hidden" name="type" value="create">
         <div class="form-group col-sm-1">
             <?php
-            $a = ($gestaoIdMax[0]);
+            $a = ($findMaxProInt[0]);
             $ultimoReg = ($a["ultimoReg"]);
             ?>
-            <label for="fk_internacao_pror">ID Int</label>
             <input type="hidden" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= $ultimoReg ?>" placeholder="Relatório da auditoria">
+        </div>
+        <div>
+            <input type="hidden" class="form-control" id="fk_internacao_uti" name="fk_internacao_uti" value="<?= ($id_internacao) ?> " placeholder="Relatório da auditoria">
         </div>
         <!-- PRORROGACAO 1 -->
         <div class="form-group row">
@@ -116,3 +118,5 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

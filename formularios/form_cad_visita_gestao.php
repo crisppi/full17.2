@@ -6,11 +6,14 @@
         <input type="hidden" name="type" value="create">
         <div class="form-group row">
             <?php
-            $a = ($gestaoIdMax[0]);
+            $a = ($findMaxVis[0]);
             $ultimoReg = ($a["ultimoReg"]);
             ?>
             <div>
-                <input type="hidden" class="form-control" id="fk_internacao_ges" name="fk_internacao_ges" value="<?= ($ultimoReg) ?> " placeholder="Relatório da auditoria">
+                <input type="hidden" class="form-control" id="fk_visita_ges" name="fk_visita_ges" value="<?= ($ultimoReg) ?> ">
+            </div>
+            <div>
+                <input type="hidden" class="form-control" id="fk_internacao_ges" name="fk_internacao_ges" value="<?= ($id_internacao) ?> ">
             </div>
             <div class="form-group col-sm-2">
                 <label for="alto_custo_ges">Alto Custo</label>
@@ -32,7 +35,7 @@
             </div>
             <div style="display:none" id="div_rel_home_care">
                 <label for="rel_home_care">Relatório Home care</label>
-                <textarea type="textarea" rows="10" class="form-control" id="rel_home_care" name="rel_home_care" placeholder="Relatório Home care"></textarea>
+                <textarea type="textarea" rows="10" class="form-control" id="rel_home_care_ges" name="rel_home_care_ges" placeholder="Relatório Home care"></textarea>
             </div>
             <div class="form-group col-sm-2">
                 <label for="opme_ges">OPME</label>
@@ -65,7 +68,7 @@
             </div>
             <div style="display:none" id="div_tipo_evento" class="form-group col-sm-2">
                 <label for="tipo_evento_adverso_gest">Tipo Evento Adverso</label>
-                <select class="form-control" id="tipo_evento_adverso_gest" name="tipo_evento_adverso_gest">
+                <select class="form-control" id="tipo_evento_adverso_ges" name="tipo_evento_adverso_ges">
                     <?php
                     sort($dados_tipo_evento, SORT_ASC);
                     foreach ($dados_tipo_evento as $evento) { ?>
@@ -199,3 +202,5 @@
         }
     }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

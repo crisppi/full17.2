@@ -6,6 +6,7 @@ require_once("models/message.php");
 require_once("dao/usuarioDao.php");
 require_once("dao/utiDao.php");
 
+
 $message = new Message($BASE_URL);
 $userDao = new UserDAO($conn, $BASE_URL);
 $utiDao = new utiDAO($conn, $BASE_URL);
@@ -19,6 +20,7 @@ if ($type === "create") {
 
     // Receber os dados dos inputs
     $fk_internacao_uti = filter_input(INPUT_POST, "fk_internacao_uti");
+    $fk_visita_uti = filter_input(INPUT_POST, "fk_visita_uti");
     $criterios_uti = filter_input(INPUT_POST, "criterios_uti");
     $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti");
     $dva_uti = filter_input(INPUT_POST, "dva_uti");
@@ -36,9 +38,10 @@ if ($type === "create") {
     $uti = new uti();
 
     // Validação mínima de dados
-    if (!empty($internacao_uti)) {
+    if (!empty($fk_internacao_uti)) {
 
         $uti->fk_internacao_uti = $fk_internacao_uti;
+        $uti->fk_visita_uti = $fk_visita_uti;
         $uti->criterios_uti = $criterios_uti;
         $uti->data_alta_uti = $data_alta_uti;
         $uti->dva_uti = $dva_uti;

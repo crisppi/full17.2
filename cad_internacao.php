@@ -14,19 +14,40 @@ include_once("dao/patologiaDao.php");
 include_once("models/paciente.php");
 require_once("dao/pacienteDAO.php");
 
+include_once("models/uti.php");
+include_once("dao/utiDao.php");
+
 include_once("models/gestao.php");
 include_once("dao/gestaoDao.php");
+
+include_once("models/prorrogacao.php");
+include_once("dao/prorrogacaoDao.php");
+
 include_once("array_dados.php");
 
 $internacaoDao = new internacaoDAO($conn, $BASE_URL);
+
 $hospital_geral = new hospitalDAO($conn, $BASE_URL);
 $hospitals = $hospital_geral->findGeral($limite, $inicio);
+
 $pacienteDao = new pacienteDAO($conn, $BASE_URL);
 $pacientes = $pacienteDao->findGeral($limite, $inicio);
+
 $patologiaDao = new patologiaDAO($conn, $BASE_URL);
 $patologias = $patologiaDao->findGeral();
+
 $gestao = new gestaoDAO($conn, $BASE_URL);
 $gestaoIdMax = $gestao->findMax();
+$findMaxGesInt = $gestao->findMaxGesInt();
+
+$uti = new utiDAO($conn, $BASE_URL);
+$utiIdMax = $uti->findMaxUTI();
+$findMaxUtiInt = $uti->findMaxUtiInt();
+
+$prorrogacao = new prorrogacaoDAO($conn, $BASE_URL);
+$prorrogacaoIdMax = $prorrogacao->findMaxPror();
+$findMaxProInt = $prorrogacao->findMaxProInt();
+
 
 ?>
 <div id="main-container" class="container">

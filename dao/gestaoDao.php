@@ -122,6 +122,7 @@ class gestaoDAO implements gestaoDAOInterface
 
         $stmt = $this->conn->prepare("INSERT INTO tb_gestao (
         fk_internacao_ges, 
+        fk_visita_ges, 
         alto_custo_ges, 
         rel_alto_custo_ges, 
         evento_adverso_ges, 
@@ -135,6 +136,7 @@ class gestaoDAO implements gestaoDAOInterface
         rel_desospitalizacao_ges
       ) VALUES (
         :fk_internacao_ges, 
+        :fk_visita_ges, 
         :alto_custo_ges, 
         :rel_alto_custo_ges, 
         :evento_adverso_ges, 
@@ -150,6 +152,7 @@ class gestaoDAO implements gestaoDAOInterface
      )");
 
         $stmt->bindParam(":fk_internacao_ges", $gestao->fk_internacao_ges);
+        $stmt->bindParam(":fk_visita_ges", $gestao->fk_visita_ges);
         $stmt->bindParam(":alto_custo_ges", $gestao->alto_custo_ges);
         $stmt->bindParam(":rel_alto_custo_ges", $gestao->rel_alto_custo_ges);
         $stmt->bindParam(":evento_adverso_ges", $gestao->evento_adverso_ges);
@@ -165,7 +168,7 @@ class gestaoDAO implements gestaoDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por adicionar filme
-        $this->message->setMessage("gestao adicionado com sucesso!", "success", "cad_internacao_niveis.php");
+        $this->message->setMessage("gestao adicionado com sucesso!", "success", "list_internacao.php");
     }
 
     public function update($gestao)
@@ -205,7 +208,7 @@ class gestaoDAO implements gestaoDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por editar gestao
-        $this->message->setMessage("gestao atualizado com sucesso!", "success", "list_gestao.php");
+        $this->message->setMessage("gestao atualizado com sucesso!", "success", "list_internacao.php");
     }
     public function findByIdUpdate($gestao)
     {
@@ -299,6 +302,19 @@ class gestaoDAO implements gestaoDAOInterface
         $gestaoIdMaxVis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $gestaoIdMaxVis;
+    }
+    public function findMaxGesInt()
+    {
+
+        $gestao = [];
+
+        $stmt = $this->conn->query("SELECT max(id_internacao) as ultimoReg from tb_internacao");
+
+        $stmt->execute();
+
+        $findMaxGesInt = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $findMaxGesInt;
     }
 }
 

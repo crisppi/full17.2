@@ -3,7 +3,6 @@
 class gestao
 {
   public $id_gestao;
-  public $fk_internacao_ges;
   public $alto_custo_ges;
   public $rel_alto_custo_ges;
   public $evento_adverso_ges;
@@ -17,6 +16,7 @@ class gestao
   public $rel_desospitalizacao_ges;
   public $fk_user_ges;
   public $fk_visita_ges;
+  public $fk_internacao_ges;
 }
 
 interface gestaoDAOInterface

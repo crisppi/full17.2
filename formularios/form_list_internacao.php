@@ -1,18 +1,22 @@
     <?php
 
-    include_once("globals.php");
     require_once("templates/header.php");
-    require_once("dao/internacaoDao.php");
+
     require_once("models/message.php");
+
     include_once("models/Internacao.php");
     include_once("dao/InternacaoDao.php");
+
     include_once("models/patologia.php");
     include_once("dao/patologiaDao.php");
 
+    include_once("models/paciente.php");
     require_once("dao/pacienteDAO.php");
-    include_once("models/pagination.php");
 
+
+    include_once("models/hospital.php");
     require_once("dao/hospitalDAO.php");
+
     include_once("models/pagination.php");
 
     $Internacao_geral = new InternacaoDAO($conn, $BASE_URL);

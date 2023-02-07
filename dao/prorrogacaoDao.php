@@ -263,19 +263,33 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
 
         return $prorrogacao;
     }
-    // pegar id max da internacao
-    public function findMax()
+    // pegar id max da visita
+    public function findMaxPror()
     {
 
         $prorrogacao = [];
 
-        $stmt = $this->conn->query("SELECT max(id_internacao) as ultimoReg from tb_internacao");
+        $stmt = $this->conn->query("SELECT max(id_visita) as ultimoReg from tb_visita");
 
         $stmt->execute();
 
         $prorrogacaoIdMax = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $prorrogacaoIdMax;
+    }
+
+    public function findMaxProInt()
+    {
+
+        $gestao = [];
+
+        $stmt = $this->conn->query("SELECT max(id_internacao) as ultimoReg from tb_internacao");
+
+        $stmt->execute();
+
+        $findMaxProInt = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $findMaxProInt;
     }
 }
 

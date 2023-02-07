@@ -4,6 +4,7 @@ class uti
 {
   public $id_uti;
   public $fk_internacao_uti;
+  public $fk_visita_uti;
   public $fk_user_uti;
   public $criterios_uti;
   public $data_alta_uti;
@@ -32,4 +33,5 @@ interface utiDAOInterface
   public function update(uti $uti);
   public function destroy($id_uti);
   public function findGeral();
+  public function findMaxUTI();
 };

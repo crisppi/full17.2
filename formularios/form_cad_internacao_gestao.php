@@ -6,7 +6,7 @@
         <input type="hidden" name="type" value="create">
         <div class="form-group row">
             <?php
-            $a = ($gestaoIdMaxVis[0]);
+            $a = ($findMaxGesInt[0]);
             $ultimoReg = ($a["ultimoReg"]);
             ?>
             <div>
@@ -199,3 +199,5 @@
         }
     }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

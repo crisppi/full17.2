@@ -28,6 +28,7 @@ class utiDAO implements utiDAOInterface
 
         $uti->id_uti = $data["id_uti"];
         $uti->fk_internacao_uti = $data["fk_internacao_uti"];
+        $uti->fk_visita_uti = $data["fk_visita_uti"];
         $uti->criterios_uti = $data["criterios_uti"];
         $uti->data_alta_uti = $data["data_alta_uti"];
         $uti->dva_uti = $data["dva_uti"];
@@ -153,6 +154,7 @@ class utiDAO implements utiDAOInterface
 
         $stmt = $this->conn->prepare("INSERT INTO tb_uti (
         fk_internacao_uti, 
+        fk_visita_uti, 
         criterios_uti, 
         data_alta_uti, 
         dva_uti, 
@@ -168,6 +170,7 @@ class utiDAO implements utiDAOInterface
         vm_uti
       ) VALUES (
         :fk_internacao_uti, 
+        :fk_visita_uti, 
         :criterios_uti, 
         :data_alta_uti, 
         :dva_uti, 
@@ -185,6 +188,7 @@ class utiDAO implements utiDAOInterface
      )");
 
         $stmt->bindParam(":fk_internacao_uti", $uti->fk_internacao_uti);
+        $stmt->bindParam(":fk_visita_uti", $uti->fk_visita_uti);
         $stmt->bindParam(":criterios_uti", $uti->criterios_uti);
         $stmt->bindParam(":data_alta_uti", $uti->data_alta_uti);
         $stmt->bindParam(":dva_uti", $uti->dva_uti);
@@ -311,18 +315,31 @@ class utiDAO implements utiDAOInterface
         return $uti;
     }
     // pegar id max da internacao
-    public function findMax()
+    public function findMaxUTI()
     {
 
         $uti = [];
 
-        $stmt = $this->conn->query("SELECT max(id_internacao) as ultimoReg from tb_internacao");
+        $stmt = $this->conn->query("SELECT max(id_visita) as ultimoReg from tb_visita");
 
         $stmt->execute();
 
         $utiIdMax = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $utiIdMax;
+    }
+    public function findMaxUtiInt()
+    {
+
+        $gestao = [];
+
+        $stmt = $this->conn->query("SELECT max(id_internacao) as ultimoReg from tb_internacao");
+
+        $stmt->execute();
+
+        $findMaxUtiInt = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $findMaxUtiInt;
     }
 }
 

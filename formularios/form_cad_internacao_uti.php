@@ -7,7 +7,7 @@
 
         <div class="form-group row">
             <?php
-            $a = ($gestaoIdMax[0]);
+            $a = ($findMaxUtiInt[0]);
             $ultimoReg = ($a["ultimoReg"]);
             ?>
             <div>
@@ -42,8 +42,11 @@
             <div class="form-group col-sm-2">
                 <label for="criterio_uti">Critério UTI</label>
                 <select class="form-control" id="criterio_uti" name="criterio_uti">
-                    <option value="Pertinente">Pertinente</option>
-                    <option value="Não pertinente">Não pertinente</option>
+                    <?php
+                    sort($criterios_UTI, SORT_ASC);
+                    foreach ($criterios_UTI as $uti) { ?>
+                        <option value="<?= $uti; ?>"><?= $uti; ?></option>
+                    <?php } ?>
                 </select>
             </div>
             <div class="form-group col-sm-2">
@@ -104,3 +107,5 @@
         </div>
     </form>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

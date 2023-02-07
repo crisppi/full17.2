@@ -7,11 +7,15 @@
 
         <div class="form-group row">
             <?php
-            $a = ($gestaoIdMax[0]);
+            $a = ($utiIdMax[0]);
             $ultimoReg = ($a["ultimoReg"]);
             ?>
+
             <div>
-                <input type="hidden" class="form-control" id="fk_internacao_uti" name="fk_internacao_uti" value="<?= ($ultimoReg) ?> " placeholder="Relatório da auditoria">
+                <input type="hidden" class="form-control" id="fk_internacao_uti" name="fk_internacao_uti" value="<?= ($id_internacao) ?> " placeholder="Relatório da auditoria">
+            </div>
+            <div>
+                <input type="hidden" class="form-control" id="fk_visita_uti" name="fk_visita_uti" value="<?= ($ultimoReg) ?> " placeholder="Relatório da auditoria">
             </div>
 
             <div class="form-group col-sm-2">
@@ -42,17 +46,18 @@
             <div class="form-group col-sm-2">
                 <label for="criterio_uti">Critério UTI</label>
                 <select class="form-control" id="criterio_uti" name="criterio_uti">
-                    <option value="Pertinente">Pertinente</option>
-                    <option value="Não pertinente">Não pertinente</option>
+                    <?php
+                    sort($criterios_UTI, SORT_ASC);
+                    foreach ($criterios_UTI as $uti) { ?>
+                        <option value="<?= $uti; ?>"><?= $uti; ?></option>
+                    <?php } ?>
                 </select>
             </div>
             <div class="form-group col-sm-2">
                 <label for="data_internacao_uti">Data internação UTI</label>
                 <input type="date" class="form-control" id="data_internacao_uti" name="data_internacao_uti">
             </div>
-            <div class="form-group col-sm-1">
-                <input type="hidden" class="form-control" value="Sim" id="internacao_int" name="internacao_int">
-            </div>
+
             <div class="form-group row">
                 <div class="form-group col-sm-2">
                     <label for="vm_uti">VM</label>
@@ -104,3 +109,8 @@
         </div>
     </form>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js";
+</script>

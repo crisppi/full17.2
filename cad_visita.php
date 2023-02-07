@@ -16,18 +16,36 @@ require_once("dao/pacienteDAO.php");
 
 include_once("models/gestao.php");
 include_once("dao/gestaoDao.php");
+
+include_once("models/prorrogacao.php");
+include_once("dao/prorrogacaoDao.php");
+
+include_once("models/uti.php");
+include_once("dao/utiDao.php");
+
 include_once("array_dados.php");
 
 $internacaoDao = new internacaoDAO($conn, $BASE_URL);
+
 $hospital_geral = new hospitalDAO($conn, $BASE_URL);
 $hospitals = $hospital_geral->findGeral($limite, $inicio);
+
 $pacienteDao = new pacienteDAO($conn, $BASE_URL);
 $pacientes = $pacienteDao->findGeral($limite, $inicio);
+
 $patologiaDao = new patologiaDAO($conn, $BASE_URL);
 $patologias = $patologiaDao->findGeral();
-$gestao = new gestaoDAO($conn, $BASE_URL);
-$gestaoIdMax = $gestao->findMax();
 
+$gestao = new gestaoDAO($conn, $BASE_URL);
+$findMaxVis = $gestao->findMaxVis();
+
+$uti = new utiDAO($conn, $BASE_URL);
+$utiIdMax = $uti->findMaxUTI();
+
+$prorrogacao = new prorrogacaoDAO($conn, $BASE_URL);
+$prorrogacaoIdMax = $prorrogacao->findMaxPror();
+
+$id_internacao = filter_input(INPUT_GET, 'id_internacao', FILTER_VALIDATE_INT);
 ?>
 <div id="main-container" class="container">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
