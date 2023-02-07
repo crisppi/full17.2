@@ -147,7 +147,7 @@
                 ?>
                     <tr>
                         <td scope="row" class="col-id"><?= $intern["id_internacao"] ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $intern["internado_int"] ?></td>
+                        <td scope="row" class="nome-coluna-table"><?php if($intern["internado_int"] == "s") {echo "Sim";} else {echo "Não";}; ?></td>
                         <td scope="row" class="nome-coluna-table"><?= $intern["nome_hosp"] ?></td>
                         <td scope="row"><?= $intern["nome_pac"] ?></td>
                         <td scope="row"><?= $intern["data_intern_int"] ?></td>

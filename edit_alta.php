@@ -44,14 +44,14 @@ $internacao = $internacaoDao->findById($id_internacao);
             <div class="form-group col-sm-2">
                 <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_create_int" name="data_create_int" placeholder="">
             </div>
-            <div class="form-group col-sm-4">
+            <div class="form-group col-sm-3">
                 <label class="control-label" for="usuario_create_int">Usuário</label>
                 <input type="text" value="<?= $_SESSION['username']; ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
             </div>
             <div class="form-group col-sm-2">
                 <label class="control-label" for="tipo_alta_int">Tipo de alta</label>
                 <select class="form-control" id="tipo_alta_int" name="tipo_alta_int">
-                    <option value=""></option>
+                    <option value="">Selecione o motivo da alta</option>
                     <?php
                     sort($dados_alta, SORT_ASC);
                     foreach ($dados_alta as $alta) { ?>
