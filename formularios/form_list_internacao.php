@@ -2,19 +2,19 @@
 
     require_once("templates/header.php");
 
-    require_once("models/message.php");
+    // require_once("models/message.php");
 
-    include_once("models/Internacao.php");
-    include_once("dao/InternacaoDao.php");
+    include_once("models/internacao.php");
+    include_once("dao/internacaoDao.php");
 
     include_once("models/patologia.php");
     include_once("dao/patologiaDao.php");
 
     include_once("models/paciente.php");
-    require_once("dao/pacienteDAO.php");
+    include_once("dao/pacienteDao.php");
 
     include_once("models/hospital.php");
-    require_once("dao/hospitalDAO.php");
+    include_once("dao/hospitalDao.php");
 
     include_once("models/pagination.php");
 
@@ -24,7 +24,7 @@
     $pacienteDao = new pacienteDAO($conn, $BASE_URL);
     $pacientes = $pacienteDao->findGeral($limite, $inicio);
 
-    $hospital_geral = new hospitalDAO($conn, $BASE_URL);
+    $hospital_geral = new HospitalDAO($conn, $BASE_URL);
     $hospitals = $hospital_geral->findGeral($limite, $inicio);
 
     $patologiaDao = new patologiaDAO($conn, $BASE_URL);
@@ -68,8 +68,7 @@
     <!-- BASE DAS PESQUISAS -->
     <?php
     //Instanciando a classe
-    $Internacao = new InternacaoDAO($conn, $BASE_URL);
-    $QtdTotalInt = new InternacaoDAO($conn, $BASE_URL);
+    $QtdTotalInt = new internacaoDAO($conn, $BASE_URL);
 
     // METODO DE BUSCA DE PAGINACAO
     $pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
@@ -116,7 +115,6 @@
         $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
         <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
         <li class="page-item"></a>';
-        // $paginacao2 .= "<div style='color:blue; margin-top:20px;'></div><nav aria-label='Page navigation example'><ul class='pagination'><li class='page-item'><a class='page-link' href='list_seguradora.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li><li class='page-item'><a class='page-link' href='list_seguradora.php?pg=$qtdPag&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li></ul></nav></div>";
     }
     ?>
     <div class="container">
