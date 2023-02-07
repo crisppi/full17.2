@@ -91,7 +91,7 @@ if ($type === "create") {
 
     //     $utiDao->update($utiData);
 
-    //     include_once('list_uti.php');
+    include_once('cad_internacao.php');
 }
 //$type = "delete";
 //$type = filter_input(INPUT_POST, "type");

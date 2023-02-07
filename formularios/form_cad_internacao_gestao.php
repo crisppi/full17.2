@@ -26,8 +26,8 @@
             <div class="form-group col-sm-2">
                 <label for="home_care_ges">Home care</label>
                 <select class="form-control" id="home_care_ges" name="home_care_ges">
-                    <option value="Não">Não</option>
-                    <option value="Sim">Sim</option>
+                    <option value="n">Não</option>
+                    <option value="s">Sim</option>
                 </select>
             </div>
             <div style="display:none" id="div_rel_home_care">
@@ -37,8 +37,8 @@
             <div class="form-group col-sm-2">
                 <label for="opme_ges">OPME</label>
                 <select class="form-control" id="opme_ges" name="opme_ges">
-                    <option value="Não">Não</option>
-                    <option value="Sim">Sim</option>
+                    <option value="n">Não</option>
+                    <option value="s">Sim</option>
                 </select>
             </div>
             <div style="display:none" id="div_rel_opme">
@@ -48,8 +48,8 @@
             <div class="form-group col-sm-2">
                 <label for="desospitalizacao_ges">Desospitalização</label>
                 <select class="form-control" id="desospitalizacao_ges" name="desospitalizacao_ges">
-                    <option value="Não">Não</option>
-                    <option value="Sim">Sim</option>
+                    <option value="n">Não</option>
+                    <option value="s">Sim</option>
                 </select>
             </div>
             <div style="display:none" id="div_rel_desospitalizacao">
@@ -59,8 +59,8 @@
             <div class="form-group col-sm-2">
                 <label for="evento_adverso_ges">Evento Adverso</label>
                 <select class="form-control" id="evento_adverso_ges" name="evento_adverso_ges">
-                    <option value="Não">Não</option>
-                    <option value="Sim">Sim</option>
+                    <option value="n">Não</option>
+                    <option value="s">Sim</option>
                 </select>
             </div>
             <div style="display:none" id="div_tipo_evento" class="form-group col-sm-2">
