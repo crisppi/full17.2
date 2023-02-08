@@ -95,22 +95,21 @@
     $pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
     $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
-
     $condicoes = [
         strlen($pesquisa_nome) ? 'ho.nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
         strlen($pesquisa_pac) ? 'pa.nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
-        strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : null
+        strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : NULL
     ];
     $condicoes = array_filter($condicoes);
-
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
 
     // QUANTIDADE InternacaoS
     $qtdIntItens1 = $QtdTotalInt->QtdInternacao($where);
+    $qtdIntItens = $QtdTotalInt->findTotal();
 
+    print_r($qtdIntItens);
     $qtdIntItens = ($qtdIntItens1['0']);
-
     // PAGINACAO
     $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, $limite_pag);
     $obLimite = $obPagination->getLimit();
@@ -127,7 +126,6 @@
     // PAGINACAO
     $paginacao = '';
     $paginas = $obPagination->getPages();
-    print_r($paginas);
 
     foreach ($paginas as $pagina) {
         $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
