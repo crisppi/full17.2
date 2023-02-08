@@ -18,7 +18,7 @@
 
     include_once("models/pagination.php");
 
-    $Internacao_geral = new InternacaoDAO($conn, $BASE_URL);
+    $Internacao_geral = new internacaoDAO($conn, $BASE_URL);
     $Internacaos = $Internacao_geral->findGeral();
 
     $pacienteDao = new pacienteDAO($conn, $BASE_URL);
@@ -46,21 +46,39 @@
                 ?>
                 <div class="form-group row">
                     <div class="form-group col-sm-3">
+                        <label style="margin-left: 30px;">Pesquisa por Hospital</label>
                         <input style="margin-left: 30px;" class="form-control" type="text" name="pesquisa_nome" placeholder="Selecione o Hospital" value="<?= $pesquisa_nome ?>">
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label style="margin-left: 30px;">Pesquisa por Paciente</label>
+
+                        <input style="margin-left: 30px;" class="form-control" type="text" name="pesquisa_pac" placeholder="Selecione o Paciente" value="<?= $pesquisa_pac ?>">
                     </div>
 
                     <div style="margin-left:20px" class="form-group col-sm-3">
+                        <label>Internados</label>
                         <select class="form-control mb-3" id="pesqInternado" name="pesqInternado">
                             <option value="">Busca por Internados</option>
                             <option value="s" <?= $pesqInternado == 's' ? 'selected' : null ?>>Sim</option>
                             <option value="n" <?= $pesqInternado == 'n' ? 'selected' : null ?>>Não</option>
                         </select>
                     </div>
-                    <div class="form-group col-sm-3">
+                    <div style="margin-left:20px" class="form-group col-sm-1">
+                        <label>Limite</label>
+                        <select class="form-control mb-3" id="limite_pag" name="limite_pag">
+                            <option value="">Registros por página</option>
+                            <option value="5" <?= $limite_pag == '5' ? 'selected' : null ?>>5</option>
+                            <option value="10" <?= $limite_pag == '10' ? 'selected' : null ?>>10</option>
+                            <option value="20" <?= $limite_pag == '20' ? 'selected' : null ?>>20</option>
+                            <option value="50" <?= $limite_pag == '50' ? 'selected' : null ?>>50</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
                         <button type="submit" class="btn btn-primary mb-1">Buscar</button>
                     </div>
                 </div>
-
         </div>
         </form>
     </div>
@@ -99,7 +117,7 @@
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $order = $ordenar;
-    $query = $i8nternacao->selectAllInternacao($where, $order, $obLimite);
+    $query = $internacao->selectAllInternacao($where, $order, $obLimite);
 
     // GETS 
     unset($_GET['pag']);

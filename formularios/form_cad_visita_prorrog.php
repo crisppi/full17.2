@@ -6,7 +6,7 @@
         <input type="hidden" name="type" value="create">
         <div class="form-group col-sm-1">
             <?php
-            $a = ($findMaxProInt[0]);
+            $a = ($prorrogacaoIdMax[0]);
             $ultimoReg = ($a["ultimoReg"]);
             ?>
             <input type="hidden" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= $ultimoReg ?>" placeholder="Relatório da auditoria">
@@ -107,7 +107,6 @@
         <div>
             <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
         </div>
-
     </form>
     <div style="margin-top:-20px" class="formulario">
         <div style="display: inline-block; margin-left:10px; margin-bottom:10px" class="form-group col-sm-1">

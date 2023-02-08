@@ -19,54 +19,65 @@ $internacaoDao = new internacaoDAO($conn, $BASE_URL);
 // Receber id do usuário
 $id_internacao = filter_input(INPUT_GET, "id_internacao");
 $internacao = $internacaoDao->findById($id_internacao);
+
+$Internacao_geral = new internacaoDAO($conn, $BASE_URL);
+$internacao = $internacaoDao->joininternacaoHospitalshow($id_internacao);
+extract($internacao);
 ?>
 
 <!-- formulario alta -->
 <div id="main-container" class="container-fluid">
     <div class="row">
-        <h1 class="page-title">Atualizar internacao</h1>
+        <h4 class="page-title">Atualizar internacao</h4>
         <p class="page-description">Adicione informações sobre o internacao</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_internacao.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="type" value="update">
-            <div class="form-group row">
-                <input type="hidden" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>" placeholder="ID">
-            </div>
-            <div class="form-group col-sm-2">
-                <label class="control-label" for="data_alta_int">Data Alta</label>
-                <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_int" name="data_alta_int" placeholder="">
-            </div>
-            <div class="form-group col-sm-2">
-                <input type="hidden" class="form-control" value="Não" id="internado_int" name="internado_int" placeholder="">
-            </div>
-            <div class="form-group col-sm-2">
-                <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_visita_int" name="data_visita_int" placeholder="">
-            </div>
-            <div class="form-group col-sm-2">
-                <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_create_int" name="data_create_int" placeholder="">
+            <div class="form-group col-sm-3">
+                <input type="hidden" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>">
             </div>
             <div class="form-group col-sm-3">
-                <label class="control-label" for="usuario_create_int">Usuário</label>
-                <input type="text" value="<?= $_SESSION['username']; ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
+                <label class="control-label" for="data_alta_int">Hospital</label>
+                <input type="text" class="form-control" value="<?= $nome_hosp ?>">
             </div>
-            <div class="form-group col-sm-2">
-                <label class="control-label" for="tipo_alta_int">Tipo de alta</label>
-                <select class="form-control" id="tipo_alta_int" name="tipo_alta_int">
-                    <option value="">Selecione o motivo da alta</option>
-                    <?php
-                    sort($dados_alta, SORT_ASC);
-                    foreach ($dados_alta as $alta) { ?>
-                        <option value="<?= $alta; ?>"><?= $alta; ?></option>
-                    <?php } ?>
-                </select>
+            <div class="form-group col-sm-3">
+                <label class="control-label" for="data_alta_int">Paciente</label>
+                <input type="text" class="form-control" value="<?= $nome_pac ?>">
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="data_alta_int">Data Alta</label>
+                    <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_int" name="data_alta_int" placeholder="" required>
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="hidden" class="form-control" value="Não" id="internado_int" name="internado_int" placeholder="">
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_visita_int" name="data_visita_int" placeholder="">
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_create_int" name="data_create_int" placeholder="">
+                </div>
+                <div class="form-group col-sm-3">
+                    <input type="hidden" value="<?= $_SESSION['username']; ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="tipo_alta_int">Tipo de alta</label>
+                    <select class="form-control" id="tipo_alta_int" name="tipo_alta_int" required>
+                        <option value="">Selecione o motivo da alta</option>
+                        <?php
+                        sort($dados_alta, SORT_ASC);
+                        foreach ($dados_alta as $alta) { ?>
+                            <option value="<?= $alta; ?>"><?= $alta; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <br>
             </div>
             <br>
+            <button style="margin:10px" type="submit" class="btn-sm btn-info">Atualizar</button>
+            <br>
     </div>
-    <br>
-    <button style="margin:10px" type="submit" class="btn-sm btn-info">Atualizar</button>
-    <br>
-</div>
-</form>
-</div>
+    </form>
 </div>
 <!-- <script>
     function mascara(i) {
