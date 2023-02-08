@@ -91,6 +91,7 @@ header("Content-type: text/html; charset=utf-8");
                   <hr class="dropdown-divider">
                 </li>
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_internacao.php">Lista Internação</a></li>
+                <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_internacao_uti.php">Lista Internação UTI</a></li>
               </ul>
             </li>
 

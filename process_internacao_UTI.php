@@ -6,10 +6,13 @@ require_once("models/internacao.php");
 // require_once("dao/usuarioDao.php");
 require_once("dao/internacaoDao.php");
 
+require_once("models/uti.php");
+require_once("dao/utiDao.php");
 
-// $message = new Message($BASE_URL);
 // $userDao = new UserDAO($conn, $BASE_URL);
-$internacaoDao = new InternacaoDAO($conn, $BASE_URL);
+$internacaoDao = new internacaoDAO($conn, $BASE_URL);
+$utiDao = new utiDAO($conn, $BASE_URL);
+
 $id_internacao = filter_input(INPUT_POST, "id_internacao");
 
 // Resgata o tipo do formulário

@@ -320,7 +320,7 @@ class utiDAO implements utiDAOInterface
 
         $uti = [];
 
-        $stmt = $this->conn->query("SELECT max(id_visita) as ultimoReg from tb_visita");
+        $stmt = $this->conn->query("SELECT * FROM tb_uti WHERE ORDER BY id_uti asc");
 
         $stmt->execute();
 
@@ -340,6 +340,38 @@ class utiDAO implements utiDAOInterface
         $findMaxUtiInt = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $findMaxUtiInt;
+    }
+
+    public function findUTIInternacao($id_internacao)
+    {
+
+        $gestao = [];
+
+        $stmt = $this->conn->query("SELECT ac.id_internacao, ac.internado_int, ac.data_intern_int, ac.fk_paciente_int, ac.internado_uti_int, pa.id_paciente, pa.nome_pac, ac.usuario_create_int, ac.fk_hospital_int, ac.modo_internacao_int, ac.tipo_admissao_int, ho.id_hospital, ho.nome_hosp, ac.especialidade_int, ac.titular_int, ac.data_visita_int, ac.grupo_patologia_int, ac.acomodacao_int, ac.fk_patologia_int, pat.patologia_pat, ut.fk_internacao_uti
+
+        FROM tb_internacao ac 
+
+        left JOIN tb_hospital as ho On  
+        ac.fk_hospital_int = ho.id_hospital
+
+        left join tb_paciente as pa on
+        ac.fk_paciente_int = pa.id_paciente
+
+        left join tb_patologia as pat on
+        ac.fk_patologia_int = pat.id_patologia
+
+        inner join tb_uti as ut on
+        ac.id_internacao = ut.fk_internacao_uti
+
+        WHERE  ac.id_internacao = ut.fk_internacao_uti
+         
+         ");
+
+        $stmt->execute();
+
+        $findUTIInternacao = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $findUTIInternacao;
     }
 }
 

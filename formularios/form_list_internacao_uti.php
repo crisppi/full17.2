@@ -134,7 +134,7 @@
     }
     ?>
     <div class="container">
-        <h6 class="page-title">Relatório de internações</h6>
+        <h6 class="page-title">Relatório de internações - UTI</h6>
         <table class="table table-sm table-striped table-bordered table-hover table-condensed">
             <thead>
                 <tr>
@@ -143,11 +143,7 @@
                     <th scope="col">Hospital</th>
                     <th scope="col">Paciente</th>
                     <th scope="col">Data internação</th>
-                    <th scope="col">Acomodação</th>
-                    <th scope="col">Data visita</th>
-                    <th scope="col">Grupo Patologia</th>
                     <th scope="col">Modo Admissão</th>
-                    <th scope="col">Tipo Alta</th>
                     <th scope="col">Médico</th>
                     <th scope="col">UTI</th>
                     <th scope="col">Int UTI</th>
@@ -170,31 +166,22 @@
                         <td scope="row" class="nome-coluna-table"><?= $intern["nome_hosp"] ?></td>
                         <td scope="row"><?= $intern["nome_pac"] ?></td>
                         <td scope="row"><?= $intern["data_intern_int"] ?></td>
-                        <td scope="row"><?= $intern["acomodacao_int"] ?></td>
-                        <td scope="row"><?= $intern["data_visita_int"] ?></td>
-                        <td scope="row"><?= $intern["grupo_patologia_int"] ?></td>
                         <td scope="row"><?= $intern["tipo_admissao_int"] ?></td>
-                        <td scope="row"><?= $intern["tipo_alta_int"] ?></td>
                         <td scope="row"><?= $intern["titular_int"] ?></td>
                         <td scope="row"><?= $intern["internacao_uti_int"] ?></td>
                         <td scope="row"><?= $intern["internado_uti_int"] ?></td>
                         <td scope="row"><?= $intern["rel_int"] ?></td>
 
                         <td class="action">
-                            <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:orange; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>
-                            <a href="<?= $BASE_URL ?>cad_visita.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:black; font-weigth:bold; margin-left:5px;margin-right:5px" name="type" value="visita" class="aparecer-acoes bi bi-file-text"></i></a>
+                            <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:green; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>
 
-                            <form class="d-inline-block delete-form" action="edit_alta.php" method="get">
+                            <form class="d-inline-block delete-form" action="edit_alta_uti.php" method="get">
                                 <input type="hidden" name="type" value="alta">
                                 <!-- <input type="hidden" name="alta" value="alta"> -->
                                 <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
                                 <button type="hidden" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block bi bi-door-open"></i></button>
                             </form>
-                            <form class="d-inline-block delete-form" action="del_internacao.php" method="POST">
-                                <input type="hidden" name="type" value="delete">
-                                <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
-                                <button type="submit" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block aparecer-acoes bi bi-x-square-fill delete-icon"></i></button>
-                            </form>
+
                         </td>
                     </tr>
                 <?php endforeach; ?>

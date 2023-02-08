@@ -488,13 +488,13 @@ class internacaoDAO implements internacaoDAOInterface
     }
     public function selectAllInternacao($where = null, $order = null, $limit = null)
     {
-    //DADOS DA QUERY
-    $where = strlen($where) ? 'WHERE ' . $where : '';
-    $order = strlen($order) ? 'ORDER BY ' . $order : '';
-    $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
 
-    //MONTA A QUERY
-    $query = $this->conn->query('SELECT 
+        //MONTA A QUERY
+        $query = $this->conn->query('SELECT 
     ac.id_internacao, 
     ac.acoes_int, 
     ac.data_intern_int, 
@@ -506,6 +506,8 @@ class internacaoDAO implements internacaoDAOInterface
     ac.modo_internacao_int, 
     ac.tipo_admissao_int,
     ac.tipo_alta_int,
+    ac.internado_uti_int,
+    ac.internacao_uti_int,
     ac.especialidade_int, 
     ac.titular_int, 
     ac.grupo_patologia_int, 
@@ -525,25 +527,25 @@ class internacaoDAO implements internacaoDAOInterface
         left join tb_paciente as pa on
         ac.fk_paciente_int = pa.id_paciente ' . $where . ' ' . $order . ' ' . $limit);
 
-    $query->execute();
+        $query->execute();
 
-    $hospital = $query->fetchAll();
+        $hospital = $query->fetchAll();
 
-    return $hospital;
-}
+        return $hospital;
+    }
 
-public function QtdInternacao()
-{
-    $hospital = [];
+    public function QtdInternacao()
+    {
+        $hospital = [];
 
-    $stmt = $this->conn->query("SELECT COUNT(id_hospital) FROM tb_hospital");
+        $stmt = $this->conn->query("SELECT COUNT(id_hospital) FROM tb_hospital");
 
-    $stmt->execute();
+        $stmt->execute();
 
-    $QtdTotalHos = $stmt->fetch();
+        $QtdTotalHos = $stmt->fetch();
 
-    return $QtdTotalHos;
-}
+        return $QtdTotalHos;
+    }
 }
 
 # Limita o número de registros a serem mostrados por página

@@ -15,25 +15,30 @@ include("array_dados.php");
 $internacao = new internacao();
 $userDao = new UserDAO($conn, $BASE_URL);
 $internacaoDao = new internacaoDAO($conn, $BASE_URL);
+$utiDao = new utiDAO($conn, $BASE_URL);
 
 // Receber id do usuário
 $id_internacao = filter_input(INPUT_GET, "id_internacao");
 $internacao = $internacaoDao->findById($id_internacao);
 
-$Internacao_geral = new internacaoDAO($conn, $BASE_URL);
+$internacao_geral = new internacaoDAO($conn, $BASE_URL);
 $internacao = $internacaoDao->joininternacaoHospitalshow($id_internacao);
 extract($internacao);
+
+$internadosUTI = $utiDao->findUTIInternacao($id_internacao);
+// extract($internadosUTI);
+print_r($internadosUTI);
 ?>
 
 <!-- formulario alta -->
 <div id="main-container" class="container-fluid">
     <div class="row">
-        <h4 class="page-title">Alta Hospitalar</h4>
-        <p class="page-description">Adicione informações sobre o internacao</p>
-        <form class="formulario" action="<?= $BASE_URL ?>process_internacao.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
+        <h4 class="page-title">Alta da UTI</h4>
+        <!-- <p class="page-description">Adicione informações sobre o internacao</p> -->
+        <form class="formulario" action="<?= $BASE_URL ?>process_internacao_uti.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="type" value="update">
             <div class="form-group col-sm-3">
-                <input type="hidden" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>">
+                <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>">
             </div>
             <div class="form-group col-sm-3">
                 <label class="control-label" for="data_alta_int">Hospital</label>
@@ -45,11 +50,11 @@ extract($internacao);
             </div>
             <div class="row">
                 <div class="form-group col-sm-2">
-                    <label class="control-label" for="data_alta_int">Data Alta</label>
+                    <label class="control-label" for="data_alta_int">Data Alta da UTI</label>
                     <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_int" name="data_alta_int" placeholder="" required>
                 </div>
                 <div class="form-group col-sm-2">
-                    <input type="hidden" class="form-control" value="Não" id="internado_int" name="internado_int" placeholder="">
+                    <input type="hidden" class="form-control" value="Não" id="internado_uti_int" name="internado_uti_int" placeholder="">
                 </div>
                 <div class="form-group col-sm-2">
                     <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_visita_int" name="data_visita_int" placeholder="">
@@ -60,7 +65,7 @@ extract($internacao);
                 <div class="form-group col-sm-3">
                     <input type="hidden" value="<?= $_SESSION['username']; ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
                 </div>
-                <div class="form-group col-sm-2">
+                <!-- <div class="form-group col-sm-2">
                     <label class="control-label" for="tipo_alta_int">Tipo de alta</label>
                     <select class="form-control" id="tipo_alta_int" name="tipo_alta_int" required>
                         <option value="">Selecione o motivo da alta</option>
@@ -70,7 +75,7 @@ extract($internacao);
                             <option value="<?= $alta; ?>"><?= $alta; ?></option>
                         <?php } ?>
                     </select>
-                </div>
+                </div> -->
                 <br>
             </div>
             <br>
