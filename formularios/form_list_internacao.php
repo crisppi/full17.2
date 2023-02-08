@@ -127,6 +127,7 @@
     // PAGINACAO
     $paginacao = '';
     $paginas = $obPagination->getPages();
+    print_r($paginas);
 
     foreach ($paginas as $pagina) {
         $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
@@ -219,14 +220,12 @@
         <!-- <?php
 
                 //modo cadastro
-                $formData = "0";
-                $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+                // $formData = "0";
+                // $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
                 $total = $internacao->findTotal();
 
                 $totalcasos = $total['0'];
-                // echo $totalcasos['0'];
                 $reg = ($totalcasos['0']);
-                // echo $reg;
 
                 if ($formData !== "0") {
                     $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
@@ -240,11 +239,12 @@
                     $query_Total = $conn->prepare($sql_Total);
                     $query_Total->execute();
                     $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
+
                     # conta quantos registros tem no banco de dados
                     $query_count = $query_Total->rowCount();
 
                     # calcula o total de paginas a serem exibidas
-                    $qtdIntItens = ceil($reg / $limite);
+                    $totalcasos = ceil($reg / $limite_pag);
                 } catch (PDOexception $error_Total) {
 
                     echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();

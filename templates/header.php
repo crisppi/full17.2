@@ -77,7 +77,6 @@ header("Content-type: text/html; charset=utf-8");
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_acomodacao.php">Acomodação</a></li>
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_patologia.php">Patologia</a></li>
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_antecedente.php">Antecedente</a></li>
-                <li><a class="dropdown-item" href="<?php $BASE_URL ?>./dao/paginacao_pdo.php">Paginacao</a></li>
               </ul>
             </li>
 
@@ -87,10 +86,7 @@ header("Content-type: text/html; charset=utf-8");
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>cad_internacao.php">Internação</a></li>
-                <li><a class="dropdown-item" href="<?php $BASE_URL ?>cad_internacao_niveis.php">Niveis</a></li>
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>cad_visita.php">Visita</a></li>
-                <li><a class="dropdown-item" href="<?php $BASE_URL ?>edit_alta.php">Alta Hospitalar</a></li>
-
                 <li>
                   <hr class="dropdown-divider">
                 </li>
