@@ -54,6 +54,7 @@ $findMaxProInt = $prorrogacao->findMaxProInt();
 ?>
 <div id="main-container" class="container">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
     <!-- FORMULARIO INTERNACAO -->
     <?php include_once('formularios/form_cad_internacao.php'); ?>
 
@@ -120,10 +121,9 @@ $findMaxProInt = $prorrogacao->findMaxProInt();
             } else {
                 div.style.display = "none";
             }
-
         });
-        // Script div de uti
 
+        // Script div de uti
         var btn = document.querySelector("#btn-uti");
 
         btn.addEventListener("click", function() {

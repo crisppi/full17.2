@@ -4,8 +4,19 @@
     <p class="page-description">Adicione informações sobre a gestão que foi identificada</p>
     <form class="formulario" action="<?= $BASE_URL ?>process_uti.php" id="add-acomodacao-form" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="type" value="create">
+        <!-- DADOS PARA FORMULARIO INTERNACAO -->
+        <div class="form-group col-sm-1">
+            <input type="text" class="form-control" value="s" id="internacao_uti_int" name="internacao_uti_int">
+        </div>
+        <div class="form-group col-sm-1">
+            <input type="text" class="form-control" value="s" id="internado_uti_int" name="internado_uti_int">
+        </div>
+        <div>
+            <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= ($ultimoReg) ?> ">
+        </div>
 
-        <div class="form-group row">
+        <!-- DADOS PARA FORMULARIO UTI -->
+        <div class=" form-group row">
             <?php
             $a = ($findMaxUtiInt[0]);
             $ultimoReg = ($a["ultimoReg"]);
@@ -53,9 +64,7 @@
                 <label for="data_internacao_uti">Data internação UTI</label>
                 <input type="date" class="form-control" id="data_internacao_uti" name="data_internacao_uti">
             </div>
-            <div class="form-group col-sm-1">
-                <input type="hidden" class="form-control" value="Sim" id="internacao_int" name="internacao_int">
-            </div>
+
             <div class="form-group row">
                 <div class="form-group col-sm-2">
                     <label for="vm_uti">VM</label>

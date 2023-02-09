@@ -205,6 +205,16 @@ class utiDAO implements utiDAOInterface
 
         $stmt->execute();
 
+        $query = $this->conn->prepare("UPDATE tb_internacao SET
+        internacao_uti_int = :internacao_uti_int
+        
+        WHERE id_internacao = :id_internacao
+        ");
+
+        $query->bindParam(":internacao_uti_int", $uti->internacao_uti_int);
+
+        $query->execute();
+
         // Mensagem de sucesso por adicionar filme
         $this->message->setMessage("uti adicionado com sucesso!", "success", "cad_internacao.php");
     }

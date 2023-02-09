@@ -34,6 +34,8 @@ if ($type === "create") {
     $saps_uti = filter_input(INPUT_POST, "saps_uti");
     $score_uti = filter_input(INPUT_POST, "score_uti");
     $vm_uti = filter_input(INPUT_POST, "vm_uti");
+    $id_internacao = filter_input(INPUT_POST, "id_internacao");
+    $internacao_uti_int = filter_input(INPUT_POST, "internacao_uti_int");
 
     $uti = new uti();
 
@@ -55,6 +57,8 @@ if ($type === "create") {
         $uti->saps_uti = $saps_uti;
         $uti->score_uti = $score_uti;
         $uti->vm_uti = $vm_uti;
+        $uti->id_internacao = $id_internacao;
+        $uti->internacao_uti_int = $internacao_uti_int;
 
         $utiDao->create($uti);
     } else {

@@ -19,6 +19,8 @@ class uti
   public $saps_uti;
   public $score_uti;
   public $vm_uti;
+  public $id_internacao;
+  public $internacao_uti_int;
 }
 
 interface utiDAOInterface

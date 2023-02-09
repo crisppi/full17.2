@@ -75,7 +75,7 @@
             </div>
         </div>
         <!-- PRORROGACAO 3 -->
-        <div class="form-group-row">
+        <div class="form-group row">
             <div style="display:none" id="container-prog3">
                 <div class="form-group col-sm-2">
                     <label class="control-label" for="acomod3_pror">Acomodação (3)</label>

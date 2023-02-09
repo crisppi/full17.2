@@ -69,9 +69,9 @@ header("Content-type: text/html; charset=utf-8");
                 <div class="form-group col-sm-1">
                     <label class="control-label" for="isol_2_pror">Isolamento</label>
                     <select class="form-control" id="isol_2_pror" name="isol_2_pror">
-                        <option value="Sim">Sim</option>
-                        <option value="Sim">Sim</option>
-                        <option value="Não">Não</option>
+                        <option value="s">Sim</option>
+                        <option value="s">Sim</option>
+                        <option value="n">Não</option>
                     </select>
                 </div>
             </div>
@@ -100,8 +100,8 @@ header("Content-type: text/html; charset=utf-8");
                 <div class="form-group col-sm-1">
                     <label class="control-label" for="isol_3_pror">Isolamento</label>
                     <select class="form-control" id="isol_3_pror" name="isol_3_pror">
-                        <option value="Não">Não</option>
-                        <option value="Sim">Sim</option>
+                        <option value="n">Não</option>
+                        <option value="s">Sim</option>
                     </select>
                 </div>
             </div>
@@ -113,10 +113,10 @@ header("Content-type: text/html; charset=utf-8");
     </form>
     <div style="margin-top:-20px" class="formulario">
         <div style="display: inline-block; margin-left:10px; margin-bottom:10px" class="form-group col-sm-1">
-            <button onclick="mostrarGrupo2('container-prog2')" style="color:blue; border:none; margin-top:15px; margin-right:10px" id="btn-gp1" class="bi bi-plus-square-fill edit-icon"> Adicione 2a</button>
+            <button onclick="mostrarGrupo2('container-prog2')" style="color:blue; font-size:0.8em; border:none; margin-top:15px; margin-right:10px" id="btn-gp1" class="bi bi-plus-square-fill edit-icon"> 2ª acomod</button>
         </div>
         <div style="display: inline-block; margin-left:30px" class="form-group col-sm-1">
-            <button onclick="mostrarGrupo3('container-prog3')" style="color:blue; border:none; margin-top:15px; margin-right:10px" id="btn-gp1" class="bi bi-plus-square-fill edit-icon"> Adicione 3a</button>
+            <button onclick="mostrarGrupo3('container-prog3')" style="color:blue; font-size:0.8em;border:none; margin-top:15px; margin-right:10px" id="btn-gp1" class="bi bi-plus-square-fill edit-icon"> 3ª acomod</button>
         </div>
     </div>
 </div>
