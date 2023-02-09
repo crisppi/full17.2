@@ -342,7 +342,7 @@ class utiDAO implements utiDAOInterface
 
         $uti = [];
 
-        $stmt = $this->conn->query("SELECT * FROM tb_uti WHERE ORDER BY id_uti asc");
+        $stmt = $this->conn->query("SELECT max(id_internacao) as ultimoReg from tb_internacao");
 
         $stmt->execute();
 
