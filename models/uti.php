@@ -34,4 +34,5 @@ interface utiDAOInterface
   public function destroy($id_uti);
   public function findGeral();
   public function findMaxUTI();
+  public function findAltaUpdate($internadosUTI);
 };

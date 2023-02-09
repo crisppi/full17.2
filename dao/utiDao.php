@@ -148,7 +148,7 @@ class utiDAO implements utiDAOInterface
         return $uti;
         $query = $uti;
     }
-
+    // METODO PARA CRIAR NOVA INTERNACAO EM UTI
     public function create(uti $uti)
     {
 
@@ -287,6 +287,28 @@ class utiDAO implements utiDAOInterface
         // Mensagem de sucesso por editar uti
         $this->message->setMessage("uti atualizado com sucesso!", "success", "list_uti.php");
     }
+    // METODO PARA DAR ALTA DA UTI
+    public function findAltaUpdate($internadosUTI) //ainda nao corrigido
+    {
+
+        $stmt = $this->conn->prepare("UPDATE tb_uti SET
+        fk_internacao_uti = :fk_internacao_uti,
+        data_alta_uti = :data_alta_uti,
+        internado_uti = :internado_uti
+
+        WHERE id_uti = :id_uti 
+      ");
+
+        $stmt->bindParam(":fk_internacao_uti", $internadosUTI->fk_internacao_uti);
+        $stmt->bindParam(":data_alta_uti", $internadosUTI->data_alta_uti);
+        $stmt->bindParam(":internado_uti", $internadosUTI->internado_uti);
+
+        $stmt->bindParam(":id_uti", $internadosUTI->id_uti);
+        $stmt->execute();
+
+        // Mensagem de sucesso por editar uti
+        $this->message->setMessage("uti atualizado com sucesso!", "success", "list_uti.php");
+    }
 
     public function destroy($id_uti)
     {
@@ -345,9 +367,8 @@ class utiDAO implements utiDAOInterface
     public function findUTIInternacao($id_internacao)
     {
 
-        $gestao = [];
-
-        $stmt = $this->conn->query("SELECT ac.id_internacao, ac.internado_int, ac.data_intern_int, ac.fk_paciente_int, ac.internado_uti_int, pa.id_paciente, pa.nome_pac, ac.usuario_create_int, ac.fk_hospital_int, ac.modo_internacao_int, ac.tipo_admissao_int, ho.id_hospital, ho.nome_hosp, ac.especialidade_int, ac.titular_int, ac.data_visita_int, ac.grupo_patologia_int, ac.acomodacao_int, ac.fk_patologia_int, pat.patologia_pat, ut.fk_internacao_uti
+        // $gestao = [];
+        $stmt = $this->conn->query("SELECT ac.id_internacao, ac.internado_int, ac.data_intern_int, ac.fk_paciente_int, ac.internado_uti_int, pa.id_paciente, pa.nome_pac, ac.usuario_create_int, ac.fk_hospital_int, ac.modo_internacao_int, ac.tipo_admissao_int, ho.id_hospital, ho.nome_hosp, ac.especialidade_int, ac.titular_int, ac.data_visita_int, ac.grupo_patologia_int, ac.acomodacao_int, ac.fk_patologia_int, pat.patologia_pat, ut.fk_internacao_uti, ut.id_uti
 
         FROM tb_internacao ac 
 
@@ -363,8 +384,7 @@ class utiDAO implements utiDAOInterface
         inner join tb_uti as ut on
         ac.id_internacao = ut.fk_internacao_uti
 
-        WHERE  ac.id_internacao = ut.fk_internacao_uti
-         
+        WHERE ac.id_internacao = $id_internacao
          ");
 
         $stmt->execute();

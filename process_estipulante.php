@@ -47,57 +47,12 @@ if ($type === "create") {
         $estipulante->numero_est = $numero_est;
         $estipulante->bairro_est = $bairro_est;
 
-        //$estipulante->id_estipulante = $userData->id_estipulante;
 
-        // Upload de imagem do filme ****** nao usaar if para imagem *******
-        /* if (isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {
-
-            $image = $_FILES["image"];
-            $imageTypes = ["image/jpeg", "image/jpg", "image/png"];
-            $jpgArray = ["image/jpeg", "image/jpg"];
-
-            // Checando tipo da imagem
-            if (in_array($image["type"], $imageTypes)) {
-
-                // Checa se imagem é jpg
-                if (in_array($image["type"], $jpgArray)) {
-                    $imageFile = imagecreatefromjpeg($image["tmp_name"]);
-                } else {
-                    $imageFile = imagecreatefrompng($image["tmp_name"]);
-                }
-
-                // Gerando o nome_est da imagem
-                $imageName = $movie->imageGenerateName();
-
-                imagejpeg($imageFile, "./img/movies/" . $imageName, 100);
-
-                $movie->image = $imageName;
-            } else {
-
-                $message->setMessage("Tipo inválido de imagem, insira png ou jpg!", "error", "back");
-            }
-        }
-*/
         $estipulanteDao->create($estipulante);
     } else {
 
         $message->setMessage("Você precisa adicionar pelo menos: nome_est do estipulante!", "error", "back");
-    }/*
-} else if ($type === "delete") {
-    // Recebe os dados do form
-    $id_estipulante = filter_input(INPUT_POST, "id_estipulante");
-
-    $estipulanteDao = new estipulanteDAO($conn, $BASE_URL);
-
-    $estipulante = $estipulanteDao->findById($id_estipulante);
-
-    if ($estipulante) {
-
-        $estipulanteDao->destroy($id_estipulante);
-    } else {
-
-        //$message->setMessage("Informações inválidas!", "error", "index.php");
-    }*/
+    }
 } else if ($type === "update") {
 
     $estipulanteDao = new estipulanteDAO($conn, $BASE_URL);

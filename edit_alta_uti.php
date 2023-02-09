@@ -8,8 +8,10 @@ if (!isset($_SESSION['username'])) {
 require_once("templates/header.php");
 require_once("models/usuario.php");
 require_once("models/internacao.php");
+require_once("models/uti.php");
 require_once("dao/usuarioDao.php");
 require_once("dao/internacaoDao.php");
+require_once("dao/utiDao.php");
 include("array_dados.php");
 
 $internacao = new internacao();
@@ -26,8 +28,10 @@ $internacao = $internacaoDao->joininternacaoHospitalshow($id_internacao);
 extract($internacao);
 
 $internadosUTI = $utiDao->findUTIInternacao($id_internacao);
+// echo "<pre>";
 // extract($internadosUTI);
 print_r($internadosUTI);
+$id_uti = $internadosUTI['0']['id_uti'];
 ?>
 
 <!-- formulario alta -->
@@ -41,26 +45,32 @@ print_r($internadosUTI);
                 <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>">
             </div>
             <div class="form-group col-sm-3">
-                <label class="control-label" for="data_alta_int">Hospital</label>
+                <input type="text" class="form-control" id="id_uti" name="id_uti" value="<?= $id_uti ?>">
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label">Hospital</label>
                 <input type="text" class="form-control" value="<?= $nome_hosp ?>">
             </div>
             <div class="form-group col-sm-3">
-                <label class="control-label" for="data_alta_int">Paciente</label>
+                <label class="control-label">Paciente</label>
                 <input type="text" class="form-control" value="<?= $nome_pac ?>">
             </div>
             <div class="row">
                 <div class="form-group col-sm-2">
-                    <label class="control-label" for="data_alta_int">Data Alta da UTI</label>
-                    <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_int" name="data_alta_int" placeholder="" required>
+                    <label class="control-label" for="data_alta_uti">Data Alta da UTI</label>
+                    <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_uti" name="data_alta_uti" placeholder="" required>
                 </div>
                 <div class="form-group col-sm-2">
                     <input type="hidden" class="form-control" value="Não" id="internado_uti_int" name="internado_uti_int" placeholder="">
                 </div>
                 <div class="form-group col-sm-2">
-                    <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_visita_int" name="data_visita_int" placeholder="">
+                    <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' placeholder="">
                 </div>
                 <div class="form-group col-sm-2">
-                    <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_create_int" name="data_create_int" placeholder="">
+                    <input type="hidden" class="form-control" id="internado_uti" name="internado_uti" value='n' placeholder="">
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' placeholder="">
                 </div>
                 <div class="form-group col-sm-3">
                     <input type="hidden" value="<?= $_SESSION['username']; ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
@@ -84,99 +94,7 @@ print_r($internadosUTI);
     </div>
     </form>
 </div>
-<!-- <script>
-    function mascara(i) {
 
-        var v = i.value;
-
-        if (isNaN(v[v.length - 1])) { // impede entrar outro caractere que não seja número
-            i.value = v.substring(0, v.length - 1);
-            return;
-        }
-
-        i.setAttribute("maxlength", "14");
-        if (v.length == 3 || v.length == 7) i.value += ".";
-        if (v.length == 11) i.value += "-";
-
-    }
-</script>
-<script>
-    function mascara(i, t) {
-
-        var v = i.value;
-
-        if (isNaN(v[v.length - 1])) {
-            i.value = v.substring(0, v.length - 1);
-            return;
-        }
-
-        if (t == "data") {
-            i.setAttribute("maxlength", "10");
-            if (v.length == 2 || v.length == 5) i.value += "/";
-        }
-
-        if (t == "cpf") {
-            i.setAttribute("maxlength", "14");
-            if (v.length == 3 || v.length == 7) i.value += ".";
-            if (v.length == 11) i.value += "-";
-        }
-
-        if (t == "cnpj") {
-            i.setAttribute("maxlength", "18");
-            if (v.length == 2 || v.length == 6) i.value += ".";
-            if (v.length == 10) i.value += "/";
-            if (v.length == 15) i.value += "-";
-        }
-
-        if (t == "cep") {
-            i.setAttribute("maxlength", "9");
-            if (v.length == 5) i.value += "-";
-        }
-
-        if (t == "tel") {
-            if (v[0] == 12) {
-
-                i.setAttribute("maxlength", "10");
-                if (v.length == 5) i.value += "-";
-                if (v.length == 0) i.value += "(";
-
-            } else {
-                i.setAttribute("maxlength", "9");
-                if (v.length == 4) i.value += "-";
-            }
-        }
-    }
-
-    function mascaraTelefone(event) {
-        let tecla = event.key;
-        let telefone = event.target.value.replace(/\D+/g, "");
-
-        if (/^[0-9]$/i.test(tecla)) {
-            telefone = telefone + tecla;
-            let tamanho = telefone.length;
-
-            if (tamanho >= 12) {
-                return false;
-            }
-
-            if (tamanho > 10) {
-                telefone = telefone.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
-            } else if (tamanho > 5) {
-                telefone = telefone.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-            } else if (tamanho > 2) {
-                telefone = telefone.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
-            } else {
-                telefone = telefone.replace(/^(\d*)/, "($1");
-            }
-
-            event.target.value = telefone;
-        }
-
-        if (!["Backsinte", "Delete"].includes(tecla)) {
-            return false;
-        }
-    }
-</script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
 <?php include_once("diversos/backbtn_internacao.php"); ?>

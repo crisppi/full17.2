@@ -65,57 +65,22 @@ if ($type === "create") {
         include_once('cad_internacao.php');
     } else {
         header("Location: javascript:history.back(1)");
-        $message->setMessage("Você precisa adicionar pelo menos: nome da internacao!", "error", "list_internacao.php");
+        $message->setMessage("Você precisa adicionar pelo menos: nome da internacao!", "error", "list_internacao_uti.php");
     }
 } else if ($type === "update") {
 
     // Receber os dados dos inputs
-    $id_internacao = filter_input(INPUT_POST, "id_internacao");
-    $fk_hospital_int = filter_input(INPUT_POST, "fk_hospital_int");
-    $fk_paciente_int = filter_input(INPUT_POST, "fk_paciente_int");
-    $fk_patologia_int = filter_input(INPUT_POST, "fk_patologia_int");
-    $fk_patologia2 = filter_input(INPUT_POST, "fk_patologia2");
-    $internado_int = filter_input(INPUT_POST, "internado_int");
-    $tipo_admissao_int = filter_input(INPUT_POST, "tipo_admissao_int");
-    $modo_internacao_int = filter_input(INPUT_POST, "modo_internacao_int");
-    $especialidade_int = filter_input(INPUT_POST, "especialidade_int");
-    $grupo_patologia_int = filter_input(INPUT_POST, "grupo_patologia_int");
-    $data_visita_int = filter_input(INPUT_POST, "data_visita_int") ?: null;
-    $data_alta_int = filter_input(INPUT_POST, "data_alta_int") ?: NULL;
-    $titular_int = filter_input(INPUT_POST, "titular_int");
-    $acomodacao_int = filter_input(INPUT_POST, "acomodacao_int");
-    $acoes_int = filter_input(INPUT_POST, "acoes_int");
-    $tipo_alta_int = filter_input(INPUT_POST, "tipo_alta_int");
-    $rel_int = filter_input(INPUT_POST, "rel_int");
-    $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
-    $data_create_int = filter_input(INPUT_POST, "data_create_int") ?: null;
+    $id_uti = filter_input(INPUT_POST, "id_uti");
+    $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti");
+    $internado_uti = filter_input(INPUT_POST, "internado_uti");
 
-    // $internacao = new internacao();
+    $UTIData->id_uti = $id_uti;
+    $UTIData->data_alta_uti = $data_alta_uti;
+    $UTIData->internado_uti = $internado_uti;
 
-    $internacaoData = $internacaoDao->findById($id_internacao);
+    $utiDao->findAltaUpdate($UTIData);
 
-    $internacaoData->id_internacao = $id_internacao;
-    $internacaoData->fk_hospital_int = $fk_hospital_int;
-    $internacaoData->fk_paciente_int = $fk_paciente_int;
-    $internacaoData->fk_patologia_int = $fk_patologia_int;
-    $internacaoData->fk_patologia2 = $fk_patologia2;
-    $internacaoData->internado_int = $internado_int;
-    $internacaoData->modo_internacao_int = $modo_internacao_int;
-    $internacaoData->tipo_admissao_int = $tipo_admissao_int;
-    $internacaoData->grupo_patologia_int = $grupo_patologia_int;
-    $internacaoData->especialidade_int = $especialidade_int;
-    $internacaoData->data_visita_int = $data_visita_int;
-    $internacaoData->data_alta_int = $data_alta_int;
-    $internacaoData->titular_int = $titular_int;
-    $internacaoData->acomodacao_int = $acomodacao_int;
-    $internacaoData->acoes_int = $acoes_int;
-    $internacaoData->tipo_alta_int = $tipo_alta_int;
-    $internacaoData->rel_int = $rel_int;
-    $internacaoData->usuario_create_int = $usuario_create_int;
-    $internacaoData->data_create_int = $data_create_int;
-    $internacaoDao->update($internacaoData);
-
-    include_once('list_internacao.php');
+    include_once('list_internacao_uti.php');
 }
 
 $type = filter_input(INPUT_POST, "type");

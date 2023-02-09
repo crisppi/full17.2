@@ -94,11 +94,14 @@
     $limite_pag = filter_input(INPUT_GET, 'limite_pag') ? filter_input(INPUT_GET, 'limite_pag') : 10;
     $pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
     $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
+    $uti_internado = 's';
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
     $condicoes = [
         strlen($pesquisa_nome) ? 'ho.nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
         strlen($pesquisa_pac) ? 'pa.nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
-        strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : NULL
+        strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : NULL,
+        strlen($uti_internado) ? 'internado_uti_int = "' . $uti_internado . '"' : NULL,
+
     ];
     $condicoes = array_filter($condicoes);
     // REMOVE POSICOES VAZIAS DO FILTRO
@@ -176,7 +179,7 @@
                             <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:green; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>
 
                             <form class="d-inline-block delete-form" action="edit_alta_uti.php" method="get">
-                                <input type="hidden" name="type" value="alta">
+                                <input type="hidden" name="type" value="update">
                                 <!-- <input type="hidden" name="alta" value="alta"> -->
                                 <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
                                 <button type="hidden" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block bi bi-door-open"></i></button>
