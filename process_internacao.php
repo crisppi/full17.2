@@ -2,8 +2,9 @@
 require_once("globals.php");
 require_once("db.php");
 require_once("models/internacao.php");
-// require_once("models/message.php");
-// require_once("dao/usuarioDao.php");
+require_once("models/message.php");
+require_once("models/usuario.php");
+require_once("dao/usuarioDao.php");
 require_once("dao/internacaoDao.php");
 
 
@@ -59,6 +60,7 @@ if ($type === "create") {
         $internacao->data_create_int = $data_create_int;
 
         $internacaoDao->create($internacao);
+
         include_once('cad_internacao_niveis.php');
     } else {
         header("Location: javascript:history.back(1)");
@@ -110,6 +112,7 @@ if ($type === "create") {
     $internacaoData->rel_int = $rel_int;
     $internacaoData->usuario_create_int = $usuario_create_int;
     $internacaoData->data_create_int = $data_create_int;
+
     $internacaoDao->update($internacaoData);
 
     include_once('cad_internacao_niveis.php');
@@ -117,20 +120,20 @@ if ($type === "create") {
 
 $type = filter_input(INPUT_POST, "type");
 
-if ($type === "delete") {
-    // Recebe os dados do form
-    $id_internacao = filter_input(INPUT_GET, "id_internacao");
+// if ($type === "delete") {
+//     // Recebe os dados do form
+//     $id_internacao = filter_input(INPUT_GET, "id_internacao");
 
-    $internacaoDao = new internacaoDAO($conn, $BASE_URL);
+//     $internacaoDao = new internacaoDAO($conn, $BASE_URL);
 
-    $internacao = $internacaoDao->findById($id_internacao);
-    if ($internacao) {
+//     $internacao = $internacaoDao->findById($id_internacao);
+//     if ($internacao) {
 
-        $internacaoDao->destroy($id_internacao);
+//         $internacaoDao->destroy($id_internacao);
 
-        include_once('list_internacao.php');
-    } else {
+//         include_once('cad_internacao_niveis.php');
+//     } else {
 
-        $message->setMessage("Informações inválidas!", "error", "list_internacao.php");
-    }
-}
+//         $message->setMessage("Informações inválidas!", "error", "cad_internacao_niveis.php");
+//     }
+// }

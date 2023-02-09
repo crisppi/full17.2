@@ -167,7 +167,7 @@ class internacaoDAO implements internacaoDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por adicionar filme
-        $this->message->setMessage("internacao adicionado com sucesso!", "success", "list_internacao.php");
+        $this->message->setMessage("internacao adicionado com sucesso!", "success", "cad_internacao_niveis.php");
     }
 
     public function update(internacao $internacao)
@@ -247,6 +247,33 @@ class internacaoDAO implements internacaoDAOInterface
         $internacao = $stmt->fetchAll();
 
         return $internacao;
+    }
+    public function findLast($lastInternacao)
+    {
+
+        $internacao = [];
+
+        $stmt = $this->conn->query("SELECT * FROM tb_internacao where id_internacao = $lastInternacao");
+
+        $stmt->execute();
+
+        $internacao = $stmt->fetchAll();
+
+        return $internacao;
+    }
+
+    public function findLastId()
+    {
+
+        $internacao = [];
+
+        $stmt = $this->conn->query("SELECT max(id_internacao) from tb_internacao");
+
+        $stmt->execute();
+
+        $internacaoID = $stmt->fetchAll();
+
+        return $internacaoID;
     }
     public function joininternacaoHospitalshow($id_internacao)
 
@@ -453,9 +480,8 @@ class internacaoDAO implements internacaoDAOInterface
     public function findByAmbos($pesquisa_hosp, $ativo, $limite, $inicio)
     {
     }
-    // public 4 -> selecao de ambos filtros
-    // public 4 -> selecao sem filtros
 
+    // public 4 -> selecao sem filtros
     public function findByAll($limite, $inicio)
 
     {
@@ -556,10 +582,9 @@ $pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
 
 # Atribui a variável inicio o inicio de onde os registros vão ser
 # mostrados por página, exemplo 0 à 10, 11 à 20 e assim por diante
+
 $inicio = ($pg * $limite) - $limite;
 $pesquisa_hosp = "";
 $pesqInternado = "";
 # seleciona o total de registros  
 $sql_Total = 'SELECT id_internacao FROM tb_internacao';
-
-// $sql_Total = 'SELECT COUNT(id_internacao) FROM tb_internacao';

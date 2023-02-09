@@ -106,7 +106,7 @@
     $condicoes = array_filter($condicoes);
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
-
+    print_r($where);
     // QUANTIDADE InternacaoS
     $qtdIntItens1 = $QtdTotalInt->QtdInternacao($where);
     $qtdIntItens = $QtdTotalInt->findTotal();
