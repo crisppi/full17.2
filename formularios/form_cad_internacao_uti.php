@@ -1,7 +1,7 @@
 <div id="container-uti" class="container" style="display:none">
     <br>
     <h4 class="page-title">Cadastrar dados UTI</h4>
-    <p class="page-description">Adicione informações sobre a gestão que foi identificada</p>
+    <p class="page-description">Adicione informações sobre a internação na UTI</p>
     <form class="formulario" action="<?= $BASE_URL ?>process_uti.php" id="add-acomodacao-form" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="type" value="create">
         <!-- DADOS PARA FORMULARIO INTERNACAO -->
@@ -28,8 +28,8 @@
             <div class="form-group col-sm-2">
                 <label for="internado_uti">Internado UTI</label>
                 <select class="form-control" id="internado_uti" name="internado_uti">
-                    <option value="Sim">Sim</option>
-                    <option value="Não">Não</option>
+                    <option value="s">Sim</option>
+                    <option value="n">Não</option>
                 </select>
             </div>
             <div class="form-group col-sm-2">
@@ -64,20 +64,26 @@
                 <label for="data_internacao_uti">Data internação UTI</label>
                 <input type="date" class="form-control" id="data_internacao_uti" name="data_internacao_uti">
             </div>
+<<<<<<< HEAD
 
+=======
+            <div class="form-group col-sm-1">
+                <input type="hidden" class="form-control" value="s" id="internacao_int" name="internacao_int">
+            </div>
+>>>>>>> 54f654b424722e239f9deca5d6936b0863fef2d2
             <div class="form-group row">
                 <div class="form-group col-sm-2">
                     <label for="vm_uti">VM</label>
                     <select class="form-control" id="vm_uti" name="vm_uti">
-                        <option value="Não">Não</option>
-                        <option value="Sim">Sim</option>
+                        <option value="n">Não</option>
+                        <option value="s">Sim</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="dva_uti">DVA</label>
                     <select class="form-control" id="dva_uti" name="dva_uti">
-                        <option value="Não">Não</option>
-                        <option value="Sim">Sim</option>
+                        <option value="n">Não</option>
+                        <option value="s">Sim</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-2">
