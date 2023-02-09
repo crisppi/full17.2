@@ -1,7 +1,6 @@
 <?php
 
-date_default_timezone_set('America/Sao_Paulo');
-header("Content-type: text/html; charset=utf-8");
+
 ?>
 <div id="container-prorrog" class="container" style="display:none">
     <br>

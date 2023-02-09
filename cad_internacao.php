@@ -3,9 +3,9 @@
 require_once("templates/header.php");
 
 include_once("models/internacao.php");
-require_once("dao/internacaoDao.php");
+include_once("dao/internacaoDao.php");
 
-require_once("models/message.php");
+include_once("models/message.php");
 
 include_once("models/hospital.php");
 include_once("dao/hospitalDao.php");
@@ -14,7 +14,7 @@ include_once("models/patologia.php");
 include_once("dao/patologiaDao.php");
 
 include_once("models/paciente.php");
-require_once("dao/pacienteDAO.php");
+include_once("dao/pacienteDAO.php");
 
 include_once("models/uti.php");
 include_once("dao/utiDao.php");

@@ -6,10 +6,10 @@
         <input type="hidden" name="type" value="create">
         <!-- DADOS PARA FORMULARIO INTERNACAO -->
         <div class="form-group col-sm-1">
-            <input type="text" class="form-control" value="s" id="internacao_uti_int" name="internacao_uti_int">
+            <input type="text" class="form-control" value="deu" id="internacao_uti_int" name="internacao_uti_int">
         </div>
         <div class="form-group col-sm-1">
-            <input type="text" class="form-control" value="s" id="internado_uti_int" name="internado_uti_int">
+            <input type="text" class="form-control" value="deu" id="internado_uti_int" name="internado_uti_int">
         </div>
         <div>
             <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= ($ultimoReg) ?> ">
@@ -64,13 +64,7 @@
                 <label for="data_internacao_uti">Data internação UTI</label>
                 <input type="date" class="form-control" id="data_internacao_uti" name="data_internacao_uti">
             </div>
-<<<<<<< HEAD
 
-=======
-            <div class="form-group col-sm-1">
-                <input type="hidden" class="form-control" value="s" id="internacao_int" name="internacao_int">
-            </div>
->>>>>>> 54f654b424722e239f9deca5d6936b0863fef2d2
             <div class="form-group row">
                 <div class="form-group col-sm-2">
                     <label for="vm_uti">VM</label>

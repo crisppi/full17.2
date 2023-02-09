@@ -59,10 +59,10 @@ if ($type === "create") {
         $internacao->data_create_int = $data_create_int;
 
         $internacaoDao->create($internacao);
-        include_once('cad_internacao.php');
+        include_once('cad_internacao_niveis.php');
     } else {
         header("Location: javascript:history.back(1)");
-        $message->setMessage("Você precisa adicionar pelo menos: nome da internacao!", "error", "list_internacao.php");
+        $message->setMessage("Você precisa adicionar pelo menos: nome da internacao!", "error", "cad_internacao_niveis.php");
     }
 } else if ($type === "update") {
 
@@ -112,7 +112,7 @@ if ($type === "create") {
     $internacaoData->data_create_int = $data_create_int;
     $internacaoDao->update($internacaoData);
 
-    include_once('list_internacao.php');
+    include_once('cad_internacao_niveis.php');
 }
 
 $type = filter_input(INPUT_POST, "type");

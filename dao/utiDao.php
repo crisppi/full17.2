@@ -151,7 +151,6 @@ class utiDAO implements utiDAOInterface
     // METODO PARA CRIAR NOVA INTERNACAO EM UTI
     public function create(uti $uti)
     {
-
         $stmt = $this->conn->prepare("INSERT INTO tb_uti (
         fk_internacao_uti, 
         fk_visita_uti, 
@@ -212,6 +211,7 @@ class utiDAO implements utiDAOInterface
         ");
 
         $query->bindParam(":internacao_uti_int", $uti->internacao_uti_int);
+        $query->bindParam(":id_internacao", $uti->id_internacao);
 
         $query->execute();
 

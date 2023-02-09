@@ -17,7 +17,8 @@ $type = filter_input(INPUT_POST, "type");
 // Resgata dados do usuário
 
 if ($type === "create") {
-
+    echo "<pre>";
+    print_r($_POST);
     // Receber os dados dos inputs
     $fk_internacao_uti = filter_input(INPUT_POST, "fk_internacao_uti");
     $fk_visita_uti = filter_input(INPUT_POST, "fk_visita_uti");
@@ -36,11 +37,10 @@ if ($type === "create") {
     $vm_uti = filter_input(INPUT_POST, "vm_uti");
     $id_internacao = filter_input(INPUT_POST, "id_internacao");
     $internacao_uti_int = filter_input(INPUT_POST, "internacao_uti_int");
-
     $uti = new uti();
 
     // Validação mínima de dados
-    if (!empty($fk_internacao_uti)) {
+    if (3 < 4) {
 
         $uti->fk_internacao_uti = $fk_internacao_uti;
         $uti->fk_visita_uti = $fk_visita_uti;

@@ -9,7 +9,7 @@
         <div class="form-group row">
             <div class="form-group col-sm-3">
                 <label class="control-label col-sm-3 " for="fk_hospital_int">Hospital</label>
-                <select class="form-control" id="fk_hospital_int" name="fk_hospital_int">
+                <select class="form-control" id="fk_hospital_int" name="fk_hospital_int" required>
                     <option value="<?= $hospital["nome_hosp"] ?>">Selecione o Hospital</option>
                     <?php foreach ($hospitals as $hospital) : ?>
                         <option value="<?= $hospital["id_hospital"] ?>"><?= $hospital["nome_hosp"] ?></option>
@@ -18,7 +18,7 @@
             </div>
             <div class="form-group col-sm-3">
                 <label class="control-label" for="fk_paciente_int">Paciente</label>
-                <select class="form-control" id="fk_paciente_int" name="fk_paciente_int">
+                <select class="form-control" id="fk_paciente_int" name="fk_paciente_int" required>
                     <option value="">Selecione o paciente</option>
                     <?php foreach ($pacientes as $paciente) : ?>
                         <option value="<?= $paciente["id_paciente"] ?>"><?= $paciente["nome_pac"] ?></option>
