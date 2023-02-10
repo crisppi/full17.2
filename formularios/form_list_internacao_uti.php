@@ -16,6 +16,9 @@
     include_once("models/hospital.php");
     include_once("dao/hospitalDao.php");
 
+    include_once("models/uti.php");
+    include_once("dao/utiDao.php");
+
     include_once("models/pagination.php");
 
     $Internacao_geral = new internacaoDAO($conn, $BASE_URL);
@@ -24,13 +27,15 @@
     $pacienteDao = new pacienteDAO($conn, $BASE_URL);
     $pacientes = $pacienteDao->findGeral($limite, $inicio);
 
-    $hospital_geral = new HospitalDAO($conn, $BASE_URL);
+    $hospital_geral = new hospitalDAO($conn, $BASE_URL);
     $hospitals = $hospital_geral->findGeral($limite, $inicio);
 
     $patologiaDao = new patologiaDAO($conn, $BASE_URL);
     $patologias = $patologiaDao->findGeral();
 
     $internacao = new internacaoDAO($conn, $BASE_URL);
+
+    $uti = new utiDAO($conn, $BASE_URL);
 
     ?>
     <!-- FORMULARIO DE PESQUISAS -->
@@ -126,7 +131,7 @@
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $order = $ordenar;
-    $query = $internacao->selectAllInternacao($where, $order, $obLimite);
+    $query = $uti->selectAllUTI($where, $order, $obLimite);
 
     // GETS 
     unset($_GET['pag']);

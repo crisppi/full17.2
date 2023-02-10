@@ -271,21 +271,40 @@ class utiDAO implements utiDAOInterface
 
         //MONTA A QUERY
         $query = $this->conn->query('SELECT 
-    ut.id_uti, 
-    ut.id_internacao, 
-    ut.internado_int,
-    pa.id_paciente,
-    pa.nome_pac,
-    ho.id_hospital, 
-    ho.nome_hosp 
-
-    FROM tb_uti ut 
-
-        INNER JOIN tb_hospital as ho On  
-        ac.fk_hospital_int = ho.id_hospital
-
-        LEFT JOIN tb_paciente as pa on
-        ac.fk_paciente_int = pa.id_paciente ' . $where . ' ' . $order . ' ' . $limit);
+        uti.id_uti,
+        uti.fk_internacao_uti,
+        uti.criterios_uti, 
+        uti.data_alta_uti, 
+        uti.dva_uti, 
+        uti.data_internacao_uti, 
+        uti.especialidade_uti, 
+        uti.internacao_uti, 
+        uti.internado_uti, 
+        uti.just_uti,
+        uti.motivo_uti,
+        uti.rel_uti,
+        uti.saps_uti,
+        uti.score_uti,
+        uti.vm_uti,
+        pa.id_paciente,
+        pa.nome_pac,
+        ho.id_hospital, 
+        ho.nome_hosp,
+        ac.id_internacao,
+        ac.fk_hospital_int,
+        ac.data_intern_int,
+        ac.fk_paciente_int
+        
+        FROM tb_uti uti 
+    
+            INNER JOIN tb_internacao AS ac ON
+            uti.fk_internacao_ges = ac.id_internacao
+            
+            INNER JOIN tb_hospital AS ho ON  
+            ac.fk_hospital_int = ho.id_hospital
+    
+            INNER JOIN tb_paciente AS pa ON
+            ac.fk_paciente_int = pa.id_paciente ' . $where . ' ' . $order . ' ' . $limit);
 
         $query->execute();
 
