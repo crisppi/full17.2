@@ -21,8 +21,8 @@
 
     include_once("models/pagination.php");
 
-    $Internacao_geral = new internacaoDAO($conn, $BASE_URL);
-    $Internacaos = $Internacao_geral->findGeral();
+    $internacao_geral = new internacaoDAO($conn, $BASE_URL);
+    $internacaos = $internacao_geral->findGeral();
 
     $pacienteDao = new pacienteDAO($conn, $BASE_URL);
     $pacientes = $pacienteDao->findGeral($limite, $inicio);
