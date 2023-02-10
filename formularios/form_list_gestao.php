@@ -16,6 +16,9 @@
     include_once("models/hospital.php");
     include_once("dao/hospitalDao.php");
 
+    include_once("models/gestao.php");
+    include_once("dao/gestaoDao.php");
+
     include_once("models/pagination.php");
 
     $Internacao_geral = new internacaoDAO($conn, $BASE_URL);
@@ -23,6 +26,9 @@
 
     $pacienteDao = new pacienteDAO($conn, $BASE_URL);
     $pacientes = $pacienteDao->findGeral($limite, $inicio);
+
+    $gestaoDao = new gestaoDAO($conn, $BASE_URL);
+    $gestaos = $gestaoDao->findGeral($limite, $inicio);
 
     $hospital_geral = new HospitalDAO($conn, $BASE_URL);
     $hospitals = $hospital_geral->findGeral($limite, $inicio);
@@ -37,17 +43,28 @@
     <div class="container">
         <div class="container py-2">
             <form class="formulario visible" action="" id="select-internacao-form" method="GET">
-                <h6 style="margin-left: 30px; padding-top:10px" class="page-title">Pesquisa internações</h6>
+                <h6 style="margin-left: 30px; padding-top:10px" class="page-title">Pesquisa gestão</h6>
                 <?php $pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
-                $pesqInternado = filter_input(INPUT_GET, 'pesqInternado');
+                $pesqGestao = filter_input(INPUT_GET, 'pesqGestao');
                 $limite_pag = filter_input(INPUT_GET, 'limite_pag');
                 $pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
                 $ordenar = filter_input(INPUT_GET, 'ordenar');
                 ?>
+
                 <div class="form-group row">
+                    <div style="margin-left:20px" class="form-group col-sm-2">
+                        <label>Tipo Gestão</label>
+                        <select class="form-control mb-2" id="pesqGestao" name="pesqGestao">
+                            <option value="">Selecione a gestão</option>
+                            <option value="home_care" <?= $pesqGestao == 'home_care' ? 'selected' : null ?>>Home care</option>
+                            <option value="desospitalizacao" <?= $pesqGestao == 'n' ? 'selected' : null ?>>desospitalizacao</option>
+                            <option value="opme" <?= $pesqGestao == 'opme' ? 'selected' : null ?>>opme</option>
+                            <option value="alto" <?= $pesqGestao == 'alto' ? 'selected' : null ?>>alto</option>
+                        </select>
+                    </div>
                     <div class="form-group col-sm-3">
-                        <label style="margin-left: 30px;">Pesquisa por Hospital</label>
-                        <input style="margin-left: 30px;" class="form-control" type="text" name="pesquisa_nome" placeholder="Selecione o Hospital" value="<?= $pesquisa_nome ?>">
+                        <label style="margin-left: 20px;">Pesquisa por Hospital</label>
+                        <input style="margin-left: 20px;" class="form-control" type="text" name="pesquisa_nome" placeholder="Selecione o Hospital" value="<?= $pesquisa_nome ?>">
                     </div>
                     <div class="form-group col-sm-3">
                         <label style="margin-left: 30px;">Pesquisa por Paciente</label>
@@ -55,18 +72,10 @@
                         <input style="margin-left: 30px;" class="form-control" type="text" name="pesquisa_pac" placeholder="Selecione o Paciente" value="<?= $pesquisa_pac ?>">
                     </div>
 
-                    <div style="margin-left:20px" class="form-group col-sm-3">
-                        <label>Internados</label>
-                        <select class="form-control mb-3" id="pesqInternado" name="pesqInternado">
-                            <option value="">Busca por Internados</option>
-                            <option value="s" <?= $pesqInternado == 's' ? 'selected' : null ?>>Sim</option>
-                            <option value="n" <?= $pesqInternado == 'n' ? 'selected' : null ?>>Não</option>
-                        </select>
-                    </div>
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Limite</label>
                         <select class="form-control mb-3" id="limite_pag" name="limite_pag">
-                            <option value="">Registros por página</option>
+                            <option value="">Reg por página</option>
                             <option value="5" <?= $limite_pag == '5' ? 'selected' : null ?>>5</option>
                             <option value="10" <?= $limite_pag == '10' ? 'selected' : null ?>>10</option>
                             <option value="20" <?= $limite_pag == '20' ? 'selected' : null ?>>20</option>
@@ -77,15 +86,15 @@
                         <label>Classificar</label>
                         <select class="form-control mb-3" id="ordenar" name="ordenar">
                             <option value="">Classificar por</option>
+                            <option value="id_internacao" <?= $ordenar == 'id_internacao' ? 'selected' : null ?>>Internação</option>
                             <option value="nome_pac" <?= $ordenar == 'nome_pac' ? 'selected' : null ?>>Paciente</option>
                             <option value="nome_hosp" <?= $ordenar == 'nome_hosp' ? 'selected' : null ?>>Hospital</option>
-                            <option value="id_internacao" <?= $ordenar == 'id_internacao' ? 'selected' : null ?>>Internação</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
-                        <button type="submit" class="btn btn-primary mb-1">Pesquisar</button>
+                        <button type="submit" class="btn btn-primary mb-1">Buscar</button>
                     </div>
                 </div>
         </div>
@@ -93,8 +102,40 @@
     </div>
 
     <!-- BASE DAS PESQUISAS -->
+
     <?php
+
+    // SELECAO DA ENTRADA DO INPUT DE PESQUISA GESTAO
+    $pesqGestao = filter_input(INPUT_GET, 'pesqGestao');
+
+    if (isset(($_GET))); {
+        if ($pesqGestao == 'home_care') {
+            $gestao = "home = sim";
+            print_r($gestao);
+        }
+    };
+    if (isset(($_GET))); {
+        if ($pesqGestao == 'desospitalizacao') {
+            $gestao = "desospitalizacao = sim";
+            print_r($gestao);
+        }
+    };
+    if (isset(($_GET))); {
+        if ($pesqGestao == 'opme') {
+            $gestao = "opme = sim";
+            print_r($gestao);
+        }
+    };
+    if (isset(($_GET))); {
+        if ($pesqGestao == 'alto') {
+            $gestao = "alto = sim";
+            print_r($gestao);
+        }
+    };
+
+
     //Instanciando a classe
+
     $QtdTotalInt = new internacaoDAO($conn, $BASE_URL);
 
     // METODO DE BUSCA DE PAGINACAO
@@ -103,19 +144,18 @@
     $limite_pag = filter_input(INPUT_GET, 'limite_pag') ? filter_input(INPUT_GET, 'limite_pag') : 10;
     $pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
     $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
-    $uti_internado = 's';
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
     $condicoes = [
         strlen($pesquisa_nome) ? 'ho.nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
         strlen($pesquisa_pac) ? 'pa.nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
-        strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : NULL,
-        strlen($uti_internado) ? 'internado_uti_int = "' . $uti_internado . '"' : NULL,
-
+        strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : NULL
     ];
     $condicoes = array_filter($condicoes);
+
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
-    // QUANTIDADE InternacaoS
+
+    // QUANTIDADE Internacao
     $qtdIntItens1 = $QtdTotalInt->QtdInternacao($where);
     $qtdIntItens = $QtdTotalInt->findTotal();
 
@@ -126,7 +166,7 @@
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $order = $ordenar;
-    $query = $internacao->selectAllInternacao($where, $order, $obLimite);
+    $query = $gestaoDao->selectAllGestao($where, $order, $obLimite);
 
     // GETS 
     unset($_GET['pag']);
@@ -145,7 +185,7 @@
     }
     ?>
     <div class="container">
-        <h6 class="page-title">Relatório de internações - UTI</h6>
+        <h6 class="page-title">Relatório Gestão</h6>
         <table class="table table-sm table-striped table-bordered table-hover table-condensed">
             <thead>
                 <tr>
@@ -154,11 +194,11 @@
                     <th scope="col">Hospital</th>
                     <th scope="col">Paciente</th>
                     <th scope="col">Data internação</th>
-                    <th scope="col">Modo Admissão</th>
-                    <th scope="col">Médico</th>
-                    <th scope="col">UTI</th>
-                    <th scope="col">Int UTI</th>
-                    <th scope="col">Relatório</th>
+                    <th scope="col">Home care</th>
+                    <th scope="col">Desospitalização</th>
+                    <th scope="col">OPME</th>
+                    <th scope="col">Alto Custo</th>
+                    <th scope="col">Evento Adverso</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -177,22 +217,47 @@
                         <td scope="row" class="nome-coluna-table"><?= $intern["nome_hosp"] ?></td>
                         <td scope="row"><?= $intern["nome_pac"] ?></td>
                         <td scope="row"><?= $intern["data_intern_int"] ?></td>
-                        <td scope="row"><?= $intern["tipo_admissao_int"] ?></td>
-                        <td scope="row"><?= $intern["titular_int"] ?></td>
-                        <td scope="row"><?= $intern["internacao_uti_int"] ?></td>
-                        <td scope="row"><?= $intern["internado_uti_int"] ?></td>
-                        <td scope="row"><?= $intern["rel_int"] ?></td>
+                        <td scope="row"><?php if ($intern["home_care_ges"] == "s") {
+                                            echo "Sim";
+                                        } else {
+                                            echo "Não";
+                                        }; ?></td>
+                        <td scope="row"><?php if ($intern["desospitalizacao_ges"] == "s") {
+                                            echo "Sim";
+                                        } else {
+                                            echo "Não";
+                                        }; ?>
+                        </td>
+                        <td scope="row"><?php if ($intern["opme_ges"] == "s") {
+                                            echo "Sim";
+                                        } else {
+                                            echo "Não";
+                                        }; ?></td>
+                        <td scope="row"><?php if ($intern["alto_custo_ges"] == "s") {
+                                            echo "Sim";
+                                        } else {
+                                            echo "Não";
+                                        }; ?></td>
+                        <td scope="row"><?php if ($intern["evento_adverso_ges"] == "s") {
+                                            echo "Sim";
+                                        } else {
+                                            echo "Não";
+                                        }; ?></td>
 
                         <td class="action">
-                            <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:green; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>
+                            <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:orange; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>
+                            <a href="<?= $BASE_URL ?>cad_visita.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:black; font-weigth:bold; margin-left:5px;margin-right:5px" name="type" value="visita" class="aparecer-acoes bi bi-file-text"></i></a>
 
-                            <form class="d-inline-block delete-form" action="edit_alta_uti.php" method="get">
-                                <input type="hidden" name="type" value="update">
-                                <!-- <input type="hidden" name="alta" value="alta"> -->
+                            <form class="d-inline-block delete-form" action="edit_alta.php" method="get">
+                                <input type="hidden" name="type" value="alta">
                                 <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
                                 <button type="hidden" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block bi bi-door-open"></i></button>
                             </form>
-
+                            <form class="d-inline-block delete-form" action="del_internacao.php" method="POST">
+                                <input type="hidden" name="type" value="delete">
+                                <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
+                                <button type="submit" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block aparecer-acoes bi bi-x-square-fill delete-icon"></i></button>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach; ?>

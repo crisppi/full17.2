@@ -138,6 +138,8 @@ class internacaoDAO implements internacaoDAOInterface
            :modo_internacao_int, 
            :tipo_admissao_int, 
            :acoes_int, 
+           :internado_uti_int,
+           :internacao_uti_int,
            :titular_int, 
            :data_visita_int, 
            :grupo_patologia_int,
@@ -159,6 +161,8 @@ class internacaoDAO implements internacaoDAOInterface
         $stmt->bindParam(":especialidade_int", $internacao->especialidade_int);
         $stmt->bindParam(":data_create_int", $internacao->data_create_int);
         $stmt->bindParam(":usuario_create_int", $internacao->usuario_create_int);
+        $stmt->bindParam(":internado_uti_int", $internacao->internado_uti_int);
+        $stmt->bindParam(":internacao_uti_int", $internacao->internacao_uti_int);
         $stmt->bindParam(":data_visita_int", $internacao->data_visita_int);
         $stmt->bindParam(":grupo_patologia_int", $internacao->grupo_patologia_int);
         $stmt->bindParam(":titular_int", $internacao->titular_int);
@@ -512,6 +516,8 @@ class internacaoDAO implements internacaoDAOInterface
 
         return $QtdTotal;
     }
+
+    // MODELO DE FILTRO COM SELECT ATUAL COM FILTROS E PAGINACAO
     public function selectAllInternacao($where = null, $order = null, $limit = null)
     {
         //DADOS DA QUERY
@@ -550,7 +556,7 @@ class internacaoDAO implements internacaoDAOInterface
         iNNER JOIN tb_hospital as ho On  
         ac.fk_hospital_int = ho.id_hospital
 
-        left join tb_paciente as pa on
+        iNNER join tb_paciente as pa on
         ac.fk_paciente_int = pa.id_paciente ' . $where . ' ' . $order . ' ' . $limit);
 
         $query->execute();

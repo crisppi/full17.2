@@ -66,11 +66,20 @@
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Limite</label>
                         <select class="form-control mb-3" id="limite_pag" name="limite_pag">
-                            <option value="">Registros por página</option>
+                            <option value="">Reg por página</option>
                             <option value="5" <?= $limite_pag == '5' ? 'selected' : null ?>>5</option>
                             <option value="10" <?= $limite_pag == '10' ? 'selected' : null ?>>10</option>
                             <option value="20" <?= $limite_pag == '20' ? 'selected' : null ?>>20</option>
                             <option value="50" <?= $limite_pag == '50' ? 'selected' : null ?>>50</option>
+                        </select>
+                    </div>
+                    <div style="margin-left:20px" class="form-group col-sm-1">
+                        <label>Classificar</label>
+                        <select class="form-control mb-3" id="ordenar" name="ordenar">
+                            <option value="">Classificar por</option>
+                            <option value="id_internacao" <?= $ordenar == 'id_internacao' ? 'selected' : null ?>>Internação</option>
+                            <option value="nome_pac" <?= $ordenar == 'nome_pac' ? 'selected' : null ?>>Paciente</option>
+                            <option value="nome_hosp" <?= $ordenar == 'nome_hosp' ? 'selected' : null ?>>Hospital</option>
                         </select>
                     </div>
                 </div>
@@ -186,7 +195,6 @@
 
                             <form class="d-inline-block delete-form" action="edit_alta.php" method="get">
                                 <input type="hidden" name="type" value="alta">
-                                <!-- <input type="hidden" name="alta" value="alta"> -->
                                 <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
                                 <button type="hidden" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block bi bi-door-open"></i></button>
                             </form>

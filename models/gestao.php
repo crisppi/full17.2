@@ -31,4 +31,5 @@ interface gestaoDAOInterface
   public function update(gestao $gestao);
   public function destroy($id_gestao);
   public function findGeral();
+  public function selectAllGestao($where = null, $order = null, $limit = null);
 };

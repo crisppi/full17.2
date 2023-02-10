@@ -148,7 +148,7 @@ class utiDAO implements utiDAOInterface
         return $uti;
         $query = $uti;
     }
-    // METODO PARA CRIAR NOVA INTERNACAO EM UTI
+    // METODO PARA CRIAR NOVA INTERNACAO EM UTI ********** concluir *******
     public function create(uti $uti)
     {
         $stmt = $this->conn->prepare("INSERT INTO tb_uti (
@@ -205,7 +205,8 @@ class utiDAO implements utiDAOInterface
         $stmt->execute();
 
         $query = $this->conn->prepare("UPDATE tb_internacao SET
-        internacao_uti_int = :internacao_uti_int
+        internacao_uti_int = :internacao_uti_int,
+        internado_uti_int = :internado_uti_int
         
         WHERE id_internacao = :id_internacao
         ");
@@ -257,6 +258,40 @@ class utiDAO implements utiDAOInterface
 
         // Mensagem de sucesso por editar uti
         $this->message->setMessage("uti atualizado com sucesso!", "success", "list_uti.php");
+    }
+
+
+    // METODO PESQUISA UTI NOVA QUERY COMPLETA
+    public function selectAllUTI($where = null, $order = null, $limit = null)
+    {
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+
+        //MONTA A QUERY
+        $query = $this->conn->query('SELECT 
+    ut.id_uti, 
+    ut.id_internacao, 
+    ut.internado_int,
+    pa.id_paciente,
+    pa.nome_pac,
+    ho.id_hospital, 
+    ho.nome_hosp 
+
+    FROM tb_uti ut 
+
+        INNER JOIN tb_hospital as ho On  
+        ac.fk_hospital_int = ho.id_hospital
+
+        LEFT JOIN tb_paciente as pa on
+        ac.fk_paciente_int = pa.id_paciente ' . $where . ' ' . $order . ' ' . $limit);
+
+        $query->execute();
+
+        $uti = $query->fetchAll();
+
+        return $uti;
     }
     public function findByIdUpdate($uti) //ainda nao corrigido
     {

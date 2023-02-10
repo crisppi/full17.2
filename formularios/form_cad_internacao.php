@@ -37,10 +37,17 @@
             <div class="form-group col-sm-1">
                 <label class="control-label" for="internado_int">Internado</label>
                 <select class="form-control" id="internado_int" name="internado_int">
-                    <option value="Sim">Sim</option>
-                    <option value="Não">Não</option>
+                    <option value="s">Sim</option>
+                    <option value="n">Não</option>
                 </select>
             </div>
+            <div class="form-group col-sm-1">
+                <input type="hidden" class="form-control" value="n" id="internado_uti_int" name="internado_uti_int">
+            </div>
+            <div class="form-group col-sm-1">
+                <input type="hidden" class="form-control" value="n" id="internacao_uti_int" name="internacao_uti_int">
+            </div>
+
         </div>
         <div class="row">
             <div class="form-group col-sm-2">
@@ -122,8 +129,8 @@
                     <textarea type="textarea" rows="10" class="form-control" id="rel_int" name="rel_int" placeholder="Relatório da auditoria"></textarea>
                 </div>
                 <div>
-                    <label for="data_create_int">Ações Auditoria</label>
-                    <textarea type="textarea" rows="10" class="form-control" id="data_create_int" name="data_create_int" placeholder="Ações de auditoria"></textarea>
+                    <label for="acoes_int">Ações Auditoria</label>
+                    <textarea type="textarea" rows="10" class="form-control" id="acoes_int" name="acoes_int" placeholder="Ações de auditoria"></textarea>
                 </div>
                 <div class="form-group col-sm-3">
                     <?php $agora = date('d/m/Y'); ?>
