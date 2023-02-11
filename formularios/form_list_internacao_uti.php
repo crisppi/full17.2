@@ -114,12 +114,13 @@
         strlen($pesquisa_nome) ? 'ho.nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
         strlen($pesquisa_pac) ? 'pa.nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
         strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : NULL,
-        strlen($uti_internado) ? 'internado_uti_int = "' . $uti_internado . '"' : NULL,
+        // strlen($uti_internado) ? 'internacao_uti_int = "' . $uti_internado . '"' : NULL,
 
     ];
     $condicoes = array_filter($condicoes);
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
+
     // QUANTIDADE InternacaoS
     $qtdIntItens1 = $QtdTotalInt->QtdInternacao($where);
     $qtdIntItens = $QtdTotalInt->findTotal();

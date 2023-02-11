@@ -2,7 +2,7 @@
 
     require_once("templates/header.php");
 
-    // require_once("models/message.php");
+    require_once("models/message.php");
 
     include_once("models/internacao.php");
     include_once("dao/internacaoDao.php");
@@ -113,18 +113,20 @@
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
 
+
     // QUANTIDADE InternacaoS
     $qtdIntItens1 = $QtdTotalInt->QtdInternacao($where);
-    $qtdIntItens = $QtdTotalInt->findTotal();
+    // $qtdIntItens = $QtdTotalInt->findTotal();
 
-    $qtdIntItens = ($qtdIntItens1['0']);
+    // $qtdIntItens = ($qtdIntItens1['0']);
+
     // PAGINACAO
     $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, $limite_pag);
     $obLimite = $obPagination->getLimit();
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $order = $ordenar;
-    $query = $internacao->selectAllInternacao($where, $order, $obLimite);
+    $query = $internacao->selectAllInternacao($where, $order, $limite_pag);
 
     // GETS 
     unset($_GET['pag']);
@@ -140,7 +142,8 @@
         $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
         <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
         <li class="page-item"></a>';
-    }
+    };
+
     ?>
     <div class="container">
         <h6 class="page-title">Relatório de internações</h6>
@@ -210,6 +213,7 @@
         </table>
         <div>
             <?php
+
             "<div style=margin-left:20px;>";
             echo "<div style='color:blue; margin-left:20px;'>";
             echo "</div>";
@@ -223,57 +227,58 @@
             echo "</div>"; ?>
             <hr>
         </div>
-        <!-- <?php
+        <?php
 
-                //modo cadastro
-                // $formData = "0";
-                // $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-                $total = $internacao->findTotal();
+        //modo cadastro
+        // $formData = "0";
+        // $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $total = $internacao->findTotal();
 
-                $totalcasos = $total['0'];
-                $reg = ($totalcasos['0']);
+        $totalcasos = $total['0'];
+        $reg = ($totalcasos['0']);
 
-                if ($formData !== "0") {
-                    $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
-                    //header("Location: index.php");
+        if ($formData !== "0") {
+            $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
+            //header("Location: index.php");
+        } else {
+            echo "<p style='color: #f00;'>Erro: Usuário não cadastrado!</p>";
+        };
+
+        try {
+
+            $query_Total = $conn->prepare($sql_Total);
+            $query_Total->execute();
+            $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
+
+            # conta quantos registros tem no banco de dados
+            $query_count = $query_Total->rowCount();
+
+            # calcula o total de paginas a serem exibidas
+            $totalcasos = ceil($reg / $limite_pag);
+            print_r($qtdIntItens);
+        } catch (PDOexception $error_Total) {
+
+            echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
+        }
+        echo "<div style=margin-left:20px;>";
+        echo "<div style='color:blue; margin-left:20px;'>";
+        echo "</div>";
+        echo "<nav aria-label='Page navigation example'>";
+        echo " <ul class='pagination'>";
+        echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
+        if ($qtdIntItens > 1 && $pag <= $qtdIntItens) {
+            for ($i = 1; $i <= $qtdIntItens; $i++) {
+                if ($i == $pag) {
+                    echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
                 } else {
-                    echo "<p style='color: #f00;'>Erro: Usuário não cadastrado!</p>";
-                };
-
-                try {
-
-                    $query_Total = $conn->prepare($sql_Total);
-                    $query_Total->execute();
-                    $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
-
-                    # conta quantos registros tem no banco de dados
-                    $query_count = $query_Total->rowCount();
-
-                    # calcula o total de paginas a serem exibidas
-                    $totalcasos = ceil($reg / $limite_pag);
-                } catch (PDOexception $error_Total) {
-
-                    echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
+                    echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pag=$i&" . $gets . "'>" . $i . "</a></li>";
                 }
-                echo "<div style=margin-left:20px;>";
-                echo "<div style='color:blue; margin-left:20px;'>";
-                echo "</div>";
-                echo "<nav aria-label='Page navigation example'>";
-                echo " <ul class='pagination'>";
-                echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
-                if ($qtdIntItens > 1 && $pg <= $qtdIntItens) {
-                    for ($i = 1; $i <= $qtdIntItens; $i++) {
-                        if ($i == $pg) {
-                            echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
-                        } else {
-                            echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pg=$i&" . $gets . "'>" . $i . "</a></li>";
-                        }
-                    }
-                }
-                echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$qtdIntItens&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
-                echo " </ul>";
-                echo "</nav>";
-                echo "</div>"; ?> -->
+            }
+        }
+        echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pag=$qtdIntItens&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+        echo " </ul>";
+        echo "</nav>";
+        echo "</div>"; ?>
         <div>
 
             <a class="btn btn-success styled" style="margin-left:120px" href="cad_internacao.php">Nova internação</a>
