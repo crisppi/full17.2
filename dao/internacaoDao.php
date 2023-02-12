@@ -566,18 +566,19 @@ class internacaoDAO implements internacaoDAOInterface
         return $hospital;
     }
 
-    public function QtdInternacao($where)
+    public function QtdInternacao($where = null, $order = null, $limit = null)
     {
-        $hospital = [];
+        $internacao = [];
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
 
-        $stmt = $this->conn->query('SELECT SELECT ac.id_internacao, COUNT(id_internacao), ac.fk_hospital_int, ho.nome_hosp, ho.id_hospital	
 
-        FROM tb_internacao as ac
+        $stmt = $this->conn->query('SELECT ac.id_internacao, COUNT(id_internacao), ac.fk_hospital_int, ho.nome_hosp, ho.id_hospital FROM tb_internacao as ac
         
         iNNER JOIN tb_hospital as ho On  
-        ac.fk_hospital_int = ho.id_hospital 
-
-        where ho.nome_hosp =' . $where . '');
+        ac.fk_hospital_int = ho.id_hospital ' . $where . ' ' . $order . ' ' . $limit);
 
         $stmt->execute();
 

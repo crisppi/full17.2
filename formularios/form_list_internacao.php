@@ -40,7 +40,7 @@
                 <h6 style="margin-left: 30px; padding-top:10px" class="page-title">Pesquisa internações</h6>
                 <?php $pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
                 $pesqInternado = filter_input(INPUT_GET, 'pesqInternado');
-                $limite_pag = filter_input(INPUT_GET, 'limite_pag');
+                $limite = filter_input(INPUT_GET, 'limite');
                 $pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
                 $ordenar = filter_input(INPUT_GET, 'ordenar');
                 ?>
@@ -65,12 +65,12 @@
                     </div>
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Limite</label>
-                        <select class="form-control mb-3" id="limite_pag" name="limite_pag">
+                        <select class="form-control mb-3" id="limite" name="limite">
                             <option value="">Reg por página</option>
-                            <option value="5" <?= $limite_pag == '5' ? 'selected' : null ?>>5</option>
-                            <option value="10" <?= $limite_pag == '10' ? 'selected' : null ?>>10</option>
-                            <option value="20" <?= $limite_pag == '20' ? 'selected' : null ?>>20</option>
-                            <option value="50" <?= $limite_pag == '50' ? 'selected' : null ?>>50</option>
+                            <option value="5" <?= $limite == '5' ? 'selected' : null ?>>5</option>
+                            <option value="10" <?= $limite == '10' ? 'selected' : null ?>>10</option>
+                            <option value="20" <?= $limite == '20' ? 'selected' : null ?>>20</option>
+                            <option value="50" <?= $limite == '50' ? 'selected' : null ?>>50</option>
                         </select>
                     </div>
                     <div style="margin-left:20px" class="form-group col-sm-1">
@@ -100,7 +100,7 @@
     // METODO DE BUSCA DE PAGINACAO
     $pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
     $pesqInternado = filter_input(INPUT_GET, 'pesqInternado');
-    $limite_pag = filter_input(INPUT_GET, 'limite_pag') ? filter_input(INPUT_GET, 'limite_pag') : 10;
+    $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
     $pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
     $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
@@ -112,22 +112,26 @@
     $condicoes = array_filter($condicoes);
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
-
+    $order = $ordenar;
 
     // QUANTIDADE InternacaoS
-    $qtdIntItens1 = $QtdTotalInt->QtdInternacao($where);
-    // $qtdIntItens = $QtdTotalInt->findTotal();
+    // $qtdIntItens = $QtdTotalInt->QtdInternacao($where, $order, $limite);
+    $qtdIntItens1 = $QtdTotalInt->findTotal();
 
-    // $qtdIntItens = ($qtdIntItens1['0']);
+    $qtdIntItens = ($qtdIntItens1['0']['0']);
+    $totalcasos = ceil($qtdIntItens / $limite);
+    print_r($totalcasos);
+    print_r($qtdIntItens);
+    print_r($limite);
+    print_r($_GET['pg']);
 
     // PAGINACAO
-    $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, $limite_pag);
+    $obPagination = new pagination($qtdIntItens, $_GET['pg'] ?? 1, $limite);
     $obLimite = $obPagination->getLimit();
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
-    $order = $ordenar;
-    $query = $internacao->selectAllInternacao($where, $order, $limite_pag);
-
+    $query = $internacao->selectAllInternacao($where, $order, $limite);
+    print_r($query);
     // GETS 
     unset($_GET['pag']);
     unset($_GET['pg']);
@@ -139,8 +143,8 @@
 
     foreach ($paginas as $pagina) {
         $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
-        $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
-        <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
+        $paginacao .= '<li class="page-item"><a href="?pg=' . $pagina['pg'] . '&' . $gets . '"> 
+        <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
         <li class="page-item"></a>';
     };
 
@@ -221,7 +225,7 @@
             echo " <ul class='pagination'>";
             echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
             <?= $paginacao ?>
-            <?php echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$qtdIntItens&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+            <?php echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
             echo " </ul>";
             echo "</nav>";
             echo "</div>"; ?>
@@ -232,50 +236,49 @@
         //modo cadastro
         // $formData = "0";
         // $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $total = $internacao->findTotal();
+        // $total = $internacao->findTotal();
 
-        $totalcasos = $total['0'];
-        $reg = ($totalcasos['0']);
+        // $totalcasos = $total['0'];
+        // $reg = ($totalcasos['0']);
 
-        if ($formData !== "0") {
-            $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
-            //header("Location: index.php");
-        } else {
-            echo "<p style='color: #f00;'>Erro: Usuário não cadastrado!</p>";
-        };
+        // if ($formData !== "0") {
+        //     $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
+        //     //header("Location: index.php");
+        // } else {
+        //     echo "<p style='color: #f00;'>Erro: Usuário não cadastrado!</p>";
+        // };
 
-        try {
+        // try {
 
-            $query_Total = $conn->prepare($sql_Total);
-            $query_Total->execute();
-            $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
+        //     $query_Total = $conn->prepare($sql_Total);
+        //     $query_Total->execute();
+        //     $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
 
-            # conta quantos registros tem no banco de dados
-            $query_count = $query_Total->rowCount();
+        //     # conta quantos registros tem no banco de dados
+        //     $query_count = $query_Total->rowCount();
 
-            # calcula o total de paginas a serem exibidas
-            $totalcasos = ceil($reg / $limite_pag);
-            print_r($qtdIntItens);
-        } catch (PDOexception $error_Total) {
+        //     # calcula o total de paginas a serem exibidas
+        //     $totalcasos = ceil($reg / $limite);
+        // } catch (PDOexception $error_Total) {
 
-            echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
-        }
+        //     echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
+        // }
         echo "<div style=margin-left:20px;>";
         echo "<div style='color:blue; margin-left:20px;'>";
         echo "</div>";
         echo "<nav aria-label='Page navigation example'>";
         echo " <ul class='pagination'>";
-        echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
-        if ($qtdIntItens > 1 && $pag <= $qtdIntItens) {
-            for ($i = 1; $i <= $qtdIntItens; $i++) {
-                if ($i == $pag) {
+        echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
+        if ($totalcasos > 1 && $pg <= $totalcasos) {
+            for ($i = 1; $i <= $totalcasos; $i++) {
+                if ($i == $pg) {
                     echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
                 } else {
-                    echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pag=$i&" . $gets . "'>" . $i . "</a></li>";
+                    echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pg=$i&" . $gets . "'>" . $i . "</a></li>";
                 }
             }
         }
-        echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pag=$qtdIntItens&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+        echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
         echo " </ul>";
         echo "</nav>";
         echo "</div>"; ?>

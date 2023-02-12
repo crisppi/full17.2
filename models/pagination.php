@@ -48,7 +48,7 @@ class pagination
 
         for ($i = 1; $i <= $this->pages; $i++) {
             $paginas[] = [
-                'pag' => $i,
+                'pg' => $i,
                 'atual' => $i == $this->currentPage
 
             ];
