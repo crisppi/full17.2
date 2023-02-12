@@ -575,7 +575,7 @@ class internacaoDAO implements internacaoDAOInterface
         $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
 
 
-        $stmt = $this->conn->query('SELECT ac.id_internacao, COUNT(id_internacao), ac.fk_hospital_int, ho.nome_hosp, ho.id_hospital FROM tb_internacao as ac
+        $stmt = $this->conn->query('SELECT ac.id_internacao, COUNT(id_internacao) as qtd, ac.fk_hospital_int, ho.nome_hosp, ho.id_hospital FROM tb_internacao as ac
         
         iNNER JOIN tb_hospital as ho On  
         ac.fk_hospital_int = ho.id_hospital ' . $where . ' ' . $order . ' ' . $limit);

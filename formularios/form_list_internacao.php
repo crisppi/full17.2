@@ -116,29 +116,18 @@
 
     // QUANTIDADE InternacaoS
     // $qtdIntItens = $QtdTotalInt->QtdInternacao($where, $order, $limite);
-    $qtdIntItens1 = $QtdTotalInt->findTotal();
+    $qtdIntItens1 = $QtdTotalInt->QtdInternacao($where);
 
-    $qtdIntItens = ($qtdIntItens1['0']['0']);
+    $qtdIntItens = ($qtdIntItens1['qtd']);
     $totalcasos = ceil($qtdIntItens / $limite);
 
-    echo "total casos '.$totalcasos.'";
-    echo "<br>";
-    echo "qtd  '.$qtdIntItens.'";
-    echo "<br>";
-    echo "limite '.$limite.'";
-    echo "<br>";
-    // echo "limite '.$_GET['0'].'";
-    // echo "<br>";
-
     // PAGINACAO
-    $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, $obLimite ?? 10);
+    $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, $limite ?? 10);
+
     $obLimite = $obPagination->getLimit();
-    print_r($obLimite);
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $query = $internacao->selectAllInternacao($where, $order, $obLimite);
-    // echo "<pre>";
-    // print_r($query);
 
     // GETS 
     unset($_GET['pag']);
@@ -151,7 +140,7 @@
 
     foreach ($paginas as $pagina) {
         $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
-        $paginacao .= '<li class="page-item"><a href="?pg=' . $pagina['pg'] . '&' . $gets . '"> 
+        $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pg'] . '&' . $gets . '"> 
         <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
         <li class="page-item"></a>';
     };
@@ -231,9 +220,9 @@
             echo "</div>";
             echo "<nav aria-label='Page navigation example'>";
             echo " <ul class='pagination'>";
-            echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
+            echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
             <?= $paginacao ?>
-            <?php echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+            <?php echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pag=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
             echo " </ul>";
             echo "</nav>";
             echo "</div>"; ?>
@@ -271,25 +260,26 @@
 
         //     echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
         // }
-        echo "<div style=margin-left:20px;>";
-        echo "<div style='color:blue; margin-left:20px;'>";
-        echo "</div>";
-        echo "<nav aria-label='Page navigation example'>";
-        echo " <ul class='pagination'>";
-        echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
-        if ($totalcasos > 1 && $pg <= $totalcasos) {
-            for ($i = 1; $i <= $totalcasos; $i++) {
-                if ($i == $pg) {
-                    echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
-                } else {
-                    echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pg=$i&" . $gets . "'>" . $i . "</a></li>";
-                }
-            }
-        }
-        echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
-        echo " </ul>";
-        echo "</nav>";
-        echo "</div>"; ?>
+        // echo "<div style=margin-left:20px;>";
+        // echo "<div style='color:blue; margin-left:20px;'>";
+        // echo "</div>";
+        // echo "<nav aria-label='Page navigation example'>";
+        // echo " <ul class='pagination'>";
+        // echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
+        // if ($totalcasos > 1 && $pg <= $totalcasos) {
+        //     for ($i = 1; $i <= $totalcasos; $i++) {
+        //         if ($i == $pg) {
+        //             echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
+        //         } else {
+        //             echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pag=$i&" . $gets . "'>" . $i . "</a></li>";
+        //         }
+        //     }
+        // }
+        // echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pag=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+        // echo " </ul>";
+        // echo "</nav>";
+        // echo "</div>"; 
+        ?>
         <div>
 
             <a class="btn btn-success styled" style="margin-left:120px" href="cad_internacao.php">Nova internação</a>
