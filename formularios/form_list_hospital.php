@@ -33,7 +33,7 @@
     $qtdhosItens = ($qtdhosItens1['0']);
 
     // PAGINACAO
-    $obPagination = new pagination($qtdhosItens, $_GET['pag'] ?? 1, 10);
+    $obPagination = new pagination($qtdhosItens, $_GET['pg'] ?? 1, 10);
     $obLimite = $obPagination->getLimit(); ?>
 
     <!--tabela evento-->
@@ -58,7 +58,7 @@
 
             // GETS 
             unset($_GET['pag']);
-            unset($_GET['pag']);
+            unset($_GET['pg']);
             $gets = http_build_query($_GET);
 
             // PAGINACAO
@@ -67,8 +67,8 @@
 
             foreach ($paginas as $pagina) {
                 $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
-                $paginacao .= '<a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
-                <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
+                $paginacao .= '<a href="?pg=' . $pagina['pg'] . '&' . $gets . '"> 
+                <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
                 </a>';
             }
             ?>

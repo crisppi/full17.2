@@ -120,18 +120,26 @@
 
     $qtdIntItens = ($qtdIntItens1['0']['0']);
     $totalcasos = ceil($qtdIntItens / $limite);
-    print_r($totalcasos);
-    print_r($qtdIntItens);
-    print_r($limite);
-    print_r($_GET['pg']);
+
+    echo "total casos '.$totalcasos.'";
+    echo "<br>";
+    echo "qtd  '.$qtdIntItens.'";
+    echo "<br>";
+    echo "limite '.$limite.'";
+    echo "<br>";
+    // echo "limite '.$_GET['0'].'";
+    // echo "<br>";
 
     // PAGINACAO
-    $obPagination = new pagination($qtdIntItens, $_GET['pg'] ?? 1, $limite);
+    $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, $obLimite ?? 10);
     $obLimite = $obPagination->getLimit();
+    print_r($obLimite);
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
-    $query = $internacao->selectAllInternacao($where, $order, $limite);
-    print_r($query);
+    $query = $internacao->selectAllInternacao($where, $order, $obLimite);
+    // echo "<pre>";
+    // print_r($query);
+
     // GETS 
     unset($_GET['pag']);
     unset($_GET['pg']);
