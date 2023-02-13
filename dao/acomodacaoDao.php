@@ -229,8 +229,54 @@ class acomodacaoDAO implements acomodacaoDAOInterface
 
         return $acomodacao;
     }
-}
 
+
+
+    // MODELO DE FILTRO COM SELECT ATUAL COM FILTROS E PAGINACAO
+
+    public function selectAllacomodacao($where = null, $order = null, $limit = null)
+    {
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+
+        //MONTA A QUERY
+        $query = $this->conn->query('SELECT 
+        ac.id_acomodacao,  
+        ac.acomodacao_aco, 
+        ac.valor_aco,   
+        ho.id_hospital, 
+        ho.nome_hosp 
+    FROM tb_acomodacao ac 
+
+        iNNER JOIN tb_hospital as ho On  
+        ac.fk_hospital = ho.id_hospital ' . $where . ' ' . $order . ' ' . $limit);
+
+        $query->execute();
+
+        $acomodacao = $query->fetchAll();
+
+        return $acomodacao;
+    }
+
+    public function QtdAcomodacao($where = null, $order = null, $limite = null)
+    {
+        $hospital = [];
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limite = strlen($limite) ? 'LIMIT ' . $limite : '';
+
+        $stmt = $this->conn->query('SELECT * ,COUNT(id_acomodacao) as qtd FROM tb_acomodacao ' . $where . ' ' . $order . ' ' . $limite);
+
+        $stmt->execute();
+
+        $QtdTotalAnt = $stmt->fetch();
+
+        return $QtdTotalAnt;
+    }
+}
 
 # Limita o número de registros a serem mostrados por página
 $limite = 20;

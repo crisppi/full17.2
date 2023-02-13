@@ -29,6 +29,7 @@
 
     $gestaoDao = new gestaoDAO($conn, $BASE_URL);
     $gestaos = $gestaoDao->findGeral($limite, $inicio);
+    $QtdTotalGes = $gestaoDao->QtdGestao($where);
 
     $hospital_geral = new HospitalDAO($conn, $BASE_URL);
     $hospitals = $hospital_geral->findGeral($limite, $inicio);
@@ -110,26 +111,22 @@
 
     if (isset(($_GET))); {
         if ($pesqGestao == 'home_care') {
-            $gestao = "home = sim";
-            print_r($gestao);
+            $gestaoHome = "sim";
         }
     };
     if (isset(($_GET))); {
         if ($pesqGestao == 'desospitalizacao') {
-            $gestao = "desospitalizacao = sim";
-            print_r($gestao);
+            $gestaoDesop = "sim";
         }
     };
     if (isset(($_GET))); {
         if ($pesqGestao == 'opme') {
-            $gestao = "opme = sim";
-            print_r($gestao);
+            $gestaoOPME = "sim";
         }
     };
     if (isset(($_GET))); {
         if ($pesqGestao == 'alto') {
-            $gestao = "alto = sim";
-            print_r($gestao);
+            $gestaoAlto = "sim";
         }
     };
 
@@ -148,24 +145,28 @@
     $condicoes = [
         strlen($pesquisa_nome) ? 'ho.nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
         strlen($pesquisa_pac) ? 'pa.nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
-        strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : NULL
+        strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : NULL,
+        strlen($gestaoAlto) ? 'alto_custo_ges = "' . $gestaoAlto . '"' : NULL,
+        strlen($gestaoOPME) ? 'opme_ges = "' . $gestaoOPME . '"' : NULL,
+        strlen($gestaoDesop) ? 'desospitalizacao_ges = "' . $gestaoDesop . '"' : NULL,
+        strlen($gestaoHome) ? 'home_care_ges = "' . $gestaoHome . '"' : NULL
+
     ];
     $condicoes = array_filter($condicoes);
-
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
 
     // QUANTIDADE Internacao
-    $qtdIntItens1 = $QtdTotalInt->QtdInternacao($where);
-    $qtdIntItens = $QtdTotalInt->findTotal();
+    $order = $ordenar;
 
-    $qtdIntItens = ($qtdIntItens1['0']);
+    $qtdGesItens1 = $QtdTotalGes->QtdGestao($where);
+
+    $qtdGesItens = ($qtdGesItens1['qtd']);
     // PAGINACAO
-    $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, $limite_pag);
+    $obPagination = new pagination($qtdGesItens, $_GET['pag'] ?? 1, $limite_pag);
     $obLimite = $obPagination->getLimit();
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
-    $order = $ordenar;
     $query = $gestaoDao->selectAllGestao($where, $order, $obLimite);
 
     // GETS 
@@ -179,10 +180,10 @@
 
     foreach ($paginas as $pagina) {
         $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
-        $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
-        <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
+        $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pg'] . '&' . $gets . '"> 
+        <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
         <li class="page-item"></a>';
-    }
+    };
     ?>
     <div class="container">
         <h6 class="page-title">Relatório Gestão</h6>

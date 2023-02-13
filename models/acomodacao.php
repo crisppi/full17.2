@@ -23,4 +23,6 @@ interface acomodacaoDAOInterface
   public function joinacomodacaoHospital();
   public function joinacomodacaoHospitalShow($id_acomodacao);
   public function findGeral();
+  public function selectAllacomodacao($where = null, $order = null, $limit = null);
+  public function QtdAcomodacao($where = null, $order = null, $limite = null);
 };
