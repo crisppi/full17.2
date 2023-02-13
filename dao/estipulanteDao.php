@@ -286,11 +286,15 @@ class EstipulanteDAO implements EstipulanteDAOInterface
         return $estipulante;
     }
 
-    public function Qtdestipulante()
+    public function Qtdestipulante($where = null, $order = null, $limite = null)
     {
         $estipulante = [];
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limite = strlen($limite) ? 'LIMIT ' . $limite : '';
 
-        $stmt = $this->conn->query("SELECT COUNT(id_estipulante) FROM tb_estipulante");
+        $stmt = $this->conn->query('SELECT * ,COUNT(id_estipulante) as qtd FROM tb_estipulante ' . $where . ' ' . $order . ' ' . $limite);
 
         $stmt->execute();
 

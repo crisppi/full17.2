@@ -16,13 +16,14 @@
     // METODO DE BUSCA DE PAGINACAO
     $busca = filter_input(INPUT_GET, 'pesquisa_nome');
     $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
+    $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
     $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
 
-    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+    $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
     $condicoes = [
         strlen($busca) ? 'nome_pac LIKE "%' . $busca . '%"' : null,
-        // strlen($buscaAtivo) ? 'ativo_pac = "' . $buscaAtivo . '"' : null
+        strlen($buscaAtivo) ? 'ativo_pac = "' . $buscaAtivo . '"' : null
     ];
     $condicoes = array_filter($condicoes);
     $order = $ordenar;
@@ -37,6 +38,10 @@
     // PAGINACAO
     $obPagination = new pagination($qtdpacItens, $_GET['pag'] ?? 1,  $limite ?? 10);
     $obLimite = $obPagination->getLimit();
+
+    // PREENCHIMENTO DO FORMULARIO COM QUERY
+    $query = $paciente->selectAllpaciente($where, $order, $obLimite);
+
     ?>
     <!--tabela evento-->
     <div class="container py-2">
@@ -69,7 +74,7 @@
                     </div>
 
 
-                    <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
+                    <div class="form-group col-sm-1" style="margin:0px 30px 10px 30px">
                         <button style="margin:10px; font-weight:600" type="submit" class="btn-sm btn-light">Pesquisar</button>
                     </div>
                 </div>
@@ -155,56 +160,7 @@
         <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
         <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
     </div>
-    <div> <?php
-
-            //modo cadastro
-            // $formData = "0";
-            // $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-            // if ($formData !== "0") {
-            //     $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
-            //     //header("Location: index.php");
-            // } else {
-            //     echo "<p style='color: #f00;'>Erro: Usuário não cadastrado!</p>";
-            // };
-
-            // try {
-
-            //     $query_Total = $conn->prepare($sql_Total);
-            //     $query_Total->execute();
-
-            //     $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
-
-            //     # conta quantos registros tem no banco de dados
-            //     $query_count = $query_Total->rowCount();
-
-            //     # calcula o total de paginas a serem exibidas
-            //     $qtdPag = ceil($query_count / $limite);
-            // } catch (PDOexception $error_Total) {
-
-            //     echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
-            // }
-            // echo "<div style=margin-left:0px;>";
-            // echo "<div style='color:blue; margin-top:20px;'>";
-            // echo "</div>";
-            // echo "<nav aria-label='Page navigation example'>";
-            // echo " <ul class='pagination'>";
-            // echo " <li class='page-item'><a class='page-link' href='list_paciente.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
-
-            // if ($qtdPag > 1 && $pg <= $qtdPag) {
-            //     for ($i = 1; $i <= $qtdPag; $i++) {
-            //         if ($i == $pg) {
-            //             echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
-            //         } else {
-            //             echo "<li class='page-item '><a class='page-link' href='list_paciente.php?pag=$i&" . $gets . "'>" . $i . "</a></li>";
-            //         }
-            //     }
-            // }
-            // echo "<li class='page-item'><a class='page-link' href='list_paciente.php?pag=$qtdPag&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
-            // echo " </ul>";
-            // echo "</nav>";
-            // echo "</div>"; 
-            ?>
+    <div>
     </div>
     </div>
 

@@ -256,17 +256,21 @@ class HospitalDAO implements HospitalDAOInterface
         return $hospital;
     }
 
-    public function Qtdhospital()
+    public function QtdHospital($where = null, $order = null, $limite = null)
     {
         $hospital = [];
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limite = strlen($limite) ? 'LIMIT ' . $limite : '';
 
-        $stmt = $this->conn->query("SELECT COUNT(id_hospital) FROM tb_hospital");
+        $stmt = $this->conn->query('SELECT * ,COUNT(id_hospital) as qtd FROM tb_hospital ' . $where . ' ' . $order . ' ' . $limite);
 
         $stmt->execute();
 
-        $QtdTotalHos = $stmt->fetch();
+        $QtdTotalHosp = $stmt->fetch();
 
-        return $QtdTotalHos;
+        return $QtdTotalHosp;
     }
 }
 

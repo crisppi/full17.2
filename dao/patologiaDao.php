@@ -228,11 +228,16 @@ class patologiaDAO implements patologiaDAOInterface
         return $patologia;
     }
 
-    public function Qtdpatologia()
-    {
-        $patologia = [];
 
-        $stmt = $this->conn->query("SELECT COUNT(id_patologia) FROM tb_patologia");
+    public function QtdPatologia($where = null, $order = null, $limite = null)
+    {
+        $hospital = [];
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limite = strlen($limite) ? 'LIMIT ' . $limite : '';
+
+        $stmt = $this->conn->query('SELECT * ,COUNT(id_patologia) as qtd FROM tb_patologia ' . $where . ' ' . $order . ' ' . $limite);
 
         $stmt->execute();
 

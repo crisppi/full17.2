@@ -162,11 +162,15 @@ class antecedenteDAO implements antecedenteDAOInterface
         return $antecedente;
     }
 
-    public function Qtdantecedente()
+    public function QtdAntecedente($where = null, $order = null, $limite = null)
     {
-        $antecedente = [];
+        $hospital = [];
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limite = strlen($limite) ? 'LIMIT ' . $limite : '';
 
-        $stmt = $this->conn->query("SELECT COUNT(id_antecedente) FROM tb_antecedente");
+        $stmt = $this->conn->query('SELECT * ,COUNT(id_antecedente) as qtd FROM tb_antecedente ' . $where . ' ' . $order . ' ' . $limite);
 
         $stmt->execute();
 

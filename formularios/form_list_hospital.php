@@ -114,57 +114,21 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <div>
-            <?php
+        <?php
 
-            //modo cadastro
-            $formData = "0";
-            $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-            if ($formData !== "0") {
-                $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
-                //header("Location: index.php");
-            } else {
-                echo "<p style='color: #f00;'>Erro: Usuário não cadastrado!</p>";
-            };
-
-            try {
-
-                $query_Total = $conn->prepare($sql_Total);
-                $query_Total->execute();
-
-                $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
-
-                # conta quantos registros tem no banco de dados
-                $query_count = $query_Total->rowCount();
-
-                # calcula o total de paginas a serem exibidas
-                $qtdPag = ceil($query_count / $limite);
-            } catch (PDOexception $error_Total) {
-
-                echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
-            }
-            echo "<div style=margin-left:0px;>";
-            echo "<div style='color:blue; margin-top:20px;'>";
-            echo "</div>";
-            echo "<nav aria-label='Page navigation example'>";
-            echo " <ul class='pagination'>";
-            echo " <li class='page-item'><a class='page-link' href='list_hospital.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
-            if ($qtdPag > 1 && $pg <= $qtdPag) {
-                for ($i = 1; $i <= $qtdPag; $i++) {
-                    if ($i == $pg) {
-                        echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
-                    } else {
-                        echo "<li class='page-item '><a class='page-link' href='list_hospital.php?pag=$i&" . $gets . "'>" . $i . "</a></li>";
-                    }
-                }
-            }
-            echo "<li class='page-item'><a class='page-link' href='list_hospital.php?pag=$qtdPag&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
-            echo " </ul>";
-            echo "</nav>";
-            echo "</div>"; ?></div>
+        "<div style=margin-left:20px;>";
+        echo "<div style='color:blue; margin-left:20px;'>";
+        echo "</div>";
+        echo "<nav aria-label='Page navigation example'>";
+        echo " <ul class='pagination'>";
+        echo " <li class='page-item'><a class='page-link' href='list_hospital.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
+        <?= $paginacao ?>
+        <?php echo "<li class='page-item'><a class='page-link' href='list_hospital.php?pag=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+        echo " </ul>";
+        echo "</nav>";
+        echo "</div>"; ?>
         <div id="id-confirmacao" class="btn_acoes oculto">
-            <p>Deseja deletar este hospital: <?= $hospital_ant ?>?</p>
+            <p>Deseja deletar este hospital: <?= $nome_hosp ?>?</p>
             <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
             <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
         </div>
