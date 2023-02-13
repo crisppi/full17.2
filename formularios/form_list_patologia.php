@@ -25,14 +25,17 @@
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
 
-    // QUANTIDADE patologiaS
-    $qtdpatItens1 = $QtdTotalpat->Qtdpatologia($where);
+    $qtdPatItens1 = $QtdTotalPat->QtdPatologia($where);
 
-    $qtdpatItens = ($qtdpatItens1['0']);
+    $qtdPatItens = ($qtdPatItens1['qtd']);
 
     // PAGINACAO
-    $obPagination = new pagination($qtdpatItens, $_GET['pag'] ?? 1, 10);
+    $obPagination = new pagination($qtdPatItens, $_GET['pag'] ?? 1, $limite ?? 10);
     $obLimite = $obPagination->getLimit();
+    $order = $ordenar;
+
+    // PREENCHIMENTO DO FORMULARIO COM QUERY
+    $query = $patologia->selectAllPatologia($where, $order, $obLimite);
     ?>
 
     <!--tabela evento-->
@@ -110,7 +113,22 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <div>
+            <?php
 
+            "<div style=margin-left:20px;>";
+            echo "<div style='color:blue; margin-left:20px;'>";
+            echo "</div>";
+            echo "<nav aria-label='Page navigation example'>";
+            echo " <ul class='pagination'>";
+            echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
+            <?= $paginacao ?>
+            <?php echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pag=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+            echo " </ul>";
+            echo "</nav>";
+            echo "</div>"; ?>
+            <hr>
+        </div>
         <div id="id-confirmacao" class="btn_acoes oculto">
             <p>Deseja deletar pate hospital: <?= $hospital_ant ?>?</p>
             <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
@@ -118,54 +136,6 @@
         </div>
     </div>
 
-    <?php
-
-    //modo cadastro
-    $formData = "0";
-    $formData = filter_input_array(INPUT_GET, FILTER_DEFAULT);
-
-    if ($formData !== "0") {
-        $_SESSION['msg'] = "<p style='color: green;'>patologia cadastrado com sucesso!</p>";
-        //header("Location: index.php");
-    } else {
-        echo "<p style='color: #f00;'>Erro: patologia não cadastrado!</p>";
-    };
-
-    try {
-
-        $query_Total = $conn->prepare($sql_Total);
-        $query_Total->execute();
-
-        $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
-
-        # conta quantos registros tem no banco de dados
-        $query_count = $query_Total->rowCount();
-
-        # calcula o total de paginas a serem exibidas
-        $qtdPag = ceil($query_count / $limite);
-    } catch (PDOexception $error_Total) {
-
-        echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
-    }
-    echo "<div style=margin-left:10px;>";
-    echo "<div style='color:blue; margin-top:20px;'>";
-    echo "</div>";
-    echo "<nav aria-label='Page navigation example'>";
-    echo " <ul class='pagination'>";
-    echo " <li class='page-item'><a class='page-link' href='list_patologia.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
-    if ($qtdPag > 1 && $pg <= $qtdPag) {
-        for ($i = 1; $i <= $qtdPag; $i++) {
-            if ($i == $pg) {
-                echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
-            } else {
-                echo "<li class='page-item '><a class='page-link' href='list_patologia.php?pag=$i&" . $gets . "'>" . $i . "</a></li>";
-            }
-        }
-    }
-    echo "<li class='page-item'><a class='page-link' href='list_patologia.php?pag=$qtdPag&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
-    echo " </ul>";
-    echo "</nav>";
-    echo "</div>"; ?>
     <div>
         <hr>
         <a class="btn btn-success styled" style="margin-left:120px" href="cad_patologia.php">Nova patologia</a>

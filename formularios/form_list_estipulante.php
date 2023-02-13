@@ -29,13 +29,17 @@
     $where = implode(' AND ', $condicoes);
 
     // QUANTIDADE estipulante
-    $qtdEstItens1 = $QtdTotalEst->Qtdestipulante($where);
-    $qtdEstItens = ($qtdEstItens1['qtd']);
-    $totalcasos = ceil($qtdEstItens / $limite);
+    $qtdestItens1 = $QtdTotalest->Qtdestipulante($where);
+
+    $qtdestItens = ($qtdestItens1['qtd']);
+    $totalcasos = ceil($qtdestItens / $limite);
 
     // PAGINACAO
-    $obPagination = new pagination($qtdestItens, $_GET['pag'] ?? 1, 10);
+    $obPagination = new pagination($qtdSegItens, $_GET['pag'] ?? 1, $limite ?? 10);
     $obLimite = $obPagination->getLimit();
+
+    // PREENCHIMENTO DO FORMULARIO COM QUERY
+    $query = $estipulante->selectAllEstipulante($where, $order, $limite);
     ?>
 
     <!--tabela evento-->

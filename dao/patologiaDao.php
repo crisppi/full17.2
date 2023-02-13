@@ -211,7 +211,7 @@ class patologiaDAO implements patologiaDAOInterface
 
         return $patologia;
     }
-    public function selectAllpatologia($where = null, $order = null, $limit = null)
+    public function selectAllPatologia($where = null, $order = null, $limit = null)
     {
         //DADOS DA QUERY
         $where = strlen($where) ? 'WHERE ' . $where : '';

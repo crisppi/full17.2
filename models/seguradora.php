@@ -34,7 +34,7 @@ interface seguradoraDAOInterface
   public function update(seguradora $seguradora);
   public function destroy($id_seguradora);
   public function findGeral();
-  
+
   public function selectAllSeguradora($where = null, $order = null, $limit = null);
-  public function QtdSeguradora();
+  public function QtdSeguradora($where);
 };

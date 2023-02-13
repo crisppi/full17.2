@@ -30,7 +30,9 @@
     // QUANTIDADE hospitalS
     $qtdhosItens1 = $QtdTotalhos->Qtdhospital($where);
 
-    $qtdhosItens = ($qtdhosItens1['0']);
+    $qtdhosItens = ($qtdhosItens1['qtd']);
+    $totalcasos = ceil($qtdhosItens / $limite);
+
 
     // PAGINACAO
     $obPagination = new pagination($qtdhosItens, $_GET['pg'] ?? 1, 10);

@@ -112,7 +112,6 @@
     $condicoes = array_filter($condicoes);
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
-    $order = $ordenar;
 
     // QUANTIDADE InternacaoS
     // $qtdIntItens = $QtdTotalInt->QtdInternacao($where, $order, $limite);
@@ -120,6 +119,7 @@
 
     $qtdIntItens = ($qtdIntItens1['qtd']);
     $totalcasos = ceil($qtdIntItens / $limite);
+
 
     // PAGINACAO
     $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, $limite ?? 10);
@@ -135,6 +135,7 @@
     $gets = http_build_query($_GET);
 
     // PAGINACAO
+    $order = $ordenar;
     $paginacao = '';
     $paginas = $obPagination->getPages();
 
