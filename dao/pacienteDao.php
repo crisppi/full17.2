@@ -95,7 +95,7 @@ class PacienteDAO implements PacienteDAOInterface
         $paciente = [];
 
         $stmt = $this->conn->prepare("SELECT * FROM tb_paciente
-                                    WHERE nome_pac LIKE :nome_pac order by nome_pac asc limit $inicio, $limite");
+                                    WHERE nome_pac LIKE :nome_pac order by nome_pac asc limite $inicio, $limite");
 
         $stmt->bindValue(":nome_pac", '%' . $pesquisa_nome . '%');
 
@@ -228,12 +228,12 @@ class PacienteDAO implements PacienteDAOInterface
     }
 
 
-    public function findGeral($limite, $inicio)
+    public function findGeral()
     {
 
         $pacientes = [];
 
-        $stmt = $this->conn->query("SELECT * FROM tb_paciente ORDER BY id_paciente asc limit $inicio, $limite");
+        $stmt = $this->conn->query("SELECT * FROM tb_paciente ORDER BY id_paciente");
 
         $stmt->execute();
 
@@ -241,15 +241,15 @@ class PacienteDAO implements PacienteDAOInterface
 
         return $pacientes;
     }
-    public function selectAllpaciente($where = null, $order = null, $limit = null)
+    public function selectAllpaciente($where = null, $order = null, $limite = null)
     {
         //DADOS DA QUERY
         $where = strlen($where) ? 'WHERE ' . $where : '';
         $order = strlen($order) ? 'ORDER BY ' . $order : '';
-        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+        $limite = strlen($limite) ? 'LIMIT ' . $limite : '';
 
         //MONTA A QUERY
-        $query = $this->conn->query('SELECT * FROM tb_paciente ' . $where . ' ' . $order . ' ' . $limit);
+        $query = $this->conn->query('SELECT * FROM tb_paciente ' . $where . ' ' . $order . ' ' . $limite);
 
         $query->execute();
 
@@ -258,11 +258,16 @@ class PacienteDAO implements PacienteDAOInterface
         return $paciente;
     }
 
-    public function Qtdpaciente()
+    public function Qtdpaciente($where = null, $order = null, $limite = null)
     {
         $paciente = [];
+        $internacao = [];
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limite = strlen($limite) ? 'LIMIT ' . $limite : '';
 
-        $stmt = $this->conn->query("SELECT COUNT(id_paciente) FROM tb_paciente");
+        $stmt = $this->conn->query('SELECT * ,COUNT(id_paciente) as qtd FROM tb_paciente ' . $where . ' ' . $order . ' ' . $limite);
 
         $stmt->execute();
 

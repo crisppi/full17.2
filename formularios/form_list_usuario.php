@@ -75,8 +75,8 @@
 
             foreach ($paginas as $pagina) {
                 $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
-                $paginacao .= '<a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
-                <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
+                $paginacao .= '<a href="?pag=' . $pagina['pg'] . '&' . $gets . '"> 
+                <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
                 </a>';
             }
             ?>

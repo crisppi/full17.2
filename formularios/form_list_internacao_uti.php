@@ -145,8 +145,8 @@
 
     foreach ($paginas as $pagina) {
         $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
-        $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
-        <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
+        $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pg'] . '&' . $gets . '"> 
+        <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
         <li class="page-item"></a>';
     }
     ?>
@@ -160,11 +160,8 @@
                     <th scope="col">Hospital</th>
                     <th scope="col">Paciente</th>
                     <th scope="col">Data internação</th>
-                    <th scope="col">Modo Admissão</th>
-                    <th scope="col">Médico</th>
                     <th scope="col">UTI</th>
                     <th scope="col">Int UTI</th>
-                    <th scope="col">Relatório</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -183,11 +180,8 @@
                         <td scope="row" class="nome-coluna-table"><?= $intern["nome_hosp"] ?></td>
                         <td scope="row"><?= $intern["nome_pac"] ?></td>
                         <td scope="row"><?= $intern["data_intern_int"] ?></td>
-                        <td scope="row"><?= $intern["tipo_admissao_int"] ?></td>
-                        <td scope="row"><?= $intern["titular_int"] ?></td>
                         <td scope="row"><?= $intern["internacao_uti_int"] ?></td>
                         <td scope="row"><?= $intern["internado_uti_int"] ?></td>
-                        <td scope="row"><?= $intern["rel_int"] ?></td>
 
                         <td class="action">
                             <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:green; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>

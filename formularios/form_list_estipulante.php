@@ -57,6 +57,8 @@
             <?php
 
             // PREENCHIMENTO DO FORMULARIO COM QUERY
+            $order = null;
+
             $query = $estipulante->selectAllestipulante($where, $order, $obLimite);
 
             // GETS 

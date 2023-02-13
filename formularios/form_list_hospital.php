@@ -53,6 +53,8 @@
             </form>
 
             <?php
+            $order = null;
+
             // PREENCHIMENTO DO FORMULARIO COM QUERY
             $query = $hospital->selectAllhospital($where, $order, $obLimite);
 

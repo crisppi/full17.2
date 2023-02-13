@@ -16,6 +16,8 @@
     // METODO DE BUSCA DE PAGINACAO
     $busca = filter_input(INPUT_GET, 'pesquisa_nome');
     $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
+    $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
+
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
     $condicoes = [
@@ -23,17 +25,17 @@
         // strlen($buscaAtivo) ? 'ativo_pac = "' . $buscaAtivo . '"' : null
     ];
     $condicoes = array_filter($condicoes);
-
+    $order = $ordenar;
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
 
     // QUANTIDADE PacienteS
     $qtdpacItens1 = $QtdTotalpac->QtdPaciente($where);
-
-    $qtdpacItens = ($qtdpacItens1['0']);
+    $qtdpacItens = ($qtdpacItens1['qtd']);
+    $totalcasos = ceil($qtdpacItens / $limite);
 
     // PAGINACAO
-    $obPagination = new pagination($qtdpacItens, $_GET['pag'] ?? 1, 10);
+    $obPagination = new pagination($qtdpacItens, $_GET['pag'] ?? 1,  $limite ?? 10);
     $obLimite = $obPagination->getLimit();
     ?>
     <!--tabela evento-->
@@ -43,9 +45,31 @@
                 <div class="form-group row">
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <div class="form-group col-sm-2">
+                        <label>Pesquisa Nome</label>
+
                         <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por paciente">
                     </div>
-                    <div class="form-group col-sm-1">
+                    <div style="margin-left:20px" class="form-group col-sm-1">
+                        <label>Limite</label>
+                        <select class="form-control mb-3" id="limite" name="limite">
+                            <option value="">Reg por página</option>
+                            <option value="5" <?= $limite == '5' ? 'selected' : null ?>>5</option>
+                            <option value="10" <?= $limite == '10' ? 'selected' : null ?>>10</option>
+                            <option value="20" <?= $limite == '20' ? 'selected' : null ?>>20</option>
+                            <option value="50" <?= $limite == '50' ? 'selected' : null ?>>50</option>
+                        </select>
+                    </div>
+                    <div style="margin-left:20px" class="form-group col-sm-1">
+                        <label>Classificar</label>
+                        <select class="form-control mb-3" id="ordenar" name="ordenar">
+                            <option value="">Classificar por</option>
+                            <option value="id_paciente" <?= $ordenar == 'id_paciente' ? 'selected' : null ?>>Id Internação</option>
+                            <option value="nome_pac" <?= $ordenar == 'nome_pac' ? 'selected' : null ?>>Paciente</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
                         <button style="margin:10px; font-weight:600" type="submit" class="btn-sm btn-light">Pesquisar</button>
                     </div>
                 </div>
@@ -65,11 +89,11 @@
             $paginas = $obPagination->getPages();
 
             foreach ($paginas as $pagina) {
-                // $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
-                $paginacao .= '<a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
-    <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
-    </a>';
-            }
+                $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
+                $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pg'] . '&' . $gets . '"> 
+                <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
+                <li class="page-item"></a>';
+            };
             ?>
         </div>
         <div>
@@ -111,63 +135,77 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <!-- <div>
-            <?= $paginacao ?>
-        </div> -->
-        <div id="id-confirmacao" class="btn_acoes oculto">
-            <p>Deseja deletar este paciente: ?</p>
-            <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
-            <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
-        </div>
-        <div> <?php
+        <?php
 
-                //modo cadastro
-                $formData = "0";
-                $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        "<div style=margin-left:20px;>";
+        echo "<div style='color:blue; margin-left:20px;'>";
+        echo "</div>";
+        echo "<nav aria-label='Page navigation example'>";
+        echo " <ul class='pagination'>";
+        echo " <li class='page-item'><a class='page-link' href='list_paciente.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
+        <?= $paginacao ?>
+        <?php echo "<li class='page-item'><a class='page-link' href='list_paciente.php?pag=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+        echo " </ul>";
+        echo "</nav>";
+        echo "</div>"; ?>
+        <hr>
+    </div>
+    <div id="id-confirmacao" class="btn_acoes oculto">
+        <p>Deseja deletar este paciente: ?</p>
+        <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
+        <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
+    </div>
+    <div> <?php
 
-                if ($formData !== "0") {
-                    $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
-                    //header("Location: index.php");
-                } else {
-                    echo "<p style='color: #f00;'>Erro: Usuário não cadastrado!</p>";
-                };
+            //modo cadastro
+            // $formData = "0";
+            // $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-                try {
+            // if ($formData !== "0") {
+            //     $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
+            //     //header("Location: index.php");
+            // } else {
+            //     echo "<p style='color: #f00;'>Erro: Usuário não cadastrado!</p>";
+            // };
 
-                    $query_Total = $conn->prepare($sql_Total);
-                    $query_Total->execute();
+            // try {
 
-                    $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
+            //     $query_Total = $conn->prepare($sql_Total);
+            //     $query_Total->execute();
 
-                    # conta quantos registros tem no banco de dados
-                    $query_count = $query_Total->rowCount();
+            //     $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
 
-                    # calcula o total de paginas a serem exibidas
-                    $qtdPag = ceil($query_count / $limite);
-                } catch (PDOexception $error_Total) {
+            //     # conta quantos registros tem no banco de dados
+            //     $query_count = $query_Total->rowCount();
 
-                    echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
-                }
-                echo "<div style=margin-left:0px;>";
-                echo "<div style='color:blue; margin-top:20px;'>";
-                echo "</div>";
-                echo "<nav aria-label='Page navigation example'>";
-                echo " <ul class='pagination'>";
-                echo " <li class='page-item'><a class='page-link' href='list_paciente.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
+            //     # calcula o total de paginas a serem exibidas
+            //     $qtdPag = ceil($query_count / $limite);
+            // } catch (PDOexception $error_Total) {
 
-                if ($qtdPag > 1 && $pg <= $qtdPag) {
-                    for ($i = 1; $i <= $qtdPag; $i++) {
-                        if ($i == $pg) {
-                            echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
-                        } else {
-                            echo "<li class='page-item '><a class='page-link' href='list_paciente.php?pag=$i&" . $gets . "'>" . $i . "</a></li>";
-                        }
-                    }
-                }
-                echo "<li class='page-item'><a class='page-link' href='list_paciente.php?pag=$qtdPag&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
-                echo " </ul>";
-                echo "</nav>";
-                echo "</div>"; ?></div>
+            //     echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
+            // }
+            // echo "<div style=margin-left:0px;>";
+            // echo "<div style='color:blue; margin-top:20px;'>";
+            // echo "</div>";
+            // echo "<nav aria-label='Page navigation example'>";
+            // echo " <ul class='pagination'>";
+            // echo " <li class='page-item'><a class='page-link' href='list_paciente.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
+
+            // if ($qtdPag > 1 && $pg <= $qtdPag) {
+            //     for ($i = 1; $i <= $qtdPag; $i++) {
+            //         if ($i == $pg) {
+            //             echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
+            //         } else {
+            //             echo "<li class='page-item '><a class='page-link' href='list_paciente.php?pag=$i&" . $gets . "'>" . $i . "</a></li>";
+            //         }
+            //     }
+            // }
+            // echo "<li class='page-item'><a class='page-link' href='list_paciente.php?pag=$qtdPag&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+            // echo " </ul>";
+            // echo "</nav>";
+            // echo "</div>"; 
+            ?>
+    </div>
     </div>
 
 
