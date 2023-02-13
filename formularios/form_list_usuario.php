@@ -11,11 +11,13 @@
 
     //Instanciando a classe
     $usuario = new userDAO($conn, $BASE_URL);
-    $QtdTotaluser = new userDAO($conn, $BASE_URL);
+    $QtdTotalUser = new userDAO($conn, $BASE_URL);
 
     // METODO DE BUSCA DE PAGINACAO
     $busca = filter_input(INPUT_GET, 'pesquisa_nome');
     $buscaAtivo = filter_input(INPUT_GET, 'ativo_user');
+    $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
+    $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
     $condicoes = [
@@ -28,13 +30,19 @@
     $where = implode(' AND ', $condicoes);
 
     // QUANTIDADE usuarioS
-    $qtduserItens1 = $QtdTotaluser->Qtdusuario($where);
+    $qtdUserItens1 = $QtdTotalUser->QtdUsuario($where);
 
-    $qtduserItens = ($qtduserItens1['0']);
+    $qtdUserItens = ($qtdUserItens1['qtd']);
+    $totalcasos = ceil($qtdUserItens / $limite);
 
     // PAGINACAO
-    $obPagination = new pagination($qtduserItens, $_GET['pag'] ?? 1, 10);
+    $obPagination = new pagination($qtdUserItens, $_GET['pag'] ?? 1, $limite ?? 10);
     $obLimite = $obPagination->getLimit();
+    $order = $ordenar;
+
+    // PREENCHIMENTO DO FORMULARIO COM QUERY
+    $query = $usuario->selectAllUsuario($where, $order, $obLimite);
+
     ?>
 
     <!--tabela evento-->
@@ -47,21 +55,41 @@
                     <div class="form-group col-sm-2">
                         <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por usuário">
                     </div>
-                    <!-- <div class="form-group col-sm-1">
+                    <div class="form-group col-sm-1">
                         <input type="radio" checked name="ativo" value="s" id="ativo" placeholder="Pesquisa por evento">
                         <label for="ativo">Ativo</label><br>
                         <input type="radio" style="margin-top:-5px" name="ativo" value="n" id="ativo" placeholder="Pesquisa por evento">
                         <label for="ativo">Inativo</label><br>
-                    </div> -->
-                    <div class="form-group col-sm-1">
-                        <button style="margin:10px; font-weight:600" type="submit" class="btn-sm btn-light">Pesquisar</button>
+                    </div>
+                    <div style="margin-left:20px" class="form-group col-sm-1">
+                        <label>Limite</label>
+                        <select class="form-control mb-3" id="limite" name="limite">
+                            <option value="">Reg por página</option>
+                            <option value="5" <?= $limite == '5' ? 'selected' : null ?>>5</option>
+                            <option value="10" <?= $limite == '10' ? 'selected' : null ?>>10</option>
+                            <option value="20" <?= $limite == '20' ? 'selected' : null ?>>20</option>
+                            <option value="50" <?= $limite == '50' ? 'selected' : null ?>>50</option>
+                        </select>
+                    </div>
+                    <div style="margin-left:20px" class="form-group col-sm-1">
+                        <label>Classificar</label>
+                        <select class="form-control mb-3" id="ordenar" name="ordenar">
+                            <option value="">Classificar por</option>
+                            <option value="id_usuario" <?= $ordenar == 'id_usuario' ? 'selected' : null ?>>Id usuario</option>
+                            <option value="usuario_user" <?= $ordenar == 'usuario_user' ? 'selected' : null ?>>usuario</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
+                            <button type="submit" class="btn btn-primary mb-1">Buscar</button>
+                        </div>
                     </div>
                 </div>
             </form>
 
             <?php
             // PREENCHIMENTO DO FORMULARIO COM QUERY
-            $order = null;
             $query = $usuario->selectAllusuario($where, $order, $obLimite);
 
             // GETS 

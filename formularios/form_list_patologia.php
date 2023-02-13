@@ -11,23 +11,28 @@
 
     //Instanciando a classe
     $patologia = new patologiaDAO($conn, $BASE_URL);
-    $QtdTotalpat = new patologiaDAO($conn, $BASE_URL);
+    $QtdTotalPat = new patologiaDAO($conn, $BASE_URL);
 
     // METODO DE BUSCA DE PAGINACAO
     $busca = filter_input(INPUT_GET, 'pesquisa_nome');
-    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+ $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
+    $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
+    $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
 
+    // MONTAR CONDICOES //
     $condicoes = [
         strlen($busca) ? 'patologia_pat LIKE "%' . $busca . '%"' : null,
     ];
     $condicoes = array_filter($condicoes);
 
-    // REMOVE POSICOES VAZIAS DO FILTRO
+    // REMOVE POSICOES VAZIAS DO FILTRO //
     $where = implode(' AND ', $condicoes);
 
     $qtdPatItens1 = $QtdTotalPat->QtdPatologia($where);
-
     $qtdPatItens = ($qtdPatItens1['qtd']);
+
+    $totalcasos = ceil($qtdPatItens / $limite);
+
 
     // PAGINACAO
     $obPagination = new pagination($qtdPatItens, $_GET['pag'] ?? 1, $limite ?? 10);
@@ -48,8 +53,29 @@
                     <div class="form-group col-sm-2">
                         <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por patologia">
                     </div>
-                    <div class="form-group col-sm-1">
-                        <button style="margin:10px; font-weight:600" type="submit" class="btn-sm btn-light">Pesquisar</button>
+                    <div style="margin-left:20px" class="form-group col-sm-1">
+                        <label>Limite</label>
+                        <select class="form-control mb-3" id="limite" name="limite">
+                            <option value="">Reg por página</option>
+                            <option value="5" <?= $limite == '5' ? 'selected' : null ?>>5</option>
+                            <option value="10" <?= $limite == '10' ? 'selected' : null ?>>10</option>
+                            <option value="20" <?= $limite == '20' ? 'selected' : null ?>>20</option>
+                            <option value="50" <?= $limite == '50' ? 'selected' : null ?>>50</option>
+                        </select>
+                    </div>
+                    <div style="margin-left:20px" class="form-group col-sm-1">
+                        <label>Classificar</label>
+                        <select class="form-control mb-3" id="ordenar" name="ordenar">
+                            <option value="">Classificar por</option>
+                            <option value="id_patologia" <?= $ordenar == 'id_patologia' ? 'selected' : null ?>>Id patologia</option>
+                            <option value="patologia_pat" <?= $ordenar == 'patologia_pat' ? 'selected' : null ?>>Patologia</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
+                            <button type="submit" class="btn btn-primary mb-1">Buscar</button>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -69,8 +95,8 @@
 
             foreach ($paginas as $pagina) {
                 $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
-                $paginacao .= '<a href="?pag=' . $pagina['pag'] . '&' . $gets . '"> 
-               <button type="button" class="btn ' . $class . '">' . $pagina['pag'] . '</button>
+                $paginacao .= '<a href="?pag=' . $pagina['pg'] . '&' . $gets . '"> 
+               <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
                </a>';
             }
 
@@ -121,9 +147,9 @@
             echo "</div>";
             echo "<nav aria-label='Page navigation example'>";
             echo " <ul class='pagination'>";
-            echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
+            echo " <li class='page-item'><a class='page-link' href='list_patologia.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
             <?= $paginacao ?>
-            <?php echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pag=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+            <?php echo "<li class='page-item'><a class='page-link' href='list_patologia.php?pag=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
             echo " </ul>";
             echo "</nav>";
             echo "</div>"; ?>

@@ -31,14 +31,15 @@
     // QUANTIDADE estipulante
     $qtdestItens1 = $QtdTotalest->Qtdestipulante($where);
 
-    $qtdestItens = ($qtdestItens1['qtd']);
-    $totalcasos = ceil($qtdestItens / $limite);
+    $qtdEstItens = ($qtdestItens1['qtd']);
+    $totalcasos = ceil($qtdEstItens / $limite);
 
     // PAGINACAO
-    $obPagination = new pagination($qtdSegItens, $_GET['pag'] ?? 1, $limite ?? 10);
+    $obPagination = new pagination($qtdEstItens, $_GET['pag'] ?? 1, $limite ?? 10);
     $obLimite = $obPagination->getLimit();
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
+    $order = $ordenar;
     $query = $estipulante->selectAllEstipulante($where, $order, $limite);
     ?>
 
@@ -51,19 +52,35 @@
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <input type="hidden" name="pesquisa" id="pesquisa" value="sim">
                     <div class="form-group col-sm-2">
+                    <label>Pesquisa Empresa</label>
+
                         <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por estipulante">
                     </div>
-                    <div class="form-group col-sm-1">
-                        <button style="margin:10px; font-weight:600" type="submit" class="btn-sm btn-light">Pesquisar</button>
+                    <div style="margin-left:20px" class="form-group col-sm-1">
+                        <label>Limite</label>
+                        <select class="form-control mb-3" id="limite" name="limite">
+                            <option value="">Reg por página</option>
+                            <option value="5" <?= $limite == '5' ? 'selected' : null ?>>5</option>
+                            <option value="10" <?= $limite == '10' ? 'selected' : null ?>>10</option>
+                            <option value="20" <?= $limite == '20' ? 'selected' : null ?>>20</option>
+                            <option value="50" <?= $limite == '50' ? 'selected' : null ?>>50</option>
+                        </select>
+                    </div>
+                    <div style="margin-left:20px" class="form-group col-sm-1">
+                        <label>Classificar</label>
+                        <select class="form-control mb-3" id="ordenar" name="ordenar">
+                            <option value="">Classificar por</option>
+                            <option value="id_estipulante" <?= $ordenar == 'id_estipulante' ? 'selected' : null ?>>Id Estipulante</option>
+                            <option value="nome_est" <?= $ordenar == 'nome_est' ? 'selected' : null ?>>Estipulante</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
+                        <button type="submit" class="btn btn-primary mb-1">Buscar</button>
                     </div>
                 </div>
             </form>
 
             <?php
-
-            // PREENCHIMENTO DO FORMULARIO COM QUERY
-            $order = $ordenar;
-            $query = $estipulante->selectAllestipulante($where, $order, $obLimite);
 
             // GETS 
             unset($_GET['pag']);
@@ -73,6 +90,10 @@
             // PAGINACAO
             $paginacao = '';
             $paginas = $obPagination->getPages();
+
+            // PREENCHIMENTO DO FORMULARIO COM QUERY
+            $order = $ordenar;
+            $query = $estipulante->selectAllestipulante($where, $order, $obLimite);
 
             foreach ($paginas as $pagina) {
                 $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
@@ -104,11 +125,10 @@
                     <tr>
                         <td scope="row" class="col-id"><?= $id_estipulante ?></td>
                         <td scope="row" class="nome-coluna-table"><?= $nome_est ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $endereco_seg ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $cidade_seg ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $endereco_est ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $cidade_est ?></td>
 
                         <td class="action">
-                            <!-- <a href="cad_estipulante.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a> -->
                             <a href="<?= $BASE_URL ?>show_estipulante.php?id_estipulante=<?= $id_estipulante ?>"><i style="color:green; margin-right:10px" class="fas fa-eye check-icon"></i></a>
 
                             <a href="<?= $BASE_URL ?>edit_estipulante.php?id_estipulante=<?= $id_estipulante ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>

@@ -17,11 +17,11 @@
     $pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
     $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
     $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
-    $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
     $condicoes = [
         strlen($pesquisa_nome) ? 'seguradora_seg LIKE "%' . $pesquisa_nome . '%"' : null,
-        strlen($buscaAtivo) ? 'ativo_seg = "' . $buscaAtivo . '"' : null
+        // strlen($buscaAtivo) ? 'ativo_seg = "' . $buscaAtivo . '"' : null
     ];
     $condicoes = array_filter($condicoes);
 
@@ -29,6 +29,8 @@
     $where = implode(' AND ', $condicoes);
 
     // QUANTIDADE SEGURADORAS
+    $order = $ordenar;
+
     $qtdSegItens1 = $QtdTotalSeg->QtdSeguradora($where);
 
     $qtdSegItens = ($qtdSegItens1['qtd']);
@@ -55,15 +57,7 @@
 
                         <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" value="<?= $busca ?>" placeholder="Pesquisa por seguradora">
                     </div>
-                    <div class="form-group col-sm-3">
-                        <label>Ativos</label>
-
-                        <select class="form-control mb-3" id="ativo_seg" name="ativo_seg">
-                            <option value="">Busca por Ativos</option>
-                            <option value="s" <?= $ativo_seg == 's' ? 'selected' : null ?>>Sim</option>
-                            <option value="n" <?= $ativo_seg == 'n' ? 'selected' : null ?>>Não</option>
-                        </select>
-                    </div>
+                    
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Limite</label>
                         <select class="form-control mb-3" id="limite" name="limite">
@@ -92,6 +86,7 @@
             <?php
 
             // PREENCHIMENTO DO FORMULARIO COM QUERY
+
             $query = $seguradora->selectAllSeguradora($where, $order, $obLimite);
 
             // GETS 

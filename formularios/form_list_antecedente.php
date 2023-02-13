@@ -29,6 +29,7 @@
     $qtdantItens1 = $QtdTotalant->Qtdantecedente($where);
 
     $qtdantItens = ($qtdantItens1['qtd']);
+    $totalcasos = ceil($qtdantItens / $limite);
 
     // PAGINACAO
     $obPagination = new pagination($qtdantItens, $_GET['pag'] ?? 1, $limite ?? 10);
@@ -41,7 +42,7 @@
     ?>
 
     <!--tabela antecedente-->
-    <div class="container-fluid py-2">
+    <div class="container py-2">
         <h4 class="page-title">Relação de antecedentes</h4>
 
         <div class="menu_pesquisa">
@@ -122,8 +123,7 @@
                     <td scope="row" class="nome-coluna-table"><?= $antecedente_ant ?></td>
 
                     <td class="action">
-                        <a href="cad_antecedente.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a>
-                        <a href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:orange; margin-right:10px" class="fas fa-eye check-icon"></i></a>
+                        <a href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:green; margin-right:10px" class="fas fa-eye check-icon"></i></a>
 
                         <a href="<?= $BASE_URL ?>edit_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>
 
@@ -143,9 +143,9 @@
         echo "</div>";
         echo "<nav aria-label='Page navigation example'>";
         echo " <ul class='pagination'>";
-        echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
+        echo " <li class='page-item'><a class='page-link' href='list_antecedente.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
         <?= $paginacao ?>
-        <?php echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pag=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+        <?php echo "<li class='page-item'><a class='page-link' href='list_antecedente.php?pag=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
         echo " </ul>";
         echo "</nav>";
         echo "</div>"; ?>
@@ -157,8 +157,10 @@
         <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
         <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
     </div>
+<div>
+        <hr>
+        <a class="btn btn-success styled" style="margin-left:120px" href="cad_antecedente.php">Novo Antecedente</a>
     </div>
-
     <?php
 
     ?>
