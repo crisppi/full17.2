@@ -25,6 +25,9 @@ include_once("dao/gestaoDao.php");
 include_once("models/prorrogacao.php");
 include_once("dao/prorrogacaoDao.php");
 
+include_once("models/negociacao.php");
+include_once("dao/negociacaoDao.php");
+
 include_once("array_dados.php");
 
 $internacaoDao = new internacaoDAO($conn, $BASE_URL);
@@ -49,6 +52,10 @@ $findMaxUtiInt = $uti->findMaxUtiInt();
 $prorrogacao = new prorrogacaoDAO($conn, $BASE_URL);
 $prorrogacaoIdMax = $prorrogacao->findMaxPror();
 $findMaxProInt = $prorrogacao->findMaxProInt();
+
+$negociacao = new negociacaoDAO($conn, $BASE_URL);
+$negociacaoLast = new negociacaoDAO($conn, $BASE_URL);
+
 
 
 ?>

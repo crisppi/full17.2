@@ -6,8 +6,16 @@
         <input type="hidden" name="type" value="create">
         <div class="form-group col-sm-1">
             <?php
+
             $a = ($gestaoIdMax[0]);
             $ultimoReg = ($a["ultimoReg"]);
+            $lastId = $ultimoReg;
+
+            print_r($lastId);
+            // $negociacaoGeral = $negociacao->findGeral();
+            $findMaxInt = $negociacaoLast->findByLastId($lastId);
+            print_r($findMaxInt);
+
             ?>
             <input type="hidden" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= $ultimoReg ?>" placeholder="Relatório da auditoria">
         </div>

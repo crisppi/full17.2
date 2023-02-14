@@ -120,7 +120,6 @@
     $qtdIntItens = ($qtdIntItens1['qtd']);
     $totalcasos = ceil($qtdIntItens / $limite);
 
-
     // PAGINACAO
     $order = $ordenar;
 

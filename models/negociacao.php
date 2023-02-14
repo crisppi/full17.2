@@ -34,4 +34,5 @@ interface negociacaoDAOInterface
   public function update(negociacao $negociacao);
   public function destroy($id_negociacao);
   public function findGeral();
+  public function findByLastId($lastId);
 };

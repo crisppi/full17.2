@@ -274,13 +274,113 @@ class negociacaoDAO implements negociacaoDAOInterface
         $this->message->setMessage("negociacao removido com sucesso!", "success", "list_negociacao.php");
     }
 
+    // METODO DE PROCURA POR ID DA INTERNACAO PARA UTILIZACAO NO FORM NEGOCIACAO
+    public function findByLastId($lastId)
+    {
 
+        $negociacao = [];
+
+        $stmt = $this->conn->query("SELECT 
+        ng.id_negociacao,
+        ng.dif_1, 
+        ng.dif_2, 
+        ng.dif_3, 
+        ng.dif_total, 
+        ng.fk_id_int, 
+        ng.qtd_1, 
+        ng.qtd_2, 
+        ng.qtd_3, 
+        ng.troca_de_1, 
+        ng.troca_de_2, 
+        ng.troca_de_3, 
+        ng.troca_para_1, 
+        ng.troca_para_2, 
+        ng.troca_para_3, 
+        ng.valor_de_1, 
+        ng.valor_de_2, 
+        ng.valor_de_3, 
+        ng.valor_para_1, 
+        ng.valor_para_2, 
+        ng.valor_para_3,
+        pa.id_paciente,
+        pa.nome_pac,
+        ho.id_hospital, 
+        ho.nome_hosp,
+        ac.id_internacao,
+        ac.internado_int,
+        ac.fk_hospital_int,
+        ac.data_intern_int,
+        ac.fk_paciente_int
+        
+        FROM tb_negociacao ng 
+    
+            INNER JOIN tb_internacao AS ac ON
+            ng.fk_id_int = ac.id_internacao
+            
+            INNER JOIN tb_hospital AS ho ON  
+            ac.fk_hospital_int = ho.id_hospital
+    
+            INNER JOIN tb_paciente AS pa ON
+            ac.fk_paciente_int = pa.id_paciente 
+            
+            WHERE ac.id_internacao = $lastId ");
+
+        $stmt->execute();
+
+        $negociacao = $stmt->fetchAll();
+
+        return $negociacao;
+    }
+
+    // METODO DE PROCURA SEM FILTROS
     public function findGeral()
     {
 
         $negociacao = [];
 
-        $stmt = $this->conn->query("SELECT * FROM tb_negociacao ORDER BY id_negociacao asc");
+        $stmt = $this->conn->query("SELECT 
+        ng.id_negociacao,
+        ng.dif_1, 
+        ng.dif_2, 
+        ng.dif_3, 
+        ng.dif_total, 
+        ng.fk_id_int, 
+        ng.qtd_1, 
+        ng.qtd_2, 
+        ng.qtd_3, 
+        ng.troca_de_1, 
+        ng.troca_de_2, 
+        ng.troca_de_3, 
+        ng.troca_para_1, 
+        ng.troca_para_2, 
+        ng.troca_para_3, 
+        ng.valor_de_1, 
+        ng.valor_de_2, 
+        ng.valor_de_3, 
+        ng.valor_para_1, 
+        ng.valor_para_2, 
+        ng.valor_para_3,
+        pa.id_paciente,
+        pa.nome_pac,
+        ho.id_hospital, 
+        ho.nome_hosp,
+        ac.id_internacao,
+        ac.internado_int,
+        ac.fk_hospital_int,
+        ac.data_intern_int,
+        ac.fk_paciente_int
+        
+        FROM tb_negociacao ng 
+    
+            INNER JOIN tb_internacao AS ac ON
+            ng.fk_id_int = ac.id_internacao
+            
+            INNER JOIN tb_hospital AS ho ON  
+            ac.fk_hospital_int = ho.id_hospital
+    
+            INNER JOIN tb_paciente AS pa ON
+            ac.fk_paciente_int = pa.id_paciente 
+        ");
 
         $stmt->execute();
 
@@ -298,27 +398,27 @@ class negociacaoDAO implements negociacaoDAOInterface
 
         //MONTA A QUERY
         $query = $this->conn->query('SELECT 
-        neg.id_negociacao,
-        neg.dif_1, 
-        neg.dif_2, 
-        neg.dif_3, 
-        neg.dif_total, 
-        neg.fk_id_int, 
-        neg.qtd_1, 
-        neg.qtd_2, 
-        neg.qtd_3, 
-        neg.troca_de_1, 
-        neg.troca_de_2, 
-        neg.troca_de_3, 
-        neg.troca_para_1, 
-        neg.troca_para_2, 
-        neg.troca_para_3, 
-        neg.valor_de_1, 
-        neg.valor_de_2, 
-        neg.valor_de_3, 
-        neg.valor_para_1, 
-        neg.valor_para_2, 
-        neg.valor_para_3
+        ng.id_negociacao,
+        ng.dif_1, 
+        ng.dif_2, 
+        ng.dif_3, 
+        ng.dif_total, 
+        ng.fk_id_int, 
+        ng.qtd_1, 
+        ng.qtd_2, 
+        ng.qtd_3, 
+        ng.troca_de_1, 
+        ng.troca_de_2, 
+        ng.troca_de_3, 
+        ng.troca_para_1, 
+        ng.troca_para_2, 
+        ng.troca_para_3, 
+        ng.valor_de_1, 
+        ng.valor_de_2, 
+        ng.valor_de_3, 
+        ng.valor_para_1, 
+        ng.valor_para_2, 
+        ng.valor_para_3,
         pa.id_paciente,
         pa.nome_pac,
         ho.id_hospital, 
@@ -329,10 +429,10 @@ class negociacaoDAO implements negociacaoDAOInterface
         ac.data_intern_int,
         ac.fk_paciente_int
         
-        FROM tb_negociacao neg 
+        FROM tb_negociacao ng 
     
             INNER JOIN tb_internacao AS ac ON
-            neg.fk_id_int = ac.id_internacao
+            ng.fk_id_int = ac.id_internacao
             
             INNER JOIN tb_hospital AS ho ON  
             ac.fk_hospital_int = ho.id_hospital
