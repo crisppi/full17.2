@@ -310,7 +310,10 @@ class negociacaoDAO implements negociacaoDAOInterface
         ac.internado_int,
         ac.fk_hospital_int,
         ac.data_intern_int,
-        ac.fk_paciente_int
+        ac.fk_paciente_int,
+        ad.fk_hospital,
+        ad.valor_aco,
+        ad.acomodacao_aco
         
         FROM tb_negociacao ng 
     
@@ -322,6 +325,9 @@ class negociacaoDAO implements negociacaoDAOInterface
     
             INNER JOIN tb_paciente AS pa ON
             ac.fk_paciente_int = pa.id_paciente 
+            
+            INNER JOIN tb_acomodacao AS ad ON  
+            ho.id_hospital = ad.fk_hospital
             
             WHERE ac.id_internacao = $lastId ");
 
@@ -427,7 +433,10 @@ class negociacaoDAO implements negociacaoDAOInterface
         ac.internado_int,
         ac.fk_hospital_int,
         ac.data_intern_int,
-        ac.fk_paciente_int
+        ac.fk_paciente_int,
+        ad.fk_hospital,
+        ad.valor_aco,
+        ad.acomodacao_aco
         
         FROM tb_negociacao ng 
     
@@ -436,6 +445,9 @@ class negociacaoDAO implements negociacaoDAOInterface
             
             INNER JOIN tb_hospital AS ho ON  
             ac.fk_hospital_int = ho.id_hospital
+
+            INNER JOIN tb_acomodacao AS ad ON  
+            ho.id_hospital = ad.fk_hospital
     
             INNER JOIN tb_paciente AS pa ON
             ac.fk_paciente_int = pa.id_paciente  ' . $where . ' ' . $order . ' ' . $limit);

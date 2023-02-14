@@ -15,6 +15,8 @@
             // $negociacaoGeral = $negociacao->findGeral();
             $findMaxInt = $negociacaoLast->findByLastId($lastId);
             print_r($findMaxInt);
+            extract($findMaxInt);
+
 
             ?>
             <input type="hidden" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= $ultimoReg ?>" placeholder="Relatório da auditoria">
@@ -45,17 +47,8 @@
                 <label class="control-label" for="qtd_1">Qtd (1)</label>
                 <input type="number" style="font-size:0.8em" class="form-control" id="qtd_1" name="qtd_1" min="1" max="30">
             </div>
-            <div class="form-group col-sm-2">
-                <label class="control-label" for="prorrog1_fim_pror">Data final (1)</label>
-                <input type="date" class="form-control" id="prorrog1_fim_pror" name="prorrog1_fim_pror">
-            </div>
-            <div class="form-group col-sm-1">
-                <label class="control-label" for="isol_1_pror">Isolamento</label>
-                <select class="form-control" id="isol_1_pror" name="isol_1_pror">
-                    <option value="n">Não</option>
-                    <option value="s">Sim</option>
-                </select>
-            </div>
+            
+            
         </div>
         <!-- PRORROGACAO 2  -->
         <div class="form-group-row">
