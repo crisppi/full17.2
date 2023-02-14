@@ -10,7 +10,6 @@
 
 h2 {
     color: black;
-
 }
 
 p {
@@ -94,6 +93,13 @@ p {
 }
 
 .font_nome_form input[type="text"] {
+    font-size: .9em;
+    font-weight: 800;
+    background-color: rgb(189, 189, 189);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.font_nome_form input[type="number"] {
     font-size: .9em;
     font-weight: 800;
     background-color: rgb(189, 189, 189);

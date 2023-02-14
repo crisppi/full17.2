@@ -4,15 +4,9 @@
     <p class="page-description">Adicione informações sobre a internação na UTI</p>
     <form class="formulario" action="<?= $BASE_URL ?>process_uti.php" id="add-acomodacao-form" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="type" value="create">
-        <!-- DADOS PARA FORMULARIO INTERNACAO -->
-        <div class="form-group col-sm-1">
-            <input type="text" class="form-control" value="deu" id="internacao_uti_int" name="internacao_uti_int">
-        </div>
-        <div class="form-group col-sm-1">
-            <input type="text" class="form-control" value="deu" id="internado_uti_int" name="internado_uti_int">
-        </div>
+        <!-- DADOS PARA FORMULARIO INTERNACAO UTI-->
         <div>
-            <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= ($ultimoReg) ?> ">
+            <input type="hidden" class="form-control" id="id_internacao" name="id_internacao" value="<?= ($ultimoReg) ?> ">
         </div>
 
         <!-- DADOS PARA FORMULARIO UTI -->

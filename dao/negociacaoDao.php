@@ -25,18 +25,26 @@ class negociacaoDAO implements negociacaoDAOInterface
         $negociacao = new Negociacao();
 
         $negociacao->id_negociacao = $data["id_negociacao"];
-        $negociacao->nome_est = $data["nome_est"];
-        $negociacao->endereco_est = $data["endereco_est"];
-        $negociacao->cidade_est = $data["cidade_est"];
-        $negociacao->cnpj_est = $data["cnpj_est"];
-        $negociacao->telefone01_est = $data["telefone01_est"];
-        $negociacao->telefone02_est = $data["telefone02_est"];
-        $negociacao->email01_est = $data["email01_est"];
-        $negociacao->email02_est = $data["email02_est"];
-        $negociacao->numero_est = $data["numero_est"];
-        $negociacao->bairro_est = $data["bairro_est"];
-        $negociacao->data_create_est = $data["data_create_est"];
-        $negociacao->usuario_create_est = $data["usuario_create_est"];
+        $negociacao->dif_1 = $data["dif_1"];
+        $negociacao->dif_2 = $data["dif_2"];
+        $negociacao->dif_3 = $data["dif_3"];
+        $negociacao->dif_total = $data["dif_total"];
+        $negociacao->fk_id_int = $data["fk_id_int"];
+        $negociacao->qtd_1 = $data["qtd_1"];
+        $negociacao->qtd_2 = $data["qtd_2"];
+        $negociacao->qtd_3 = $data["qtd_3"];
+        $negociacao->troca_de_1 = $data["troca_de_1"];
+        $negociacao->troca_de_2 = $data["troca_de_2"];
+        $negociacao->troca_de_3 = $data["troca_de_3"];
+        $negociacao->troca_para_1 = $data["troca_para_1"];
+        $negociacao->troca_para_2 = $data["troca_para_2"];
+        $negociacao->troca_para_3 = $data["troca_para_3"];
+        $negociacao->valor_de_1 = $data["valor_de_1"];
+        $negociacao->valor_de_2 = $data["valor_de_2"];
+        $negociacao->valor_de_3 = $data["valor_de_3"];
+        $negociacao->valor_para_1 = $data["valor_para_1"];
+        $negociacao->valor_para_2 = $data["valor_para_2"];
+        $negociacao->valor_para_3 = $data["valor_para_3"];
 
         return $negociacao;
     }
@@ -131,73 +139,75 @@ class negociacaoDAO implements negociacaoDAOInterface
         return $negociacao;
     }
 
-    public function findByTitle($title)
-    {
 
-        $negociacao = [];
-
-        $stmt = $this->conn->prepare("SELECT * FROM tb_negociacao
-                                    WHERE title LIKE :nome");
-
-        $stmt->bindValue(":title", '%' . $title . '%');
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-
-            $negociacaoArray = $stmt->fetchAll();
-
-            foreach ($negociacaoArray as $negociacao) {
-                $negociacao[] = $this->buildnegociacao($negociacao);
-            }
-        }
-
-        return $negociacao;
-    }
 
     public function create(negociacao $negociacao)
     {
 
         $stmt = $this->conn->prepare("INSERT INTO tb_negociacao (
-        nome_est, 
-        endereco_est, 
-        bairro_est, 
-        email01_est, 
-        cnpj_est, 
-        email02_est, 
-        telefone01_est, 
-        telefone02_est, 
-        numero_est, 
-        cidade_est, 
-        data_create_est, 
-        usuario_create_est
+        dif_1, 
+        dif_2, 
+        dif_3, 
+        dif_total, 
+        fk_id_int, 
+        qtd_1, 
+        qtd_2, 
+        qtd_3, 
+        troca_de_1, 
+        troca_de_2, 
+        troca_de_3, 
+        troca_para_1, 
+        troca_para_2, 
+        troca_para_3, 
+        valor_de_1, 
+        valor_de_2, 
+        valor_de_3, 
+        valor_para_1, 
+        valor_para_2, 
+        valor_para_3
       ) VALUES (
-        :nome_est, 
-        :endereco_est, 
-        :bairro_est, 
-        :email01_est, 
-        :cnpj_est, 
-        :email02_est, 
-        :telefone01_est, 
-        :telefone02_est, 
-        :numero_est, 
-        :cidade_est, 
-        :data_create_est, 
-        :usuario_create_est
+        :dif_1, 
+        :dif_2, 
+        :dif_3, 
+        :dif_total, 
+        :fk_id_int, 
+        :qtd_1, 
+        :qtd_2, 
+        :qtd_3, 
+        :troca_de_1, 
+        :troca_de_2, 
+        :troca_de_3, 
+        :troca_para_1, 
+        :troca_para_2, 
+        :troca_para_3, 
+        :valor_de_1, 
+        :valor_de_2, 
+        :valor_de_3, 
+        :valor_para_1, 
+        :valor_para_2, 
+        :valor_para_3
      )");
 
-        $stmt->bindParam(":nome_est", $negociacao->nome_est);
-        $stmt->bindParam(":endereco_est", $negociacao->endereco_est);
-        $stmt->bindParam(":bairro_est", $negociacao->bairro_est);
-        $stmt->bindParam(":email01_est", $negociacao->email01_est);
-        $stmt->bindParam(":cnpj_est", $negociacao->cnpj_est);
-        $stmt->bindParam(":email02_est", $negociacao->email02_est);
-        $stmt->bindParam(":telefone01_est", $negociacao->telefone01_est);
-        $stmt->bindParam(":telefone02_est", $negociacao->telefone02_est);
-        $stmt->bindParam(":numero_est", $negociacao->numero_est);
-        $stmt->bindParam(":cidade_est", $negociacao->cidade_est);
-        $stmt->bindParam(":data_create_est", $negociacao->data_create_est);
-        $stmt->bindParam(":usuario_create_est", $negociacao->usuario_create_est);
+        $stmt->bindParam(":dif_1", $negociacao->dif_1);
+        $stmt->bindParam(":dif_2", $negociacao->dif_2);
+        $stmt->bindParam(":dif_3", $negociacao->dif_3);
+        $stmt->bindParam(":dif_total", $negociacao->dif_total);
+        $stmt->bindParam(":fk_id_int", $negociacao->fk_id_int);
+        $stmt->bindParam(":qtd_1", $negociacao->qtd_1);
+        $stmt->bindParam(":qtd_2", $negociacao->qtd_2);
+        $stmt->bindParam(":qtd_3", $negociacao->qtd_3);
+        $stmt->bindParam(":troca_de_1", $negociacao->troca_de_1);
+        $stmt->bindParam(":troca_de_2", $negociacao->troca_de_2);
+        $stmt->bindParam(":troca_de_3", $negociacao->troca_de_3);
+        $stmt->bindParam(":troca_para_1", $negociacao->troca_para_1);
+        $stmt->bindParam(":troca_para_2", $negociacao->troca_para_2);
+        $stmt->bindParam(":troca_para_3", $negociacao->troca_para_3);
+        $stmt->bindParam(":valor_de_1", $negociacao->valor_de_1);
+        $stmt->bindParam(":valor_de_2", $negociacao->valor_de_2);
+        $stmt->bindParam(":valor_de_3", $negociacao->valor_de_3);
+        $stmt->bindParam(":valor_para_1", $negociacao->valor_para_1);
+        $stmt->bindParam(":valor_para_2", $negociacao->valor_para_2);
+        $stmt->bindParam(":valor_para_3", $negociacao->valor_para_3);
 
 
         $stmt->execute();
@@ -206,7 +216,7 @@ class negociacaoDAO implements negociacaoDAOInterface
         $this->message->setMessage("negociacao adicionado com sucesso!", "success", "list_negociacao.php");
     }
 
-    public function update(negociacao $negociacao)
+    public function update(negociacao $negociacao) // ainda nao atualizado
     {
 
         $stmt = $this->conn->prepare("UPDATE tb_negociacao SET
@@ -224,16 +234,26 @@ class negociacaoDAO implements negociacaoDAOInterface
         WHERE id_negociacao = :id_negociacao 
       ");
 
-        $stmt->bindParam(":nome_est", $negociacao->nome_est);
-        $stmt->bindParam(":endereco_est", $negociacao->endereco_est);
-        $stmt->bindParam(":email01_est", $negociacao->email01_est);
-        $stmt->bindParam(":email02_est", $negociacao->email02_est);
-        $stmt->bindParam(":cnpj_est", $negociacao->cnpj_est);
-        $stmt->bindParam(":numero_est", $negociacao->numero_est);
-        $stmt->bindParam(":telefone01_est", $negociacao->telefone01_est);
-        $stmt->bindParam(":telefone02_est", $negociacao->telefone02_est);
-        $stmt->bindParam(":cidade_est", $negociacao->cidade_est);
-        $stmt->bindParam(":bairro_est", $negociacao->bairro_est);
+        $stmt->bindParam(":dif_1", $negociacao->dif_1);
+        $stmt->bindParam(":dif_2", $negociacao->dif_2);
+        $stmt->bindParam(":dif_3", $negociacao->dif_3);
+        $stmt->bindParam(":dif_total", $negociacao->dif_total);
+        $stmt->bindParam(":fk_id_int", $negociacao->fk_id_int);
+        $stmt->bindParam(":qtd_1", $negociacao->qtd_1);
+        $stmt->bindParam(":qtd_2", $negociacao->qtd_2);
+        $stmt->bindParam(":qtd_3", $negociacao->qtd_3);
+        $stmt->bindParam(":troca_de_1", $negociacao->troca_de_1);
+        $stmt->bindParam(":troca_de_2", $negociacao->troca_de_2);
+        $stmt->bindParam(":troca_de_3", $negociacao->troca_de_3);
+        $stmt->bindParam(":troca_para_1", $negociacao->troca_para_1);
+        $stmt->bindParam(":troca_para_2", $negociacao->troca_para_2);
+        $stmt->bindParam(":troca_para_3", $negociacao->troca_para_3);
+        $stmt->bindParam(":valor_de_1", $negociacao->valor_de_1);
+        $stmt->bindParam(":valor_de_2", $negociacao->valor_de_2);
+        $stmt->bindParam(":valor_de_3", $negociacao->valor_de_3);
+        $stmt->bindParam(":valor_para_1", $negociacao->valor_para_1);
+        $stmt->bindParam(":valor_para_2", $negociacao->valor_para_2);
+        $stmt->bindParam(":valor_para_3", $negociacao->valor_para_3);
 
         $stmt->bindParam(":id_negociacao", $negociacao->id_negociacao);
         $stmt->execute();
@@ -277,7 +297,48 @@ class negociacaoDAO implements negociacaoDAOInterface
         $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
 
         //MONTA A QUERY
-        $query = $this->conn->query('SELECT * FROM tb_negociacao ' . $where . ' ' . $order . ' ' . $limit);
+        $query = $this->conn->query('SELECT 
+        neg.id_negociacao,
+        neg.dif_1, 
+        neg.dif_2, 
+        neg.dif_3, 
+        neg.dif_total, 
+        neg.fk_id_int, 
+        neg.qtd_1, 
+        neg.qtd_2, 
+        neg.qtd_3, 
+        neg.troca_de_1, 
+        neg.troca_de_2, 
+        neg.troca_de_3, 
+        neg.troca_para_1, 
+        neg.troca_para_2, 
+        neg.troca_para_3, 
+        neg.valor_de_1, 
+        neg.valor_de_2, 
+        neg.valor_de_3, 
+        neg.valor_para_1, 
+        neg.valor_para_2, 
+        neg.valor_para_3
+        pa.id_paciente,
+        pa.nome_pac,
+        ho.id_hospital, 
+        ho.nome_hosp,
+        ac.id_internacao,
+        ac.internado_int,
+        ac.fk_hospital_int,
+        ac.data_intern_int,
+        ac.fk_paciente_int
+        
+        FROM tb_negociacao neg 
+    
+            INNER JOIN tb_internacao AS ac ON
+            neg.fk_id_int = ac.id_internacao
+            
+            INNER JOIN tb_hospital AS ho ON  
+            ac.fk_hospital_int = ho.id_hospital
+    
+            INNER JOIN tb_paciente AS pa ON
+            ac.fk_paciente_int = pa.id_paciente  ' . $where . ' ' . $order . ' ' . $limit);
 
         $query->execute();
 

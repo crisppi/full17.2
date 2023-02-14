@@ -30,7 +30,6 @@ interface negociacaoDAOInterface
 
   public function buildnegociacao($negociacao);
   public function findById($id_negociacao);
-  public function findByIdUpdate($id_negociacao);
   public function create(negociacao $negociacao);
   public function update(negociacao $negociacao);
   public function destroy($id_negociacao);
