@@ -346,6 +346,7 @@ class gestaoDAO implements gestaoDAOInterface
         ho.id_hospital, 
         ho.nome_hosp,
         ac.id_internacao,
+        ac.internado_int,
         ac.fk_hospital_int,
         ac.data_intern_int,
         ac.fk_paciente_int
@@ -375,7 +376,41 @@ class gestaoDAO implements gestaoDAOInterface
         $order = strlen($order) ? 'ORDER BY ' . $order : '';
         $limite = strlen($limite) ? 'LIMIT ' . $limite : '';
 
-        $stmt = $this->conn->query('SELECT * ,COUNT(id_gestao) as qtd FROM tb_gestao ' . $where . ' ' . $order . ' ' . $limite);
+        $stmt = $this->conn->query('SELECT 
+        ge.id_gestao,
+        ge.fk_internacao_ges,
+        ge.home_care_ges,
+        ge.rel_home_care_ges,
+        ge.alto_custo_ges,
+        ge.rel_alto_custo_ges,
+        ge.evento_adverso_ges,
+        ge.rel_evento_adverso_ges,
+        ge.tipo_evento_adverso_gest,
+        ge.opme_ges,
+        ge.rel_opme_ges,
+        ge.desospitalizacao_ges,
+        ge.rel_desospitalizacao_ges,
+        pa.id_paciente,
+        pa.nome_pac,
+        ho.id_hospital, 
+        ho.nome_hosp,
+        ac.id_internacao,
+        ac.internado_int,
+        ac.fk_hospital_int,
+        ac.data_intern_int,
+        ac.fk_paciente_int,
+        COUNT(id_gestao) as qtd
+        
+        FROM tb_gestao ge 
+    
+            INNER JOIN tb_internacao AS ac ON
+            ge.fk_internacao_ges = ac.id_internacao
+            
+            INNER JOIN tb_hospital AS ho ON  
+            ac.fk_hospital_int = ho.id_hospital
+    
+            INNER JOIN tb_paciente AS pa ON
+            ac.fk_paciente_int = pa.id_paciente ' . $where . ' ' . $order . ' ' . $limite);
 
         $stmt->execute();
 
@@ -384,15 +419,3 @@ class gestaoDAO implements gestaoDAOInterface
         return $QtdTotalAnt;
     }
 }
-# Limita o número de registros a serem mostrados por página
-$limite = 10;
-
-# Se pg não existe atribui 1 a variável pg
-$pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
-
-# Atribui a variável inicio o inicio de onde os registros vão ser
-# mostrados por página, exemplo 0 à 10, 11 à 20 e assim por diante
-$inicio = ($pg * $limite) - $limite;
-$pesquisa_hosp = "";
-# seleciona o total de registros  
-$sql_Total = 'SELECT id_gestao FROM tb_gestao';

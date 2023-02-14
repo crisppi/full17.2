@@ -103,7 +103,7 @@
     $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
     $pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
     $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
-    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+    $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
     $condicoes = [
         strlen($pesquisa_nome) ? 'ho.nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
         strlen($pesquisa_pac) ? 'pa.nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
@@ -122,6 +122,8 @@
 
 
     // PAGINACAO
+    $order = $ordenar;
+
     $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, $limite ?? 10);
 
     $obLimite = $obPagination->getLimit();
@@ -135,7 +137,6 @@
     $gets = http_build_query($_GET);
 
     // PAGINACAO
-    $order = $ordenar;
     $paginacao = '';
     $paginas = $obPagination->getPages();
 
@@ -229,58 +230,7 @@
             echo "</div>"; ?>
             <hr>
         </div>
-        <?php
 
-        //modo cadastro
-        // $formData = "0";
-        // $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        // $total = $internacao->findTotal();
-
-        // $totalcasos = $total['0'];
-        // $reg = ($totalcasos['0']);
-
-        // if ($formData !== "0") {
-        //     $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
-        //     //header("Location: index.php");
-        // } else {
-        //     echo "<p style='color: #f00;'>Erro: Usuário não cadastrado!</p>";
-        // };
-
-        // try {
-
-        //     $query_Total = $conn->prepare($sql_Total);
-        //     $query_Total->execute();
-        //     $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
-
-        //     # conta quantos registros tem no banco de dados
-        //     $query_count = $query_Total->rowCount();
-
-        //     # calcula o total de paginas a serem exibidas
-        //     $totalcasos = ceil($reg / $limite);
-        // } catch (PDOexception $error_Total) {
-
-        //     echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
-        // }
-        // echo "<div style=margin-left:20px;>";
-        // echo "<div style='color:blue; margin-left:20px;'>";
-        // echo "</div>";
-        // echo "<nav aria-label='Page navigation example'>";
-        // echo " <ul class='pagination'>";
-        // echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
-        // if ($totalcasos > 1 && $pg <= $totalcasos) {
-        //     for ($i = 1; $i <= $totalcasos; $i++) {
-        //         if ($i == $pg) {
-        //             echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
-        //         } else {
-        //             echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pag=$i&" . $gets . "'>" . $i . "</a></li>";
-        //         }
-        //     }
-        // }
-        // echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pag=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
-        // echo " </ul>";
-        // echo "</nav>";
-        // echo "</div>"; 
-        ?>
         <div>
 
             <a class="btn btn-success styled" style="margin-left:120px" href="cad_internacao.php">Nova internação</a>
