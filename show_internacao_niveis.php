@@ -12,13 +12,16 @@
 <body>
     <?php
     include_once("globals.php");
-
+    include_once("models/internacao.php");
     require_once("dao/internacaoDao.php");
+
     require_once("models/message.php");
     include_once("models/hospital.php");
     include_once("dao/hospitalDao.php");
+
     include_once("models/patologia.php");
     include_once("dao/patologiaDao.php");
+
     require_once("dao/pacienteDAO.php");
 
     $internacaoDAO = new internacaoDAO($conn, $BASE_URL);
@@ -29,7 +32,10 @@
 
     $niveis = $internacaoDAO->findLast($a);
     //Instanciar o metodo internacao 
-    print_r($niveis);
+    // print_r($niveis);
+    // echo "<hr>";
+    // print_r($_POST);
+
     ?>
 
     <br>
@@ -44,7 +50,6 @@
         <br>
     </div>
     <br>
-
     <hr>
     <div>
         <button class="btn-primary" id="btn-prorrog">Prorrogação</button>

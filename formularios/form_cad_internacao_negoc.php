@@ -2,7 +2,7 @@
     <br>
     <h4 class="page-title">Cadastrar dados de prorrogação</h4>
     <p class="page-description">Adicione informações sobre as negociações</p>
-    <form class="formulario" action="<?= $BASE_URL ?>process_negociacao.php" id="add-prorrogacao-form" method="POST" enctype="multipart/form-data">
+    <form class="formulario" action="<?= $BASE_URL ?>process_negociacao.php" id="add-negociacao-form" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="type" value="create">
         <div class="form-group col-sm-1">
             <?php
@@ -12,7 +12,6 @@
             $lastId = $ultimoReg;
             // $negociacaoGeral = $negociacao->findGeral();
             $findMaxInt = $negociacaoLast->findByLastId($lastId);
-            extract($findMaxInt);
 
             ?>
             <input type="hidden" class="form-control" id="fk_id_int" name="fk_id_int" value="<?= $ultimoReg ?>" placeholder="Relatório da auditoria">

@@ -23,7 +23,6 @@ if ($type === "create") {
     $troca_para_1 = filter_input(INPUT_POST, "troca_para_1");
     $fk_id_int = filter_input(INPUT_POST, "fk_id_int");
 
-
     $negociacao = new negociacao();
 
     // Validação mínima de dados

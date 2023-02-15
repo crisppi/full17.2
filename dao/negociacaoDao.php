@@ -227,7 +227,7 @@ class negociacaoDAO implements negociacaoDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por adicionar filme
-        $this->message->setMessage("negociacao adicionado com sucesso!", "success", "list_negociacao.php");
+        $this->message->setMessage("negociacao adicionado com sucesso!", "success", "show_internacao_niveis.php");
     }
 
     public function update(negociacao $negociacao) // ainda nao atualizado
