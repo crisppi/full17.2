@@ -317,7 +317,7 @@ class negociacaoDAO implements negociacaoDAOInterface
         
         FROM tb_negociacao ng 
     
-            INNER JOIN tb_internacao AS ac ON
+            left JOIN tb_internacao AS ac ON
             ng.fk_id_int = ac.id_internacao
             
             INNER JOIN tb_hospital AS ho ON  

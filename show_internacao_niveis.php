@@ -28,7 +28,8 @@
     $a = $internacaoID['0'];
 
     $niveis = $internacaoDAO->findLast($a);
-    //Instanciar o metodo internacao   
+    //Instanciar o metodo internacao 
+    print_r($niveis);
     ?>
 
     <br>
@@ -37,9 +38,9 @@
         <span style="font-weight: 500; margin:0px 5px 0px 0px " class="card-title bold">Internação:</span>
         <span class="card-title bold" style="font-weight: 500; margin:0px 80px 0px 5px "><?= $niveis['0']['id_internacao'] ?></span>
         <span style="font-weight: 500; margin:0px 5px 0px 0px">Visita:</span>
-        <span style="font-weight: 500; margin:0px 80px 0px 0px"><?= date("d/m/Y", strtotime($niveis['0']['data_visita_int']))  ?></span>
+        <span style="font-weight: 500; margin:0px 80px 0px 0px"><?= $niveis['0']['data_intern_int']  ?></span>
         <span style="font-weight: 500; margin:0px 5px 0px 80px">Hospital:</span>
-        <span style=" font-weight: 500; margin:0px 10px 0px 0px"><?= $niveis['0']['fk_hospital_int'] ?></span>
+        <span style=" font-weight: 500; margin:0px 10px 0px 0px"><?= $niveis['0']['nome_hosp'] ?></span>
         <br>
     </div>
     <br>
