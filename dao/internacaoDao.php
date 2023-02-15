@@ -119,7 +119,9 @@ class internacaoDAO implements internacaoDAOInterface
             internado_int, 
             modo_internacao_int, 
             tipo_admissao_int, 
-            acoes_int, 
+            acoes_int,
+            internado_uti_int,
+            internacao_uti_int,
             titular_int, 
             data_visita_int, 
             grupo_patologia_int,
@@ -152,7 +154,7 @@ class internacaoDAO implements internacaoDAOInterface
         $stmt->bindParam(":fk_paciente_int", $internacao->fk_paciente_int);
         $stmt->bindParam(":rel_int", $internacao->rel_int);
         $stmt->bindParam(":fk_patologia_int", $internacao->fk_patologia_int);
-        $stmt->bindParam(":fk_patologia2", $internacao->fk_patologia_int);
+        $stmt->bindParam(":fk_patologia2", $internacao->fk_patologia2);
         $stmt->bindParam(":data_intern_int", $internacao->data_intern_int);
         $stmt->bindParam(":internado_int", $internacao->internado_int);
         $stmt->bindParam(":acoes_int", $internacao->acoes_int);

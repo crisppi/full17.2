@@ -24,7 +24,7 @@ if ($type === "create") {
     $fk_hospital_int = filter_input(INPUT_POST, "fk_hospital_int");
     $fk_paciente_int = filter_input(INPUT_POST, "fk_paciente_int");
     $fk_patologia_int = filter_input(INPUT_POST, "fk_patologia_int") ?: 1000;
-    $fk_patologia2 = filter_input(INPUT_POST, "fk_patologia2");
+    $fk_patologia2 = filter_input(INPUT_POST, "fk_patologia2") ?: 1000;
     $internado_int = filter_input(INPUT_POST, "internado_int");
     $modo_internacao_int = filter_input(INPUT_POST, "modo_internacao_int");
     $tipo_admissao_int = filter_input(INPUT_POST, "tipo_admissao_int");

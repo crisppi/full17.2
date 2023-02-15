@@ -11,6 +11,8 @@
 
 <body>
     <?php
+    include_once("globals.php");
+
     require_once("dao/internacaoDao.php");
     require_once("models/message.php");
     include_once("models/hospital.php");
@@ -19,7 +21,7 @@
     include_once("dao/patologiaDao.php");
     require_once("dao/pacienteDAO.php");
 
-    $internacaoDAO = new internacaoDAO($conn, $base_url);
+    $internacaoDAO = new internacaoDAO($conn, $BASE_URL);
     $internacaoID = $internacaoDAO->findLastId();
     $internacaoID = $internacaoID['0'];
 
@@ -72,7 +74,6 @@
         var btn = document.querySelector("#btn-gestao");
 
         btn.addEventListener("click", function() {
-
             var divGes = document.querySelector("#container-gestao");
             var divPro = document.querySelector("#container-prorrog");
             var divUti = document.querySelector("#container-uti");
@@ -170,9 +171,9 @@
                 document.getElementById(el).style.display = 'none';
         }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
     <?php
@@ -181,5 +182,3 @@
 </body>
 
 </html>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
