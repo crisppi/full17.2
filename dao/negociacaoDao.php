@@ -48,7 +48,21 @@ class negociacaoDAO implements negociacaoDAOInterface
 
         return $negociacao;
     }
+    public function joinnegociacaoHospitalshow($id_negociacao)
 
+    {
+        $stmt = $this->conn->query("SELECT ac.id_negociacao, ac.fk_hospital, ac.valor_aco, ac.negociacao_aco, ho.id_hospital, ho.nome_hosp
+         FROM tb_negociacao ac          
+         iNNER JOIN tb_hospital as ho On  
+         ac.fk_hospital = ho.id_hospital
+         where id_negociacao = $id_negociacao   
+         ");
+
+        $stmt->execute();
+
+        $negociacao = $stmt->fetch();
+        return $negociacao;
+    }
     public function findAll()
     {
         $negociacao = [];
@@ -274,7 +288,7 @@ class negociacaoDAO implements negociacaoDAOInterface
         $this->message->setMessage("negociacao removido com sucesso!", "success", "list_negociacao.php");
     }
 
-    // METODO DE PROCURA POR ID DA INTERNACAO PARA UTILIZACAO NO FORM NEGOCIACAO
+    // METODO DE PROCURA POR ID DA INTERNACAO PARA UTILIZACAO NO FORM NEGOCIACAO    
     public function findByLastId($lastId)
     {
 

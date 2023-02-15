@@ -2,7 +2,7 @@
     <br>
     <h4 class="page-title">Cadastrar dados de prorrogação</h4>
     <p class="page-description">Adicione informações sobre as negociações</p>
-    <form class="formulario" action="<?= $BASE_URL ?>process_prorrogacao.php" id="add-prorrogacao-form" method="POST" enctype="multipart/form-data">
+    <form class="formulario" action="<?= $BASE_URL ?>process_negociacao.php" id="add-prorrogacao-form" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="type" value="create">
         <div class="form-group col-sm-1">
             <?php
@@ -10,17 +10,14 @@
             $a = ($gestaoIdMax[0]);
             $ultimoReg = ($a["ultimoReg"]);
             $lastId = $ultimoReg;
-
-            print_r($lastId);
             // $negociacaoGeral = $negociacao->findGeral();
             $findMaxInt = $negociacaoLast->findByLastId($lastId);
-            print_r($findMaxInt);
             extract($findMaxInt);
 
-
             ?>
-            <input type="hidden" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= $ultimoReg ?>" placeholder="Relatório da auditoria">
+            <input type="hidden" class="form-control" id="fk_id_int" name="fk_id_int" value="<?= $ultimoReg ?>" placeholder="Relatório da auditoria">
         </div>
+
         <!-- PRORROGACAO 1 -->
         <div class="form-group row">
             <div class="form-group col-sm-2">
@@ -47,8 +44,8 @@
                 <label class="control-label" for="qtd_1">Qtd (1)</label>
                 <input type="number" style="font-size:0.8em" class="form-control" id="qtd_1" name="qtd_1" min="1" max="30">
             </div>
-            
-            
+
+
         </div>
         <!-- PRORROGACAO 2  -->
         <div class="form-group-row">
