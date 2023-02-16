@@ -6,10 +6,21 @@ require_once("models/negociacao.php");
 require_once("models/message.php");
 require_once("dao/usuarioDao.php");
 require_once("dao/negociacaoDao.php");
+include_once("models/internacao.php");
+require_once("dao/internacaoDao.php");
 
 $message = new Message($BASE_URL);
 $userDao = new UserDAO($conn, $BASE_URL);
 $negociacaoDao = new negociacaoDAO($conn, $BASE_URL);
+
+$internacaoDAO = new internacaoDAO($conn, $BASE_URL);
+$internacaoID = $internacaoDAO->findLastId();
+$internacaoID = $internacaoID['0'];
+
+$a = $internacaoID['0'];
+
+$niveis = $internacaoDAO->findLast($a);
+
 
 // Resgata o tipo do formulário
 $type = filter_input(INPUT_POST, "type");
@@ -23,6 +34,20 @@ if ($type === "create") {
     $troca_para_1 = filter_input(INPUT_POST, "troca_para_1");
     $fk_id_int = filter_input(INPUT_POST, "fk_id_int");
 
+    foreach ($niveis as $query) {
+        echo "<pre>";
+        // print_r($query);
+        print_r($troca_de_1);
+        if ($troca_de_1 === $query['acomodacao_aco']) {
+            $valor = $query['valor_aco'];
+            print_r($valor);
+            print_r($query['acomodacao_aco']);
+            print_r("chegou");
+        }
+    };
+
+
+    exit;
     $negociacao = new negociacao();
 
     // Validação mínima de dados
@@ -31,7 +56,6 @@ if ($type === "create") {
         $negociacao->troca_de_1 = $troca_de_1;
         $negociacao->troca_para_1 = $troca_para_1;
         $negociacao->fk_id_int = $fk_id_int;
-
 
         $negociacaoDao->create($negociacao);
     } else {

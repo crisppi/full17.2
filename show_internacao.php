@@ -19,15 +19,14 @@
     }
     include_once("globals.php");
     include_once("templates/header.php");
-
-    require_once("templates/header.php");
+    include_once("models/internacao.php");
     require_once("dao/internacaoDao.php");
     require_once("models/message.php");
     include_once("models/hospital.php");
     include_once("dao/hospitalDao.php");
     include_once("models/patologia.php");
     include_once("dao/patologiaDao.php");
-    require_once("dao/pacienteDAO.php");
+    include_once("dao/pacienteDAO.php");
 
 
     // Pegar o id da internacao
