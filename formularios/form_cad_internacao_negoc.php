@@ -18,7 +18,7 @@
         </div>
 
         <!-- PRORROGACAO 1 -->
-        <div class="form-group row">
+        <div class="form-group row" style="display:flex">
             <div class="form-group col-sm-2">
                 <label class="control-label" for="troca_de_1">Acomodação Solicitada</label>
                 <select class="form-control" id="troca_de_1" name="troca_de_1">
@@ -30,8 +30,8 @@
                 </select>
             </div>
             <div class="form-group col-sm-2">
-                <label class="control-label" for="troca_para_1">Acomodação Liberada</label>
-                <select class="form-control" id="troca_para_1" name="troca_para_1">
+                <label class="control-label" style="margin-left:10px" for="troca_para_1">Acomodação Liberada</label>
+                <select class="form-control" style="margin-left:10px" id="troca_para_1" name="troca_para_1">
                     <option value="">Selecione acomodação</option>
                     <?php sort($dados_acomodacao, SORT_ASC);
                     foreach ($dados_acomodacao as $acomd) { ?>
@@ -40,17 +40,17 @@
                 </select>
             </div>
             <div class="form-group col-sm-2">
-                <label class="control-label" for="qtd_1">Qtd (1)</label>
-                <input type="number" style="font-size:0.8em" class="form-control" id="qtd_1" name="qtd_1" min="1" max="30">
+                <label class="control-label" style="margin-left:10px" for="qtd_1">Qtd (1)</label>
+                <input type="number" style="margin-left:10px" style="font-size:0.8em" class="form-control" id="qtd_1" name="qtd_1" min="1" max="30">
             </div>
         </div>
 
         <!-- PRORROGACAO 2  -->
-        <div class="form-group-row">
+        <div class="form-group row">
             <div style="display:none" id="container-negoc2">
                 <div class="form-group col-sm-2">
-                    <label class="control-label" for="troca_de_2">Acomodação Solicitada</label>
-                    <select class="form-control" id="troca_de_2" name="troca_de_2">
+                    <label class="control-label" style="margin-left:10px" for="troca_de_2">Acomodação Solicitada</label>
+                    <select class="form-control" style="margin-left:10px" id="troca_de_2" name="troca_de_2">
                         <option value="">Selecione acomodação</option>
                         <?php sort($dados_acomodacao, SORT_ASC);
                         foreach ($dados_acomodacao as $acomd) { ?>
@@ -59,8 +59,8 @@
                     </select>
                 </div>
                 <div class="form-group col-sm-2">
-                    <label class="control-label" for="troca_para_2">Acomodação Liberada</label>
-                    <select class="form-control" id="troca_para_2" name="troca_para_2">
+                    <label class="control-label" style="margin-left:10px" for="troca_para_2">Acomodação Liberada</label>
+                    <select class="form-control" style="margin-left:10px" id="troca_para_2" name="troca_para_2">
                         <option value="">Selecione acomodação</option>
                         <?php sort($dados_acomodacao, SORT_ASC);
                         foreach ($dados_acomodacao as $acomd) { ?>
@@ -75,21 +75,21 @@
             </div>
         </div>
         <!-- PRORROGACAO 3 -->
-        <div class="form-group-row">
+        <div class="form-group row">
             <div style="display:none" id="container-negoc3">
                 <div class="form-group col-sm-2">
-                    <label class="control-label" for="troca_de_3">Acomodação Solicitada</label>
-                    <select class="form-control" id="troca_de_3" name="troca_de_3">
+                    <label class="control-label" style="margin-left:10px" for="troca_de_3">Acomodação Solicitada</label>
+                    <select class="form-control" style="margin-left:10px" id="troca_de_3" name="troca_de_3">
                         <option value="">Selecione acomodação</option>
                         <?php sort($dados_acomodacao, SORT_ASC);
                         foreach ($dados_acomodacao as $acomd) { ?>
-                            <option value="<?= $acomd; ?>"><?= $acomd; ?></option>
+                            <option style="margin-left:10px" value="<?= $acomd; ?>"><?= $acomd; ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-sm-2">
-                    <label class="control-label" for="troca_para_3">Acomodação Liberada</label>
-                    <select class="form-control" id="troca_para_3" name="troca_para_3">
+                    <label class="control-label" style="margin-left:10px" for="troca_para_3">Acomodação Liberada</label>
+                    <select class="form-control" style="margin-left:10px" id="troca_para_3" name="troca_para_3">
                         <option value="">Selecione acomodação</option>
                         <?php sort($dados_acomodacao, SORT_ASC);
                         foreach ($dados_acomodacao as $acomd) { ?>
@@ -99,7 +99,7 @@
                 </div>
                 <div class="form-group col-sm-2">
                     <label class="control-label" for="qtd_3">Qtd (3)</label>
-                    <input type="number" style="font-size:0.8em" class="form-control" id="qtd_3" name="qtd_3" min="1" max="30">
+                    <input type="number" style="margin-left:10px" style="font-size:0.8em" class="form-control" id="qtd_3" name="qtd_3" min="1" max="30">
                 </div>
             </div>
         </div>

@@ -181,7 +181,7 @@ $negociacaoLast = new negociacaoDAO($conn, $BASE_URL);
         function mostrarGrupo3(el) {
             var display = document.getElementById(el).style.display;
             if (display == "none")
-                document.getElementById(el).style.display = 'block';
+                document.getElementById(el).style.display = 'flex';
             else
                 document.getElementById(el).style.display = 'none';
         }

@@ -1,4 +1,4 @@
-<div id="container-gestao" style="display: none">
+<div id="container-gestao" class="formulario" style="display:none">
     <br>
     <h4 class="page-title">Cadastrar gestão</h4>
     <p class="page-description">Adicione informações sobre a gestão que foi identificada</p>
