@@ -26,6 +26,9 @@ $niveis = $internacaoDAO->findLast($a);
 $type = filter_input(INPUT_POST, "type");
 
 // Resgata dados do usuário
+$valor_de_1 = $valor_para_1 = null;
+$valor_de_2 = $valor_para_2 = null;
+$valor_de_3 = $valor_para_3 = null;
 
 if ($type === "create") {
 
@@ -33,21 +36,63 @@ if ($type === "create") {
     $troca_de_1 = filter_input(INPUT_POST, "troca_de_1");
     $troca_para_1 = filter_input(INPUT_POST, "troca_para_1");
     $fk_id_int = filter_input(INPUT_POST, "fk_id_int");
+    $qtd_1 = filter_input(INPUT_POST, "qtd_1");
+
+    $troca_de_2 = filter_input(INPUT_POST, "troca_de_2");
+    $troca_para_2 = filter_input(INPUT_POST, "troca_para_2");
+    $qtd_2 = filter_input(INPUT_POST, "qtd_2");
+
+    $troca_de_3 = filter_input(INPUT_POST, "troca_de_3");
+    $troca_para_3 = filter_input(INPUT_POST, "troca_para_3");
+    $qtd_3 = filter_input(INPUT_POST, "qtd_3");
+
 
     foreach ($niveis as $query) {
-        echo "<pre>";
-        // print_r($query);
-        print_r($troca_de_1);
+
         if ($troca_de_1 === $query['acomodacao_aco']) {
-            $valor = $query['valor_aco'];
-            print_r($valor);
-            print_r($query['acomodacao_aco']);
-            print_r("chegou");
+            $valor_de_1 = $query['valor_aco'];
+        }
+    };
+    foreach ($niveis as $query) {
+
+        if ($troca_para_1 === $query['acomodacao_aco']) {
+            $valor_para_1 = $query['valor_aco'];
         }
     };
 
+    foreach ($niveis as $query) {
 
-    exit;
+        if ($troca_de_2 === $query['acomodacao_aco']) {
+            $valor_de_2 = $query['valor_aco'];
+        }
+    };
+    foreach ($niveis as $query) {
+
+        if ($troca_para_2 === $query['acomodacao_aco']) {
+            $valor_para_2 = $query['valor_aco'];
+        }
+    };
+
+    foreach ($niveis as $query) {
+
+        if ($troca_de_3 === $query['acomodacao_aco']) {
+            $valor_de_3 = $query['valor_aco'];
+        }
+    };
+    foreach ($niveis as $query) {
+
+        if ($troca_para_3 === $query['acomodacao_aco']) {
+            $valor_para_3 = $query['valor_aco'];
+        }
+    };
+    // valorozacao das diarias
+    $dif_aco_1 = $valor_de_1 - $valor_para_1;
+    $dif_1 = $dif_aco_1 * $qtd_1;
+    $dif_aco_2 = $valor_de_2 - $valor_para_2;
+    $dif_2 = $dif_aco_2 * $qtd_2;
+    $dif_aco_3 = $valor_de_3 - $valor_para_3;
+    $dif_3 = $dif_aco_3 * $qtd_3;
+
     $negociacao = new negociacao();
 
     // Validação mínima de dados
@@ -56,6 +101,24 @@ if ($type === "create") {
         $negociacao->troca_de_1 = $troca_de_1;
         $negociacao->troca_para_1 = $troca_para_1;
         $negociacao->fk_id_int = $fk_id_int;
+        $negociacao->valor_de_1 = $valor_de_1;
+        $negociacao->valor_para_1 = $valor_para_1;
+        $negociacao->dif_1 = $dif_1;
+        $negociacao->qtd_1 = $qtd_1;
+
+        $negociacao->troca_de_2 = $troca_de_2;
+        $negociacao->troca_para_2 = $troca_para_2;
+        $negociacao->valor_de_2 = $valor_de_2;
+        $negociacao->valor_para_2 = $valor_para_2;
+        $negociacao->dif_2 = $dif_2;
+        $negociacao->qtd_2 = $qtd_2;
+
+        $negociacao->troca_de_3 = $troca_de_3;
+        $negociacao->troca_para_3 = $troca_para_3;
+        $negociacao->valor_de_3 = $valor_de_3;
+        $negociacao->valor_para_3 = $valor_para_3;
+        $negociacao->dif_3 = $dif_3;
+        $negociacao->qtd_3 = $qtd_3;
 
         $negociacaoDao->create($negociacao);
     } else {
@@ -83,23 +146,3 @@ if ($type === "create") {
 
     include_once('cad_internacao_niveis.php');
 }
-
-// $type = filter_input(INPUT_GET, "type");
-
-// if ($type === "delete") {
-//     // Recebe os dados do form
-//     $id_negociacao = filter_input(INPUT_GET, "id_negociacao");
-
-//     $negociacaoDao = new negociacaoDAO($conn, $BASE_URL);
-
-//     $negociacao = $negociacaoDao->joinnegociacaoHospitalShow($id_negociacao);
-//     if ($negociacao) {
-
-//         $negociacaoDao->destroy($id_negociacao);
-
-//         include_once('list_negociacao.php');
-//     } else {
-
-//         $message->setMessage("Informações inválidas!", "error", "index.php");
-//     }
-// }
