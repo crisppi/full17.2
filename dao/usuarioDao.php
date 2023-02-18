@@ -249,7 +249,7 @@ class UserDAO implements UserDAOInterface
 
         if ($email_user != "") {
 
-            $stmt = $this->conn->prepare("SELECT * FROM tb_user WHERE email_user = :email_login AND senha_user =:senha_login");
+            $stmt = $this->conn->prepare("SELECT * FROM tb_user WHERE email_user = :username");
 
             $stmt->bindParam(":email_user", $email_user);
 
