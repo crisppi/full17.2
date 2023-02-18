@@ -102,7 +102,7 @@ $negociacaoLast = new negociacaoDAO($conn, $BASE_URL);
                 divNeg.style.display = "none";
 
             } else {
-                divGes.style.display = "none";
+                div.style.display = "none";
             }
 
         });

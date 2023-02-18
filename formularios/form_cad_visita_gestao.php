@@ -10,7 +10,7 @@
             $ultimoReg = ($a["ultimoReg"]);
             ?>
             <div>
-                <input type="hidden" class="form-control" id="fk_visita_ges" name="fk_visita_ges" value="<?= ($ultimoReg) ?> ">
+                <input type="text" class="form-control" id="fk_visita_ges" name="fk_visita_ges" value="<?= ($ultimoReg) ?> ">
             </div>
             <div>
                 <input type="hidden" class="form-control" id="fk_internacao_ges" name="fk_internacao_ges" value="<?= ($id_internacao) ?> ">

@@ -150,13 +150,12 @@ if (empty($id_usuario)) {
                     <input type="password" class="form-control" id="senha_user" name="senha_user" placeholder="Digite a senha">
                 </div>
 
-                <div class="form-group col-sm-2">
-                    <label for="data_create_user">Data criação</label>
-                    <input class="form-control" type="date" type="date" class="form-control" id="data_create_user" name="data_create_user" placeholder="">
+                <div class="form-group col-sm-4">
+                    <?php $agora = date('d/m/Y'); ?>
+                    <input class="visible" type="text" class="form-control" value='<?= $agora; ?>' id="data_create_pac" name="data_create_pac" placeholder="">
                 </div>
-                <div class="form-group col-sm-2">
-                    <label for="usuario_create_user">Usuario criação</label>
-                    <input type="text" class="form-control" id="usuario_create_user" name="usuario_create_user" placeholder="Digite o usuário">
+                <div class="form-group col-sm-4">
+                    <input type="text" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['username'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
                 </div>
             </div>
 

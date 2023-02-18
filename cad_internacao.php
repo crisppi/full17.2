@@ -106,7 +106,6 @@ $negociacaoLast = new negociacaoDAO($conn, $BASE_URL);
             } else {
                 divGes.style.display = "none";
             }
-
         });
 
         // Script div de prorrogacoes
@@ -126,7 +125,7 @@ $negociacaoLast = new negociacaoDAO($conn, $BASE_URL);
                 divNeg.style.display = "none";
 
             } else {
-                div.style.display = "none";
+                divPro.style.display = "none";
             }
         });
 
@@ -146,7 +145,7 @@ $negociacaoLast = new negociacaoDAO($conn, $BASE_URL);
                 divNeg.style.display = "none";
 
             } else {
-                div.style.display = "none";
+                divUti.style.display = "none";
             }
 
         });
@@ -166,7 +165,7 @@ $negociacaoLast = new negociacaoDAO($conn, $BASE_URL);
                 divGes.style.display = "none";
 
             } else {
-                div.style.display = "none";
+                divNeg.style.display = "none";
             }
 
         });
@@ -188,10 +187,9 @@ $negociacaoLast = new negociacaoDAO($conn, $BASE_URL);
                 document.getElementById(el).style.display = 'none';
         }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <?php
     require_once("templates/footer.php");
     ?>

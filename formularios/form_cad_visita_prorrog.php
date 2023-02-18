@@ -3,16 +3,16 @@
     <h4 class="page-title">Cadastrar dados de prorrogação</h4>
     <p class="page-description">Adicione informações sobre as diárias da prorrogação</p>
     <form class="formulario" action="<?= $BASE_URL ?>process_prorrogacao.php" id="add-prorrogacao-form" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="type" value="create">
+        <input type="hidden" name="type" value="create-vis">
         <div class="form-group col-sm-1">
             <?php
             $a = ($prorrogacaoIdMax[0]);
             $ultimoReg = ($a["ultimoReg"]);
             ?>
-            <input type="hidden" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= $ultimoReg ?>" placeholder="Relatório da auditoria">
+            <input type="text" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= $ultimoReg ?>" placeholder="Relatório da auditoria">
         </div>
         <div>
-            <input type="hidden" class="form-control" id="fk_internacao_uti" name="fk_internacao_uti" value="<?= ($id_internacao) ?> " placeholder="Relatório da auditoria">
+            <input type="text" class="form-control" id="fk_internacao_uti" name="fk_internacao_uti" value="<?= ($id_internacao) ?> " placeholder="Relatório da auditoria">
         </div>
         <!-- PRORROGACAO 1 -->
         <div class="form-group row">
@@ -21,8 +21,8 @@
                 <select class="form-control" id="acomod1_pror" name="acomod1_pror">
                     <option value=""></option>
                     <?php sort($dados_acomodacao, SORT_ASC);
-                    foreach ($dados_acomodacao as $acomd) { ?>
-                        <option value="<?= $acomd; ?>"><?= $acomd; ?></option>
+                    foreach ($dados_acomodacao as $acomod) { ?>
+                        <option value="<?= $acomod; ?>"><?= $acomod; ?></option>
                     <?php } ?>
                 </select>
             </div>
@@ -50,10 +50,10 @@
                     <select class="form-control" id="acomod2_pror" name="acomod2_pror">
                         <option value=""></option>
                         <?php sort($dados_acomodacao, SORT_ASC);
-                        foreach ($dados_acomodacao as $acomd) { ?>
-                            <option value="<?= $acomd; ?>"><?= $acomd; ?></option>
+                        foreach ($dados_acomodacao as $acomod) { ?>
+                            <option value="<?= $acomod; ?>"><?= $acomod; ?></option>
                         <?php } ?>
-                        ?>
+
                     </select>
                 </div>
                 <div class="form-group col-sm-2">
@@ -82,8 +82,8 @@
                     <select class="form-control" id="acomod3_pror" name="acomod3_pror">
                         <option value=""></option>
                         <?php sort($dados_acomodacao, SORT_ASC);
-                        foreach ($dados_acomodacao as $acomd) { ?>
-                            <option value="<?= $acomd; ?>"><?= $acomd; ?></option>
+                        foreach ($dados_acomodacao as $acomod) { ?>
+                            <option value="<?= $acomod; ?>"><?= $acomod; ?></option>
                         <?php } ?>
                     </select>
                 </div>

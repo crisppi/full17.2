@@ -89,12 +89,14 @@ if (empty($id_hospital)) {
                         <option value="Não">Não</option>
                     </select>
                 </div>
-                <!-- <div class="form-group col-sm-4">
-                    <input class="oculto" type="date" type="hidden" class="form-control" id="data_create" name="data_create" placeholder="">
-                </div> -->
-                <!-- <div class="form-group col-sm-4 oculto">
-                    <input type="text" class="form-control" id="hospital_create" name="hospital_create" placeholder="Digite o usuário">
-                </div> -->
+                <div class="form-group col-sm-4">
+                    <?php $agora = date('d/m/Y'); ?>
+                    <input class="visible" type="text" class="form-control" value='<?= $agora; ?>' id="data_create_pac" name="data_create_pac" placeholder="">
+                </div>
+                <div class="form-group col-sm-4">
+                    <input type="text" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['username'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
+                </div>
+
             </div>
             <br>
             <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
