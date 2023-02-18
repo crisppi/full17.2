@@ -40,6 +40,8 @@ class internacaoDAO implements internacaoDAOInterface
         $internacao->titular_int = $data["titular_int"];
         $internacao->especialidade_int = $data["especialidade_int"];
         $internacao->grupo_patologia_int = $data["grupo_patologia_int"];
+        $internacao->primeira_vis_int = $data["primeira_vis_int"];
+        $internacao->visita_no_int = $data["visita_no_int"];
         $internacao->internado_int = $data["internado_int"];
         $internacao->rel_int = $data['rel_int'];
 
@@ -127,6 +129,8 @@ class internacaoDAO implements internacaoDAOInterface
             grupo_patologia_int,
             data_create_int,
             usuario_create_int,
+            primeira_vis_int,
+            visita_no_int,
             especialidade_int
    
          ) VALUES (
@@ -147,6 +151,8 @@ class internacaoDAO implements internacaoDAOInterface
            :grupo_patologia_int,
            :data_create_int,
            :usuario_create_int,
+           :primeira_vis_int,
+           :visita_no_int,
            :especialidade_int
         )");
 
@@ -167,6 +173,8 @@ class internacaoDAO implements internacaoDAOInterface
         $stmt->bindParam(":internacao_uti_int", $internacao->internacao_uti_int);
         $stmt->bindParam(":data_visita_int", $internacao->data_visita_int);
         $stmt->bindParam(":grupo_patologia_int", $internacao->grupo_patologia_int);
+        $stmt->bindParam(":primeira_vis_int", $internacao->primeira_vis_int);
+        $stmt->bindParam(":visita_no_int", $internacao->visita_no_int);
         $stmt->bindParam(":titular_int", $internacao->titular_int);
 
 
@@ -336,6 +344,8 @@ class internacaoDAO implements internacaoDAOInterface
         ac.titular_int, 
         ac.grupo_patologia_int, 
         ac.acomodacao_int, 
+        ac.primeira_vis_int, 
+        ac.visita_no_int, 
         ac.fk_patologia_int, 
         ac.fk_patologia2, 
         ac.internado_int,
@@ -430,6 +440,8 @@ class internacaoDAO implements internacaoDAOInterface
         ac.fk_patologia_int, 
         ac.fk_patologia2, 
         ac.internado_int,
+        ac.visita_no_int,
+        ac.primeira_vis_int,
         pa.id_paciente,
         pa.nome_pac,
         ho.id_hospital, 
@@ -473,6 +485,8 @@ class internacaoDAO implements internacaoDAOInterface
         ac.fk_patologia_int, 
         ac.fk_patologia2, 
         ac.internado_int,
+        ac.visita_no_int,
+        ac.primeira_vis_int,
         pa.id_paciente,
         pa.nome_pac,
         ho.id_hospital, 
@@ -561,6 +575,8 @@ class internacaoDAO implements internacaoDAOInterface
     ac.fk_patologia_int, 
     ac.fk_patologia2, 
     ac.internado_int,
+    ac.visita_no_int,
+    ac.primeira_vis_int,
     pa.id_paciente,
     pa.nome_pac,
     ho.id_hospital, 
@@ -601,18 +617,3 @@ class internacaoDAO implements internacaoDAOInterface
         return $QtdTotalInt;
     }
 }
-
-# Limita o número de registros a serem mostrados por página
-$limite = 10;
-
-# Se pg não existe atribui 1 a variável pg
-$pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
-
-# Atribui a variável inicio o inicio de onde os registros vão ser
-# mostrados por página, exemplo 0 à 10, 11 à 20 e assim por diante
-
-$inicio = ($pg * $limite) - $limite;
-$pesquisa_hosp = "";
-$pesqInternado = "";
-# seleciona o total de registros  
-$sql_Total = 'SELECT id_internacao FROM tb_internacao';

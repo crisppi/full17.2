@@ -45,6 +45,8 @@ class Internacao
   public $modo_internacao_int;
   public $titular_int;
   public $fk_negociacoes_int;
+  public $primeira_vis_int;
+  public $visita_no_int;
 }
 
 interface InternacaoDAOInterface

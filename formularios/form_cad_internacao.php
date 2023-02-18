@@ -47,6 +47,12 @@
             <div class="form-group col-sm-1">
                 <input type="hidden" class="form-control" value="n" id="internacao_uti_int" name="internacao_uti_int">
             </div>
+            <div class="form-group col-sm-1">
+                <input type="hidden" class="form-control" value="s" id="primeira_vis_int" name="primeira_vis_int">
+            </div>
+            <div class="form-group col-sm-1">
+                <input type="hidden" class="form-control" value="0" id="visita_no_int" name="visita_no_int">
+            </div>
 
         </div>
         <div class="row">
@@ -144,6 +150,7 @@
         </div>
     </form>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>

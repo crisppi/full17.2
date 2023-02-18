@@ -103,7 +103,7 @@
     $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
     $pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
     $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
-    $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
     $condicoes = [
         strlen($pesquisa_nome) ? 'ho.nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
         strlen($pesquisa_pac) ? 'pa.nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
@@ -231,7 +231,6 @@
         </div>
 
         <div>
-
             <a class="btn btn-success styled" style="margin-left:120px" href="cad_internacao.php">Nova internação</a>
         </div>
     </div>

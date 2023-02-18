@@ -2,6 +2,7 @@
 require_once("templates/header.php");
 require_once("dao/usuarioDao.php");
 require_once("models/message.php");
+include_once("array_dados.php");
 
 $usuarioDao = new userDAO($conn, $BASE_URL);
 
@@ -109,21 +110,26 @@ if (empty($id_usuario)) {
             </div>
             <div class="form-group row">
 
-                <div class="form-group col-sm-2 ">
-                    <label class="control-label" for="cargo_user">Sexo</label>
-                    <select class="form-control" name="cargo_user">
-                        <option value="">Cargo</option>
-                        <option value="Administrativo">Administrativo</option>
-                        <option value="Auditor">Auditor</option>
-                        <option value="Gerente">Gerente</option>
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="cargo_user">Cargo</label>
+                    <select class="form-control" id="cargo_user" name="cargo_user">
+                        <option value="">Selecione Cargo</option>
+                        <?php
+                        sort($cargo_user, SORT_ASC);
+                        foreach ($cargo_user as $cargo) { ?>
+                            <option value="<?= $cargo; ?>"><?= $cargo; ?></option>
+                        <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-sm-2 ">
-                    <label class="control-label" for="nivel_user">Nível </label>
+                    <label class="control-label" for="nivel_user">Nível</label>
                     <select class="form-control" name="nivel_user">
                         <option value="">Nível</option>
                         <option value="nivel01">Nível 01</option>
                         <option value="nivel02">Nível 02</option>
+                        <option value="nivel03">Nível 03</option>
+                        <option value="nivel04">Nível 04</option>
+                        <option value="nivel05">Nível 05</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-2 ">
@@ -135,11 +141,11 @@ if (empty($id_usuario)) {
                     </select>
                 </div>
                 <div class="form-group col-sm-2 ">
-                    <label class="control-label" for="vinculo_user">Vínculo </label>
+                    <label class="control-label" for="vinculo_user">Vínculo</label>
                     <select class="form-control" name="vinculo_user">
                         <option value="">Vínculo</option>
-                        <option value="coordenacao">CLT</option>
-                        <option value="auditoria">Terceiro</option>
+                        <option value="clt">CLT</option>
+                        <option value="terceiro">Terceiro</option>
                     </select>
                 </div>
             </div>
@@ -152,10 +158,10 @@ if (empty($id_usuario)) {
 
                 <div class="form-group col-sm-4">
                     <?php $agora = date('d/m/Y'); ?>
-                    <input class="visible" type="text" class="form-control" value='<?= $agora; ?>' id="data_create_pac" name="data_create_pac" placeholder="">
+                    <input class="visible" type="hidden" class="form-control" value='<?= $agora; ?>' id="data_create_pac" name="data_create_pac" placeholder="">
                 </div>
                 <div class="form-group col-sm-4">
-                    <input type="text" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['username'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
+                    <input type="hidden" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['username'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
                 </div>
             </div>
 

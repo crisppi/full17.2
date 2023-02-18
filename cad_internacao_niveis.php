@@ -63,13 +63,6 @@ $negociacaoLast = new negociacaoDAO($conn, $BASE_URL);
     <!-- FORMULARIO INTERNACAO -->
     <?php include_once('show_internacao_niveis.php'); ?>
 
-    <div>
-        <button class="btn-primary" id="btn-prorrog">Prorrogação</button>
-        <button class="btn-primary" id="btn-gestao">Gestão</button>
-        <button class="btn-primary" id="btn-uti">UTI</button>
-        <button class="btn-primary" id="btn-negoc">Negociações</button>
-    </div>
-
     <!-- FORMULARIO DE GESTÃO -->
     <?php include_once('formularios/form_cad_internacao_gestao.php'); ?>
 

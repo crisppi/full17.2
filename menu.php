@@ -5,6 +5,7 @@ session_start();
 if (!isset($_SESSION['username'])) {
     header('location:index.php');
 }
+print_r($_SESSION);
 require_once("templates/header.php");
 
 
@@ -15,7 +16,7 @@ require_once("templates/header.php");
         <div style="height: 10px;">
         </div>
         <div class="col lista_menu">
-            <div >
+            <div>
                 <h4>CADASTRO</h4>
             </div>
             <hr>

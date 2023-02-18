@@ -73,9 +73,13 @@
     <!-- <FORMULARO DE NEGOCIACOES -->
     <?php include_once('formularios/form_cad_internacao_negoc.php'); ?>
 
-
+    <br>
     <?php include_once("diversos/backbtn_internacao.php"); ?>
 
+    <hr>
+    <div>
+        <a class="btn btn-success styled" style="margin-left:60px" href="cad_internacao.php">Nova internação</a>
+    </div>
     <script type="text/javascript">
         // script div de gestao -->
 

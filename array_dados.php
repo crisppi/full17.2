@@ -8,3 +8,4 @@ $criterios_UTI = ["Clínica", "Pediatria", "Ginecologia", "Cirurgia Geral", "Cir
 $dados_grupo_pat = ["Cardiológica", "Pediátrica", "Oncológica", "Urológica", "Infecção"];
 $dados_tipo_evento = ["Úlcera pressão", "Queda", "Broncoaspiração", "Infecção hospitalar", "Infecção cirúrgica"];
 $dados_alta = ["Melhorado", "Transferido", "Óbito"];
+$cargo_user = ["Med_auditor", "Enf_Auditor", "Adm", "Diretoria", "Gerencia", "Secretaria"];

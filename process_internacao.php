@@ -36,6 +36,8 @@ if ($type === "create") {
     $acomodacao_int = filter_input(INPUT_POST, "acomodacao_int");
     $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
     $data_create_int = filter_input(INPUT_POST, "data_create_int") ?: null;
+    $primeira_vis_int = filter_input(INPUT_POST, "primeira_vis_int");
+    $visita_no_int = filter_input(INPUT_POST, "visita_no_int");
 
     $internacao = new internacao();
 
@@ -58,6 +60,8 @@ if ($type === "create") {
         $internacao->acoes_int = $acoes_int;
         $internacao->usuario_create_int = $usuario_create_int;
         $internacao->data_create_int = $data_create_int;
+        $internacao->primeira_vis_int = $primeira_vis_int;
+        $internacao->visita_no_int = $visita_no_int;
 
         $internacaoDao->create($internacao);
 
@@ -119,21 +123,3 @@ if ($type === "create") {
 }
 
 $type = filter_input(INPUT_POST, "type");
-
-// if ($type === "delete") {
-//     // Recebe os dados do form
-//     $id_internacao = filter_input(INPUT_GET, "id_internacao");
-
-//     $internacaoDao = new internacaoDAO($conn, $BASE_URL);
-
-//     $internacao = $internacaoDao->findById($id_internacao);
-//     if ($internacao) {
-
-//         $internacaoDao->destroy($id_internacao);
-
-//         include_once('cad_internacao_niveis.php');
-//     } else {
-
-//         $message->setMessage("Informações inválidas!", "error", "cad_internacao_niveis.php");
-//     }
-// }
