@@ -21,6 +21,7 @@ class uti
   public $vm_uti;
   public $id_internacao;
   public $internacao_uti_int;
+  public $internado_uti_int;
 }
 
 interface utiDAOInterface

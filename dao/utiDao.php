@@ -207,11 +207,12 @@ class utiDAO implements utiDAOInterface
         $query = $this->conn->prepare("UPDATE tb_internacao SET
         internacao_uti_int = :internacao_uti_int,
         internado_uti_int = :internado_uti_int
-        
+
         WHERE id_internacao = :id_internacao
         ");
 
         $query->bindParam(":internacao_uti_int", $uti->internacao_uti_int);
+        $query->bindParam(":internado_uti_int", $uti->internado_uti_int);
         $query->bindParam(":id_internacao", $uti->id_internacao);
 
         $query->execute();

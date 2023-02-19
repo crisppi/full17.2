@@ -35,6 +35,8 @@ if ($type === "create") {
     $titular_int = filter_input(INPUT_POST, "titular_int");
     $especialidade_int = filter_input(INPUT_POST, "especialidade_int");
     $grupo_patologia_int = filter_input(INPUT_POST, "grupo_patologia_int");
+    $internacao_uti_int = filter_input(INPUT_POST, "internacao_uti_int");
+    $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int");
     $acomodacao_int = filter_input(INPUT_POST, "acomodacao_int");
     $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
     $data_create_int = filter_input(INPUT_POST, "data_create_int") ?: null;
