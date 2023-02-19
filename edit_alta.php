@@ -27,16 +27,16 @@ extract($internacao);
         <h4 class="page-title">Alta Hospitalar</h4>
         <p class="page-description">Adicione informações sobre o internacao</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_internacao.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="type" value="update">
+            <input type="hidden" name="type" value="alta">
             <div class="form-group col-sm-3">
                 <input type="hidden" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>">
             </div>
             <div class="form-group col-sm-3">
-                <label class="control-label" for="data_alta_int">Hospital</label>
+                <label class="control-label">Hospital</label>
                 <input type="text" class="form-control" value="<?= $nome_hosp ?>">
             </div>
             <div class="form-group col-sm-3">
-                <label class="control-label" for="data_alta_int">Paciente</label>
+                <label class="control-label">Paciente</label>
                 <input type="text" class="form-control" value="<?= $nome_pac ?>">
             </div>
             <div class="row">
@@ -45,7 +45,7 @@ extract($internacao);
                     <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_int" name="data_alta_int" placeholder="" required>
                 </div>
                 <div class="form-group col-sm-2">
-                    <input type="hidden" class="form-control" value="Não" id="internado_int" name="internado_int" placeholder="">
+                    <input type="hidden" class="form-control" value="n" id="internado_int" name="internado_int" placeholder="">
                 </div>
 
                 <div class="form-group col-sm-2">

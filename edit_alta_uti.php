@@ -24,9 +24,7 @@ $internacao = $internacaoDao->joininternacaoHospitalshow($id_internacao);
 extract($internacao);
 
 $internadosUTI = $utiDao->findUTIInternacao($id_internacao);
-echo "<pre>";
-// extract($internadosUTI);
-print_r($internadosUTI);
+
 $id_uti = $internadosUTI['0']['id_uti'];
 ?>
 

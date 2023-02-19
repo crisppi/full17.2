@@ -81,27 +81,5 @@ if ($type === "create") {
     $utiDao->findAltaUpdate($UTIData);
 
 
-
-
     include_once('list_internacao_uti.php');
-}
-
-$type = filter_input(INPUT_POST, "type");
-
-if ($type === "delete") {
-    // Recebe os dados do form
-    $id_internacao = filter_input(INPUT_GET, "id_internacao");
-
-    $internacaoDao = new internacaoDAO($conn, $BASE_URL);
-
-    $internacao = $internacaoDao->findById($id_internacao);
-    if ($internacao) {
-
-        $internacaoDao->destroy($id_internacao);
-
-        include_once('list_internacao.php');
-    } else {
-
-        $message->setMessage("Informações inválidas!", "error", "list_internacao.php");
-    }
 }

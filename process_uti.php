@@ -6,7 +6,6 @@ require_once("models/message.php");
 require_once("dao/usuarioDao.php");
 require_once("dao/utiDao.php");
 
-
 $message = new Message($BASE_URL);
 $userDao = new UserDAO($conn, $BASE_URL);
 $utiDao = new utiDAO($conn, $BASE_URL);
@@ -64,35 +63,6 @@ if ($type === "create") {
 
         $message->setMessage("Você precisa adicionar pelo menos: utiNome do uti!", "error", "back");
     }
-    // } else if ($type === "update") {
-
-    //     $utiDao = new utiDAO($conn, $BASE_URL);
-
-    //     // Receber os dados dos inputs
-    //     $id_uti = filter_input(INPUT_POST, "id_uti");
-    //     $nome_uti = filter_input(INPUT_POST, "nome_uti");
-    //     $endereco_uti = filter_input(INPUT_POST, "endereco_uti");
-    //     $email01_uti = filter_input(INPUT_POST, "email01_uti");
-    //     $cidade_uti = filter_input(INPUT_POST, "cidade_uti");
-    //     $cnpj_uti = filter_input(INPUT_POST, "cnpj_uti");
-    //     $telefone01_uti = filter_input(INPUT_POST, "telefone01_uti");
-    //     $telefone02_uti = filter_input(INPUT_POST, "telefone02_uti");
-    //     $numero_uti = filter_input(INPUT_POST, "numero_uti");
-    //     $bairro_uti = filter_input(INPUT_POST, "bairro_uti");
-
-    //     $utiData = $utiDao->findById($id_uti);
-
-    //     $utiData->id_uti = $id_uti;
-    //     $utiData->nome_uti = $nome_uti;
-    //     $utiData->endereco_uti = $endereco_uti;
-    //     $utiData->email01_uti = $email01_uti;
-    //     $utiData->cidade_uti = $cidade_uti;
-    //     $utiData->telefone01_uti = $telefone01_uti;
-    //     $utiData->telefone02_uti = $telefone02_uti;
-    //     $utiData->numero_uti = $numero_uti;
-    //     $utiData->bairro_uti = $bairro_uti;
-
-    //     $utiDao->update($utiData);
 
     include_once('cad_internacao.php');
 }
