@@ -96,25 +96,3 @@ if ($type === "create") {
 
     include_once('list_seguradora.php');
 }
-//$type = "delete";
-//$type = filter_input(INPUT_POST, "type");
-
-if ($type === "delete") {
-    // Recebe os dados do form
-    $id_seguradora = filter_input(INPUT_GET, "id_seguradora");
-
-    $seguradoraDao = new seguradoraDAO($conn, $BASE_URL);
-
-    $seguradora = $seguradoraDao->findById($id_seguradora);
-
-    echo $seguradora;
-    if ($seguradora) {
-
-        $seguradoraDao->destroy($id_seguradora);
-
-        include_once('list_seguradora.php');
-    } else {
-
-        $message->setMessage("Informações inválidas!", "error", "index.php");
-    }
-}

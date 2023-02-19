@@ -1,10 +1,6 @@
 <?php
-session_start();
+include_once("check_logado.php");
 
-if (!isset($_SESSION['username'])) {
-    header('location: index.php');
-    exit;
-}
 require_once("models/usuario.php");
 require_once("models/usuario.php");
 require_once("dao/usuarioDao.php");

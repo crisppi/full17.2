@@ -1,5 +1,6 @@
 <?php
 //session_start();
+include_once("check_logado.php");
 
 require_once("templates/header.php");
 require_once("dao/antecedenteDao.php");

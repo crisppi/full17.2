@@ -1,4 +1,5 @@
 <?php
+include_once("check_logado.php");
 
 require_once("templates/header.php");
 include_once("models/internacao.php");

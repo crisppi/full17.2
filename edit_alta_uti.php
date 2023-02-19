@@ -1,10 +1,6 @@
 <?php
-session_start();
+include_once("check_logado.php");
 
-if (!isset($_SESSION['username'])) {
-    header('location: index.php');
-    exit;
-}
 require_once("templates/header.php");
 require_once("models/usuario.php");
 require_once("models/internacao.php");
@@ -28,7 +24,7 @@ $internacao = $internacaoDao->joininternacaoHospitalshow($id_internacao);
 extract($internacao);
 
 $internadosUTI = $utiDao->findUTIInternacao($id_internacao);
-// echo "<pre>";
+echo "<pre>";
 // extract($internadosUTI);
 print_r($internadosUTI);
 $id_uti = $internadosUTI['0']['id_uti'];
@@ -73,7 +69,7 @@ $id_uti = $internadosUTI['0']['id_uti'];
                     <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' placeholder="">
                 </div>
                 <div class="form-group col-sm-3">
-                    <input type="hidden" value="<?= $_SESSION['username']; ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
+                    <input type="hidden" value="<?= $_SESSION['email_user']; ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
                 </div>
                 <!-- <div class="form-group col-sm-2">
                     <label class="control-label" for="tipo_alta_int">Tipo de alta</label>

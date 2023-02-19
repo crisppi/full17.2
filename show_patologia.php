@@ -1,10 +1,6 @@
 <?php
-session_start();
+include_once("check_logado.php");
 
-if (!isset($_SESSION['username'])) {
-    header('location: index.php');
-    exit;
-}
 include_once("globals.php");
 
 include_once("models/patologia.php");

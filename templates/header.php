@@ -104,7 +104,7 @@ header("Content-type: text/html; charset=utf-8");
       <div class="col-md-2" style="margin-left:200px; font-weight:600 ;font-size:12px">
         <?php
         if ($_SESSION) {
-          echo "<span style='color:green; font-size:1.2em'>Bem vindo!!  " . $_SESSION['username'] . "</span><br>";
+          echo "<span style='color:green; font-size:1.2em'>Bem vindo!!  " . $_SESSION['login_user'] . "</span><br>";
           $agora = date('d/m/Y H:i');
         } else {
           echo "<span style='color:red'> Você não esta logado!!</span>" . "<br>";

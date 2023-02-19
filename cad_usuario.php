@@ -1,4 +1,6 @@
 <?php
+include_once("check_logado.php");
+
 require_once("templates/header.php");
 require_once("dao/usuarioDao.php");
 require_once("models/message.php");
@@ -161,7 +163,7 @@ if (empty($id_usuario)) {
                     <input class="visible" type="hidden" class="form-control" value='<?= $agora; ?>' id="data_create_pac" name="data_create_pac" placeholder="">
                 </div>
                 <div class="form-group col-sm-4">
-                    <input type="hidden" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['username'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
+                    <input type="hidden" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['email_user'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
                 </div>
             </div>
 

@@ -1,10 +1,5 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['username'])) {
-    header('location: index.php');
-    exit;
-}
+include_once("check_logado.php");
 
 require_once("models/usuario.php");
 require_once("models/hospital.php");
@@ -81,12 +76,12 @@ $hospital = $hospitalDao->findById($id_hospital);
                     <input type="text" onkeydown="return mascaraTelefone(event)" value="<?= $hospital->telefone02_hosp ?>" class="form-control" id="telefone02" name="telefone02" placeholder="Digite outro telefone">
                 </div>
 
-                <!-- <div class="form-group col-sm-4">
+                <div class="form-group col-sm-4">
                     <input type="data" type="hidden" class="form-control" value='<?php echo date("d/m/Y"); ?>' id="data_create" name="data_create" placeholder="">
                 </div>
                 <div class="form-group col-sm-4">
                     <input type="text" class="form-control" id="usuario_create" name="usuario_create" placeholder="Digite o usuário">
-                </div> -->
+                </div>
             </div>
             <br>
             <button style="margin:10px" type="submit" class="btn-sm btn-info">Atualizar</button>

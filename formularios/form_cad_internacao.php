@@ -127,7 +127,7 @@
             </div>
             <div class="form-group col-sm-3">
                 <label for="usuario_create_int">Usuário</label>
-                <input type="text" class="form-control" id="usuario_create_int" value="<?= $_SESSION['username'] ?>" name="usuario_create_int">
+                <input type="text" class="form-control" id="usuario_create_int" value="<?= $_SESSION['email_user'] ?>" name="usuario_create_int">
             </div>
             <div class="form-group row">
                 <div>

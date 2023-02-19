@@ -17,8 +17,7 @@ $type = filter_input(INPUT_POST, "type");
 // Resgata dados do usuário
 
 if ($type === "create") {
-    echo "<pre>";
-    print_r($_POST);
+
     // Receber os dados dos inputs
     $fk_internacao_uti = filter_input(INPUT_POST, "fk_internacao_uti");
     $fk_visita_uti = filter_input(INPUT_POST, "fk_visita_uti");
@@ -96,26 +95,4 @@ if ($type === "create") {
     //     $utiDao->update($utiData);
 
     include_once('cad_internacao.php');
-}
-//$type = "delete";
-//$type = filter_input(INPUT_POST, "type");
-
-if ($type === "delete") {
-    // Recebe os dados do form
-    $id_uti = filter_input(INPUT_GET, "id_uti");
-
-    $utiDao = new utiDAO($conn, $BASE_URL);
-
-    $uti = $utiDao->findById($id_uti);
-
-    echo $uti;
-    if ($uti) {
-
-        $utiDao->destroy($id_uti);
-
-        include_once('list_uti.php');
-    } else {
-
-        $message->setMessage("Informações inválidas!", "error", "index.php");
-    }
 }

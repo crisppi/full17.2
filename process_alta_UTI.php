@@ -80,6 +80,9 @@ if ($type === "create") {
 
     $utiDao->findAltaUpdate($UTIData);
 
+
+
+
     include_once('list_internacao_uti.php');
 }
 

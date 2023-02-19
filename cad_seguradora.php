@@ -1,4 +1,6 @@
 <?php
+include_once("check_logado.php");
+
 require_once("templates/header.php");
 require_once("dao/seguradoraDao.php");
 require_once("models/message.php");
@@ -94,7 +96,7 @@ if (empty($id_seguradora)) {
                     <input class="oculto" type="text" class="form-control" id="data_create_seg" value='<?= $agora; ?>' name="data_create_seg" placeholder="">
                 </div>
                 <div class="form-group col-sm-4 oculto">
-                    <input type="text" class=" form-control" id="usuario_create_seg" value="<?= $_SESSION['username'] ?>" name="usuario_create_seg" placeholder="Digite o usuário">
+                    <input type="text" class=" form-control" id="usuario_create_seg" value="<?= $_SESSION['email_user'] ?>" name="usuario_create_seg" placeholder="Digite o usuário">
                 </div>
             </div>
             <br>

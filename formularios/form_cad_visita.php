@@ -8,7 +8,7 @@
 
             <div class="form-group col-sm-4">
                 <label for="usuario_create">Usuário</label>
-                <input type="text" class="form-control" class="form-control" id="usuario_create" value="<?= $_SESSION['username'] ?>" name="usuario_create">
+                <input type="text" class="form-control" class="form-control" id="usuario_create" value="<?= $_SESSION['email_user'] ?>" name="usuario_create">
             </div>
 
             <div class="form-group col-sm-4">

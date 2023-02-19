@@ -1,13 +1,7 @@
 <?php
 
-session_start();
-
-if (!isset($_SESSION['username'])) {
-    header('location:index.php');
-}
-print_r($_SESSION);
+include_once("check_logado.php");
 require_once("templates/header.php");
-
 
 ?>
 

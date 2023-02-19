@@ -1,10 +1,6 @@
 <?php
-session_start();
+include_once("check_logado.php");
 
-if (!isset($_SESSION['username'])) {
-    header('location: index.php');
-    exit;
-}
 include_once("models/pagination.php");
 
 ?>
@@ -16,7 +12,7 @@ include_once("models/pagination.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- 
+
 </head>
 
 <body>

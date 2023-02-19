@@ -1,4 +1,6 @@
 <?php
+include_once("check_logado.php");
+
 require_once("templates/header.php");
 require_once("dao/hospitalDao.php");
 require_once("models/message.php");
@@ -26,13 +28,13 @@ if (empty($id_hospital)) {
         $message->setMessage("Usuário não encontrado!", "error", "index.php");
     }
 }
-
 ?>
 <div id="main-container" class="container">
     <div class="row">
         <h1 class="page-title">Cadastrar Paciente</h1>
         <p class="page-description">Adicione informações sobre o paciente</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_paciente.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
+
             <input type="hidden" name="type" value="create">
             <div class="form-group row">
                 <div class="form-group col-sm-4">
@@ -105,10 +107,10 @@ if (empty($id_hospital)) {
                 </div>
                 <div class="form-group col-sm-4">
                     <?php $agora = date('d/m/Y'); ?>
-                    <input class="visible" type="text" class="form-control" value='<?= $agora; ?>' id="data_create_pac" name="data_create_pac" placeholder="">
+                    <input class="visible" type="hidden" class="form-control" value='<?= $agora; ?>' id="data_create_pac" name="data_create_pac" placeholder="">
                 </div>
                 <div class="form-group col-sm-4">
-                    <input type="text" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['username'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
+                    <input type="hidden" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['email_user'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
                 </div>
             </div>
             <br>

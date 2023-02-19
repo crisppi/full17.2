@@ -4,6 +4,7 @@ class Usuario
 
     public $id_usuario;
     public $usuario_user;
+    public $username;
     public $endereco_user;
     public $bairro_user;
     public $cidade_user;

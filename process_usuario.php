@@ -39,8 +39,6 @@ if ($type === "create") {
 
     $senha_user = password_hash($hash_user, PASSWORD_DEFAULT);
 
-    print_r($senha_user);
-
     $usuario = new Usuario();
 
     // Validação mínima de dados
@@ -119,23 +117,4 @@ if ($type === "create") {
     $usuarioDao->update($usuarioData);
 
     include_once('list_usuario.php');
-}
-
-if ($type === "delete") {
-    // Recebe os dados do form
-    $id_usuario = filter_input(INPUT_GET, "id_usuario");
-
-    $usuarioDao = new userDAO($conn, $BASE_URL);
-
-    $usuario = $usuarioDao->findById_user($id_usuario);
-
-    if ($usuario) {
-
-        $usuarioDao->destroy($id_usuario);
-
-        //include_once('list_usuario.php');
-    } else {
-
-        $message->setMessage("Informações inválidas!", "error", "list_usuario.php");
-    }
 }

@@ -1,10 +1,6 @@
 <?php
-session_start();
+include_once("check_logado.php");
 
-if (!isset($_SESSION['username'])) {
-    header('location: index.php');
-    exit;
-}
 require_once("templates/header.php");
 require_once("models/usuario.php");
 require_once("models/internacao.php");
@@ -51,6 +47,7 @@ extract($internacao);
                 <div class="form-group col-sm-2">
                     <input type="hidden" class="form-control" value="Não" id="internado_int" name="internado_int" placeholder="">
                 </div>
+
                 <div class="form-group col-sm-2">
                     <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_visita_int" name="data_visita_int" placeholder="">
                 </div>
@@ -58,7 +55,7 @@ extract($internacao);
                     <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_create_int" name="data_create_int" placeholder="">
                 </div>
                 <div class="form-group col-sm-3">
-                    <input type="hidden" value="<?= $_SESSION['username']; ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
+                    <input type="hidden" value="<?= $_SESSION['email_user']; ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">
                 </div>
                 <div class="form-group col-sm-2">
                     <label class="control-label" for="tipo_alta_int">Tipo de alta</label>
@@ -71,10 +68,29 @@ extract($internacao);
                         <?php } ?>
                     </select>
                 </div>
+            </div>
+            <div class="row">
+                <?php if ($internado_uti_int == "s") {
+                ?>
+                    <div>
+                        <hr>
+                        <p> Você precisa dar alta da UTI</p>
+                    </div>
+                    <input type="hidden" name="alta_uti" value="alta_uti">
+
+                    <div class="form-group col-sm-2">
+                        <label class="control-label" for="internado_uti_int">UTI</label>
+                        <input type="text" class="form-control" value="<?= $internado_uti_int ?>" id="internado_uti_int" name="internado_uti_int" placeholder="internado_uti_int">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label class="control-label" for="data_alta_uti">Data alta UTI</label>
+                        <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_uti" name="data_alta_uti" placeholder="">
+                    </div>
+                <?php } ?>
                 <br>
             </div>
             <br>
-            <button style="margin:10px" type="submit" class="btn-sm btn-info">Atualizar</button>
+            <button style="margin:10px" type="submit" class="btn-sm btn-success">Alta</button>
             <br>
     </div>
     </form>

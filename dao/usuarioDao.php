@@ -47,6 +47,7 @@ class UserDAO implements UserDAOInterface
         $user->nivel_user = $data["nivel_user"];
         $user->cargo_user = $data["cargo_user"];
         $user->cpf_user = $data["cpf_user"];
+        $user->username = $data["username"];
         $user->reg_profissional_user = $data["reg_profissional_user"];
         return $user;
     }
@@ -231,8 +232,8 @@ class UserDAO implements UserDAOInterface
 
             $stmt = $this->conn->prepare("SELECT * FROM tb_user WHERE usuario_user = :username AND senha_user =:senha_login");
 
-            $stmt->bindParam(":usuario_user", $user->senha_user);
-            $stmt->bindParam(":senha_user", $user->usuario_user);
+            $stmt->bindParam(":usuario_user", $user->usuario_user);
+            $stmt->bindParam(":senha_user", $user->senha_user);
 
             $stmt->execute();
 
@@ -244,14 +245,14 @@ class UserDAO implements UserDAOInterface
         }
     }
 
-    public function findByEmail($email_user)
+    public function findByEmail($username)
     {
 
-        if ($email_user != "") {
+        if ($username != "") {
 
             $stmt = $this->conn->prepare("SELECT * FROM tb_user WHERE email_user = :username");
 
-            $stmt->bindParam(":email_user", $email_user);
+            $stmt->bindParam(":email_user", $username);
 
             $stmt->execute();
 
@@ -392,29 +393,7 @@ class UserDAO implements UserDAOInterface
         return $usuarios;
     }
 
-    //SISTEMA DE LOGIN
-    public function logaFuncionario($dados)
-    {
-        $this->email_user = $dados['email_login'];
-        $this->senha_user = sha1($dados['senha_login']);
-        try {
-            $cst = $this->conn->prepare("SELECT `idFuncionario`, `email`, `senha` FROM `funcionario` WHERE `email` = :email AND `senha` = :senha;");
-            $cst->bindParam(':email', $this->email_user, PDO::PARAM_STR);
-            $cst->bindParam(':senha', $this->senha_user, PDO::PARAM_STR);
-            $cst->execute();
-            if ($cst->rowCount() == 0) {
-                header('location: login/?login=error');
-            } else {
-                session_start();
-                $rst = $cst->fetch();
-                $_SESSION['logado'] = "sim";
-                $_SESSION['func'] = $rst['idFuncionario'];
-                header("location: login/admin");
-            }
-        } catch (PDOException $e) {
-            return 'Error: ' . $e->getMessage();
-        }
-    }
+
 
     public function funcionarioLogado($dado)
     {

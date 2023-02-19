@@ -1,10 +1,7 @@
 <?php
-session_start();
 
-if (!isset($_SESSION['username'])) {
-    header('location: index.php');
-    exit;
-}
+include_once("check_logado.php");
+
 include_once("models/pagination.php");
 ?>
 <!DOCTYPE html>
