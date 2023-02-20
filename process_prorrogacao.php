@@ -32,6 +32,7 @@ if ($type === "create") {
     $isol_3_pror = filter_input(INPUT_POST, "isol_3_pror");
     $prorrog3_fim_pror = filter_input(INPUT_POST, "prorrog3_fim_pror") ?: null;
     $prorrog3_ini_pror = filter_input(INPUT_POST, "prorrog3_ini_pror") ?: null;
+    $fk_usuario_pror = filter_input(INPUT_POST, "fk_usuario_pror");
 
     $prorrogacao = new prorrogacao();
 
@@ -50,6 +51,7 @@ if ($type === "create") {
         $prorrogacao->acomod3_pror = $acomod3_pror;
         $prorrogacao->isol_3_pror = $isol_3_pror;
         $prorrogacao->prorrog3_fim_pror = $prorrog3_fim_pror;
+        $prorrogacao->fk_usuario_pror = $fk_usuario_pror;
         $prorrogacao->prorrog3_ini_pror = $prorrog3_ini_pror;
 
         $prorrogacaoDao->create($prorrogacao);

@@ -71,6 +71,9 @@ if (empty($id_acomodacao)) {
                         <!-- <input type="text" class="form-control" id="valor_aco" onKeyPress="return(moeda(this,'.',',',event))" name="valor_aco" placeholder="Digite o valor diária"> -->
                         <input type="text" class="form-control" id="valor_aco" name="valor_aco" placeholder="Digite o valor diária">
                     </div>
+                    <div class="form-group col-sm-4">
+                        <input type="text" class="form-control" id="fk_usuario_aco" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_aco" placeholder="Digite o usuário">
+                    </div>
 
                 </div>
                 <br>

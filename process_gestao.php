@@ -32,6 +32,7 @@ if ($type === "create") {
     $rel_home_care_ges = filter_input(INPUT_POST, "rel_home_care_ges");
     $desospitalizacao_ges = filter_input(INPUT_POST, "desospitalizacao_ges");
     $rel_desospitalizacao_ges = filter_input(INPUT_POST, "rel_desospitalizacao_ges");
+    $fk_usuario_ges = filter_input(INPUT_POST, "fk_usuario_ges");
 
     $gestao = new gestao();
 
@@ -51,6 +52,7 @@ if ($type === "create") {
         $gestao->rel_home_care_ges = $rel_home_care_ges;
         $gestao->desospitalizacao_ges = $desospitalizacao_ges;
         $gestao->rel_desospitalizacao_ges = $rel_desospitalizacao_ges;
+        $gestao->fk_usuario_ges = $fk_usuario_ges;
 
         $gestaoDao->create($gestao);
     } else {

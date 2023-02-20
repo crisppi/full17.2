@@ -40,6 +40,7 @@ if ($type === "create") {
     $acomodacao_int = filter_input(INPUT_POST, "acomodacao_int");
     $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
     $data_create_int = filter_input(INPUT_POST, "data_create_int") ?: null;
+    $fk_usuario_uti = filter_input(INPUT_POST, "fk_usuario_uti");
 
     $internacao = new internacao();
 
@@ -62,6 +63,7 @@ if ($type === "create") {
         $internacao->acoes_int = $acoes_int;
         $internacao->usuario_create_int = $usuario_create_int;
         $internacao->data_create_int = $data_create_int;
+        $internacao->fk_usuario_int = $fk_usuario_int;
 
         $internacaoDao->create($internacao);
         include_once('cad_internacao.php');

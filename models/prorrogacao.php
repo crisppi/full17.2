@@ -20,6 +20,7 @@ class prorrogacao
   public $prorrog3_fim_pror;
   public $prorrog3_ini_pror;
   public $prorrogacao_pror;
+  public $fk_usuario_pror;
 }
 
 interface prorrogacaoDAOInterface

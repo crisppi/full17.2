@@ -43,6 +43,7 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
         $prorrogacao->prorrog3_fim_pror = $data["prorrog3_fim_pror"];
 
         $prorrogacao->fk_internacao_pror = $data["fk_internacao_pror"];
+        $prorrogacao->fk_usuario_pror = $data["fk_usuario_pror"];
 
         return $prorrogacao;
     }
@@ -62,6 +63,7 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
         acomod3_pror, 
         isol_3_pror, 
         prorrog3_fim_pror,
+        fk_usuario_pror,
         prorrog3_ini_pror
 
       ) VALUES (
@@ -76,7 +78,8 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
         :prorrog2_ini_pror,
         :acomod3_pror, 
         :isol_3_pror, 
-        :prorrog3_fim_pror, 
+        :prorrog3_fim_pror,
+        :fk_usuario_pror,
         :prorrog3_ini_pror
         
      )");
@@ -93,6 +96,7 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
         $stmt->bindParam(":isol_3_pror", $prorrogacao->isol_3_pror);
         $stmt->bindParam(":prorrog3_ini_pror", $prorrogacao->prorrog3_ini_pror);
         $stmt->bindParam(":prorrog3_fim_pror", $prorrogacao->prorrog3_fim_pror);
+        $stmt->bindParam(":fk_usuario_pror", $prorrogacao->fk_usuario_pror);
 
         $stmt->bindParam(":fk_internacao_pror", $prorrogacao->fk_internacao_pror);
 

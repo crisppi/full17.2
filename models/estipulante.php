@@ -20,6 +20,7 @@ class Estipulante
   public $email_coordFat_est;
   public $data_create_est;
   public $usuario_create_est;
+  public $fk_usuario_est;
 }
 
 interface EstipulanteDAOInterface

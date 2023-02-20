@@ -51,6 +51,7 @@ class Internacao
   public $visita_no_int;
   public $visita_auditor_prof_med;
   public $visita_auditor_prof_enf;
+  public $fk_usuario_int;
 }
 
 interface InternacaoDAOInterface

@@ -165,6 +165,9 @@ if (empty($id_usuario)) {
                 <div class="form-group col-sm-4">
                     <input type="hidden" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['email_user'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
                 </div>
+                <div class="form-group col-sm-4">
+                    <input type="hidden" class="form-control" id="fk_usuario_user" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_user" placeholder="Digite o usuário">
+                </div>
             </div>
 
             <div class="form-group row">

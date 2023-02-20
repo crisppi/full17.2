@@ -98,6 +98,9 @@ if (empty($id_seguradora)) {
                 <div class="form-group col-sm-4 oculto">
                     <input type="text" class=" form-control" id="usuario_create_seg" value="<?= $_SESSION['email_user'] ?>" name="usuario_create_seg" placeholder="Digite o usuário">
                 </div>
+                <div class="form-group col-sm-4">
+                    <input type="text" class="form-control" id="fk_usuario_seg" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_seg" placeholder="Digite o usuário">
+                </div>
             </div>
             <br>
             <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>

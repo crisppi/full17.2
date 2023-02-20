@@ -8,6 +8,7 @@ class acomodacao
   public $fk_hospital;
   public $data_create;
   public $usuario_create;
+  public $fk_usuario_aco;
 }
 interface acomodacaoDAOInterface
 {

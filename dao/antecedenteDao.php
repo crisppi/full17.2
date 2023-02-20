@@ -25,6 +25,7 @@ class antecedenteDAO implements antecedenteDAOInterface
 
         $antecedente->id_antecedente = $data["id_antecedente"];
         $antecedente->antecedente_ant = $data["antecedente_ant"];
+        $antecedente->fk_usuario_ant = $data["fk_usuario_ant"];
 
         return $antecedente;
     }
@@ -89,12 +90,15 @@ class antecedenteDAO implements antecedenteDAOInterface
     {
 
         $stmt = $this->conn->prepare("INSERT INTO tb_antecedente (
-        antecedente_ant
+        antecedente_ant,
+        fk_usuario_ant
       ) VALUES (
-        :antecedente_ant
+        :antecedente_ant,
+        :fk_usuario_ant
      )");
 
         $stmt->bindParam(":antecedente_ant", $antecedente->antecedente_ant);
+        $stmt->bindParam(":fk_usuario_ant", $antecedente->fk_usuario_ant);
         $stmt->execute();
         $cad_antec = 1;
         // Mensagem de sucesso por adicionar antecedente

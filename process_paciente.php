@@ -35,6 +35,7 @@ if ($type === "create") {
     $sexo_pac = filter_input(INPUT_POST, "sexo_pac");
     $usuario_create_pac = filter_input(INPUT_POST, "usuario_create_pac");
     $data_create_pac = filter_input(INPUT_POST, "data_create_pac");
+    $fk_usuario_pac = filter_input(INPUT_POST, "fk_usuario_pac");
 
     $paciente = new Paciente();
 
@@ -57,38 +58,8 @@ if ($type === "create") {
         $paciente->ativo_pac = $ativo_pac;
         $paciente->data_create_pac = $data_create_pac;
         $paciente->usuario_create_pac = $usuario_create_pac;
+        $paciente->fk_usuario_pac = $fk_usuario_pac;
 
-        //$data_create_pac->id_paciente = $userData->id_paciente;
-
-        // Upload de imagem do filme ****** nao usaar if para imagem *******
-        /* if (isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {
-
-            $image = $_FILES["image"];
-            $imageTypes = ["image/jpeg", "image/jpg", "image/png"];
-            $jpgArray = ["image/jpeg", "image/jpg"];
-
-            // Checando tipo da imagem
-            if (in_array($image["type"], $imageTypes)) {
-
-                // Checa se imagem é jpg
-                if (in_array($image["type"], $jpgArray)) {
-                    $imageFile = imagecreatefromjpeg($image["tmp_name"]);
-                } else {
-                    $imageFile = imagecreatefrompng($image["tmp_name"]);
-                }
-
-                // Gerando o nome_pac da imagem
-                $imageName = $movie->imageGenerateName();
-
-                imagejpeg($imageFile, "./img/movies/" . $imageName, 100);
-
-                $movie->image = $imageName;
-            } else {
-
-                $message->setMessage("Tipo inválido de imagem, insira png ou jpg!", "error", "back");
-            }
-        }
-*/
         $pacienteDao->create($paciente);
     } else {
 

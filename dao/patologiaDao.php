@@ -27,6 +27,7 @@ class patologiaDAO implements patologiaDAOInterface
         $patologia->id_patologia = $data["id_patologia"];
         $patologia->patologia_pat = $data["patologia_pat"];
         $patologia->dias_pato = $data["dias_pato"];
+        $patologia->fk_usuario_pat = $data["fk_usuario_pat"];
 
         return $patologia;
     }
@@ -135,14 +136,17 @@ class patologiaDAO implements patologiaDAOInterface
 
         $stmt = $this->conn->prepare("INSERT INTO tb_patologia (
         patologia_pat,
+        fk_usuario_pat,
         dias_pato
       ) VALUES (
         :patologia_pat,
+        :fk_usuario_pat,
         :dias_pato
      )");
 
         $stmt->bindParam(":patologia_pat", $patologia->patologia_pat);
         $stmt->bindParam(":dias_pato", $patologia->dias_pato);
+        $stmt->bindParam(":fk_usuario_pat", $patologia->fk_usuario_pat);
 
         $stmt->execute();
 

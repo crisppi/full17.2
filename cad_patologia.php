@@ -45,6 +45,9 @@ if (empty($id_patologia)) {
                     <label for="dias_pato">Patologia</label>
                     <input type="text" class="form-control" id="dias_pato" name="dias_pato" placeholder="Digite os dias da meta de internação">
                 </div>
+                <div class="form-group col-sm-4">
+                    <input type="text" class="form-control" id="fk_usuario_pat" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_pat" placeholder="Digite o usuário">
+                </div>
             </div>
 
             <br>

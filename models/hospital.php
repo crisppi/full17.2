@@ -20,6 +20,7 @@ class Hospital
   public $email_coordFat_hosp;
   public $data_create_hosp;
   public $usuario_create_hosp;
+  public $fk_usuario_hosp;
 }
 
 interface HospitalDAOInterface

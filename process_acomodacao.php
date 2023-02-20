@@ -22,6 +22,7 @@ if ($type === "create") {
     $acomodacao_aco = filter_input(INPUT_POST, "acomodacao_aco");
     $valor_aco = filter_input(INPUT_POST, "valor_aco");
     $fk_hospital = filter_input(INPUT_POST, "fk_hospital");
+    $fk_usuario_aco = filter_input(INPUT_POST, "fk_usuario_aco");
 
     $acomodacao = new acomodacao();
 
@@ -31,6 +32,7 @@ if ($type === "create") {
         $acomodacao->acomodacao_aco = $acomodacao_aco;
         $acomodacao->valor_aco = $valor_aco;
         $acomodacao->fk_hospital = $fk_hospital;
+        $acomodacao->fk_usuario_aco = $fk_usuario_aco;
 
         $acomodacaoDao->create($acomodacao);
     } else {

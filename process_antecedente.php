@@ -20,6 +20,7 @@ if ($type === "create") {
 
     // Receber os dados dos inputs
     $antecedente_ant = filter_input(INPUT_POST, "antecedente_ant");
+    $fk_usuario_ant = filter_input(INPUT_POST, "fk_usuario_ant");
 
     $antecedente = new antecedente();
 
@@ -27,6 +28,7 @@ if ($type === "create") {
     if (!empty($antecedente_ant)) {
 
         $antecedente->antecedente_ant = $antecedente_ant;
+        $antecedente->fk_usuario_ant = $fk_usuario_ant;
         $antecedenteDao->create($antecedente);
     } else {
 

@@ -5,6 +5,7 @@ class Patologia
   public $id_patologia;
   public $patologia_pat;
   public $dias_pato;
+  public $fk_usuario_pat;
 }
 
 interface patologiaDAOInterface

@@ -45,6 +45,7 @@ class negociacaoDAO implements negociacaoDAOInterface
         $negociacao->valor_para_1 = $data["valor_para_1"];
         $negociacao->valor_para_2 = $data["valor_para_2"];
         $negociacao->valor_para_3 = $data["valor_para_3"];
+        $negociacao->fk_usuario_neg = $data["fk_usuario_neg"];
 
         return $negociacao;
     }
@@ -178,7 +179,8 @@ class negociacaoDAO implements negociacaoDAOInterface
         valor_de_3, 
         valor_para_1, 
         valor_para_2, 
-        valor_para_3
+        valor_para_3,
+        fk_usuario_neg
       ) VALUES (
         :dif_1, 
         :dif_2, 
@@ -199,7 +201,8 @@ class negociacaoDAO implements negociacaoDAOInterface
         :valor_de_3, 
         :valor_para_1, 
         :valor_para_2, 
-        :valor_para_3
+        :valor_para_3,
+        :fk_usuario_neg
      )");
 
         $stmt->bindParam(":dif_1", $negociacao->dif_1);
@@ -222,6 +225,7 @@ class negociacaoDAO implements negociacaoDAOInterface
         $stmt->bindParam(":valor_para_1", $negociacao->valor_para_1);
         $stmt->bindParam(":valor_para_2", $negociacao->valor_para_2);
         $stmt->bindParam(":valor_para_3", $negociacao->valor_para_3);
+        $stmt->bindParam(":fk_usuario_neg", $negociacao->fk_usuario_neg);
 
 
         $stmt->execute();

@@ -42,7 +42,7 @@ class utiDAO implements utiDAOInterface
         $uti->saps_uti = $data["saps_uti"];
         $uti->score_uti = $data["score_uti"];
         $uti->vm_uti = $data["vm_uti"];
-        $uti->fk_user_uti = $data["fk_user_uti"];
+        $uti->fk_usuario_uti = $data["fk_usuario_uti"];
 
 
         return $uti;

@@ -29,6 +29,7 @@ if ($type === "create") {
     $email02_est = filter_input(INPUT_POST, "email02_est");
     $numero_est = filter_input(INPUT_POST, "numero_est");
     $bairro_est = filter_input(INPUT_POST, "bairro_est");
+    $fk_usuario_est = filter_input(INPUT_POST, "fk_usuario_est");
 
     $estipulante = new estipulante();
 
@@ -46,6 +47,7 @@ if ($type === "create") {
         $estipulante->telefone02_est = $telefone02_est;
         $estipulante->numero_est = $numero_est;
         $estipulante->bairro_est = $bairro_est;
+        $estipulante->fk_usuario_est = $fk_usuario_est;
 
 
         $estipulanteDao->create($estipulante);

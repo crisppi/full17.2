@@ -20,6 +20,7 @@ class Seguradora
   public $email_coordFat_seg;
   public $data_create_seg;
   public $usuario_create_seg;
+  public $fk_usuario_seg;
 }
 
 interface seguradoraDAOInterface

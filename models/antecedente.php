@@ -4,6 +4,7 @@ class Antecedente
 {
   public $id_antecedente;
   public $antecedente_ant;
+  public $fk_usuario_ant;
 }
 
 interface antecedenteDAOInterface

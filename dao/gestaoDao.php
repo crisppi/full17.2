@@ -38,7 +38,7 @@ class gestaoDAO implements gestaoDAOInterface
         $gestao->rel_home_care_ges = $data["rel_home_care_ges"];
         $gestao->desospitalizacao_ges = $data["desospitalizacao_ges"];
         $gestao->rel_desospitalizacao_ges = $data["rel_desospitalizacao_ges"];
-        $gestao->fk_user_ges = $data["fk_user_ges"];
+        $gestao->fk_usuario_ges = $data["fk_usuario_ges"];
 
 
         return $gestao;
@@ -133,6 +133,7 @@ class gestaoDAO implements gestaoDAOInterface
         home_care_ges, 
         rel_home_care_ges,
         desospitalizacao_ges,
+        fk_usuario_ges,
         rel_desospitalizacao_ges
       ) VALUES (
         :fk_internacao_ges, 
@@ -147,6 +148,7 @@ class gestaoDAO implements gestaoDAOInterface
         :home_care_ges, 
         :rel_home_care_ges,
         :desospitalizacao_ges,
+        :fk_usuario_ges,
         :rel_desospitalizacao_ges
 
      )");
@@ -164,6 +166,7 @@ class gestaoDAO implements gestaoDAOInterface
         $stmt->bindParam(":rel_home_care_ges", $gestao->rel_home_care_ges);
         $stmt->bindParam(":desospitalizacao_ges", $gestao->desospitalizacao_ges);
         $stmt->bindParam(":rel_desospitalizacao_ges", $gestao->rel_desospitalizacao_ges);
+        $stmt->bindParam(":fk_usuario_ges", $gestao->fk_usuario_ges);
 
         $stmt->execute();
 

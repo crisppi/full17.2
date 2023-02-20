@@ -52,6 +52,7 @@ if ($type === "create") {
     $visita_auditor_prof_enf = filter_input(INPUT_POST, "visita_auditor_prof_enf");
     $internacao_uti_int = filter_input(INPUT_POST, "internacao_uti_int");
     $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int");
+    $fk_usuario_int = filter_input(INPUT_POST, "fk_usuario_int");
 
 
     $internacao = new internacao();
@@ -92,6 +93,7 @@ if ($type === "create") {
         $internacao->visita_auditor_prof_enf = $visita_auditor_prof_enf;
         $internacao->internacao_uti_int = $internacao_uti_int;
         $internacao->internado_uti_int = $internado_uti_int;
+        $internacao->fk_usuario_int = $fk_usuario_int;
 
         $internacaoDao->create($internacao);
 

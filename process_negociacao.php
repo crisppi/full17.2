@@ -46,6 +46,7 @@ if ($type === "create") {
     $troca_para_3 = filter_input(INPUT_POST, "troca_para_3");
     $qtd_3 = filter_input(INPUT_POST, "qtd_3");
 
+    $fk_usuario_neg = filter_input(INPUT_POST, "fk_usuario_neg");
 
     foreach ($niveis as $query) {
 
@@ -119,6 +120,8 @@ if ($type === "create") {
         $negociacao->valor_para_3 = $valor_para_3;
         $negociacao->dif_3 = $dif_3;
         $negociacao->qtd_3 = $qtd_3;
+
+        $negociacao->fk_usuario_neg = $fk_usuario_neg;
 
         $negociacaoDao->create($negociacao);
     } else {

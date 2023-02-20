@@ -24,6 +24,8 @@ class Usuario
     public $cpf_user;
     public $senha_user;
     public $token;
+    public $fk_usuario_user;
+
 
     public function getFullName($user)
     {

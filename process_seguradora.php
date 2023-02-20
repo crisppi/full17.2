@@ -75,6 +75,7 @@ if ($type === "create") {
     $bairro_seg = filter_input(INPUT_POST, "bairro_seg");
     $data_create_seg = filter_input(INPUT_POST, "data_create_seg");
     $usuario_create_seg = filter_input(INPUT_POST, "usuario_create_seg");
+    $fk_usuario_seg = filter_input(INPUT_POST, "fk_usuario_seg");
 
     $seguradoraData = $seguradoraDao->findById($id_seguradora);
 
@@ -89,6 +90,7 @@ if ($type === "create") {
     $seguradoraData->numero_seg = $numero_seg;
     $seguradoraData->bairro_seg = $bairro_seg;
     $seguradora->data_create_seg = $data_create_seg;
+    $seguradora->fk_usuario_seg = $fk_usuario_seg;
     $seguradora->usuario_create_seg = $usuario_create_seg;
 
 

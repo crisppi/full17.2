@@ -17,6 +17,7 @@ class gestao
   public $fk_user_ges;
   public $fk_visita_ges;
   public $fk_internacao_ges;
+  public $fk_usuario_ges;
 }
 
 interface gestaoDAOInterface

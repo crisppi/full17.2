@@ -23,6 +23,7 @@ class negociacao
   public $valor_para_1;
   public $valor_para_2;
   public $valor_para_3;
+  public $fk_usuario_neg;
 }
 
 interface negociacaoDAOInterface

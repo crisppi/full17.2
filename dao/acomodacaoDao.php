@@ -29,6 +29,7 @@ class acomodacaoDAO implements acomodacaoDAOInterface
         $acomod->acomodacao_aco = $acomodacao["acomodacao_aco"];
         $acomod->fk_hospital = $acomodacao["fk_hospital"];
         $acomod->valor_aco = $acomodacao["valor_aco"];
+        $acomod->fk_usuario_aco = $acomodacao["fk_usuario_aco"];
         return $acomodacao;
     }
 
@@ -164,17 +165,20 @@ class acomodacaoDAO implements acomodacaoDAOInterface
 
         $stmt = $this->conn->prepare("INSERT INTO tb_acomodacao (
         acomodacao_aco, 
-        fk_hospital, 
+        fk_hospital,
+        fk_usuario_aco,
         valor_aco
       ) VALUES (
         :acomodacao_aco, 
-        :fk_hospital, 
+        :fk_hospital,
+        :fk_usuario_aco,
         :valor_aco 
             )");
 
         $stmt->bindParam(":acomodacao_aco", $acomodacao->acomodacao_aco);
         $stmt->bindParam(":fk_hospital", $acomodacao->fk_hospital);
         $stmt->bindParam(":valor_aco", $acomodacao->valor_aco);
+        $stmt->bindParam(":fk_usuario_aco", $acomodacao->fk_usuario_aco);
 
         $stmt->execute();
 

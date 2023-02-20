@@ -37,6 +37,7 @@ class EstipulanteDAO implements EstipulanteDAOInterface
         $estipulante->bairro_est = $data["bairro_est"];
         $estipulante->data_create_est = $data["data_create_est"];
         $estipulante->usuario_create_est = $data["usuario_create_est"];
+        $estipulante->fk_usuario_est = $data["fk_usuario_est"];
 
         return $estipulante;
     }
@@ -170,6 +171,7 @@ class EstipulanteDAO implements EstipulanteDAOInterface
         numero_est, 
         cidade_est, 
         data_create_est, 
+        fk_usuario_est,
         usuario_create_est
       ) VALUES (
         :nome_est, 
@@ -182,7 +184,8 @@ class EstipulanteDAO implements EstipulanteDAOInterface
         :telefone02_est, 
         :numero_est, 
         :cidade_est, 
-        :data_create_est, 
+        :data_create_est,
+        :fk_usuario_est,
         :usuario_create_est
      )");
 
@@ -198,6 +201,7 @@ class EstipulanteDAO implements EstipulanteDAOInterface
         $stmt->bindParam(":cidade_est", $estipulante->cidade_est);
         $stmt->bindParam(":data_create_est", $estipulante->data_create_est);
         $stmt->bindParam(":usuario_create_est", $estipulante->usuario_create_est);
+        $stmt->bindParam(":fk_usuario_est", $estipulante->fk_usuario_est);
 
 
         $stmt->execute();

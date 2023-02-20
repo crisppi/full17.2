@@ -35,6 +35,7 @@ class HospitalDAO implements HospitalDAOInterface
         $hospital->telefone01_hosp = $data["telefone01_hosp"];
         $hospital->telefone02_hosp = $data["telefone02_hosp"];
         $hospital->bairro_hosp = $data["bairro_hosp"];
+        $hospital->fk_usuario_hosp = $data["fk_usuario_hosp"];
 
 
         return $hospital;
@@ -145,6 +146,7 @@ class HospitalDAO implements HospitalDAOInterface
         email02_hosp, 
         telefone01_hosp, 
         telefone02_hosp, 
+        fk_usuario_hosp,
         cidade_hosp
       ) VALUES (
         :nome_hosp, 
@@ -156,6 +158,7 @@ class HospitalDAO implements HospitalDAOInterface
         :email02_hosp, 
         :telefone01_hosp, 
         :telefone02_hosp, 
+        :fk_usuario_hosp,
         :cidade_hosp
      )");
 
@@ -169,6 +172,7 @@ class HospitalDAO implements HospitalDAOInterface
         $stmt->bindParam(":telefone01_hosp", $hospital->telefone01_hosp);
         $stmt->bindParam(":telefone02_hosp", $hospital->telefone02_hosp);
         $stmt->bindParam(":cidade_hosp", $hospital->cidade_hosp);
+        $stmt->bindParam(":fk_usuario_hosp", $hospital->fk_usuario_hosp);
 
         $stmt->execute();
 

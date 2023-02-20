@@ -58,13 +58,15 @@ if ($type === "create") {
     $id_patologia = filter_input(INPUT_POST, "id_patologia");
     $patologia_pat = filter_input(INPUT_POST, "patologia_pat");
     $dias_pato = filter_input(INPUT_POST, "dias_pato");
-
+    $fk_usuario_pat = filter_input(INPUT_POST, "fk_usuario_pat");
 
     $patologiaData = $patologiaDao->findById($id_patologia);
 
     $patologiaData->id_patologia = $id_patologia;
     $patologiaData->patologia_pat = $patologia_pat;
     $patologiaData->dias_pato = $dias_pato;
+    $patologiaData->fk_usuario_pat = $fk_usuario_pat;
+
 
 
     $patologiaDao->update($patologiaData);

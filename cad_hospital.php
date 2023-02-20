@@ -93,10 +93,13 @@ if (empty($id_hospital)) {
                 </div>
                 <div class="form-group col-sm-4">
                     <?php $agora = date('d/m/Y'); ?>
-                    <input class="visible" type="text" class="form-control" value='<?= $agora; ?>' id="data_create_pac" name="data_create_pac" placeholder="">
+                    <input class="visible" type="text" class="form-control" value='<?= $agora; ?>' id="data_create_hosp" name="data_create_hosp" placeholder="">
                 </div>
                 <div class="form-group col-sm-4">
-                    <input type="text" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['username'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
+                    <input type="text" class="form-control" id="usuario_create_hosp" value="<?= $_SESSION['username'] ?>" name="usuario_create_hosp" placeholder="Digite o usuário">
+                </div>
+                <div class="form-group col-sm-4">
+                    <input type="text" class="form-control" id="fk_usuario_hosp" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_hosp" placeholder="Digite o usuário">
                 </div>
 
             </div>

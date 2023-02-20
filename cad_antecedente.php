@@ -31,6 +31,9 @@ $id_antecedente = filter_input(INPUT_GET, "id_antecedente");
                     <label for="antecedente_ant">Patologia</label>
                     <input type="text" class="form-control" id="antecedente_ant" name="antecedente_ant" placeholder="Digite o nome do usuário" required>
                 </div>
+                <div class="form-group col-sm-4">
+                    <input type="text" class="form-control" id="fk_usuario_ant" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_ant" placeholder="Digite o usuário">
+                </div>
             </div>
             <br>
             <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>

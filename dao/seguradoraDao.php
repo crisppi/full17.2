@@ -37,6 +37,7 @@ class seguradoraDAO implements seguradoraDAOInterface
         $seguradora->bairro_seg = $data["bairro_seg"];
         $seguradora->data_create_seg = $data["data_create_seg"];
         $seguradora->usuario_create_seg = $data["usuario_create_seg"];
+        $seguradora->fk_usuario_seg = $data["fk_usuario_seg"];
 
         return $seguradora;
     }
@@ -170,7 +171,8 @@ class seguradoraDAO implements seguradoraDAOInterface
         telefone02_seg, 
         numero_seg, 
         cidade_seg, 
-        data_create_seg, 
+        data_create_seg,
+        fk_usuario_seg,
         usuario_create_seg
       ) VALUES (
         :seguradora_seg, 
@@ -183,7 +185,8 @@ class seguradoraDAO implements seguradoraDAOInterface
         :telefone02_seg, 
         :numero_seg, 
         :cidade_seg, 
-        :data_create_seg, 
+        :data_create_seg,
+        :fk_usuario_seg,
         :usuario_create_seg
      )");
 

@@ -54,6 +54,7 @@ class internacaoDAO implements internacaoDAOInterface
         $internacao->tipo_alta_int = $data['tipo_alta_int'];
         $internacao->visita_auditor_prof_med = $data['visita_auditor_prof_med'];
         $internacao->visita_auditor_prof_enf = $data['visita_auditor_prof_enf'];
+        $internacao->fk_usuario_int = $data['fk_usuario_int'];
 
         return $internacao;
     }
@@ -152,6 +153,7 @@ class internacaoDAO implements internacaoDAOInterface
             data_alta_int,
             visita_auditor_prof_med,
             visita_auditor_prof_enf,
+            fk_usuario_int,
             especialidade_int
    
          ) VALUES (
@@ -185,6 +187,7 @@ class internacaoDAO implements internacaoDAOInterface
            :data_alta_int,
            :visita_auditor_prof_med,
            :visita_auditor_prof_enf,
+           :fk_usuario_int,
            :especialidade_int
         )");
 
@@ -219,6 +222,7 @@ class internacaoDAO implements internacaoDAOInterface
         $stmt->bindParam(":visita_auditor_prof_med", $internacao->visita_auditor_prof_med);
         $stmt->bindParam(":visita_auditor_prof_enf", $internacao->visita_auditor_prof_enf);
         $stmt->bindParam(":titular_int", $internacao->titular_int);
+        $stmt->bindParam(":fk_usuario_int", $internacao->fk_usuario_int);
 
 
         $stmt->execute();

@@ -28,6 +28,7 @@ if ($type === "create") {
     $email02_hosp = filter_input(INPUT_POST, "email02_hosp");
     $numero_hosp = filter_input(INPUT_POST, "numero_hosp");
     $bairro_hosp = filter_input(INPUT_POST, "bairro_hosp");
+    $fk_usuario_hosp = filter_input(INPUT_POST, "fk_usuario_hosp");
 
     $hospital = new hospital();
 
@@ -45,7 +46,7 @@ if ($type === "create") {
         $hospital->telefone02_hosp = $telefone02_hosp;
         $hospital->numero_hosp = $numero_hosp;
         $hospital->bairro_hosp = $bairro_hosp;
-
+        $hospital->fk_usuario_hosp = $fk_usuario_hosp;
 
         $hospitalDao->create($hospital);
     } else {

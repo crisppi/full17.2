@@ -35,6 +35,7 @@ if ($type === "create") {
     $vm_uti = filter_input(INPUT_POST, "vm_uti");
     $id_internacao = filter_input(INPUT_POST, "id_internacao");
     $internacao_uti_int = filter_input(INPUT_POST, "internacao_uti_int");
+    $fk_usuario_uti = filter_input(INPUT_POST, "fk_usuario_uti");
     $uti = new uti();
 
     // Validação mínima de dados
@@ -56,6 +57,7 @@ if ($type === "create") {
         $uti->score_uti = $score_uti;
         $uti->vm_uti = $vm_uti;
         $uti->id_internacao = $id_internacao;
+        $uti->fk_usuario_uti = $fk_usuario_uti;
         $uti->internacao_uti_int = $internacao_uti_int;
 
         $utiDao->create($uti);
