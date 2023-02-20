@@ -19,6 +19,7 @@ class Paciente
   public $sexo_pac;
   public $data_create_pac;
   public $usuario_create_pac;
+  public $fk_usuario_pac;
 }
 
 interface PacienteDAOInterface

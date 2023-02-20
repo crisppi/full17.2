@@ -42,6 +42,7 @@ if (!empty($query)) {
     $email_user = $query[0]['email_user'];
     $ativo = $query[0]['ativo_user'];
     $cargo = $query[0]['cargo_user'];
+    $id_user = $query[0]['id_usuario'];
     $senha_hash = $query[0]['senha_user'];
 
     if (password_verify($senha_login, $senha_hash)) {
@@ -50,6 +51,7 @@ if (!empty($query)) {
         $_SESSION['login_user'] = $login_user;
         $_SESSION['email_user'] = $email_user;
         $_SESSION['ativo'] = $ativo;
+        $_SESSION['id_usuario'] = $id_user;
         $_SESSION['cargo'] = $cargo;
         header('location: menu.php');
     } else {

@@ -112,6 +112,9 @@ if (empty($id_hospital)) {
                 <div class="form-group col-sm-4">
                     <input type="hidden" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['email_user'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
                 </div>
+                <div class="form-group col-sm-4">
+                    <input type="text" class="form-control" id="fk_usuario_pac" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_pac" placeholder="Digite o usuário">
+                </div>
             </div>
             <br>
             <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>

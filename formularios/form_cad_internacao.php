@@ -41,7 +41,6 @@
                     <option value="n">Não</option>
                 </select>
             </div>
-
             <!-- ENTRADA DE DADOS AUTOMATICOS NO INPUT-->
             <div class="form-group col-sm-1">
                 <input type="hidden" class="form-control" value="n" id="internado_uti_int" name="internado_uti_int">
