@@ -43,7 +43,17 @@ class internacaoDAO implements internacaoDAOInterface
         $internacao->primeira_vis_int = $data["primeira_vis_int"];
         $internacao->visita_no_int = $data["visita_no_int"];
         $internacao->internado_int = $data["internado_int"];
+        $internacao->visita_med_int = $data["visita_med_int"];
+        $internacao->visita_enf_int = $data["visita_enf_int"];
+        $internacao->senha_int = $data['senha_int'];
+        $internacao->acomodacao_int = $data['acomodacao_int'];
         $internacao->rel_int = $data['rel_int'];
+        $internacao->conta_finalizada_int = $data['conta_finalizada_int'];
+        $internacao->internacao_ativa_int = $data['internacao_ativa_int'];
+        $internacao->data_alta_int = $data['data_alta_int'];
+        $internacao->tipo_alta_int = $data['tipo_alta_int'];
+        $internacao->visita_auditor_prof_med = $data['visita_auditor_prof_med'];
+        $internacao->visita_auditor_prof_enf = $data['visita_auditor_prof_enf'];
 
         return $internacao;
     }
@@ -113,15 +123,15 @@ class internacaoDAO implements internacaoDAOInterface
 
         $stmt = $this->conn->prepare("INSERT INTO tb_internacao (
             fk_hospital_int, 
-            rel_int, 
             fk_paciente_int, 
+            rel_int, 
             fk_patologia_int, 
             fk_patologia2, 
             data_intern_int, 
+            acoes_int,
             internado_int, 
             modo_internacao_int, 
             tipo_admissao_int, 
-            acoes_int,
             internado_uti_int,
             internacao_uti_int,
             titular_int, 
@@ -131,19 +141,30 @@ class internacaoDAO implements internacaoDAOInterface
             usuario_create_int,
             primeira_vis_int,
             visita_no_int,
+            visita_enf_int,
+            visita_med_int,
+            senha_int,
+            acomodacao_int,
+            conta_finalizada_int,
+            conta_paga_int,
+            internacao_ativa_int,
+            tipo_alta_int,
+            data_alta_int,
+            visita_auditor_prof_med,
+            visita_auditor_prof_enf,
             especialidade_int
    
          ) VALUES (
            :fk_hospital_int, 
-           :rel_int, 
            :fk_paciente_int,
+           :rel_int, 
            :fk_patologia_int, 
            :fk_patologia2, 
            :data_intern_int, 
+           :acoes_int, 
            :internado_int, 
            :modo_internacao_int, 
            :tipo_admissao_int, 
-           :acoes_int, 
            :internado_uti_int,
            :internacao_uti_int,
            :titular_int, 
@@ -153,6 +174,17 @@ class internacaoDAO implements internacaoDAOInterface
            :usuario_create_int,
            :primeira_vis_int,
            :visita_no_int,
+           :visita_enf_int,
+           :visita_med_int,
+           :senha_int,
+           :acomodacao_int,
+           :conta_finalizada_int,
+           :conta_paga_int,
+           :internacao_ativa_int,
+           :tipo_alta_int,
+           :data_alta_int,
+           :visita_auditor_prof_med,
+           :visita_auditor_prof_enf,
            :especialidade_int
         )");
 
@@ -175,6 +207,17 @@ class internacaoDAO implements internacaoDAOInterface
         $stmt->bindParam(":grupo_patologia_int", $internacao->grupo_patologia_int);
         $stmt->bindParam(":primeira_vis_int", $internacao->primeira_vis_int);
         $stmt->bindParam(":visita_no_int", $internacao->visita_no_int);
+        $stmt->bindParam(":visita_med_int", $internacao->visita_med_int);
+        $stmt->bindParam(":visita_enf_int", $internacao->visita_enf_int);
+        $stmt->bindParam(":senha_int", $internacao->senha_int);
+        $stmt->bindParam(":acomodacao_int", $internacao->acomodacao_int);
+        $stmt->bindParam(":conta_finalizada_int", $internacao->conta_finalizada_int);
+        $stmt->bindParam(":conta_paga_int", $internacao->conta_paga_int);
+        $stmt->bindParam(":internacao_ativa_int", $internacao->internacao_ativa_int);
+        $stmt->bindParam(":tipo_alta_int", $internacao->tipo_alta_int);
+        $stmt->bindParam(":data_alta_int", $internacao->data_alta_int);
+        $stmt->bindParam(":visita_auditor_prof_med", $internacao->visita_auditor_prof_med);
+        $stmt->bindParam(":visita_auditor_prof_enf", $internacao->visita_auditor_prof_enf);
         $stmt->bindParam(":titular_int", $internacao->titular_int);
 
 

@@ -13,6 +13,8 @@ class Internacao
   public $auditor_int;
   public $conta_finalizada_int;
   public $conta_paga_int;
+  public $visita_med_int;
+  public $visita_enf_int;
   public $covid_int;
   public $fk_gestao_int;
   public $data_alta_int;
@@ -47,6 +49,8 @@ class Internacao
   public $fk_negociacoes_int;
   public $primeira_vis_int;
   public $visita_no_int;
+  public $visita_auditor_prof_med;
+  public $visita_auditor_prof_enf;
 }
 
 interface InternacaoDAOInterface

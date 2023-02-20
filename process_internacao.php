@@ -20,7 +20,6 @@ $type = filter_input(INPUT_POST, "type");
 if ($type === "create") {
 
     // Receber os dados dos inputs
-    $rel_int = filter_input(INPUT_POST, "rel_int") ?: null;
     $fk_hospital_int = filter_input(INPUT_POST, "fk_hospital_int");
     $fk_paciente_int = filter_input(INPUT_POST, "fk_paciente_int");
     $fk_patologia_int = filter_input(INPUT_POST, "fk_patologia_int") ?: 1000;
@@ -29,23 +28,38 @@ if ($type === "create") {
     $modo_internacao_int = filter_input(INPUT_POST, "modo_internacao_int");
     $tipo_admissao_int = filter_input(INPUT_POST, "tipo_admissao_int");
     $data_visita_int = filter_input(INPUT_POST, "data_visita_int") ?: null;
-    $acoes_int = filter_input(INPUT_POST, "acoes_int");
-    $titular_int = filter_input(INPUT_POST, "titular_int");
+    $data_intern_int = filter_input(INPUT_POST, "data_intern_int") ?: null;
     $especialidade_int = filter_input(INPUT_POST, "especialidade_int");
-    $grupo_patologia_int = filter_input(INPUT_POST, "grupo_patologia_int");
+    $titular_int = filter_input(INPUT_POST, "titular_int");
     $acomodacao_int = filter_input(INPUT_POST, "acomodacao_int");
+    $acoes_int = filter_input(INPUT_POST, "acoes_int");
+    $rel_int = filter_input(INPUT_POST, "rel_int") ?: null;
+    $senha_int = filter_input(INPUT_POST, "senha_int");
     $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
     $data_create_int = filter_input(INPUT_POST, "data_create_int") ?: null;
+    $grupo_patologia_int = filter_input(INPUT_POST, "grupo_patologia_int");
     $primeira_vis_int = filter_input(INPUT_POST, "primeira_vis_int");
+    $visita_med_int = filter_input(INPUT_POST, "visita_med_int");
+    $visita_enf_int = filter_input(INPUT_POST, "visita_enf_int");
     $visita_no_int = filter_input(INPUT_POST, "visita_no_int");
+    $acomodacao_int = filter_input(INPUT_POST, "acomodacao_int");
+    $conta_finalizada_int = filter_input(INPUT_POST, "conta_finalizada_int");
+    $internacao_ativa_int = filter_input(INPUT_POST, "internacao_ativa_int");
+    $tipo_alta_int = filter_input(INPUT_POST, "tipo_alta_int");
+    $data_alta_int = filter_input(INPUT_POST, "data_alta_int");
+    $visita_auditor_prof_med = filter_input(INPUT_POST, "visita_auditor_prof_med");
+    $visita_auditor_prof_enf = filter_input(INPUT_POST, "visita_auditor_prof_enf");
+    $internacao_uti_int = filter_input(INPUT_POST, "internacao_uti_int");
+    $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int");
+
 
     $internacao = new internacao();
 
     // Validação mínima de dados
     if (3 < 4) {
 
-        $internacao->fk_paciente_int = $fk_paciente_int;
         $internacao->fk_hospital_int = $fk_hospital_int;
+        $internacao->fk_paciente_int = $fk_paciente_int;
         $internacao->fk_patologia_int = $fk_patologia_int;
         $internacao->fk_patologia2 = $fk_patologia2;
         $internacao->internado_int = $internado_int;
@@ -53,15 +67,29 @@ if ($type === "create") {
         $internacao->tipo_admissao_int = $tipo_admissao_int;
         $internacao->grupo_patologia_int = $grupo_patologia_int;
         $internacao->data_visita_int = $data_visita_int;
+        $internacao->data_intern_int = $data_intern_int;
         $internacao->especialidade_int = $especialidade_int;
         $internacao->titular_int = $titular_int;
         $internacao->acomodacao_int = $acomodacao_int;
         $internacao->rel_int = $rel_int;
         $internacao->acoes_int = $acoes_int;
+        $internacao->senha_int = $senha_int;
         $internacao->usuario_create_int = $usuario_create_int;
         $internacao->data_create_int = $data_create_int;
+        $internacao->grupo_patologia_int = $grupo_patologia_int;
         $internacao->primeira_vis_int = $primeira_vis_int;
+        $internacao->visita_med_int = $visita_med_int;
+        $internacao->visita_enf_int = $visita_enf_int;
         $internacao->visita_no_int = $visita_no_int;
+        $internacao->acomodacao_int = $acomodacao_int;
+        $internacao->conta_finalizada_int = $visita_no_int;
+        $internacao->internacao_ativa_int = $internacao_ativa_int;
+        $internacao->tipo_alta_int = $tipo_alta_int;
+        $internacao->data_alta_int = $data_alta_int;
+        $internacao->visita_auditor_prof_med = $visita_auditor_prof_med;
+        $internacao->visita_auditor_prof_enf = $visita_auditor_prof_enf;
+        $internacao->internacao_uti_int = $internacao_uti_int;
+        $internacao->internado_uti_int = $internado_uti_int;
 
         $internacaoDao->create($internacao);
 

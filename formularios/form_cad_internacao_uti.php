@@ -19,7 +19,7 @@
                 <input type="hidden" class="form-control" id="fk_internacao_uti" name="fk_internacao_uti" value="<?= ($ultimoReg) ?> " placeholder="Relatório da auditoria">
             </div>
             <div>
-                <input type="text" class="form-control" id="internado_uti_int" name="internado_uti_int" value="s">
+                <input type="text" class="form-control" id="internacao_uti_int" name="internacao_uti_int" value="s">
             </div>
             <div>
                 <input type="text" class="form-control" id="internado_uti_int" name="internado_uti_int" value="s">
