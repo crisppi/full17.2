@@ -44,6 +44,7 @@ if ($type === "create") {
     $visita_no_int = filter_input(INPUT_POST, "visita_no_int");
     $acomodacao_int = filter_input(INPUT_POST, "acomodacao_int");
     $conta_finalizada_int = filter_input(INPUT_POST, "conta_finalizada_int");
+    $conta_paga_int = filter_input(INPUT_POST, "conta_paga_int");
     $internacao_ativa_int = filter_input(INPUT_POST, "internacao_ativa_int");
     $tipo_alta_int = filter_input(INPUT_POST, "tipo_alta_int");
     $data_alta_int = filter_input(INPUT_POST, "data_alta_int");
@@ -82,7 +83,8 @@ if ($type === "create") {
         $internacao->visita_enf_int = $visita_enf_int;
         $internacao->visita_no_int = $visita_no_int;
         $internacao->acomodacao_int = $acomodacao_int;
-        $internacao->conta_finalizada_int = $visita_no_int;
+        $internacao->conta_finalizada_int = $conta_finalizada_int;
+        $internacao->conta_paga_int = $conta_paga_int;
         $internacao->internacao_ativa_int = $internacao_ativa_int;
         $internacao->tipo_alta_int = $tipo_alta_int;
         $internacao->data_alta_int = $data_alta_int;
