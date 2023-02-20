@@ -20,6 +20,8 @@ class Paciente
   public $data_create_pac;
   public $usuario_create_pac;
   public $fk_usuario_pac;
+  public $fk_seguradora_pac;
+  public $fk_estipulante_pac;
 }
 
 interface PacienteDAOInterface

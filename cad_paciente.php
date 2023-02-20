@@ -2,10 +2,22 @@
 include_once("check_logado.php");
 
 require_once("templates/header.php");
+
 require_once("dao/hospitalDao.php");
+
+require_once("models/seguradora.php");
+require_once("dao/seguradoraDao.php");
+
+require_once("models/estipulante.php");
+require_once("dao/estipulanteDao.php");
+
 require_once("models/message.php");
 
-$hospitalDao = new HospitalDAO($conn, $BASE_URL);
+$seguradoraDao = new seguradoraDAO($conn, $BASE_URL);
+$seguradoras = $seguradoraDao->findAll();
+
+$estipulanteDao = new estipulanteDAO($conn, $BASE_URL);
+$estipulantes = $estipulanteDao->findAll();
 
 // Receber id do usuário
 $id_hospital = filter_input(INPUT_GET, "id_hospital");
@@ -45,17 +57,17 @@ if (empty($id_hospital)) {
                     <label for="idade_pac">Idade</label>
                     <input type="text" class="form-control" id="idade_pac" name="idade_pac" placeholder="Digite a idade">
                 </div>
-                <div class="form-group col-sm-1 ">
+                <div class="form-group col-sm-3">
+                    <label for="mae_pac">Mãe</label>
+                    <input type="text" class="form-control" id="mae_pac" name="mae_pac" placeholder="Digite a mae">
+                </div>
+                <div class="form-group col-sm-1">
                     <label class="control-label" for="sexo_pac">Sexo</label>
-                    <select class="form-control" id="sexo_pac" name="sexo_pac">
+                    <select style="font-size:0.6em" class="form-control" id="sexo_pac" name="sexo_pac">
                         <option value="">Selecione</option>
                         <option value="Feminino">Feminino</option>
                         <option value="Masculino">Masculino</option>
                     </select>
-                </div>
-                <div class="form-group col-sm-3">
-                    <label for="mae_pac">Mãe</label>
-                    <input type="text" class="form-control" id="mae_pac" name="mae_pac" placeholder="Digite a mae">
                 </div>
             </div>
             <div class="form-group row">
@@ -100,7 +112,7 @@ if (empty($id_hospital)) {
                 </div>
                 <div class="form-group col-sm-1">
                     <label class="control-label" for="ativo_pac">Ativo</label>
-                    <select class="form-control" id="ativo_pac" name="ativo_pac">
+                    <select style="font-size:0.6em" class="form-control" id="ativo_pac" name="ativo_pac">
                         <option value="Sim">Sim</option>
                         <option value="Não">Não</option>
                     </select>
@@ -113,7 +125,25 @@ if (empty($id_hospital)) {
                     <input type="hidden" class="form-control" id="usuario_create_pac" value="<?= $_SESSION['email_user'] ?>" name="usuario_create_pac" placeholder="Digite o usuário">
                 </div>
                 <div class="form-group col-sm-4">
-                    <input type="text" class="form-control" id="fk_usuario_pac" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_pac" placeholder="Digite o usuário">
+                    <input type="hidden" class="form-control" id="fk_usuario_pac" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_pac" placeholder="Digite o usuário">
+                </div>
+                <div class="form-group col-sm-3">
+                    <label class="control-label col-sm-3 " for="fk_seguradora_pac">Seguradora</label>
+                    <select class="form-control" id="fk_seguradora_pac" name="fk_seguradora_pac" required>
+                        <option value="">Selecione a Seguradora</option>
+                        <?php foreach ($seguradoras as $seguradora) : ?>
+                            <option value="<?= $seguradora["id_seguradora"] ?>"><?= $seguradora["seguradora_seg"] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label class="control-label col-sm-3 " for="fk_estipulante_pac">Estipulante</label>
+                    <select class="form-control" id="fk_estipulante_pac" name="fk_estipulante_pac" required>
+                        <option value="">Selecione o Estipulante</option>
+                        <?php foreach ($estipulantes as $estipulante) : ?>
+                            <option value="<?= $estipulante["id_estipulante"] ?>"><?= $estipulante["nome_est"] ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
             <br>

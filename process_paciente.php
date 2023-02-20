@@ -36,6 +36,9 @@ if ($type === "create") {
     $usuario_create_pac = filter_input(INPUT_POST, "usuario_create_pac");
     $data_create_pac = filter_input(INPUT_POST, "data_create_pac");
     $fk_usuario_pac = filter_input(INPUT_POST, "fk_usuario_pac");
+    $fk_estipulante_pac = filter_input(INPUT_POST, "fk_estipulante_pac");
+    $fk_seguradora_pac = filter_input(INPUT_POST, "fk_seguradora_pac");
+    $fk_usuario_pac = filter_input(INPUT_POST, "fk_usuario_pac");
 
     $paciente = new Paciente();
 
@@ -45,6 +48,7 @@ if ($type === "create") {
         $paciente->nome_pac = $nome_pac;
         $paciente->endereco_pac = $endereco_pac;
         $paciente->sexo_pac = $sexo_pac;
+        $paciente->mae_pac = $mae_pac;
         $paciente->bairro_pac = $bairro_pac;
         $paciente->idade_pac = $idade_pac;
         $paciente->email02_pac = $email02_pac;
@@ -59,6 +63,8 @@ if ($type === "create") {
         $paciente->data_create_pac = $data_create_pac;
         $paciente->usuario_create_pac = $usuario_create_pac;
         $paciente->fk_usuario_pac = $fk_usuario_pac;
+        $paciente->fk_seguradora_pac = $fk_seguradora_pac;
+        $paciente->fk_estipulante_pac = $fk_estipulante_pac;
 
         $pacienteDao->create($paciente);
     } else {

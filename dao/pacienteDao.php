@@ -41,6 +41,8 @@ class PacienteDAO implements PacienteDAOInterface
         $paciente->data_create_pac = $data["data_create_pac"];
         $paciente->usuario_create_pac = $data["usuario_create_pac"];
         $paciente->fk_usuario_pac = $data["fk_usuario_pac"];
+        $paciente->fk_estipulante_pac = $data["fk_estipulante_pac"];
+        $paciente->fk_seguradora_pac = $data["fk_seguradora_pac"];
 
 
         return $paciente;
@@ -125,6 +127,8 @@ class PacienteDAO implements PacienteDAOInterface
         ativo_pac, 
         data_create_pac,
         fk_usuario_pac,
+        fk_estipulante_pac,
+        fk_seguradora_pac,
         usuario_create_pac
       ) VALUES (
         :nome_pac, 
@@ -143,6 +147,8 @@ class PacienteDAO implements PacienteDAOInterface
         :ativo_pac, 
         :data_create_pac, 
         :fk_usuario_pac,
+        :fk_estipulante_pac,
+        :fk_seguradora_pac,
         :usuario_create_pac
      )");
 
@@ -163,6 +169,8 @@ class PacienteDAO implements PacienteDAOInterface
         $stmt->bindParam(":data_create_pac", $paciente->data_create_pac);
         $stmt->bindParam(":usuario_create_pac", $paciente->usuario_create_pac);
         $stmt->bindParam(":fk_usuario_pac", $paciente->fk_usuario_pac);
+        $stmt->bindParam(":fk_estipulante_pac", $paciente->fk_estipulante_pac);
+        $stmt->bindParam(":fk_seguradora_pac", $paciente->fk_seguradora_pac);
 
 
         $stmt->execute();

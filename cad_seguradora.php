@@ -30,7 +30,7 @@ if (empty($id_seguradora)) {
 }
 
 ?>
-<div id="main-container" class="container-fluid">
+<div id="main-container" class="container">
     <div class="row">
         <h1 class="page-title">Cadastrar Seguradora</h1>
         <p class="page-description">Adicione informações sobre a Seguradora</p>
@@ -38,7 +38,7 @@ if (empty($id_seguradora)) {
             <input type="hidden" name="type" value="create">
             <div class="form-group row">
                 <div class="form-group col-sm-4">
-                    <label for="seguradora_seg">seguradora</label>
+                    <label for="seguradora_seg">Seguradora</label>
                     <input type="text" class="form-control" id="seguradora_seg" name="seguradora_seg" placeholder="Digite o nome da Seguradora" required>
                 </div>
 
