@@ -159,13 +159,11 @@
                     <th scope="col">Data internação</th>
                     <th scope="col">Acomodação</th>
                     <th scope="col">Data visita</th>
-                    <th scope="col">Grupo Patologia</th>
                     <th scope="col">Modo Admissão</th>
                     <th scope="col">Tipo Alta</th>
                     <th scope="col">Médico</th>
                     <th scope="col">UTI</th>
                     <th scope="col">Int UTI</th>
-                    <th scope="col">Relatório</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -186,13 +184,11 @@
                         <td scope="row"><?= $intern["data_intern_int"] ?></td>
                         <td scope="row"><?= $intern["acomodacao_int"] ?></td>
                         <td scope="row"><?= $intern["data_visita_int"] ?></td>
-                        <td scope="row"><?= $intern["grupo_patologia_int"] ?></td>
                         <td scope="row"><?= $intern["tipo_admissao_int"] ?></td>
                         <td scope="row"><?= $intern["tipo_alta_int"] ?></td>
                         <td scope="row"><?= $intern["titular_int"] ?></td>
                         <td scope="row"><?= $intern["internacao_uti_int"] ?></td>
                         <td scope="row"><?= $intern["internado_uti_int"] ?></td>
-                        <td scope="row"><?= $intern["rel_int"] ?></td>
 
                         <td class="action">
                             <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:orange; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>

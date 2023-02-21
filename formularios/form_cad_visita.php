@@ -1,6 +1,16 @@
 <div class="row">
     <h4 class="page-title">Cadastrar visita</h4>
     <p class="page-description">Adicione informações sobre a visita</p>
+
+    <div id="view-contact-container" class="container-fluid" style="align-items:center">
+        <span style="font-weight: 500; margin:0px 5px 0px 0px " class="card-title bold">Internação:</span>
+        <span class="card-title bold" style="font-weight: 500; margin:0px 80px 0px 5px "><?= $id_internacao ?></span>
+        <span style="font-weight: 500; margin:0px 5px 0px 0px">Visita:</span>
+        <span style="font-weight: 500; margin:0px 80px 0px 0px"><?= $data_intern_int ?></span>
+        <span style="font-weight: 500; margin:0px 5px 0px 80px">Hospital:</span>
+        <span style=" font-weight: 500; margin:0px 10px 0px 0px"><?= $nome_hosp ?></span>
+        <br>
+    </div>
     <form class="formulario" action="<?= $BASE_URL ?>process_visita.php" id="add-visita-form" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="type" value="create">
 
