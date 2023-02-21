@@ -47,8 +47,8 @@ $prorrogacao = new prorrogacaoDAO($conn, $BASE_URL);
 $prorrogacaoIdMax = $prorrogacao->findMaxPror();
 
 $id_internacao = filter_input(INPUT_GET, 'id_internacao', FILTER_VALIDATE_INT);
-$internacao = $internacaoDao->joininternacaoHospitalshow($id_internacao);
-
+$internacaoList = $internacaoDao->joininternacaoHospitalshow($id_internacao);
+extract($internacaoList);
 ?>
 <div id="main-container" class="container">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
