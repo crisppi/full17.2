@@ -30,7 +30,7 @@ if (empty($id_estipulante)) {
 }
 
 ?>
-<div id="main-container" class="container-fluid">
+<div id="main-container" class="container">
     <div class="row">
         <h1 class="page-title">Cadastrar Estipulante</h1>
         <p class="page-description">Adicione informações sobre a Estipulante</p>
@@ -38,11 +38,11 @@ if (empty($id_estipulante)) {
             <input type="hidden" name="type" value="create">
             <div class="form-group row">
                 <div class="form-group col-sm-4">
-                    <label for="nome_est">estipulante</label>
+                    <label for="nome_est">Estipulante</label>
                     <input type="text" class="form-control" id="nome_est" name="nome_est" placeholder="Digite o nome do usuário" required>
                 </div>
 
-                <div class="form-group col-sm-1">
+                <div class="form-group col-sm-2">
                     <label for="cnpj_est">CNPJ</label>
                     <input type="text" oninput="mascara(this, 'cnpj')" class="form-control" id="cnpj_est" name="cnpj_est" placeholder="Digite o cnpj">
                 </div>
@@ -93,13 +93,13 @@ if (empty($id_estipulante)) {
                 </div>
                 <div class="form-group col-sm-4">
                     <?php $agora = date('d/m/Y'); ?>
-                    <input class="visible" type="text" class="form-control" value='<?= $agora; ?>' id="data_create_est" name="data_create_est" placeholder="">
+                    <input class="visible" type="hidden" class="form-control" value='<?= $agora; ?>' id="data_create_est" name="data_create_est" placeholder="">
                 </div>
                 <div class="form-group col-sm-4">
-                    <input type="text" class="form-control" id="usuario_create_est" value="<?= $_SESSION['username'] ?>" name="usuario_create_est" placeholder="Digite o usuário">
+                    <input type="hidden" class="form-control" id="usuario_create_est" value="<?= $_SESSION['login_user'] ?>" name="usuario_create_est" placeholder="Digite o usuário">
                 </div>
                 <div class="form-group col-sm-4">
-                    <input type="text" class="form-control" id="fk_usuario_est" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_est" placeholder="Digite o usuário">
+                    <input type="hidden" class="form-control" id="fk_usuario_est" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_est" placeholder="Digite o usuário">
                 </div>
             </div>
             <br>

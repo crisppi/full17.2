@@ -42,7 +42,7 @@ if (empty($id_seguradora)) {
                     <input type="text" class="form-control" id="seguradora_seg" name="seguradora_seg" placeholder="Digite o nome da Seguradora" required>
                 </div>
 
-                <div class="form-group col-sm-1">
+                <div class="form-group col-sm-2">
                     <label for="cnpj_seg">CNPJ</label>
                     <input type="text" oninput="mascara(this, 'cnpj')" class="form-control" id="cnpj_seg" name="cnpj_seg" placeholder="Digite o cnpj">
                 </div>
@@ -93,10 +93,10 @@ if (empty($id_seguradora)) {
                 </div>
                 <div class="form-group col-sm-4">
                     <?php $agora = date('d/m/Y'); ?>
-                    <input class="oculto" type="text" class="form-control" id="data_create_seg" value='<?= $agora; ?>' name="data_create_seg" placeholder="">
+                    <input type="text" class="form-control" id="data_create_seg" value='<?= $agora; ?>' name="data_create_seg" placeholder="">
                 </div>
-                <div class="form-group col-sm-4 oculto">
-                    <input type="text" class=" form-control" id="usuario_create_seg" value="<?= $_SESSION['email_user'] ?>" name="usuario_create_seg" placeholder="Digite o usuário">
+                <div class="form-group col-sm-4">
+                    <input type="text" class=" form-control" id="usuario_create_seg" value="<?= $_SESSION['login_user'] ?>" name="usuario_create_seg" placeholder="Digite o usuário">
                 </div>
                 <div class="form-group col-sm-4">
                     <input type="text" class="form-control" id="fk_usuario_seg" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_seg" placeholder="Digite o usuário">

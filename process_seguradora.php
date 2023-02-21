@@ -2,14 +2,18 @@
 
 require_once("globals.php");
 require_once("db.php");
+
 require_once("models/seguradora.php");
-require_once("models/message.php");
-require_once("dao/usuarioDao.php");
 require_once("dao/seguradoraDao.php");
+
+require_once("models/usuario.php");
+require_once("dao/usuarioDao.php");
+
+require_once("models/message.php");
 
 $message = new Message($BASE_URL);
 $userDao = new UserDAO($conn, $BASE_URL);
-$seguradoraDao = new seguradoraDAO($conn, $BASE_URL);
+$seguradora = new seguradoraDAO($conn, $BASE_URL);
 
 // Resgata o tipo do formulário
 $type = filter_input(INPUT_POST, "type");
@@ -22,11 +26,11 @@ if ($type === "create") {
     $seguradora_seg = filter_input(INPUT_POST, "seguradora_seg");
     $endereco_seg = filter_input(INPUT_POST, "endereco_seg");
     $email01_seg = filter_input(INPUT_POST, "email01_seg");
+    $email02_seg = filter_input(INPUT_POST, "email02_seg");
     $cidade_seg = filter_input(INPUT_POST, "cidade_seg");
     $cnpj_seg = filter_input(INPUT_POST, "cnpj_seg");
     $telefone01_seg = filter_input(INPUT_POST, "telefone01_seg");
     $telefone02_seg = filter_input(INPUT_POST, "telefone02_seg");
-    $email02_seg = filter_input(INPUT_POST, "email02_seg");
     $numero_seg = filter_input(INPUT_POST, "numero_seg");
     $bairro_seg = filter_input(INPUT_POST, "bairro_seg");
     $data_create_seg = filter_input(INPUT_POST, "data_create_seg");
@@ -40,14 +44,13 @@ if ($type === "create") {
         $seguradora->seguradora_seg = $seguradora_seg;
         $seguradora->endereco_seg = $endereco_seg;
         $seguradora->bairro_seg = $bairro_seg;
-        $seguradora->email02_seg = $email02_seg;
         $seguradora->email01_seg = $email01_seg;
+        $seguradora->email02_seg = $email02_seg;
         $seguradora->cidade_seg = $cidade_seg;
         $seguradora->cnpj_seg = $cnpj_seg;
         $seguradora->telefone01_seg = $telefone01_seg;
         $seguradora->telefone02_seg = $telefone02_seg;
         $seguradora->numero_seg = $numero_seg;
-        $seguradora->bairro_seg = $bairro_seg;
         $seguradora->data_create_seg = $data_create_seg;
         $seguradora->usuario_create_seg = $usuario_create_seg;
 
@@ -89,9 +92,9 @@ if ($type === "create") {
     $seguradoraData->telefone02_seg = $telefone02_seg;
     $seguradoraData->numero_seg = $numero_seg;
     $seguradoraData->bairro_seg = $bairro_seg;
-    $seguradora->data_create_seg = $data_create_seg;
-    $seguradora->fk_usuario_seg = $fk_usuario_seg;
-    $seguradora->usuario_create_seg = $usuario_create_seg;
+    $seguradoraData->data_create_seg = $data_create_seg;
+    $seguradoraData->fk_usuario_seg = $fk_usuario_seg;
+    $seguradoraData->usuario_create_seg = $usuario_create_seg;
 
 
     $seguradoraDao->update($seguradoraData);
