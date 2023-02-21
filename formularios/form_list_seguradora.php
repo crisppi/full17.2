@@ -47,7 +47,6 @@
 
     <!--tabela evento-->
     <div class="container py-2">
-
         <div class="row" style="background-color: #d3d3d3">
             <form class="formulario" id="form_pesquisa" method="GET">
                 <div class="form-group row">
@@ -72,40 +71,41 @@
                         <label>Classificar</label>
                         <select class="form-control mb-3" id="ordenar" name="ordenar">
                             <option value="">Classificar por</option>
-                            <option value="id_internacao" <?= $ordenar == 'id_internacao' ? 'selected' : null ?>>Internação</option>
-                            <option value="nome_pac" <?= $ordenar == 'nome_pac' ? 'selected' : null ?>>Paciente</option>
-                            <option value="nome_hosp" <?= $ordenar == 'nome_hosp' ? 'selected' : null ?>>Hospital</option>
+                            <option value="id_seguradora" <?= $ordenar == 'id_seguradora' ? 'selected' : null ?>>Id Seguradora</option>
+                            <option value="seguradora_seg" <?= $ordenar == 'seguradora_seg' ? 'selected' : null ?>>Seguradora</option>
                         </select>
                     </div>
-                    <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
-                        <button type="submit" class="btn btn-primary mb-1">Buscar</button>
-                    </div>
                 </div>
-            </form>
+                <div class="form-group col-sm-1" style="margin:0px 0px 10px 5px">
+                    <button type="submit" class="btn btn-primary mb-1">Buscar</button>
+                </div>
+        </div>
+        </form>
 
-            <?php
+        <?php
 
-            // PREENCHIMENTO DO FORMULARIO COM QUERY
+        // PREENCHIMENTO DO FORMULARIO COM QUERY
 
-            $query = $seguradora->selectAllSeguradora($where, $order, $obLimite);
+        $query = $seguradora->selectAllSeguradora($where, $order, $obLimite);
 
-            // GETS 
-            unset($_GET['pag']);
-            unset($_GET['pg']);
-            $gets = http_build_query($_GET);
+        // GETS 
+        unset($_GET['pag']);
+        unset($_GET['pg']);
+        $gets = http_build_query($_GET);
 
-            // PAGINACAO
-            $paginacao = '';
-            $paginas = $obPagination->getPages();
+        // PAGINACAO
+        $paginacao = '';
+        $paginas = $obPagination->getPages();
 
-            foreach ($paginas as $pagina) {
-                $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
-                $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pg'] . '&' . $gets . '"> 
+        foreach ($paginas as $pagina) {
+            $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
+            $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pg'] . '&' . $gets . '"> 
                 <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
                 <li class="page-item"></a>';
-            };
-            ?>
-        </div>
+        };
+        ?>
+    </div>
+    <div class="container">
         <div>
             <h4 class="page-title">Relação de Seguradoras</h4>
         </div>
@@ -164,12 +164,10 @@
             <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
             <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
         </div>
-    </div>
-
-
-    <div>
-        <hr>
-        <a class="btn btn-success styled" style="margin-left:120px" href="cad_seguradora.php">Nova seguradora</a>
+        <div>
+            <hr>
+            <a class="btn btn-success styled" style="margin-left:120px" href="cad_seguradora.php">Nova seguradora</a>
+        </div>
     </div>
 </body>
 

@@ -13,7 +13,7 @@ require_once("models/message.php");
 
 $message = new Message($BASE_URL);
 $userDao = new UserDAO($conn, $BASE_URL);
-$seguradora = new seguradoraDAO($conn, $BASE_URL);
+$seguradoraDao = new seguradoraDAO($conn, $BASE_URL);
 
 // Resgata o tipo do formulário
 $type = filter_input(INPUT_POST, "type");
@@ -25,6 +25,7 @@ if ($type === "create") {
     // Receber os dados dos inputs
     $seguradora_seg = filter_input(INPUT_POST, "seguradora_seg");
     $endereco_seg = filter_input(INPUT_POST, "endereco_seg");
+    $bairro_seg = filter_input(INPUT_POST, "bairro_seg");
     $email01_seg = filter_input(INPUT_POST, "email01_seg");
     $email02_seg = filter_input(INPUT_POST, "email02_seg");
     $cidade_seg = filter_input(INPUT_POST, "cidade_seg");
@@ -32,7 +33,6 @@ if ($type === "create") {
     $telefone01_seg = filter_input(INPUT_POST, "telefone01_seg");
     $telefone02_seg = filter_input(INPUT_POST, "telefone02_seg");
     $numero_seg = filter_input(INPUT_POST, "numero_seg");
-    $bairro_seg = filter_input(INPUT_POST, "bairro_seg");
     $data_create_seg = filter_input(INPUT_POST, "data_create_seg");
     $usuario_create_seg = filter_input(INPUT_POST, "usuario_create_seg");
 
@@ -53,7 +53,6 @@ if ($type === "create") {
         $seguradora->numero_seg = $numero_seg;
         $seguradora->data_create_seg = $data_create_seg;
         $seguradora->usuario_create_seg = $usuario_create_seg;
-
 
         $seguradoraDao->create($seguradora);
     } else {
@@ -95,7 +94,6 @@ if ($type === "create") {
     $seguradoraData->data_create_seg = $data_create_seg;
     $seguradoraData->fk_usuario_seg = $fk_usuario_seg;
     $seguradoraData->usuario_create_seg = $usuario_create_seg;
-
 
     $seguradoraDao->update($seguradoraData);
 

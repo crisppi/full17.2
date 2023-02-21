@@ -72,10 +72,8 @@
                             <option value="nome_pac" <?= $ordenar == 'nome_pac' ? 'selected' : null ?>>Paciente</option>
                         </select>
                     </div>
-
-
-                    <div class="form-group col-sm-1" style="margin:0px 30px 10px 30px">
-                        <button style="margin:10px; font-weight:600" type="submit" class="btn-sm btn-light">Pesquisar</button>
+                    <div class="form-group col-sm-1" style="padding:0px 50px 30px 50px">
+                        <button style="margin:10px; font-weight:400" type="submit" class="btn-sm btn-primary">Pesquisar</button>
                     </div>
                 </div>
             </form>

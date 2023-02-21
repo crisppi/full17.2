@@ -201,6 +201,7 @@ class seguradoraDAO implements seguradoraDAOInterface
         $stmt->bindParam(":numero_seg", $seguradora->numero_seg);
         $stmt->bindParam(":cidade_seg", $seguradora->cidade_seg);
         $stmt->bindParam(":data_create_seg", $seguradora->data_create_seg);
+        $stmt->bindParam(":fk_usuario_seg", $seguradora->fk_usuario_seg);
         $stmt->bindParam(":usuario_create_seg", $seguradora->usuario_create_seg);
 
 
