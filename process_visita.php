@@ -4,6 +4,7 @@ require_once("globals.php");
 require_once("db.php");
 require_once("models/visita.php");
 require_once("models/message.php");
+require_once("models/usuario.php");
 require_once("dao/usuarioDao.php");
 require_once("dao/visitaDao.php");
 
@@ -23,6 +24,12 @@ if ($type === "create") {
     $fk_internacao_vis = filter_input(INPUT_POST, "fk_internacao_vis");
     $rel_visita_vis = filter_input(INPUT_POST, "rel_visita_vis");
     $acoes_int_vis = filter_input(INPUT_POST, "acoes_int_vis");
+    $data_visita_vis = filter_input(INPUT_POST, "data_visita_vis");
+    $fk_usuario_vis = filter_input(INPUT_POST, "fk_usuario_vis");
+    $visita_enf_vis = filter_input(INPUT_POST, "visita_enf_vis");
+    $visita_med_vis = filter_input(INPUT_POST, "visita_med_vis");
+    $visita_auditor_prof_enf = filter_input(INPUT_POST, "visita_auditor_prof_enf");
+    $visita_auditor_prof_med = filter_input(INPUT_POST, "visita_auditor_prof_med");
 
     $visita = new visita();
 
@@ -33,6 +40,12 @@ if ($type === "create") {
         $visita->rel_visita_vis = $rel_visita_vis;
         $visita->acoes_int_vis = $acoes_int_vis;
         $visita->usuario_create = $usuario_create;
+        $visita->data_visita_vis = $data_visita_vis;
+        $visita->fk_usuario_vis = $fk_usuario_vis;
+        $visita->visita_enf_vis = $visita_enf_vis;
+        $visita->visita_med_vis = $visita_med_vis;
+        $visita->visita_auditor_prof_enf = $visita_auditor_prof_enf;
+        $visita->visita_auditor_prof_med = $visita_auditor_prof_med;
 
         $visitaDao->create($visita);
     } else {

@@ -28,6 +28,12 @@ class visitaDAO implements visitaDAOInterface
         $visita->rel_visita_vis = $data["rel_visita_vis"];
         $visita->acoes_int_vis = $data["acoes_int_vis"];
         $visita->usuario_create = $data["usuario_create"];
+        $visita->data_visita_vis = $data["data_visita_vis"];
+        $visita->visita_auditor_prof_med = $data["visita_auditor_prof_med"];
+        $visita->visita_auditor_prof_enf = $data["visita_auditor_prof_enf"];
+        $visita->visita_med_vis = $data["visita_med_vis"];
+        $visita->visita_enf_vis = $data["usuario_create"];
+        $visita->fk_usuario_vis = $data["fk_usuario_vis"];
 
         return $visita;
     }
@@ -148,16 +154,41 @@ class visitaDAO implements visitaDAOInterface
     {
 
         $stmt = $this->conn->prepare("INSERT INTO tb_visita (
-        fk_internacao_vis, rel_visita_vis, acoes_int_vis, usuario_create
+        fk_internacao_vis, 
+        rel_visita_vis, 
+        acoes_int_vis, 
+        usuario_create,
+        visita_auditor_prof_med,
+        visita_auditor_prof_enf,
+        visita_med_vis,
+        visita_enf_vis,
+        fk_usuario_vis,
+        data_visita_vis
 
       ) VALUES (
-        :fk_internacao_vis, :rel_visita_vis, :acoes_int_vis, :usuario_create
+        :fk_internacao_vis, 
+        :rel_visita_vis, 
+        :acoes_int_vis, 
+        :usuario_create,
+        :visita_auditor_prof_med,
+        :visita_auditor_prof_enf,
+        :visita_med_vis,
+        :visita_enf_vis,
+        :fk_usuario_vis,
+        :data_visita_vis
+
      )");
 
         $stmt->bindParam(":fk_internacao_vis", $visita->fk_internacao_vis);
         $stmt->bindParam(":rel_visita_vis", $visita->rel_visita_vis);
         $stmt->bindParam(":acoes_int_vis", $visita->acoes_int_vis);
         $stmt->bindParam(":usuario_create", $visita->usuario_create);
+        $stmt->bindParam(":visita_auditor_prof_med", $visita->visita_auditor_prof_med);
+        $stmt->bindParam(":visita_auditor_prof_enf", $visita->visita_auditor_prof_enf);
+        $stmt->bindParam(":visita_med_vis", $visita->visita_med_vis);
+        $stmt->bindParam(":visita_enf_vis", $visita->visita_enf_vis);
+        $stmt->bindParam(":fk_usuario_vis", $visita->fk_usuario_vis);
+        $stmt->bindParam(":data_visita_vis", $visita->data_visita_vis);
 
         $stmt->execute();
 

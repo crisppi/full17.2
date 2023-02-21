@@ -11,7 +11,13 @@ class visita
   public $rel_visita_vis;
   public $acoes_int_vis;
   public $fk_internacao_vis;
+  public $visita_no_vis;
+  public $visita_auditor_prof_med;
+  public $visita_auditor_prof_enf;
+  public $visita_med_vis;
+  public $visita_enf_vis;
   public $fk_usuario_vis;
+  public $data_visita_vis;
 }
 
 interface visitaDAOInterface
