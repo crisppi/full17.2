@@ -48,7 +48,7 @@
                 <input type="hidden" class="form-control" value="s" id="primeira_vis_int" name="primeira_vis_int">
             </div>
             <div class="form-group col-sm-1">
-                <input type="hidden" class="form-control" value="0" id="visita_no_int" name="visita_no_int">
+                <input type="hidden" class="form-control" value="0" id="visita_no_vis" name="visita_no_vis">
             </div>
             <div class="form-group col-sm-1">
                 <input type="hidden" class="form-control" value="n" id="conta_finalizada_int" name="conta_finalizada_int">
@@ -62,6 +62,16 @@
             <div class="form-group col-sm-1">
                 <input type="text" class="form-control" value="<?= ($_SESSION['id_usuario']) ?>" id="fk_usuario_vis" name="fk_usuario_vis">
             </div>
+            <div class="form-group col-sm-1">
+                <label>medico</label>
+
+                <input type="text" class="form-control" value="<?= ($_SESSION['cargo']) ?>" id="fk_usuario_vis" name="fk_usuario_vis">
+            </div>
+            <div class="form-group col-sm-1">
+                <label>login</label>
+
+                <input type="text" class="form-control" value="<?= ($_SESSION['id_usuario']) ?>" id="fk_usuario_vis" name="fk_usuario_vis">
+            </div>
             <div class="form-group col-sm-2">
                 <label for="data_visita_vis">Data Visita</label>
                 <?php $agora = date('d/m/Y'); ?>
@@ -73,9 +83,9 @@
                                                                                                                 } else {
                                                                                                                     echo 'n';
                                                                                                                 }; ?>" value="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
-                                                                                                                                    's';
+                                                                                                                                    echo 's';
                                                                                                                                 } else {
-                                                                                                                                    'n';
+                                                                                                                                    echo 'n';
                                                                                                                                 }; ?>">
             </div>
             <div class="form-group col-sm-1">
@@ -84,23 +94,26 @@
                                                                                                                 } else {
                                                                                                                     echo 'n';
                                                                                                                 }; ?>" value="<?php if (($_SESSION['cargo']) == 'Med_auditor') {
-                                                                                                                                    's';
+                                                                                                                                    echo 's';
                                                                                                                                 } else {
-                                                                                                                                    'n';
+                                                                                                                                    echo 'n';
                                                                                                                                 }; ?>">
             </div>
             <div class="form-group col-sm-1">
                 <input type="text" class="form-control" id="visita_auditor_prof_enf" name="visita_auditor_prof_enf" placeholder="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
                                                                                                                                         echo ($_SESSION['login_user']);
                                                                                                                                     }; ?>" value="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
-                                                                                                                                                        ($_SESSION['login_user']);
+                                                                                                                                                        echo ($_SESSION['login_user']);
                                                                                                                                                     }; ?>">
             </div>
+            <?php if (($_SESSION['cargo']) === 'Med_auditor') {
+            }; ?>
             <div class="form-group col-sm-1">
-                <input type="text" class="form-control" id="visita_auditor_prof_med" name="visita_auditor_prof_med" placeholder="<?php if (($_SESSION['cargo']) === 'Med_auditor') {
+                <label>medico</label>
+                <input type="text" class="form-control" id="visita_auditor_prof_med" name="visita_auditor_prof_med" placeholder="<?php if (($_SESSION['cargo']) == 'Med_auditor') {
                                                                                                                                         echo ($_SESSION['login_user']);
-                                                                                                                                    }; ?>" value="<?php if (($_SESSION['cargo']) == 'Med_auditor') {
-                                                                                                                                                        ($_SESSION['login_user']);
+                                                                                                                                    }; ?>" value="<?php if (($_SESSION['cargo']) === 'Med_auditor') {
+                                                                                                                                                        echo ($_SESSION['login_user']);
                                                                                                                                                     }; ?>">
             </div>
 

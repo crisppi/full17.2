@@ -3,7 +3,7 @@
     <h4 class="page-title">Cadastrar dados de prorrogação</h4>
     <p class="page-description">Adicione informações sobre as diárias da prorrogação</p>
     <form class="formulario" action="<?= $BASE_URL ?>process_prorrogacao.php" id="add-prorrogacao-form" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="type" value="create-vis">
+        <input type="hidden" name="type" value="create">
         <div class="form-group col-sm-1">
             <?php
             $a = ($prorrogacaoIdMax[0]);

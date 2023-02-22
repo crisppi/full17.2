@@ -29,6 +29,7 @@ class visitaDAO implements visitaDAOInterface
         $visita->acoes_int_vis = $data["acoes_int_vis"];
         $visita->usuario_create = $data["usuario_create"];
         $visita->data_visita_vis = $data["data_visita_vis"];
+        $visita->visita_no_vis = $data["visita_no_vis"];
         $visita->visita_auditor_prof_med = $data["visita_auditor_prof_med"];
         $visita->visita_auditor_prof_enf = $data["visita_auditor_prof_enf"];
         $visita->visita_med_vis = $data["visita_med_vis"];
@@ -162,6 +163,7 @@ class visitaDAO implements visitaDAOInterface
         visita_auditor_prof_enf,
         visita_med_vis,
         visita_enf_vis,
+        visita_no_vis,
         fk_usuario_vis,
         data_visita_vis
 
@@ -174,6 +176,7 @@ class visitaDAO implements visitaDAOInterface
         :visita_auditor_prof_enf,
         :visita_med_vis,
         :visita_enf_vis,
+        :visita_no_vis,
         :fk_usuario_vis,
         :data_visita_vis
 
@@ -187,6 +190,7 @@ class visitaDAO implements visitaDAOInterface
         $stmt->bindParam(":visita_auditor_prof_enf", $visita->visita_auditor_prof_enf);
         $stmt->bindParam(":visita_med_vis", $visita->visita_med_vis);
         $stmt->bindParam(":visita_enf_vis", $visita->visita_enf_vis);
+        $stmt->bindParam(":visita_no_vis", $visita->visita_no_vis);
         $stmt->bindParam(":fk_usuario_vis", $visita->fk_usuario_vis);
         $stmt->bindParam(":data_visita_vis", $visita->data_visita_vis);
 
