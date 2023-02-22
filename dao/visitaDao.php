@@ -193,7 +193,7 @@ class visitaDAO implements visitaDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por adicionar visita
-        $this->message->setMessage("visita adicionado com sucesso!", "success", "list_visita.php");
+        $this->message->setMessage("visita adicionado com sucesso!", "success", "list_internacao.php");
     }
 
     public function update($visita)
