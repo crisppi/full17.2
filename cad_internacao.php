@@ -57,8 +57,6 @@ $findMaxProInt = $prorrogacao->findMaxProInt();
 $negociacao = new negociacaoDAO($conn, $BASE_URL);
 $negociacaoLast = new negociacaoDAO($conn, $BASE_URL);
 
-
-
 ?>
 <div id="main-container" class="container">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
