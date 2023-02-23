@@ -6,11 +6,11 @@
         <input type="hidden" name="type" value="create">
         <div class="form-group row">
             <?php
-            $a = ($findMaxVis[0]);
+            $a = ($prorrogacaoIdMax[0]); // pegar dado da ultima visita
             $ultimoReg = ($a["ultimoReg"]);
             ?>
             <div>
-                <input type="text" class="form-control" id="fk_visita_ges" name="fk_visita_ges" value="<?= ($ultimoReg) ?> ">
+                <input type="hidden" class="form-control" id="fk_visita_ges" name="fk_visita_ges" value="<?= ($ultimoReg) ?> ">
             </div>
             <div>
                 <input type="hidden" class="form-control" id="fk_internacao_ges" name="fk_internacao_ges" value="<?= ($id_internacao) ?> ">

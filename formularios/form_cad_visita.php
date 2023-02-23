@@ -60,47 +60,44 @@
                 <input type="hidden" class="form-control" value="s" id="internacao_ativa_int" name="internacao_ativa_int">
             </div>
             <div class="form-group col-sm-1">
-                <input type="text" class="form-control" value="<?= ($_SESSION['id_usuario']) ?>" id="fk_usuario_vis" name="fk_usuario_vis">
+                <input type="hidden" class="form-control" value="<?= ($_SESSION['id_usuario']) ?>" id="fk_usuario_vis" name="fk_usuario_vis">
             </div>
             <div class="form-group col-sm-1">
-                <label>medico</label>
 
-                <input type="text" class="form-control" value="<?= ($_SESSION['cargo']) ?>" id="fk_usuario_vis" name="fk_usuario_vis">
+                <input type="hidden" class="form-control" value="<?= ($_SESSION['cargo']) ?>" id="fk_usuario_vis" name="fk_usuario_vis">
             </div>
             <div class="form-group col-sm-1">
-                <label>login</label>
 
-                <input type="text" class="form-control" value="<?= ($_SESSION['id_usuario']) ?>" id="fk_usuario_vis" name="fk_usuario_vis">
+                <input type="hidden" class="form-control" value="<?= ($_SESSION['id_usuario']) ?>" id="fk_usuario_vis" name="fk_usuario_vis">
             </div>
             <div class="form-group col-sm-2">
-                <label for="data_visita_vis">Data Visita</label>
                 <?php $agora = date('d/m/Y'); ?>
-                <input type="text" value='<?= $agora; ?>' class="form-control" id="data_visita_vis" name="data_visita_vis">
+                <input type="hidden" value='<?= $agora; ?>' class="form-control" id="data_visita_vis" name="data_visita_vis">
             </div>
             <div class="form-group col-sm-1">
-                <input type="text" class="form-control" id="visita_enf_vis" name="visita_enf_vis" placeholder="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
-                                                                                                                    echo 's';
-                                                                                                                } else {
-                                                                                                                    echo 'n';
-                                                                                                                }; ?>" value="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
-                                                                                                                                    echo 's';
-                                                                                                                                } else {
-                                                                                                                                    echo 'n';
-                                                                                                                                }; ?>">
+                <input type="hidden" class="form-control" id="visita_enf_vis" name="visita_enf_vis" placeholder="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
+                                                                                                                        echo 's';
+                                                                                                                    } else {
+                                                                                                                        echo 'n';
+                                                                                                                    }; ?>" value="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
+                                                                                                                                        echo 's';
+                                                                                                                                    } else {
+                                                                                                                                        echo 'n';
+                                                                                                                                    }; ?>">
             </div>
             <div class="form-group col-sm-1">
-                <input type="text" class="form-control" id="visita_med_vis" name="visita_med_vis" placeholder="<?php if (($_SESSION['cargo']) === 'Med_auditor') {
-                                                                                                                    echo 's';
-                                                                                                                } else {
-                                                                                                                    echo 'n';
-                                                                                                                }; ?>" value="<?php if (($_SESSION['cargo']) == 'Med_auditor') {
-                                                                                                                                    echo 's';
-                                                                                                                                } else {
-                                                                                                                                    echo 'n';
-                                                                                                                                }; ?>">
+                <input type="hidden" class="form-control" id="visita_med_vis" name="visita_med_vis" placeholder="<?php if (($_SESSION['cargo']) === 'Med_auditor') {
+                                                                                                                        echo 's';
+                                                                                                                    } else {
+                                                                                                                        echo 'n';
+                                                                                                                    }; ?>" value="<?php if (($_SESSION['cargo']) == 'Med_auditor') {
+                                                                                                                                        echo 's';
+                                                                                                                                    } else {
+                                                                                                                                        echo 'n';
+                                                                                                                                    }; ?>">
             </div>
             <div class="form-group col-sm-1">
-                <input type="text" class="form-control" id="visita_auditor_prof_enf" name="visita_auditor_prof_enf" placeholder="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
+                <input type="hidden" class="form-control" id="visita_auditor_prof_enf" name="visita_auditor_prof_enf" placeholder="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
                                                                                                                                         echo ($_SESSION['login_user']);
                                                                                                                                     }; ?>" value="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
                                                                                                                                                         echo ($_SESSION['login_user']);
@@ -109,8 +106,7 @@
             <?php if (($_SESSION['cargo']) === 'Med_auditor') {
             }; ?>
             <div class="form-group col-sm-1">
-                <label>medico</label>
-                <input type="text" class="form-control" id="visita_auditor_prof_med" name="visita_auditor_prof_med" placeholder="<?php if (($_SESSION['cargo']) == 'Med_auditor') {
+                <input type="hidden" class="form-control" id="visita_auditor_prof_med" name="visita_auditor_prof_med" placeholder="<?php if (($_SESSION['cargo']) == 'Med_auditor') {
                                                                                                                                         echo ($_SESSION['login_user']);
                                                                                                                                     }; ?>" value="<?php if (($_SESSION['cargo']) === 'Med_auditor') {
                                                                                                                                                         echo ($_SESSION['login_user']);

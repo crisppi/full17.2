@@ -6,16 +6,13 @@
         <input type="hidden" name="type" value="create">
         <div class="form-group col-sm-1">
             <?php
-            $a = ($prorrogacaoIdMax[0]);
+            $a = ($prorrogacaoIdMax[0]); // pegar dado da ultima visita
             $prorrogacaoIdMax = ($a["ultimoReg"]);
-
             ?>
-            <input type="text" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= $prorrogacaoIdMax ?>" placeholder="Relatório da auditoria">
+            <input type="hidden" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= $prorrogacaoIdMax ?>" placeholder="Relatório da auditoria">
         </div>
         <div>
-            <label class="control-label" for="acomod1_pror">id_int</label>
-
-            <input type="text" class="form-control" id="fk_internacao_uti" name="fk_internacao_uti" value="<?= ($id_internacao) ?> " placeholder="Relatório da auditoria">
+            <input type="hidden" class="form-control" id="fk_internacao_uti" name="fk_internacao_uti" value="<?= ($id_internacao) ?> " placeholder="Relatório da auditoria">
         </div>
         <!-- PRORROGACAO 1 -->
         <div class="form-group row">

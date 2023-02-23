@@ -1,13 +1,13 @@
 <div id="container-uti" class="container" style="display:none">
     <br>
     <h4 class="page-title">Cadastrar dados UTI</h4>
-    <p class="page-description">Adicione informações sobre a gestão que foi identificada</p>
+    <p class="page-description">Adicione informações sobre a UTI</p>
     <form class="formulario" action="<?= $BASE_URL ?>process_uti.php" id="add-acomodacao-form" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="type" value="create">
 
         <div class="form-group row">
             <?php
-            $a = ($utiIdMax[0]);
+            $a = ($prorrogacaoIdMax[0]); // pegar dado da ultima visita
             $ultimoReg = ($a["ultimoReg"]);
             ?>
 

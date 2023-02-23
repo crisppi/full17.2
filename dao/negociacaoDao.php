@@ -476,7 +476,19 @@ class negociacaoDAO implements negociacaoDAOInterface
 
         return $negociacao;
     }
+    public function findMaxVis()
+    {
 
+        $gestao = [];
+
+        $stmt = $this->conn->query("SELECT max(id_visita) as ultimoReg from tb_visita");
+
+        $stmt->execute();
+
+        $gestaoIdMaxVis = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $gestaoIdMaxVis;
+    }
     public function Qtdnegociacao($where = null, $order = null, $limite = null)
     {
         $negociacao = [];

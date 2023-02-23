@@ -218,7 +218,7 @@ class utiDAO implements utiDAOInterface
         $query->execute();
 
         // Mensagem de sucesso por adicionar filme
-        $this->message->setMessage("uti adicionado com sucesso!", "success", "cad_internacao.php");
+        $this->message->setMessage("uti adicionado com sucesso!", "success", "cad_internacao_niveis.php");
     }
 
     public function update($uti) //ainda nao corrigido
