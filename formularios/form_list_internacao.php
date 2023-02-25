@@ -194,13 +194,16 @@
                             <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:orange; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>
 
                             <?php if ($pesqInternado == "s") { ?>
-                                <a href="<?= $BASE_URL ?>cad_visita.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:black; font-weigth:bold; margin-left:5px;margin-right:5px" name="type" value="visita" class="aparecer-acoes bi bi-file-text"></i></a>
+                                <a href="<?= $BASE_URL ?>cad_visita.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:black; text-decoration: none; font-size: 12px; font-weigth:bold; margin-left:5px;margin-right:5px" name="type" value="visita" class="aparecer-acoes bi bi-file-text"> Visita</i></a>
                             <?php }; ?>
-                            <form class="d-inline-block delete-form" action="edit_alta.php" method="get">
-                                <input type="hidden" name="type" value="alta">
-                                <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
-                                <button type="hidden" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block bi bi-door-open"></i></button>
-                            </form>
+
+                            <?php if ($pesqInternado == "s") { ?><form class="d-inline-block delete-form" action="edit_alta.php" method="get">
+                                    <input type="hidden" name="type" value="alta">
+                                    <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
+                                    <button type="hidden" style="margin-left:3px; font-size: 12px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block bi bi-door-open"> ALTA</i></button>
+                                </form>
+                            <?php }; ?>
+
                             <form class="d-inline-block delete-form" action="del_internacao.php" method="POST">
                                 <input type="hidden" name="type" value="delete">
                                 <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">

@@ -258,7 +258,7 @@ class utiDAO implements utiDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por editar uti
-        $this->message->setMessage("uti atualizado com sucesso!", "success", "list_uti.php");
+        $this->message->setMessage("uti atualizado com sucesso!", "success", "list_internacao_uti.php");
     }
 
 
@@ -351,7 +351,7 @@ class utiDAO implements utiDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por editar uti
-        $this->message->setMessage("uti atualizado com sucesso!", "success", "list_uti.php");
+        $this->message->setMessage("uti atualizado com sucesso!", "success", "list_internacao_uti.php");
     }
     // METODO PARA DAR ALTA DA UTI
     public function findAltaUpdate($internadosUTI) //ainda nao corrigido
@@ -373,7 +373,7 @@ class utiDAO implements utiDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por editar uti
-        $this->message->setMessage("uti atualizado com sucesso!", "success", "list_uti.php");
+        $this->message->setMessage("uti atualizado com sucesso!", "success", "list_internacao_uti.php");
     }
 
     public function destroy($id_uti)
@@ -385,7 +385,7 @@ class utiDAO implements utiDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por remover filme
-        $this->message->setMessage("uti removido com sucesso!", "success", "list_uti.php");
+        $this->message->setMessage("uti removido com sucesso!", "success", "list_internacao_uti.php");
     }
 
 
@@ -468,8 +468,11 @@ class utiDAO implements utiDAOInterface
         $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
 
 
-        $stmt = $this->conn->query('SELECT ac.id_internacao, COUNT(id_internacao) as qtd, ac.fk_hospital_int, ho.nome_hosp, ho.id_hospital FROM tb_internacao as ac
+        $stmt = $this->conn->query('SELECT ac.id_internacao, COUNT(id_uti) as qtd, ut.fk_internacao_uti, ac.fk_hospital_int, ho.nome_hosp, ho.id_hospital FROM tb_internacao as ac
         
+        inner join tb_uti as ut on
+        ac.id_internacao = ut.fk_internacao_uti
+
         iNNER JOIN tb_hospital as ho On  
         ac.fk_hospital_int = ho.id_hospital ' . $where . ' ' . $order . ' ' . $limit);
 

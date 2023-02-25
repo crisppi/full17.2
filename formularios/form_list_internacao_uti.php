@@ -123,9 +123,8 @@
 
     // QUANTIDADE InternacaoS
     $qtdIntItens1 = $QtdTotalIntUTI->QtdInternacaoUTI($where);
-    $qtdIntItens = $QtdTotalInt->findTotal();
-
-    $qtdIntItens = ($qtdIntItens1['0']);
+    // $qtdIntItens = $QtdTotalInt->findTotal();
+    $qtdIntItens = ($qtdIntItens1['qtd']);
     // PAGINACAO
     $obPagination = new pagination($qtdIntItens, $_GET['pag'] ?? 1, $limite_pag);
     $obLimite = $obPagination->getLimit();

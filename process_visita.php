@@ -18,10 +18,6 @@ $visitaDao = new visitaDAO($conn, $BASE_URL);
 $type = filter_input(INPUT_POST, "type");
 
 // Resgata dados do usuário
-// print_r($_SESSION);
-// echo "<hr>";
-// print_r($_POST);
-// exit;
 if ($type === "create") {
 
     // Receber os dados dos inputs
