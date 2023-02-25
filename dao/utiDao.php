@@ -459,4 +459,24 @@ class utiDAO implements utiDAOInterface
 
         return $findUTIInternacao;
     }
+    public function QtdInternacaoUTI($where = null, $order = null, $limit = null)
+    {
+        $internacao = [];
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+
+
+        $stmt = $this->conn->query('SELECT ac.id_internacao, COUNT(id_internacao) as qtd, ac.fk_hospital_int, ho.nome_hosp, ho.id_hospital FROM tb_internacao as ac
+        
+        iNNER JOIN tb_hospital as ho On  
+        ac.fk_hospital_int = ho.id_hospital ' . $where . ' ' . $order . ' ' . $limit);
+
+        $stmt->execute();
+
+        $QtdTotalInt = $stmt->fetch();
+
+        return $QtdTotalInt;
+    }
 }

@@ -63,7 +63,7 @@ if ($type === "create") {
         $utiDao->create($uti);
     } else {
 
-        $message->setMessage("Você precisa adicionar pelo menos: utiNome do uti!", "error", "back");
+        $message->setMessage("Você precisa adicionar pelo menos: Uti!", "error", "back");
     }
 
     include_once('cad_niveis_internacao.php');

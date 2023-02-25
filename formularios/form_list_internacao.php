@@ -39,7 +39,7 @@
             <form class="formulario visible" action="" id="select-internacao-form" method="GET">
                 <h6 style="margin-left: 30px; padding-top:10px" class="page-title">Pesquisa internações</h6>
                 <?php $pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
-                $pesqInternado = filter_input(INPUT_GET, 'pesqInternado');
+                $pesqInternado = filter_input(INPUT_GET, 'pesqInternado') ?: "s";
                 $limite = filter_input(INPUT_GET, 'limite');
                 $pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
                 $ordenar = filter_input(INPUT_GET, 'ordenar');
@@ -96,14 +96,14 @@
     <?php
     //Instanciando a classe
     $QtdTotalInt = new internacaoDAO($conn, $BASE_URL);
-
-    // METODO DE BUSCA DE PAGINACAO
+    // METODO DE BUSCA DE PAGINACAO 
     $pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
-    $pesqInternado = filter_input(INPUT_GET, 'pesqInternado');
+    $pesqInternado = filter_input(INPUT_GET, 'pesqInternado') ?: "s";
     $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
     $pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
     $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+
     $condicoes = [
         strlen($pesquisa_nome) ? 'ho.nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
         strlen($pesquisa_pac) ? 'pa.nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
@@ -192,8 +192,10 @@
 
                         <td class="action">
                             <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:orange; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>
-                            <a href="<?= $BASE_URL ?>cad_visita.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:black; font-weigth:bold; margin-left:5px;margin-right:5px" name="type" value="visita" class="aparecer-acoes bi bi-file-text"></i></a>
 
+                            <?php if ($pesqInternado == "s") { ?>
+                                <a href="<?= $BASE_URL ?>cad_visita.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:black; font-weigth:bold; margin-left:5px;margin-right:5px" name="type" value="visita" class="aparecer-acoes bi bi-file-text"></i></a>
+                            <?php }; ?>
                             <form class="d-inline-block delete-form" action="edit_alta.php" method="get">
                                 <input type="hidden" name="type" value="alta">
                                 <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">

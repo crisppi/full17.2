@@ -100,7 +100,7 @@
     <!-- BASE DAS PESQUISAS -->
     <?php
     //Instanciando a classe
-    $QtdTotalInt = new internacaoDAO($conn, $BASE_URL);
+    $QtdTotalIntUTI = new utiDAO($conn, $BASE_URL);
 
     // METODO DE BUSCA DE PAGINACAO
     $pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
@@ -122,7 +122,7 @@
     $where = implode(' AND ', $condicoes);
 
     // QUANTIDADE InternacaoS
-    $qtdIntItens1 = $QtdTotalInt->QtdInternacao($where);
+    $qtdIntItens1 = $QtdTotalIntUTI->QtdInternacaoUTI($where);
     $qtdIntItens = $QtdTotalInt->findTotal();
 
     $qtdIntItens = ($qtdIntItens1['0']);
@@ -205,65 +205,15 @@
             echo "</div>";
             echo "<nav aria-label='Page navigation example'>";
             echo " <ul class='pagination'>";
-            echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
+            echo " <li class='page-item'><a class='page-link' href='list_internacao_uti.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
             <?= $paginacao ?>
-            <?php echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$qtdIntItens&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
+            <?php echo "<li class='page-item'><a class='page-link' href='list_internacao_uti.php?pg=$qtdIntItens&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
             echo " </ul>";
             echo "</nav>";
             echo "</div>"; ?>
             <hr>
         </div>
-        <!-- <?php
 
-                //modo cadastro
-                // $formData = "0";
-                // $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-                $total = $internacao->findTotal();
-
-                $totalcasos = $total['0'];
-                $reg = ($totalcasos['0']);
-
-                if ($formData !== "0") {
-                    $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
-                    //header("Location: index.php");
-                } else {
-                    echo "<p style='color: #f00;'>Erro: Usuário não cadastrado!</p>";
-                };
-
-                try {
-
-                    $query_Total = $conn->prepare($sql_Total);
-                    $query_Total->execute();
-                    $query_result = $query_Total->fetchAll(PDO::FETCH_ASSOC);
-
-                    # conta quantos registros tem no banco de dados
-                    $query_count = $query_Total->rowCount();
-
-                    # calcula o total de paginas a serem exibidas
-                    $totalcasos = ceil($reg / $limite_pag);
-                } catch (PDOexception $error_Total) {
-
-                    echo 'Erro ao retornar os Dados. ' . $error_Total->getMessage();
-                }
-                echo "<div style=margin-left:20px;>";
-                echo "<div style='color:blue; margin-left:20px;'>";
-                echo "</div>";
-                echo "<nav aria-label='Page navigation example'>";
-                echo " <ul class='pagination'>";
-                echo " <li class='page-item'><a class='page-link' href='list_internacao.php?pg=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>";
-                if ($qtdIntItens > 1 && $pg <= $qtdIntItens) {
-                    for ($i = 1; $i <= $qtdIntItens; $i++) {
-                        if ($i == $pg) {
-                            echo "<li class='page-item active'><a class='page-link' class='ativo'>" . $i . "</a></li>";
-                        } else {
-                            echo "<li class='page-item '><a class='page-link' href='list_internacao.php?pg=$i&" . $gets . "'>" . $i . "</a></li>";
-                        }
-                    }
-                }
-                echo "<li class='page-item'><a class='page-link' href='list_internacao.php?pg=$qtdIntItens&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
-                echo " </ul>";
-                echo "</nav>";
-                echo "</div>"; ?> -->
         <div>
 
             <a class="btn btn-success styled" style="margin-left:120px" href="cad_internacao.php">Nova internação</a>
