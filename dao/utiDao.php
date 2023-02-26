@@ -467,7 +467,6 @@ class utiDAO implements utiDAOInterface
         $order = strlen($order) ? 'ORDER BY ' . $order : '';
         $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
 
-
         $stmt = $this->conn->query('SELECT ac.id_internacao, COUNT(id_uti) as qtd, ut.fk_internacao_uti, ac.fk_hospital_int, ho.nome_hosp, ho.id_hospital FROM tb_internacao as ac
         
         inner join tb_uti as ut on
