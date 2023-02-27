@@ -137,19 +137,21 @@ if ($type === "create") {
 
     $internacaoDao->update($internacaoData);
 
-    include_once('cad_internacao_niveis.php');
-} else if ($type === "alta-uti") {
+    // include_once('cad_internacao_niveis.php');
 
-    // Receber os dados dos inputs
-    $id_uti = filter_input(INPUT_POST, "id_uti");
-    $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti");
-    $internado_uti = filter_input(INPUT_POST, "internado_uti");
+    if ($type === "alta-uti") {
 
-    $UTIData->id_uti = $id_uti;
-    $UTIData->data_alta_uti = $data_alta_uti;
-    $UTIData->internado_uti = $internado_uti;
+        // Receber os dados dos inputs
+        $id_uti = filter_input(INPUT_POST, "id_uti");
+        $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti");
+        $internado_uti = filter_input(INPUT_POST, "internado_uti");
 
-    $utiDao->findAltaUpdate($UTIData);
+        $UTIData->id_uti = $id_uti;
+        $UTIData->data_alta_uti = $data_alta_uti;
+        $UTIData->internado_uti = $internado_uti;
 
-    include_once('cad_internacao_niveis.php');
+        $utiDao->findAltaUpdate($UTIData);
+
+        include_once('cad_internacao_niveis.php');
+    }
 }
