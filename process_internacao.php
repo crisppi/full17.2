@@ -122,7 +122,7 @@ if ($type === "create") {
 
     // RECEBER DADOS DO INPUT PARA DARA ALTA DA UTI
     $alta_uti = filter_input(INPUT_POST, "alta_uti");
-    $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int");
+    $id_uti = filter_input(INPUT_POST, "id_uti");
     $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int");
     $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti") ?: null;
 
@@ -147,6 +147,7 @@ if ($type === "create") {
 
         include_once('list_internacao.php');
     }
+
     $internacaoDao->update($internacaoData);
 
     // include_once('cad_internacao_niveis.php');
