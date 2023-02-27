@@ -2,16 +2,24 @@
 require_once("globals.php");
 require_once("db.php");
 require_once("models/internacao.php");
+require_once("dao/internacaoDao.php");
+
+require_once("models/uti.php");
+require_once("dao/utiDao.php");
+
 require_once("models/message.php");
+
 require_once("models/usuario.php");
 require_once("dao/usuarioDao.php");
-require_once("dao/internacaoDao.php");
 
 
 // $message = new Message($BASE_URL);
 // $userDao = new UserDAO($conn, $BASE_URL);
 $internacaoDao = new InternacaoDAO($conn, $BASE_URL);
 $id_internacao = filter_input(INPUT_POST, "id_internacao");
+
+$internadosUTI = $utiDao->findUTIInternacao($id_internacao);
+
 
 // Resgata o tipo do formulário
 $type = filter_input(INPUT_POST, "type");
@@ -112,8 +120,11 @@ if ($type === "create") {
     $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
     $data_create_int = filter_input(INPUT_POST, "data_create_int") ?: null;
 
-    // $internacao = new internacao();
+    // RECEBER DADOS DO INPUT PARA DARA ALTA DA UTI
+    $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int") ?: null;
+    $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti") ?: null;
 
+    // $internacao = new internacao();
     $internacaoData = $internacaoDao->findById($id_internacao);
 
     $internacaoData->id_internacao = $id_internacao;
@@ -125,6 +136,20 @@ if ($type === "create") {
     $internacaoData->data_create_int = $data_create_int;
 
     $internacaoDao->update($internacaoData);
+
+    include_once('cad_internacao_niveis.php');
+} else if ($type === "alta-uti") {
+
+    // Receber os dados dos inputs
+    $id_uti = filter_input(INPUT_POST, "id_uti");
+    $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti");
+    $internado_uti = filter_input(INPUT_POST, "internado_uti");
+
+    $UTIData->id_uti = $id_uti;
+    $UTIData->data_alta_uti = $data_alta_uti;
+    $UTIData->internado_uti = $internado_uti;
+
+    $utiDao->findAltaUpdate($UTIData);
 
     include_once('cad_internacao_niveis.php');
 }

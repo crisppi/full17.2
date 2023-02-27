@@ -89,21 +89,6 @@ class internacaoDAO implements internacaoDAOInterface
         return $internacao;
     }
 
-    public function findById($id_internacao)
-    {
-        $internacao = [];
-        $stmt = $this->conn->prepare("SELECT * FROM tb_internacao
-                                    WHERE id_internacao = :id_internacao");
-        $stmt->bindParam(":id_internacao", $id_internacao);
-        $stmt->execute();
-
-        $data = $stmt->fetch();
-        // var_dump($data);
-        $internacao = $this->buildinternacao($data);
-
-        return $internacao;
-    }
-
     public function findByPac($pesquisa_nome)
     {
         $internacao = [];
@@ -277,10 +262,8 @@ class internacaoDAO implements internacaoDAOInterface
         $stmt->bindParam(":rel_int", $internacao->rel_int);
         $stmt->bindParam(":grupo_patologia_int", $internacao->grupo_patologia_int);
         $stmt->bindParam(":id_internacao", $internacao->id_internacao);
-        $stmt->execute();
 
-        // Mensagem de sucesso por editar internacao
-        $this->message->setMessage("internacao atualizado com sucesso!", "success", "list_internacao.php");
+        $stmt->execute();
     }
 
     public function destroy($id_internacao)
@@ -351,7 +334,35 @@ class internacaoDAO implements internacaoDAOInterface
     public function joininternacaoHospitalshow($id_internacao)
 
     {
-        $stmt = $this->conn->query("SELECT ac.id_internacao, ac.acoes_int,  ac.internado_int, ac.fk_patologia_int, ac.data_intern_int, ac.rel_int, ac.fk_paciente_int, ac.acomodacao_int, pa.id_paciente, pa.nome_pac, ac.usuario_create_int, ac.fk_hospital_int, ac.modo_internacao_int, ac.tipo_admissao_int, ho.id_hospital, ho.nome_hosp, ac.especialidade_int, ac.titular_int, ac.data_visita_int, ac.grupo_patologia_int, ac.acomodacao_int, ac.internado_uti_int, ac.internacao_uti_int, ac.fk_patologia_int, pat.patologia_pat
+        $stmt = $this->conn->query("SELECT ac.id_internacao, 
+        ac.acoes_int,  
+        ac.internado_int, 
+        ac.fk_patologia_int, 
+        ac.data_intern_int, 
+        ac.rel_int, 
+        ac.fk_paciente_int, 
+        ac.acomodacao_int, 
+        pa.id_paciente, 
+        pa.nome_pac, 
+        ac.usuario_create_int, 
+        ac.fk_hospital_int, 
+        ac.modo_internacao_int, 
+        ac.tipo_admissao_int, 
+        ho.id_hospital, 
+        ho.nome_hosp, 
+        ac.especialidade_int, 
+        ac.titular_int, 
+        ac.data_visita_int, 
+        ac.grupo_patologia_int, 
+        ac.acomodacao_int, 
+        ac.internado_uti_int, 
+        ac.internacao_uti_int, 
+        ac.fk_patologia_int, 
+        ut.fk_internacao_uti,
+        ut.internacao_uti,
+        ut.internado_uti,
+        pat.patologia_pat
+
         FROM tb_internacao ac 
 
         iNNER JOIN tb_hospital as ho On  
@@ -362,6 +373,9 @@ class internacaoDAO implements internacaoDAOInterface
 
         left join tb_patologia as pat on
         ac.fk_patologia_int = pat.id_patologia
+
+        left JOIN tb_uti as ut On  
+        ac.id_internacao = ut.fk_internacao_uti
 
         WHERE id_internacao = $id_internacao
          
@@ -417,6 +431,7 @@ class internacaoDAO implements internacaoDAOInterface
 
         return $internacao;
     }
+
     public function alta($id_internacao)
     {
 
@@ -627,13 +642,20 @@ class internacaoDAO implements internacaoDAOInterface
     pa.id_paciente,
     pa.nome_pac,
     ho.id_hospital, 
+    ut.fk_internacao_uti,
+    ut.internacao_uti,
+    ut.internado_uti,
     ho.nome_hosp 
+
     FROM tb_internacao ac 
 
-        iNNER JOIN tb_hospital as ho On  
+        left JOIN tb_hospital as ho On  
         ac.fk_hospital_int = ho.id_hospital
 
-        iNNER join tb_paciente as pa on
+        left JOIN tb_uti as ut On  
+        ac.id_internacao = ut.fk_internacao_uti
+
+        left join tb_paciente as pa on
         ac.fk_paciente_int = pa.id_paciente ' . $where . ' ' . $order . ' ' . $limit);
 
         $query->execute();
@@ -662,5 +684,23 @@ class internacaoDAO implements internacaoDAOInterface
         $QtdTotalInt = $stmt->fetch();
 
         return $QtdTotalInt;
+    }
+
+    // METODO PARA LOCALIZAR INTERNACAO PELO ID - UTILIZADO NA ALTA.
+    public function findById($id_internacao)
+    {
+        $internacao = [];
+        $stmt = $this->conn->prepare("SELECT * FROM tb_internacao
+                                    WHERE id_internacao = :id_internacao");
+        $stmt->bindParam(":id_internacao", $id_internacao);
+        $stmt->execute();
+
+        $data = $stmt->fetch();
+
+
+        // var_dump($data);
+        $internacao = $this->buildinternacao($data);
+
+        return $internacao;
     }
 }

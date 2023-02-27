@@ -70,17 +70,16 @@ extract($internacao);
                 </div>
             </div>
             <div class="row">
-                <?php if ($internado_uti_int == "s") {
+                <?php if ($internado_uti == "s") {
                 ?>
                     <div>
                         <hr>
                         <p> Você precisa dar alta da UTI</p>
                     </div>
-                    <input type="hidden" name="alta_uti" value="alta_uti">
-
+                    <input type="text" name="alta_uti" value="alta_uti">
                     <div class="form-group col-sm-2">
-                        <label class="control-label" for="internado_uti_int">UTI</label>
-                        <input type="text" class="form-control" value="<?= $internado_uti_int ?>" id="internado_uti_int" name="internado_uti_int" placeholder="internado_uti_int">
+                        <label class="control-label" for="internado_uti">UTI</label>
+                        <input type="text" class="form-control" value="s" id="internado_uti" name="internado_uti" placeholder="internado_uti">
                     </div>
                     <div class="form-group col-sm-2">
                         <label class="control-label" for="data_alta_uti">Data alta UTI</label>
