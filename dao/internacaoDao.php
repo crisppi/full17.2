@@ -359,6 +359,7 @@ class internacaoDAO implements internacaoDAOInterface
         ac.internacao_uti_int, 
         ac.fk_patologia_int, 
         ut.fk_internacao_uti,
+        ut.id_uti,
         ut.internacao_uti,
         ut.internado_uti,
         pat.patologia_pat

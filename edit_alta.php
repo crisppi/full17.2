@@ -19,6 +19,7 @@ $internacao = $internacaoDao->findById($id_internacao);
 $Internacao_geral = new internacaoDAO($conn, $BASE_URL);
 $internacao = $internacaoDao->joininternacaoHospitalshow($id_internacao);
 extract($internacao);
+
 ?>
 
 <!-- formulario alta -->
@@ -77,9 +78,11 @@ extract($internacao);
                         <p> Você precisa dar alta da UTI</p>
                     </div>
                     <input type="text" name="alta_uti" value="alta_uti">
+                    <input type="text" name="id_uti" value="<?= $fk_internacao_uti ?>">
+                    <input type="text" name="id_uti" value="<?= $id_uti ?>">
                     <div class="form-group col-sm-2">
                         <label class="control-label" for="internado_uti">UTI</label>
-                        <input type="text" class="form-control" value="s" id="internado_uti" name="internado_uti" placeholder="internado_uti">
+                        <input type="text" class="form-control" value="n" id="internado_uti" name="internado_uti" placeholder="internado_uti">
                     </div>
                     <div class="form-group col-sm-2">
                         <label class="control-label" for="data_alta_uti">Data alta UTI</label>

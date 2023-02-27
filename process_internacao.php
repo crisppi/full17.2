@@ -16,10 +16,10 @@ require_once("dao/usuarioDao.php");
 // $message = new Message($BASE_URL);
 // $userDao = new UserDAO($conn, $BASE_URL);
 $internacaoDao = new InternacaoDAO($conn, $BASE_URL);
+$utiDao = new utiDAO($conn, $BASE_URL);
 $id_internacao = filter_input(INPUT_POST, "id_internacao");
 
 $internadosUTI = $utiDao->findUTIInternacao($id_internacao);
-
 
 // Resgata o tipo do formulário
 $type = filter_input(INPUT_POST, "type");
@@ -121,7 +121,9 @@ if ($type === "create") {
     $data_create_int = filter_input(INPUT_POST, "data_create_int") ?: null;
 
     // RECEBER DADOS DO INPUT PARA DARA ALTA DA UTI
-    $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int") ?: null;
+    $alta_uti = filter_input(INPUT_POST, "alta_uti");
+    $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int");
+    $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int");
     $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti") ?: null;
 
     // $internacao = new internacao();
@@ -131,25 +133,21 @@ if ($type === "create") {
     $internacaoData->internado_int = $internado_int;
     $internacaoData->data_alta_int = $data_alta_int;
     $internacaoData->tipo_alta_int = $tipo_alta_int;
-
     $internacaoData->usuario_create_int = $usuario_create_int;
     $internacaoData->data_create_int = $data_create_int;
 
+    if ($alta_uti == "alta-uti") {
+        print_r('chegoou');
+        exit;
+        $UTIData->id_uti = $id_uti;
+        $UTIData->data_alta_uti = $data_alta_uti;
+        $UTIData->internado_uti = $internado_uti;
+
+        $utiDao->findAltaUpdate($UTIData);
+
+        include_once('list_internacao.php');
+    }
     $internacaoDao->update($internacaoData);
 
-    include_once('cad_internacao_niveis.php');
-} else if ($type === "alta-uti") {
-
-    // Receber os dados dos inputs
-    $id_uti = filter_input(INPUT_POST, "id_uti");
-    $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti");
-    $internado_uti = filter_input(INPUT_POST, "internado_uti");
-
-    $UTIData->id_uti = $id_uti;
-    $UTIData->data_alta_uti = $data_alta_uti;
-    $UTIData->internado_uti = $internado_uti;
-
-    $utiDao->findAltaUpdate($UTIData);
-
-    include_once('cad_internacao_niveis.php');
+    // include_once('cad_internacao_niveis.php');
 }
