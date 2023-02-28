@@ -125,6 +125,10 @@ if ($type === "create") {
     $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int") ?: null;
     $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int") ?: null;
     $alta_uti = filter_input(INPUT_POST, "alta_uti");
+    $alta_uti = filter_input(INPUT_POST, "alta_uti");
+    $id_uti = filter_input(INPUT_POST, "id_uti");
+    $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int");
+    $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti") ?: null;
 
     // $internacao = new internacao();
     $internacaoData = $internacaoDao->findById($id_internacao);
@@ -135,6 +139,18 @@ if ($type === "create") {
     $internacaoData->tipo_alta_int = $tipo_alta_int;
     $internacaoData->usuario_create_int = $usuario_create_int;
     $internacaoData->data_create_int = $data_create_int;
+
+    if ($alta_uti == "alta-uti") {
+        print_r('chegoou');
+        exit;
+        $UTIData->id_uti = $id_uti;
+        $UTIData->data_alta_uti = $data_alta_uti;
+        $UTIData->internado_uti = $internado_uti;
+
+        $utiDao->findAltaUpdate($UTIData);
+
+        include_once('list_internacao.php');
+    }
 
     $internacaoDao->update($internacaoData);
 

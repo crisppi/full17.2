@@ -19,7 +19,6 @@ $internacao = $internacaoDao->findById($id_internacao);
 $Internacao_geral = new internacaoDAO($conn, $BASE_URL);
 $internacao = $internacaoDao->joininternacaoHospitalshow($id_internacao);
 extract($internacao);
-
 ?>
 
 <!-- formulario alta -->
@@ -85,30 +84,36 @@ extract($internacao);
                     <div class="form-group col-sm-2">
                         <label class="control-label" for="internado_uti">UTI</label>
                         <input type="hidden" class="form-control" value="n" id="internado_uti" name="internado_uti" placeholder="internado_uti" require>
+                        <input type="text" name="alta_uti" value="alta_uti">
+                        <input type="text" name="id_uti" value="<?= $fk_internacao_uti ?>">
+                        <input type="text" name="id_uti" value="<?= $id_uti ?>">
+                        <div class="form-group col-sm-2">
+                            <label class="control-label" for="internado_uti">UTI</label>
+                            <input type="text" class="form-control" value="n" id="internado_uti" name="internado_uti" placeholder="internado_uti">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label class="control-label" for="data_alta_uti">Data alta UTI</label>
+                            <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_uti" name="data_alta_uti" require>
+                        </div>
+                    <?php } ?>
+                    <br>
                     </div>
-                    <div class="form-group col-sm-2">
-                        <label class="control-label" for="data_alta_uti">Data alta UTI</label>
-                        <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_uti" name="data_alta_uti" require>
-                    </div>
-                <?php } ?>
-                <br>
+                    <br>
+                    <button style="margin:10px" type="submit" class="btn-sm btn-success">Alta</button>
+                    <br>
             </div>
-            <br>
-            <button style="margin:10px" type="submit" class="btn-sm btn-success">Alta</button>
-            <br>
+        </form>
     </div>
-    </form>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
-<?php include_once("diversos/backbtn_internacao.php"); ?>
+    <?php include_once("diversos/backbtn_internacao.php"); ?>
 
-<?php
-include_once("templates/footer.php");
-?>
+    <?php
+    include_once("templates/footer.php");
+    ?>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 
-</html>
+    </html>
