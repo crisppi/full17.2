@@ -19,6 +19,7 @@ $internacao = $internacaoDao->findById($id_internacao);
 $Internacao_geral = new internacaoDAO($conn, $BASE_URL);
 $internacao = $internacaoDao->joininternacaoHospitalshow($id_internacao);
 extract($internacao);
+
 ?>
 
 <!-- formulario alta -->
@@ -27,9 +28,9 @@ extract($internacao);
         <h4 class="page-title">Alta Hospitalar</h4>
         <p class="page-description">Adicione informações sobre o internacao</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_internacao.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="type" value="alta">
+            <input type="text" name="type" value="alta">
             <div class="form-group col-sm-3">
-                <input type="hidden" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>">
+                <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>">
             </div>
             <div class="form-group col-sm-3">
                 <label class="control-label">Hospital</label>
@@ -45,7 +46,7 @@ extract($internacao);
                     <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_int" name="data_alta_int" placeholder="" required>
                 </div>
                 <div class="form-group col-sm-2">
-                    <input type="hidden" class="form-control" value="n" id="internado_int" name="internado_int" placeholder="">
+                    <input type="text" class="form-control" value="n" id="internado_int" name="internado_int" placeholder="">
                 </div>
 
                 <div class="form-group col-sm-2">
@@ -69,6 +70,8 @@ extract($internacao);
                     </select>
                 </div>
             </div>
+
+            <!-- FORMULARIO PARA ALTA DE UTI -->
             <div class="row">
                 <?php if ($internado_uti == "s") {
                 ?>
@@ -76,14 +79,16 @@ extract($internacao);
                         <hr>
                         <p> Você precisa dar alta da UTI</p>
                     </div>
-                    <input type="text" name="alta_uti" value="alta_uti">
+                    <input type="hidden" name="alta_uti" id="alta_uti" value="alta_uti">
+                    <input type="hidden" name="id_uti" id="id_uti" value="<?= $id_uti ?>">
+                    <input type="hidden" name="fk_internacao_uti" id="fk_internacao_uti" value="<?= $fk_internacao_uti ?>">
                     <div class="form-group col-sm-2">
                         <label class="control-label" for="internado_uti">UTI</label>
-                        <input type="text" class="form-control" value="s" id="internado_uti" name="internado_uti" placeholder="internado_uti">
+                        <input type="hidden" class="form-control" value="n" id="internado_uti" name="internado_uti" placeholder="internado_uti" require>
                     </div>
                     <div class="form-group col-sm-2">
                         <label class="control-label" for="data_alta_uti">Data alta UTI</label>
-                        <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_uti" name="data_alta_uti" placeholder="">
+                        <input type="date" class="form-control" value='<?php echo date('d/m/Y') ?>' id="data_alta_uti" name="data_alta_uti" require>
                     </div>
                 <?php } ?>
                 <br>

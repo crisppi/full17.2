@@ -159,8 +159,8 @@
                     <th scope="col">Hospital</th>
                     <th scope="col">Paciente</th>
                     <th scope="col">Data internação</th>
-                    <th scope="col">UTI</th>
-                    <th scope="col">Int UTI</th>
+                    <th scope="col">Internado UTI</th>
+                    <th scope="col">Internação UTI</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -179,8 +179,8 @@
                         <td scope="row" class="nome-coluna-table"><?= $intern["nome_hosp"] ?></td>
                         <td scope="row"><?= $intern["nome_pac"] ?></td>
                         <td scope="row"><?= $intern["data_intern_int"] ?></td>
-                        <td scope="row"><?= $intern["internacao_uti"] ?></td>
                         <td scope="row"><?= $intern["internado_uti"] ?></td>
+                        <td scope="row"><?= $intern["internacao_uti"] ?></td>
 
                         <td class="action">
                             <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:green; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>

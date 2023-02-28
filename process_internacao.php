@@ -16,10 +16,11 @@ require_once("dao/usuarioDao.php");
 // $message = new Message($BASE_URL);
 // $userDao = new UserDAO($conn, $BASE_URL);
 $internacaoDao = new InternacaoDAO($conn, $BASE_URL);
+$utiDao = new utiDAO($conn, $BASE_URL);
+
 $id_internacao = filter_input(INPUT_POST, "id_internacao");
 
 $internadosUTI = $utiDao->findUTIInternacao($id_internacao);
-
 
 // Resgata o tipo do formulário
 $type = filter_input(INPUT_POST, "type");
@@ -122,7 +123,8 @@ if ($type === "create") {
 
     // RECEBER DADOS DO INPUT PARA DARA ALTA DA UTI
     $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int") ?: null;
-    $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti") ?: null;
+    $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int") ?: null;
+    $alta_uti = filter_input(INPUT_POST, "alta_uti");
 
     // $internacao = new internacao();
     $internacaoData = $internacaoDao->findById($id_internacao);
@@ -131,15 +133,15 @@ if ($type === "create") {
     $internacaoData->internado_int = $internado_int;
     $internacaoData->data_alta_int = $data_alta_int;
     $internacaoData->tipo_alta_int = $tipo_alta_int;
-
     $internacaoData->usuario_create_int = $usuario_create_int;
     $internacaoData->data_create_int = $data_create_int;
 
     $internacaoDao->update($internacaoData);
 
     // include_once('cad_internacao_niveis.php');
-
-    if ($type === "alta-uti") {
+    // print_r("chegou neste ponto");
+    // print_r($alta_uti);
+    if ($alta_uti == "alta_uti") {
 
         // Receber os dados dos inputs
         $id_uti = filter_input(INPUT_POST, "id_uti");

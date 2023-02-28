@@ -35,6 +35,8 @@ $id_uti = $internadosUTI['0']['id_uti'];
         <!-- <p class="page-description">Adicione informações sobre o internacao</p> -->
         <form class="formulario" action="<?= $BASE_URL ?>process_internacao_uti.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="type" value="update">
+
+            <!-- DADOS DO INPUT COM ENTRADA DE DADOS PADRAO -->
             <div class="form-group col-sm-3">
                 <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>">
             </div>
@@ -58,13 +60,10 @@ $id_uti = $internadosUTI['0']['id_uti'];
                     <input type="hidden" class="form-control" value="Não" id="internado_uti_int" name="internado_uti_int" placeholder="">
                 </div>
                 <div class="form-group col-sm-2">
-                    <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' placeholder="">
+                    <input type="hidden" name="data_create_int" class="form-control" value='<?php echo date('d/m/Y') ?>' placeholder="">
                 </div>
                 <div class="form-group col-sm-2">
                     <input type="hidden" class="form-control" id="internado_uti" name="internado_uti" value='n' placeholder="">
-                </div>
-                <div class="form-group col-sm-2">
-                    <input type="hidden" class="form-control" value='<?php echo date('d/m/Y') ?>' placeholder="">
                 </div>
                 <div class="form-group col-sm-3">
                     <input type="hidden" value="<?= $_SESSION['email_user']; ?>" class="form-control" id="usuario_create_int" name="usuario_create_int" placeholder="Digite o usuário">

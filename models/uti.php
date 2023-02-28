@@ -23,6 +23,8 @@ class uti
   public $internacao_uti_int;
   public $internado_uti_int;
   public $fk_usuario_uti;
+  public $data_create_uti;
+  public $usuario_create_uti;
 }
 
 interface utiDAOInterface
