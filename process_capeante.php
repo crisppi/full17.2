@@ -24,37 +24,42 @@ if ($type === "create") {
     // Receber os dados dos inputs
 
     $adm_capeante = filter_input(INPUT_POST, "adm_capeante");
-    $adm_check = filter_input(INPUT_POST, "adm_check");
     $aud_enf_capeante = filter_input(INPUT_POST, "aud_enf_capeante");
     $aud_med_capeante = filter_input(INPUT_POST, "aud_med_capeante");
+
+    $data_inicial_capeante = filter_input(INPUT_POST, "data_inicial_capeante");
     $data_fech_capeante = filter_input(INPUT_POST, "data_fech_capeante");
     $data_final_conta = filter_input(INPUT_POST, "data_final_conta");
-    $data_inicial_capeante = filter_input(INPUT_POST, "data_inicial_capeante");
     $diarias_capeante = filter_input(INPUT_POST, "diarias_capeante");
+
     $glosa_diaria = filter_input(INPUT_POST, "glosa_diaria");
     $glosa_honorarios = filter_input(INPUT_POST, "glosa_honorarios");
     $glosa_matmed = filter_input(INPUT_POST, "glosa_matmed");
     $glosa_oxig = filter_input(INPUT_POST, "glosa_oxig");
     $glosa_sadt = filter_input(INPUT_POST, "glosa_sadt");
-    $sexo_pac = filter_input(INPUT_POST, "sexo_pac");
     $glosa_taxas = filter_input(INPUT_POST, "glosa_taxas");
+
+    $adm_check = filter_input(INPUT_POST, "adm_check");
     $med_check = filter_input(INPUT_POST, "med_check");
     $enfer_check = filter_input(INPUT_POST, "enfer_check");
+
     $pacote = filter_input(INPUT_POST, "pacote");
     $parcial_capeante = filter_input(INPUT_POST, "parcial_capeante");
     $parcial_num = filter_input(INPUT_POST, "parcial_num");
     $fk_int_capeante = filter_input(INPUT_POST, "fk_int_capeante");
+
     $valor_apresentado_capeante = filter_input(INPUT_POST, "valor_apresentado_capeante");
-    $valor_diarias = filter_input(INPUT_POST, "valor_diarias");
     $valor_final_capeante = filter_input(INPUT_POST, "valor_final_capeante");
-    $valor_glosa_enf = filter_input(INPUT_POST, "valor_glosa_enf");
-    $valor_glosa_med = filter_input(INPUT_POST, "valor_glosa_med");
-    $valor_glosa_total = filter_input(INPUT_POST, "valor_glosa_total");
-    $valor_honorarios = filter_input(INPUT_POST, "valor_honorarios");
+    $valor_diarias = filter_input(INPUT_POST, "valor_diarias");
     $valor_matmed = filter_input(INPUT_POST, "valor_matmed");
     $valor_oxig = filter_input(INPUT_POST, "valor_oxig");
     $valor_sadt = filter_input(INPUT_POST, "valor_sadt");
     $valor_taxa = filter_input(INPUT_POST, "valor_taxa");
+    $valor_honorarios = filter_input(INPUT_POST, "valor_honorarios");
+
+    $valor_glosa_enf = filter_input(INPUT_POST, "valor_glosa_enf");
+    $valor_glosa_med = filter_input(INPUT_POST, "valor_glosa_med");
+    $valor_glosa_total = filter_input(INPUT_POST, "valor_glosa_total");
 
     $capeante = new capeante();
 
