@@ -36,6 +36,8 @@
     <!-- FORMULARIO DE PESQUISAS -->
     <div class="container">
         <div class="container py-2">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
             <form class="formulario visible" action="" id="select-internacao-form" method="GET">
                 <h6 style="margin-left: 30px; padding-top:10px" class="page-title">Pesquisa internações</h6>
                 <?php $pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
@@ -83,10 +85,10 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
-                        <button type="submit" class="btn btn-primary mb-1">Buscar</button>
-                    </div>
+                <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
+                    <button type="submit" class="btn btn-primary mb-1"><span class="material-icons">
+                            person_search
+                        </span></button>
                 </div>
         </div>
         </form>

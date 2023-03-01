@@ -23,6 +23,46 @@
             </div>
         </div>
         <br>
+        <!-- campos de dados gerais  -->
+        <div class="form-group row">
+            <div class="form-group col-sm-2">
+                <label for="data_inicial_capeante">Data Inicial</label>
+                <input type="date" class="form-control" id="data_inicial_capeante" name="data_inicial_capeante">
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="data_final_conta">Data Final</label>
+                <input type="date" class="form-control" id="data_final_conta" name="data_final_conta">
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="diarias_capeante">Diárias</label>
+                <input type="text" class="form-control" id="diarias_capeante" name="diarias_capeante">
+            </div>
+
+            <div class="form-group col-sm-2">
+                <label for="data_fech_capeante">Data Fechamento</label>
+                <input type="date" class="form-control" id="data_fech_capeante" name="data_fech_capeante">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" id="valor_matmed" name="valor_matmed" placeholder="Valor MatMed">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" id="valor_oxig" name="valor_oxig" placeholder="Valor Oxigenioterapia">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" id="valor_sadt" name="valor_sadt" placeholder="Valor taxas">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" id="valor_taxa" name="valor_taxa" placeholder="Valor SADT">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" id="valor_honorarios" name="valor_honorarios" placeholder="Valor honorários">
+            </div>
+        </div>
+        <br>
         <!-- campos de valor apresentado -->
         <div class="form-group row">
             <div class="form-group col-sm-2">
@@ -64,7 +104,7 @@
                 <input type="text" class="form-control" id="glosa_taxa" name="glosa_taxa" placeholder="Glosa SADT">
             </div>
             <div class="form-group col-sm-2">
-                <input type="text" class="form-control" id="valor_honorarios" name="valor_honorarios" placeholder="Glosa honorários">
+                <input type="text" class="form-control" id="glosa_honorarios" name="glosa_honorarios" placeholder="Glosa honorários">
             </div>
         </div>
         <br>
@@ -72,16 +112,13 @@
         <!-- campos de glosas por profissional-->
         <div class="form-group row">
             <div class="form-group col-sm-2">
-                <input type="text" class="form-control" id="valor_glosa_enf" name="valor_glosa_enf" placeholder="glosa enf">
+                <input type="text" class="form-control" id="valor_glosa_enf" name="valor_glosa_enf" placeholder="Glosa enfermagem">
             </div>
             <div class="form-group col-sm-2">
-                <input type="text" class="form-control" id="glosa_matmed" name="glosa_matmed" placeholder="glosa MatMed">
+                <input type="text" class="form-control" id="valor_glosa_med" name="valor_glosa_med" placeholder="Glosa Médica">
             </div>
             <div class="form-group col-sm-2">
-                <input type="text" class="form-control" id="glosa_oxig" name="glosa_oxig" placeholder="glosa Oxigenioterapia">
-            </div>
-            <div class="form-group col-sm-2">
-                <input type="text" class="form-control" id="glosa_sadt" name="glosa_sadt" placeholder="glosa taxas">
+                <input type="text" class="form-control" id="valor_glosa_total" name="valor_glosa_total" placeholder="Glosa Total">
             </div>
 
         </div>

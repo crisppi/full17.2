@@ -89,12 +89,10 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
-                        <button type="submit" class="btn btn-primary mb-1"><span class="material-icons">
-                                person_search
-                            </span></button>
-                    </div>
+                <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
+                    <button type="submit" class="btn btn-primary mb-1"><span class="material-icons">
+                            person_search
+                        </span></button>
                 </div>
         </div>
         </form>
