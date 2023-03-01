@@ -98,8 +98,21 @@ header("Content-type: text/html; charset=utf-8");
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_internacao_uti.php">Alta UTI</a></li>
-                <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_internacao.php">Alta Hospitalar</a></li>
+                <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_internacao_uti_alta.php">Alta UTI</a></li>
+                <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_internacao_alta.php">Alta Hospitalar</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Contas
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><a class="dropdown-item" href="<?php $BASE_URL ?>cad_capeante.php">Capeante</a></li>
+                <li>
+
+                  <hr class="dropdown-divider">
+                </li>
+
               </ul>
             </li>
 

@@ -152,18 +152,14 @@
         <table class="table table-sm table-striped table-bordered table-hover table-condensed">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Internado</th>
-                    <th scope="col">Hospital</th>
-                    <th scope="col">Paciente</th>
-                    <th scope="col">Data internação</th>
-                    <th scope="col">Acomodação</th>
-                    <th scope="col">Data visita</th>
-                    <th scope="col">Modo Admissão</th>
-                    <th scope="col">Médico</th>
-                    <th scope="col">UTI</th>
-                    <th scope="col">Int UTI</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col" width="3%">Id</th>
+                    <th scope="col" width="7%">Internado</th>
+                    <th scope="col" width="20%">Hospital</th>
+                    <th scope="col" width="20%">Paciente</th>
+                    <th scope="col" width="8%">Data internação</th>
+                    <th scope="col" width="7%">UTI</th>
+                    <th scope="col" width="7%">Int UTI</th>
+                    <th scope="col" width="8%">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -179,34 +175,25 @@
                                                                     } else {
                                                                         echo "Não";
                                                                     }; ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $intern["nome_hosp"] ?></td>
+                        <td scope="row" style="font-weigth:bolder;"><?= $intern["nome_hosp"] ?></td>
                         <td scope="row"><?= $intern["nome_pac"] ?></td>
                         <td scope="row"><?= $intern["data_intern_int"] ?></td>
-                        <td scope="row"><?= $intern["acomodacao_int"] ?></td>
-                        <td scope="row"><?= $intern["data_visita_int"] ?></td>
-                        <td scope="row"><?= $intern["tipo_admissao_int"] ?></td>
-                        <td scope="row"><?= $intern["titular_int"] ?></td>
                         <td scope="row"><?= $intern["internacao_uti_int"] ?></td>
                         <td scope="row"><?= $intern["internado_uti"] ?></td>
 
                         <td class="action">
-                            <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:green; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>
+                            <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:blue; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>
 
-                            <?php if ($pesqInternado == "s") { ?>
-                                <a href="<?= $BASE_URL ?>cad_visita.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:black; text-decoration: none; font-size: 12px; font-weigth:bold; margin-left:5px;margin-right:5px" name="type" value="visita" class="aparecer-acoes bi bi-file-text"> Visita</i></a>
-                            <?php }; ?>
+
 
                             <?php if ($pesqInternado == "s") { ?><form class="d-inline-block delete-form" action="edit_alta.php" method="get">
                                     <input type="hidden" name="type" value="alta">
                                     <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
-                                    <button type="hidden" style="margin-left:3px; font-size: 12px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block bi bi-door-open"> ALTA</i></button>
+                                    <button type="hidden" style="margin-left:3px; font-size: 12px; background:transparent; border-color:transparent; color:green" class="delete-btn"><i class=" d-inline-block bi bi-door-open"> ALTA</i></button>
                                 </form>
                             <?php }; ?>
-                            <!-- <form class="d-inline-block delete-form" action="del_internacao.php" method="POST">
-                                <input type="hidden" name="type" value="delete">
-                                <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
-                                <button type="submit" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block aparecer-acoes bi bi-x-square-fill delete-icon"></i></button>
-                            </form> -->
+
+
                         </td>
                     </tr>
                 <?php endforeach; ?>
