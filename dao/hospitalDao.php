@@ -132,7 +132,6 @@ class HospitalDAO implements HospitalDAOInterface
         return $hospital;
     }
 
-
     public function create(Hospital $hospital)
     {
 
@@ -277,16 +276,3 @@ class HospitalDAO implements HospitalDAOInterface
         return $QtdTotalHosp;
     }
 }
-
-# Limita o número de registros a serem mostrados por página
-$limite = 10;
-
-# Se pg não existe atribui 1 a variável pg
-$pg = (isset($_GET['pag'])) ? (int)$_GET['pag'] : 1;
-
-# Atribui a variável inicio o inicio de onde os registros vão ser
-# mostrados por página, exemplo 0 à 10, 11 à 20 e assim por diante
-$inicio = ($pg * $limite) - $limite;
-$pesquisa_hosp = "";
-# seleciona o total de registros  
-$sql_Total = 'SELECT id_hospital FROM tb_hospital';

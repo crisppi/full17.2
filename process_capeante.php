@@ -27,9 +27,9 @@ if ($type === "create") {
     $aud_enf_capeante = filter_input(INPUT_POST, "aud_enf_capeante");
     $aud_med_capeante = filter_input(INPUT_POST, "aud_med_capeante");
 
-    $data_inicial_capeante = filter_input(INPUT_POST, "data_inicial_capeante");
-    $data_fech_capeante = filter_input(INPUT_POST, "data_fech_capeante");
-    $data_final_conta = filter_input(INPUT_POST, "data_final_conta");
+    $data_inicial_capeante = filter_input(INPUT_POST, "data_inicial_capeante") ?: null;
+    $data_fech_capeante = filter_input(INPUT_POST, "data_fech_capeante") ?: null;
+    $data_final_conta = filter_input(INPUT_POST, "data_final_conta") ?: null;
     $diarias_capeante = filter_input(INPUT_POST, "diarias_capeante");
 
     $glosa_diaria = filter_input(INPUT_POST, "glosa_diaria");
@@ -143,7 +143,7 @@ if ($type === "create") {
 
     //     $capeanteDao->update($capeanteData);
 
-    include_once('list_capeante.php');
+    include_once('cad_capeante.php');
 }
 //$type = "delete";
 //$type = filter_input(INPUT_POST, "type");

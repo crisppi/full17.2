@@ -68,6 +68,7 @@ header("Content-type: text/html; charset=utf-8");
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_paciente.php">Pacientes</a></li>
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_usuario.php">Usuários</a></li>
+                <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_hospitalUser.php">Hospital por Usuário</a></li>
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_hospital.php">Hospitais</a></li>
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_seguradora.php">Seguradora</a></li>
                 <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_estipulante.php">Estipulante</a></li>

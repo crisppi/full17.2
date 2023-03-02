@@ -12,7 +12,6 @@ a:link {
     text-decoration: none;
 }
 
-
 h2 {
     color: black;
 }
@@ -483,4 +482,14 @@ p {
     color: #0F5132;
     background-color: #D1E7DD;
     border-color: #BADBCC;
+}
+
+
+/* capeante - informacao profissiona logado no sistema */
+
+.logado {
+    color: #0F5132;
+    font-size: 0.8em;
+    text-align: end;
+    font-weight: 400;
 }
