@@ -4,14 +4,17 @@
 
     <?php
     include_once("globals.php");
+
     include_once("models/hospitalUser.php");
-    include_once("models/message.php");
     include_once("dao/hospitalUserDao.php");
+
+    include_once("models/message.php");
+
     include_once("templates/header.php");
+
     include_once("array_dados.php");
 
-    include_once("models/pagination.php");
-
+    // include_once("models/pagination.php");
 
     //Instanciando a classe 
     $hospitalUser = new hospitalUserDAO($conn, $BASE_URL);
@@ -22,13 +25,13 @@
     // $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
     // $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
     // $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
-    $QtdTotalhosp = new hospitalUserDAO($conn, $BASE_URL);
+    // $QtdTotalhosp = new hospitalUserDAO($conn, $BASE_URL);
 
     // METODO DE BUSCA DE PAGINACAO
-    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
-    $buscaAtivo = filter_input(INPUT_GET, 'ativo_hosp');
-    $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
-    $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
+    // $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    // $buscaAtivo = filter_input(INPUT_GET, 'ativo_hosp');
+    // $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
+    // $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
 
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
@@ -53,26 +56,27 @@
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $id_usuario = 5;
     $query = $hospitalUser->joinHospitalUser($id_usuario);
-    $condicoes = [
-        strlen($busca) ? 'nome_hosp LIKE "%' . $busca . '%"' : null,
-        strlen($buscaAtivo) ? 'ativo_hosp = "' . $buscaAtivo . '"' : null
-    ];
-    $condicoes = array_filter($condicoes);
-    $order = $ordenar;
-    // REMOVE POSICOES VAZIAS DO FILTRO
-    $where = implode(' AND ', $condicoes);
+    print_r($query);
+    // $condicoes = [
+    //     strlen($busca) ? 'nome_hosp LIKE "%' . $busca . '%"' : null,
+    //     strlen($buscaAtivo) ? 'ativo_hosp = "' . $buscaAtivo . '"' : null
+    // ];
+    // $condicoes = array_filter($condicoes);
+    // $order = $ordenar;
+    // // REMOVE POSICOES VAZIAS DO FILTRO
+    // $where = implode(' AND ', $condicoes);
 
-    // QUANTIDADE hospitalUserS
-    $qtdhospItens1 = $QtdTotalhosp->QtdhospitalUser($where);
-    $qtdhospItens = ($qtdhospItens1['qtd']);
-    $totalcasos = ceil($qtdhospItens / $limite);
+    // // QUANTIDADE hospitalUserS
+    // $qtdhospItens1 = $QtdTotalhosp->QtdhospitalUser($where);
+    // $qtdhospItens = ($qtdhospItens1['qtd']);
+    // $totalcasos = ceil($qtdhospItens / $limite);
 
-    // PAGINACAO
-    $obPagination = new pagination($qtdhospItens, $_GET['pag'] ?? 1,  $limite ?? 10);
-    $obLimite = $obPagination->getLimit();
+    // // PAGINACAO
+    // $obPagination = new pagination($qtdhospItens, $_GET['pag'] ?? 1,  $limite ?? 10);
+    // $obLimite = $obPagination->getLimit();
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
-    $query = $hospitalUser->joinHospitalUser($where, $order, $obLimite);
+    // $query = $hospitalUser->joinHospitalUser($id_usuario);
 
     ?>
     <!--tabela evento-->
