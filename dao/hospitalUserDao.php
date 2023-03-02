@@ -207,19 +207,23 @@ class hospitalUserDAO implements hospitalUserDAOInterface
     {
         $stmt = $this->conn->query("SELECT 
         
-        us.id_hospitalUser,
-        us.fk_usuario_hosp,
-        us.fk_hospital_user,
-        ho.id_hospital, 
+        hu.id_hospitalUser,
+        hu.fk_usuario_hosp,
+        hu.fk_hospital_user,
+        ho.id_hospital,
+        us.id_usuario,
+        us.usuario_user,
         ho.nome_hosp 
         
-        FROM tb_usuario us 
+        FROM tb_hospitalUser hu 
 
-        iNNER JOIN tb_hospital as ho On  
-        us.fk_hospital_user = ho.id_hospital
-
-        WHERE id_usuario = $id_usuario
+        left JOIN tb_hospital as ho On  
+        hu.fk_hospital_user = ho.id_hospital
+        
+		left JOIN tb_user as us On  
+        hu.fk_usuario_hosp = us.id_usuario
          
+        where us.id_usuario = $id_usuario
          ");
 
         $stmt->execute();

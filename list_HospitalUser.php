@@ -11,43 +11,43 @@
 
     //Instanciando a classe 
     $hospitalUser = new hospitalUserDAO($conn, $BASE_URL);
-    $QtdTotalpac = new hospitalUserDAO($conn, $BASE_URL);
+    // $QtdTotalpac = new hospitalUserDAO($conn, $BASE_URL);
 
-    // METODO DE BUSCA DE PAGINACAO
-    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
-    $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
-    $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
-    $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
+    // // METODO DE BUSCA DE PAGINACAO
+    // $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    // $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
+    // $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
+    // $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
 
-    $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+    // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
-    $condicoes = [
-        strlen($busca) ? 'nome_pac LIKE "%' . $busca . '%"' : null,
-        strlen($buscaAtivo) ? 'ativo_pac = "' . $buscaAtivo . '"' : null
-    ];
-    $condicoes = array_filter($condicoes);
-    $order = $ordenar;
-    // REMOVE POSICOES VAZIAS DO FILTRO
-    $where = implode(' AND ', $condicoes);
+    // $condicoes = [
+    //     strlen($busca) ? 'nome_pac LIKE "%' . $busca . '%"' : null,
+    //     strlen($buscaAtivo) ? 'ativo_pac = "' . $buscaAtivo . '"' : null
+    // ];
+    // $condicoes = array_filter($condicoes);
+    // $order = $ordenar;
+    // // REMOVE POSICOES VAZIAS DO FILTRO
+    // $where = implode(' AND ', $condicoes);
 
-    // QUANTIDADE hospitalUserS
-    $qtdpacItens1 = $QtdTotalpac->QtdhospitalUser($where);
-    $qtdpacItens = ($qtdpacItens1['qtd']);
-    $totalcasos = ceil($qtdpacItens / $limite);
+    // // QUANTIDADE hospitalUserS
+    // $qtdpacItens1 = $QtdTotalpac->QtdhospitalUser($where);
+    // $qtdpacItens = ($qtdpacItens1['qtd']);
+    // $totalcasos = ceil($qtdpacItens / $limite);
 
     // PAGINACAO
-    $obPagination = new pagination($qtdpacItens, $_GET['pag'] ?? 1,  $limite ?? 10);
-    $obLimite = $obPagination->getLimit();
+    // $obPagination = new pagination($qtdpacItens, $_GET['pag'] ?? 1,  $limite ?? 10);
+    // $obLimite = $obPagination->getLimit();
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
-    $query = $hospitalUser->selectAllhospitalUser($where, $order, $obLimite);
-
+    $id_usuario = 5;
+    $query = $hospitalUser->joinHospitalUser($id_usuario);
     ?>
     <!--tabela evento-->
     <div class="container py-2">
         <div class="row" style="background-color: #d3d3d3">
             <form class="formulario" id="form_pesquisa" method="GET">
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <div class="form-group col-sm-2">
                         <label>Pesquisa Nome</label>
@@ -75,28 +75,28 @@
                     <div class="form-group col-sm-1" style="padding:0px 50px 30px 50px">
                         <button style="margin:10px; font-weight:400" type="submit" class="btn-sm btn-primary">Pesquisar</button>
                     </div>
-                </div>
+                </div> -->
             </form>
 
             <?php
             // PREENCHIMENTO DO FORMULARIO COM QUERY
-            $query = $hospitalUser->selectAllhospitalUser($where, $order, $obLimite);
+            // $query = $hospitalUser->joinHospitalUser($id_usuario);
 
             // GETS 
-            unset($_GET['pag']);
-            unset($_GET['pg']);
-            $gets = http_build_query($_GET);
+            // unset($_GET['pag']);
+            // unset($_GET['pg']);
+            // $gets = http_build_query($_GET);
 
-            // PAGINACAO
-            $paginacao = '';
-            $paginas = $obPagination->getPages();
+            // // PAGINACAO
+            // $paginacao = '';
+            // $paginas = $obPagination->getPages();
 
-            foreach ($paginas as $pagina) {
-                $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
-                $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pg'] . '&' . $gets . '"> 
-                <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
-                <li class="page-item"></a>';
-            };
+            // foreach ($paginas as $pagina) {
+            //     $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
+            //     $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pg'] . '&' . $gets . '"> 
+            //     <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
+            //     <li class="page-item"></a>';
+            // };
             ?>
         </div>
         <div>
@@ -106,23 +106,23 @@
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">hospitalUser</th>
-                    <th scope="col">Endereço</th>
-                    <th scope="col">Cidade</th>
+                    <th scope="col">Hospital</th>
+                    <th scope="col">Usuário</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
 
-                foreach ($query as $hospitalUser) :
-                    extract($hospitalUser);
+                foreach ($query as $hospitalUserSel) :
+                    extract($hospitalUserSel);
+                    print_r($hospitalUserSel);
+                    exit;
                 ?>
                     <tr>
                         <td scope="row" class="col-id"><?= $id_hospitalUser ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $nome_pac ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $endereco_pac ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $cidade_pac ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $nome_hosp ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $usuario_user ?></td>
 
                         <td class="action">
                             <!-- <a href="cad_hospitalUser.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a> -->
