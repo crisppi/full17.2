@@ -202,25 +202,30 @@ class hospitalUserDAO implements hospitalUserDAOInterface
         return $QtdTotalHosp;
     }
 
-    public function joinHospitalUser($id_usuario)
+    public function joinHospitalUser($where, $order, $obLimite)
 
     {
-        $stmt = $this->conn->query("SELECT 
-        
-        us.id_hospitalUser,
-        us.fk_usuario_hosp,
-        us.fk_hospital_user,
+        $stmt = $this->conn->query(
+            'SELECT 
+        hu.id_hospitalUser,
+        hu.fk_usuario_hosp,
+        hu.fk_hospital_user,
         ho.id_hospital, 
-        ho.nome_hosp 
-        
-        FROM tb_usuario us 
+        ho.nome_hosp,
+        us.id_usuario,
+        us.usuario_user
+
+        FROM tb_user us 
 
         iNNER JOIN tb_hospital as ho On  
-        us.fk_hospital_user = ho.id_hospital
+        hu.fk_hospital_user = ho.id_hospital
 
-        WHERE id_usuario = $id_usuario
-         
-         ");
+        iNNER JOIN tb_hospitalUser as hu On  
+        hu.fk_hospital_user = ho.id_hospital'
+
+                . $where . ' ' . $order . ' ' . $obLimite
+
+        );
 
         $stmt->execute();
 

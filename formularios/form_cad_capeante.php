@@ -6,19 +6,29 @@
         <input type="hidden" name="type" value="create">
         <br>
         <?php if ($_SESSION['cargo'] === "Enf_auditor") {
+            echo "<div class='logado'>";
+            echo "Olá !!! ";
+            echo  $_SESSION['login_user'];
+            echo "<br>";
             echo "Você está logado como Enfermeiro(a)";
+            echo "</div>";
         };
         if ($_SESSION['cargo'] === "Med_auditor") {
-            echo "<div>";
+            echo "<div class='logado'>";
+            echo "Olá !!! ";
+            echo  $_SESSION['login_user'];
             echo "Você está logado como Médico(a)";
-            echo "<div>";
+            echo "</div>";
         };
         if ($_SESSION['cargo'] === "Adm") {
             echo "<div class='logado'>";
+            echo "Olá !!! ";
+            echo  $_SESSION['login_user'];
             echo "Você está logado como Administrativo(a)";
             echo "</div>";
         };
         ?>
+        <hr>
         <!-- profissionais  -->
         <div class="form-group row">
             <?php if ($_SESSION['cargo'] === "Adm") { ?>
@@ -185,9 +195,10 @@
         <div> <button style="margin:10px" type="submit" class="btn-sm btn-success">Cadastrar</button>
         </div>
     </form>
-</div>
-<div>
-    <a class="btn btn-success styled" style="margin-left:120px" href="cad_capeante.php">Novo Capeante</a>
+    <hr>
+    <div>
+        <a class="btn btn-success styled" style="margin-left:10px" href="cad_capeante.php">Novo Capeante</a>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>

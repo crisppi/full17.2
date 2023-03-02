@@ -19,7 +19,7 @@ interface hospitalUserDAOInterface
   public function update(hospitalUser $hospitalUser);
   public function destroy($id_hospitalUser);
   public function findGeral();
-  public function joinHospitalUser($id_usuario);
+  public function joinHospitalUser($where, $order, $obLimite);
 
   public function selectAllhospitalUser($where = null, $order = null, $limit = null);
   public function QtdhospitalUser();
