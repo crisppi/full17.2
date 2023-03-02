@@ -1,6 +1,7 @@
 <body>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
     <?php
     include_once("globals.php");
     include_once("models/hospitalUser.php");
@@ -8,6 +9,9 @@
     include_once("dao/hospitalUserDao.php");
     include_once("templates/header.php");
     include_once("array_dados.php");
+
+    include_once("models/pagination.php");
+
 
     //Instanciando a classe 
     $hospitalUser = new hospitalUserDAO($conn, $BASE_URL);
@@ -18,6 +22,13 @@
     // $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
     // $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
     // $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
+    $QtdTotalhosp = new hospitalUserDAO($conn, $BASE_URL);
+
+    // METODO DE BUSCA DE PAGINACAO
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $buscaAtivo = filter_input(INPUT_GET, 'ativo_hosp');
+    $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
+    $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
 
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
@@ -42,6 +53,27 @@
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $id_usuario = 5;
     $query = $hospitalUser->joinHospitalUser($id_usuario);
+    $condicoes = [
+        strlen($busca) ? 'nome_hosp LIKE "%' . $busca . '%"' : null,
+        strlen($buscaAtivo) ? 'ativo_hosp = "' . $buscaAtivo . '"' : null
+    ];
+    $condicoes = array_filter($condicoes);
+    $order = $ordenar;
+    // REMOVE POSICOES VAZIAS DO FILTRO
+    $where = implode(' AND ', $condicoes);
+
+    // QUANTIDADE hospitalUserS
+    $qtdhospItens1 = $QtdTotalhosp->QtdhospitalUser($where);
+    $qtdhospItens = ($qtdhospItens1['qtd']);
+    $totalcasos = ceil($qtdhospItens / $limite);
+
+    // PAGINACAO
+    $obPagination = new pagination($qtdhospItens, $_GET['pag'] ?? 1,  $limite ?? 10);
+    $obLimite = $obPagination->getLimit();
+
+    // PREENCHIMENTO DO FORMULARIO COM QUERY
+    $query = $hospitalUser->joinHospitalUser($where, $order, $obLimite);
+
     ?>
     <!--tabela evento-->
     <div class="container py-2">
@@ -69,7 +101,7 @@
                         <select class="form-control mb-3" id="ordenar" name="ordenar">
                             <option value="">Classificar por</option>
                             <option value="id_hospitalUser" <?= $ordenar == 'id_hospitalUser' ? 'selected' : null ?>>Id Internação</option>
-                            <option value="nome_pac" <?= $ordenar == 'nome_pac' ? 'selected' : null ?>>hospitalUser</option>
+                            <option value="nome_hosp" <?= $ordenar == 'nome_hosp' ? 'selected' : null ?>>hospitalUser</option>
                         </select>
                     </div>
                     <div class="form-group col-sm-1" style="padding:0px 50px 30px 50px">
@@ -123,6 +155,8 @@
                         <td scope="row" class="col-id"><?= $id_hospitalUser ?></td>
                         <td scope="row" class="nome-coluna-table"><?= $nome_hosp ?></td>
                         <td scope="row" class="nome-coluna-table"><?= $usuario_user ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $endereco_hosp ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $cidade_hosp ?></td>
 
                         <td class="action">
                             <!-- <a href="cad_hospitalUser.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a> -->

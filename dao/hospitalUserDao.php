@@ -226,6 +226,27 @@ class hospitalUserDAO implements hospitalUserDAOInterface
         where us.id_usuario = $id_usuario
          ");
 
+        $stmt = $this->conn->query(
+            'SELECT 
+        hu.id_hospitalUser,
+        hu.fk_usuario_hosp,
+        hu.fk_hospital_user,
+        ho.id_hospital, 
+        ho.nome_hosp,
+        us.id_usuario,
+        us.usuario_user
+
+        FROM tb_user us 
+
+        iNNER JOIN tb_hospital as ho On  
+        hu.fk_hospital_user = ho.id_hospital
+
+        iNNER JOIN tb_hospitalUser as hu On  
+        hu.fk_hospital_user = ho.id_hospital'
+
+
+        );
+
         $stmt->execute();
 
         $hospitalUser = $stmt->fetch();
