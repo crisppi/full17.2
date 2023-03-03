@@ -11,7 +11,7 @@
     include_once("models/message.php");
 
     include_once("templates/header.php");
- 
+
     include_once("array_dados.php");
 
     include_once("models/pagination.php");
@@ -72,7 +72,7 @@
                     </div>
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Classificar</label>
-                        <select class="form-control mb-3"  style="font-size:0.6em"id="ordenar" name="ordenar">
+                        <select class="form-control mb-3" style="font-size:0.6em" id="ordenar" name="ordenar">
                             <option value="">Classificar por</option>
                             <option value="id_hospitalUser" <?= $ordenar == 'id_hospitalUser' ? 'selected' : null ?>>Id Internação</option>
                             <option value="nome_hosp" <?= $ordenar == 'nome_hosp' ? 'selected' : null ?>>hospitalUser</option>
@@ -144,19 +144,19 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <!-- <?php
+        <?php
 
-                "<div style=margin-left:20px;>";
-                echo "<div style='color:blue; margin-left:20px;'>";
-                echo "</div>";
-                echo "<nav aria-label='Page navigation example'>";
-                echo " <ul class='pagination'>";
-                echo " <li class='page-item'><a class='page-link' href='list_hospitalUser.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
+        "<div style=margin-left:20px;>";
+        echo "<div style='color:blue; margin-left:20px;'>";
+        echo "</div>";
+        echo "<nav aria-label='Page navigation example'>";
+        echo " <ul class='pagination'>";
+        echo " <li class='page-item'><a class='page-link' href='list_hospitalUser.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
         <?= $paginacao ?>
         <?php echo "<li class='page-item'><a class='page-link' href='list_hospitalUser.php?pag=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
         echo " </ul>";
         echo "</nav>";
-        echo "</div>"; ?> -->
+        echo "</div>"; ?>
         <hr>
     </div>
     <div id="id-confirmacao" class="btn_acoes oculto">
