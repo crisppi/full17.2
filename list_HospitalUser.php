@@ -18,7 +18,7 @@
 
     //Instanciando a classe 
     $hospitalUser = new hospitalUserDAO($conn, $BASE_URL);
-    // $QtdTotalpac = new hospitalUserDAO($conn, $BASE_URL);
+    // $QtdTotalHosp = new hospitalUserDAO($conn, $BASE_URL);
 
     // // METODO DE BUSCA DE PAGINACAO
     $busca = filter_input(INPUT_GET, 'pesquisa_nome');
@@ -26,13 +26,6 @@
     $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
     $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
     $QtdTotalhosp = new hospitalUserDAO($conn, $BASE_URL);
-
-    // METODO DE BUSCA DE PAGINACAO
-    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
-    $buscaAtivo = filter_input(INPUT_GET, 'ativo_hosp');
-    $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
-    $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
-
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
     $condicoes = [
@@ -45,50 +38,27 @@
     $where = implode(' AND ', $condicoes);
 
     // // QUANTIDADE hospitalUserS
-    // $qtdpacItens1 = $QtdTotalpac->QtdhospitalUser($where);
-    // $qtdpacItens = ($qtdpacItens1['qtd']);
-    // $totalcasos = ceil($qtdpacItens / $limite);
+    $qtdHospItens1 = $QtdTotalhosp->QtdhospitalUser($where);
+    $qtdHospItens = ($qtdHospItens1['qtd']);
+    $totalcasos = ceil($qtdHospItens / $limite);
 
     // PAGINACAO
-    // $obPagination = new pagination($qtdpacItens, $_GET['pag'] ?? 1,  $limite ?? 10);
-    // $obLimite = $obPagination->getLimit();
+    $obPagination = new pagination($qtdHospItens, $_GET['pag'] ?? 1,  $limite ?? 10);
+    $obLimite = $obPagination->getLimit();
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $id_usuario = 5;
     $query = $hospitalUser->selectAllhospitalUser($where, $order, $limite);
 
-    // $condicoes = [
-    //     strlen($busca) ? 'nome_hosp LIKE "%' . $busca . '%"' : null,
-    //     strlen($buscaAtivo) ? 'ativo_hosp = "' . $buscaAtivo . '"' : null
-    // ];
-    // $condicoes = array_filter($condicoes);
-    // $order = $ordenar;
-    // // REMOVE POSICOES VAZIAS DO FILTRO
-    // $where = implode(' AND ', $condicoes);
-
-    // // QUANTIDADE hospitalUserS
-    // $qtdhospItens1 = $QtdTotalhosp->QtdhospitalUser($where);
-    // $qtdhospItens = ($qtdhospItens1['qtd']);
-    // $totalcasos = ceil($qtdhospItens / $limite);
-
-    // // PAGINACAO
-    // $obPagination = new pagination($qtdhospItens, $_GET['pag'] ?? 1,  $limite ?? 10);
-    // $obLimite = $obPagination->getLimit();
-
-    // PREENCHIMENTO DO FORMULARIO COM QUERY
-    // $query = $hospitalUser->joinHospitalUser($id_usuario);
-
     ?>
-    <!--tabela evento-->
     <div class="container py-2">
         <div class="row" style="background-color: #d3d3d3">
             <form class="formulario" id="form_pesquisa" method="GET">
-                <!-- <div class="form-group row">
+                <div class="form-group row">
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <div class="form-group col-sm-2">
-                        <label>Pesquisa Nome</label>
-
-                        <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por hospitalUser">
+                        <label>Pesquisa Usuário</label>
+                        <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px" id="pesquisa_nome" placeholder="Pesquisa por hospitalUser">
                     </div>
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Limite</label>
@@ -111,7 +81,7 @@
                     <div class="form-group col-sm-1" style="padding:0px 50px 30px 50px">
                         <button style="margin:10px; font-weight:400" type="submit" class="btn-sm btn-primary">Pesquisar</button>
                     </div>
-                </div> -->
+                </div>
             </form>
 
             <?php
@@ -119,20 +89,20 @@
             // $query = $hospitalUser->joinHospitalUser($id_usuario);
 
             // GETS 
-            // unset($_GET['pag']);
-            // unset($_GET['pg']);
-            // $gets = http_build_query($_GET);
+            unset($_GET['pag']);
+            unset($_GET['pg']);
+            $gets = http_build_query($_GET);
 
             // // PAGINACAO
-            // $paginacao = '';
-            // $paginas = $obPagination->getPages();
+            $paginacao = '';
+            $paginas = $obPagination->getPages();
 
-            // foreach ($paginas as $pagina) {
-            //     $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
-            //     $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pg'] . '&' . $gets . '"> 
-            //     <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
-            //     <li class="page-item"></a>';
-            // };
+            foreach ($paginas as $pagina) {
+                $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
+                $paginacao .= '<li class="page-item"><a href="?pag=' . $pagina['pg'] . '&' . $gets . '"> 
+                <button type="button" class="btn ' . $class . '">' . $pagina['pg'] . '</button>
+                <li class="page-item"></a>';
+            };
             ?>
         </div>
         <div>
@@ -229,9 +199,7 @@
         idAcoes.style.display = 'none';
 
     };
-    src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js";
 </script>
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

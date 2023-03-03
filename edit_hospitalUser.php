@@ -48,9 +48,6 @@ $hospitals = $hospital_geral->findGeral($limite, $inicio);
 $usuarioDao = new userDAO($conn, $BASE_URL);
 $usuarios = $usuarioDao->findGeral($limite, $inicio);
 
-$patologiaDao = new patologiaDAO($conn, $BASE_URL);
-$patologias = $patologiaDao->findGeral();
-
 $hospitalUserDao = new hospitalUserDAO($conn, $BASE_URL);
 $hospitalUser = $hospitalUserDao->findGeral();
 
@@ -62,12 +59,15 @@ extract($hospitalUser);
 ?>
 
 <!-- formulario update -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <div id="main-container" class="container-fluid">
     <div class="row">
         <h1 class="page-title">Atualizar hospital</h1>
         <p class="page-description">Adicione informações sobre o hospital</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_hospitalUser.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="type" value="update">
+            <input type="hidden" name="id_hospitalUser" value="<?= $id_hospitalUser ?>">
             <div class="form-group row">
                 <div class="form-group col-sm-3">
                     <label class="control-label col-sm-3 " for="fk_hospital_user">Hospital</label>
@@ -102,8 +102,8 @@ extract($hospitalUser);
 <?php
 include_once("templates/footer.php");
 ?>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </html>
