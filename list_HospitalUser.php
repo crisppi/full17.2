@@ -11,10 +11,10 @@
     include_once("models/message.php");
 
     include_once("templates/header.php");
-
+ 
     include_once("array_dados.php");
 
-    // include_once("models/pagination.php");
+    include_once("models/pagination.php");
 
     //Instanciando a classe 
     $hospitalUser = new hospitalUserDAO($conn, $BASE_URL);
@@ -55,14 +55,14 @@
         <div class="row" style="background-color: #d3d3d3">
             <form class="formulario" id="form_pesquisa" method="GET">
                 <div class="form-group row">
-                    <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
-                    <div class="form-group col-sm-2">
-                        <label>Pesquisa Usuário</label>
-                        <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px" id="pesquisa_nome" placeholder="Pesquisa por hospitalUser">
+                    <h6 class="page-title" style="margin-top:10px border:0em;">Selecione itens para efetuar Pesquisa</h6>
+                    <div class="form-group col-sm-3">
+                        <label style="margin-left: 30px;">Pesquisa por Hospital</label>
+                        <input style="margin-left: 30px;" class="form-control" type="text" name="pesquisa_nome" placeholder="Selecione o Hospital" value="">
                     </div>
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Limite</label>
-                        <select class="form-control mb-3" id="limite" name="limite">
+                        <select class="form-control mb-3" style="font-size:0.6em" id="limite" name="limite">
                             <option value="">Reg por página</option>
                             <option value="5" <?= $limite == '5' ? 'selected' : null ?>>5</option>
                             <option value="10" <?= $limite == '10' ? 'selected' : null ?>>10</option>
@@ -72,7 +72,7 @@
                     </div>
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Classificar</label>
-                        <select class="form-control mb-3" id="ordenar" name="ordenar">
+                        <select class="form-control mb-3"  style="font-size:0.6em"id="ordenar" name="ordenar">
                             <option value="">Classificar por</option>
                             <option value="id_hospitalUser" <?= $ordenar == 'id_hospitalUser' ? 'selected' : null ?>>Id Internação</option>
                             <option value="nome_hosp" <?= $ordenar == 'nome_hosp' ? 'selected' : null ?>>hospitalUser</option>
