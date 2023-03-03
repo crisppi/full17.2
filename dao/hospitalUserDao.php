@@ -1,9 +1,9 @@
 <?php
 
-require_once("./models/hospitalUser.php");
 require_once("./models/message.php");
 
 // Review DAO
+require_once("./models/hospitalUser.php");
 require_once("dao/hospitalUserDao.php");
 
 class hospitalUserDAO implements hospitalUserDAOInterface
@@ -135,6 +135,7 @@ class hospitalUserDAO implements hospitalUserDAOInterface
         $stmt->bindParam(":fk_hospital_user", $hospitalUser->fk_hospital_user);
 
         $stmt->bindParam(":id_hospitalUser", $hospitalUser->id_hospitalUser);
+
         $stmt->execute();
 
         // Mensagem de sucesso por editar hospitalUser
@@ -176,7 +177,26 @@ class hospitalUserDAO implements hospitalUserDAOInterface
         $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
 
         //MONTA A QUERY
-        $query = $this->conn->query('SELECT * FROM tb_hospitalUser ' . $where . ' ' . $order . ' ' . $limit);
+        $query = $this->conn->query('SELECT 
+        
+        hu.id_hospitalUser,
+        hu.fk_usuario_hosp,
+        hu.fk_hospital_user,
+        ho.id_hospital,
+        us.id_usuario,
+        us.usuario_user,
+        us.cargo_user,
+        ho.nome_hosp 
+        
+        FROM tb_hospitalUser hu 
+
+        left JOIN tb_hospital as ho On  
+        hu.fk_hospital_user = ho.id_hospital
+        
+		left JOIN tb_user as us On  
+        hu.fk_usuario_hosp = us.id_usuario
+        
+         ' . $where . ' ' . $order . ' ' . $limit);
 
         $query->execute();
 
@@ -202,7 +222,38 @@ class hospitalUserDAO implements hospitalUserDAOInterface
         return $QtdTotalHosp;
     }
 
-    public function joinHospitalUser($id_usuario)
+    public function joinHospitalUser($id_hospitalUser)
+
+    {
+        $stmt = $this->conn->query("SELECT 
+        
+        hu.id_hospitalUser,
+        hu.fk_usuario_hosp,
+        hu.fk_hospital_user,
+        ho.id_hospital,
+        us.id_usuario,
+        us.usuario_user,
+        us.cargo_user,
+        ho.nome_hosp 
+        
+        FROM tb_hospitalUser hu 
+
+        left JOIN tb_hospital as ho On  
+        hu.fk_hospital_user = ho.id_hospital
+        
+		left JOIN tb_user as us On  
+        hu.fk_usuario_hosp = us.id_usuario
+         
+        where hu.id_hospitalUser = $id_hospitalUser
+
+         ");
+
+        $stmt->execute();
+
+        $hospitalUserJoin = $stmt->fetchAll();
+        return $hospitalUserJoin;
+    }
+    public function joinHospitalUserAll()
 
     {
         $stmt = $this->conn->query("SELECT 
@@ -222,34 +273,11 @@ class hospitalUserDAO implements hospitalUserDAOInterface
         
 		left JOIN tb_user as us On  
         hu.fk_usuario_hosp = us.id_usuario
-         
-        where us.id_usuario = $id_usuario
-         ");
-
-        $stmt = $this->conn->query(
-            'SELECT 
-        hu.id_hospitalUser,
-        hu.fk_usuario_hosp,
-        hu.fk_hospital_user,
-        ho.id_hospital, 
-        ho.nome_hosp,
-        us.id_usuario,
-        us.usuario_user
-
-        FROM tb_user us 
-
-        iNNER JOIN tb_hospital as ho On  
-        hu.fk_hospital_user = ho.id_hospital
-
-        iNNER JOIN tb_hospitalUser as hu On  
-        hu.fk_hospital_user = ho.id_hospital'
-
-
-        );
+                  ");
 
         $stmt->execute();
 
-        $hospitalUser = $stmt->fetch();
-        return $hospitalUser;
+        $hospitalUserJoin = $stmt->fetchAll();
+        return $hospitalUserJoin;
     }
 }

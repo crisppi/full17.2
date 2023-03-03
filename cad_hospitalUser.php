@@ -2,116 +2,107 @@
 include_once("check_logado.php");
 
 require_once("templates/header.php");
-require_once("dao/hospitalUserDao.php");
 
 require_once("models/hospitalUser.php");
 require_once("dao/hospitalUserDao.php");
 
 require_once("models/message.php");
+include_once("check_logado.php");
+
+require_once("templates/header.php");
+
+include_once("models/internacao.php");
+include_once("dao/internacaoDao.php");
+
+include_once("models/message.php");
+
+include_once("models/hospital.php");
+include_once("dao/hospitalDao.php");
+
+include_once("models/patologia.php");
+include_once("dao/patologiaDao.php");
+
+include_once("models/usuario.php");
+include_once("dao/usuarioDAO.php");
+
+include_once("models/uti.php");
+include_once("dao/utiDao.php");
+
+include_once("models/gestao.php");
+include_once("dao/gestaoDao.php");
+
+include_once("models/prorrogacao.php");
+include_once("dao/prorrogacaoDao.php");
+
+include_once("models/negociacao.php");
+include_once("dao/negociacaoDao.php");
+
+include_once("array_dados.php");
+
+$internacaoDao = new internacaoDAO($conn, $BASE_URL);
+
+$hospital_geral = new hospitalDAO($conn, $BASE_URL);
+$hospitals = $hospital_geral->findGeral($limite, $inicio);
+
+$usuarioDao = new userDAO($conn, $BASE_URL);
+$usuarios = $usuarioDao->findGeral($limite, $inicio);
+
+$patologiaDao = new patologiaDAO($conn, $BASE_URL);
+$patologias = $patologiaDao->findGeral();
+
+$gestao = new gestaoDAO($conn, $BASE_URL);
+$gestaoIdMax = $gestao->findMax();
+$findMaxGesInt = $gestao->findMaxGesInt();
+
+$uti = new utiDAO($conn, $BASE_URL);
+$utiIdMax = $uti->findMaxUTI();
+$findMaxUtiInt = $uti->findMaxUtiInt();
+
+$prorrogacao = new prorrogacaoDAO($conn, $BASE_URL);
+$prorrogacaoIdMax = $prorrogacao->findMaxPror();
+$findMaxProInt = $prorrogacao->findMaxProInt();
+
+$negociacao = new negociacaoDAO($conn, $BASE_URL);
+$negociacaoLast = new negociacaoDAO($conn, $BASE_URL);
 
 $hospitalUserDao = new hospitalUserDAO($conn, $BASE_URL);
 
 // Receber id do usuário
 $id_hospitalUser = filter_input(INPUT_GET, "id_hospitalUser");
 
-if (empty($id_hospitalUser)) {
 
-    if (!empty($userData)) {
-
-        $id = $userData->id_hospitalUser;
-    } else {
-
-        //$message->setMessage("Usuário não encontrado!", "error", "index.php");
-    }
-} else {
-
-    $userData = $userDao->findById($id_hospitalUser);
-
-    // Se não encontrar usuário
-    if (!$userData) {
-        $message->setMessage("Usuário não encontrado!", "error", "index.php");
-    }
-}
 
 ?>
 <div id="main-container" class="container-fluid">
     <div class="row">
         <h1 class="page-title">Cadastrar hospitalUser</h1>
-        <p class="page-description">Adicione informações sobre o hospitalUser</p>
+        <p class="page-description">Adicione informações sobre o Usuários/Hospital</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_hospitalUser.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="type" value="create">
-            <div class="form-group row">
-                <div class="form-group col-sm-4">
-                    <label for="nome_hosp">hospitalUser</label>
-                    <input type="text" class="form-control" id="nome_hosp" name="nome_hosp" placeholder="Digite o nome do hospitalUser" required>
-                </div>
-
-                <div class="form-group col-sm-1">
-                    <label for="cnpj_hosp">CNPJ</label>
-                    <input type="text" oninput="mascara(this, 'cnpj')" class="form-control" id="cnpj_hosp" name="cnpj_hosp" placeholder="Digite o cnpj">
-                </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label col-sm-3 " for="fk_hospital_user">Hospital</label>
+                <select class="form-control" id="fk_hospital_user" name="fk_hospital_user" required>
+                    <option value="<?= $hospital["nome_hosp"] ?>">Selecione o Hospital</option>
+                    <?php foreach ($hospitals as $hospital) : ?>
+                        <option value="<?= $hospital["id_hospital"] ?>"><?= $hospital["nome_hosp"] ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
-            <div class="form-group row">
-                <div class="form-group col-sm-3">
-                    <label for="endereco_hosp">Endereço</label>
-                    <input type="text" class="form-control" id="endereco_hosp" name="endereco_hosp" placeholder="Digite o endereço">
-                </div>
-
-                <div class="form-group col-sm-3">
-                    <label for="bairro_hosp">Bairro</label>
-                    <input type="text" class="form-control" id="bairro_hosp" name="bairro_hosp" placeholder="Digite o bairro">
-                </div>
-                <div class="form-group col-sm-1">
-                    <label for="numero_hosp">Número</label>
-                    <input type="text" class="form-control" id="numero_hosp" name="numero_hosp" placeholder="Digite o número">
-                </div>
-                <div class="form-group col-sm-3">
-                    <label for="cidade_hosp">Cidade</label>
-                    <input type="text" class="form-control" id="cidade_hosp" name="cidade_hosp" placeholder="Digite a cidade">
-                </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label" for="fk_usuario_hosp">usuario</label>
+                <select class="form-control" id="fk_usuario_hosp" name="fk_usuario_hosp" required>
+                    <option value="">Selecione o usuario</option>
+                    <?php foreach ($usuarios as $usuario) : ?>
+                        <option value="<?= $usuario["id_usuario"] ?>"><?= $usuario["usuario_user"] ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
-            <div class="form-group row">
-
-                <div class="form-group col-sm-2">
-                    <label for="email01_hosp">email01</label>
-                    <input type="email" class="form-control" id="email01_hosp" name="email01_hosp" placeholder="Digite a email01">
-                </div>
-                <div class="form-group col-sm-2">
-                    <label for="email02_hosp">email02_hosp</label>
-                    <input type="email" class="form-control" id="email02_hosp" name="email02_hosp" placeholder="Digite a email02">
-                </div>
-                <div class="form-group col-sm-2">
-                    <label for="telefone01_hosp">Telefone</label>
-                    <input type="text" onkeydown="return mascara(this, 'tel')" class="form-control" id="telefone01_hosp" name="telefone01_hosp" placeholder="Digite o telefone">
-                </div>
-                <div class="form-group col-sm-2">
-                    <label for="telefone02_hosp">Telefone</label>
-                    <input type="text" onkeydown="return mascara(this, 'tel')" class="form-control" id="telefone02_hosp" name="telefone02_hosp" placeholder="Digite outro telefone">
-                </div>
-                <div class="form-group col-sm-1">
-                    <label class="control-label" for="ativo_hosp">Ativo</label>
-                    <select class="form-control" name="ativo_hosp">
-                        <option value="Sim">Sim</option>
-                        <option value="Não">Não</option>
-                    </select>
-                </div>
-                <div class="form-group col-sm-4">
-                    <?php $agora = date('d/m/Y'); ?>
-                    <input class="visible" type="text" class="form-control" value='<?= $agora; ?>' id="data_create_hosp" name="data_create_hosp" placeholder="">
-                </div>
-                <div class="form-group col-sm-4">
-                    <input type="text" class="form-control" id="usuario_create_hosp" value="<?= $_SESSION['username'] ?>" name="usuario_create_hosp" placeholder="Digite o usuário">
-                </div>
-                <div class="form-group col-sm-4">
-                    <input type="text" class="form-control" id="fk_usuario_hosp" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_hosp" placeholder="Digite o usuário">
-                </div>
-
-            </div>
-            <br>
-            <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
-            <br>
     </div>
-    </form>
+    <br>
+    <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
+    <br>
+</div>
+</form>
 </div>
 </div>
 

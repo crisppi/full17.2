@@ -21,28 +21,28 @@
     // $QtdTotalpac = new hospitalUserDAO($conn, $BASE_URL);
 
     // // METODO DE BUSCA DE PAGINACAO
-    // $busca = filter_input(INPUT_GET, 'pesquisa_nome');
-    // $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
-    // $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
-    // $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
-    // $QtdTotalhosp = new hospitalUserDAO($conn, $BASE_URL);
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
+    $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
+    $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
+    $QtdTotalhosp = new hospitalUserDAO($conn, $BASE_URL);
 
     // METODO DE BUSCA DE PAGINACAO
-    // $busca = filter_input(INPUT_GET, 'pesquisa_nome');
-    // $buscaAtivo = filter_input(INPUT_GET, 'ativo_hosp');
-    // $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
-    // $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $buscaAtivo = filter_input(INPUT_GET, 'ativo_hosp');
+    $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
+    $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
 
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
-    // $condicoes = [
-    //     strlen($busca) ? 'nome_pac LIKE "%' . $busca . '%"' : null,
-    //     strlen($buscaAtivo) ? 'ativo_pac = "' . $buscaAtivo . '"' : null
-    // ];
-    // $condicoes = array_filter($condicoes);
-    // $order = $ordenar;
-    // // REMOVE POSICOES VAZIAS DO FILTRO
-    // $where = implode(' AND ', $condicoes);
+    $condicoes = [
+        strlen($busca) ? 'nome_pac LIKE "%' . $busca . '%"' : null,
+        strlen($buscaAtivo) ? 'ativo_pac = "' . $buscaAtivo . '"' : null
+    ];
+    $condicoes = array_filter($condicoes);
+    $order = $ordenar;
+    // REMOVE POSICOES VAZIAS DO FILTRO
+    $where = implode(' AND ', $condicoes);
 
     // // QUANTIDADE hospitalUserS
     // $qtdpacItens1 = $QtdTotalpac->QtdhospitalUser($where);
@@ -55,8 +55,8 @@
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $id_usuario = 5;
-    $query = $hospitalUser->joinHospitalUser($id_usuario);
-    print_r($query);
+    $query = $hospitalUser->selectAllhospitalUser($where, $order, $limite);
+
     // $condicoes = [
     //     strlen($busca) ? 'nome_hosp LIKE "%' . $busca . '%"' : null,
     //     strlen($buscaAtivo) ? 'ativo_hosp = "' . $buscaAtivo . '"' : null
@@ -144,6 +144,7 @@
                     <th scope="col">Id</th>
                     <th scope="col">Hospital</th>
                     <th scope="col">Usuário</th>
+                    <th scope="col">Cargo</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -152,15 +153,12 @@
 
                 foreach ($query as $hospitalUserSel) :
                     extract($hospitalUserSel);
-                    print_r($hospitalUserSel);
-                    exit;
                 ?>
                     <tr>
                         <td scope="row" class="col-id"><?= $id_hospitalUser ?></td>
                         <td scope="row" class="nome-coluna-table"><?= $nome_hosp ?></td>
                         <td scope="row" class="nome-coluna-table"><?= $usuario_user ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $endereco_hosp ?></td>
-                        <td scope="row" class="nome-coluna-table"><?= $cidade_hosp ?></td>
+                        <td scope="row" class="nome-coluna-table"><?= $cargo_user ?></td>
 
                         <td class="action">
                             <!-- <a href="cad_hospitalUser.php"><i name="type" value="create" style="color:green; margin-right:10px" class="bi bi-plus-square-fill edit-icon"></i></a> -->
@@ -176,19 +174,19 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <?php
+        <!-- <?php
 
-        "<div style=margin-left:20px;>";
-        echo "<div style='color:blue; margin-left:20px;'>";
-        echo "</div>";
-        echo "<nav aria-label='Page navigation example'>";
-        echo " <ul class='pagination'>";
-        echo " <li class='page-item'><a class='page-link' href='list_hospitalUser.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
+                "<div style=margin-left:20px;>";
+                echo "<div style='color:blue; margin-left:20px;'>";
+                echo "</div>";
+                echo "<nav aria-label='Page navigation example'>";
+                echo " <ul class='pagination'>";
+                echo " <li class='page-item'><a class='page-link' href='list_hospitalUser.php?pag=1&" . $gets . "''><span aria-hidden='true'>&laquo;</span></a></li>"; ?>
         <?= $paginacao ?>
         <?php echo "<li class='page-item'><a class='page-link' href='list_hospitalUser.php?pag=$totalcasos&" . $gets . "''><span aria-hidden='true'>&raquo;</span></a></li>";
         echo " </ul>";
         echo "</nav>";
-        echo "</div>"; ?>
+        echo "</div>"; ?> -->
         <hr>
     </div>
     <div id="id-confirmacao" class="btn_acoes oculto">
@@ -233,6 +231,8 @@
     };
     src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js";
 </script>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <script>

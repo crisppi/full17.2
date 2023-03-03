@@ -16,6 +16,8 @@
     // METODO DE BUSCA DE PAGINACAO
     $busca = filter_input(INPUT_GET, 'pesquisa_nome');
     $buscaAtivo = filter_input(INPUT_GET, 'ativo_hos');
+    $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
+
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
     $condicoes = [
@@ -92,7 +94,6 @@
             </thead>
             <tbody>
                 <?php
-
                 foreach ($query as $hospital) :
                     extract($hospital);
                 ?>
