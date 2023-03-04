@@ -21,7 +21,8 @@
     // $QtdTotalHosp = new hospitalUserDAO($conn, $BASE_URL);
 
     // // METODO DE BUSCA DE PAGINACAO
-    $busca = filter_input(INPUT_GET, 'pesquisa_nome');
+    $busca = filter_input(INPUT_GET, 'pesquisa_nome') ? filter_input(INPUT_GET, 'pesquisa_nome') : "";
+    $busca_user = filter_input(INPUT_GET, 'pesquisa_user') ? filter_input(INPUT_GET, 'pesquisa_user') : "";
     $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
     $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
     $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
@@ -29,7 +30,8 @@
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
 
     $condicoes = [
-        strlen($busca) ? 'nome_pac LIKE "%' . $busca . '%"' : null,
+        strlen($busca) ? 'nome_hosp LIKE "%' . $busca . '%"' : null,
+        strlen($busca_user) ? 'usuario_user LIKE "%' . $busca_user . '%"' : null,
         strlen($buscaAtivo) ? 'ativo_pac = "' . $buscaAtivo . '"' : null
     ];
     $condicoes = array_filter($condicoes);
@@ -48,17 +50,22 @@
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $id_usuario = 5;
-    $query = $hospitalUser->selectAllhospitalUser($where, $order, $limite);
+    $query = $hospitalUser->selectAllhospitalUser($where, $order, $obLimite);
 
     ?>
     <div class="container py-2">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <div class="row" style="background-color: #d3d3d3">
             <form class="formulario" id="form_pesquisa" method="GET">
                 <div class="form-group row">
-                    <h6 class="page-title" style="margin-top:10px border:0em;">Selecione itens para efetuar Pesquisa</h6>
+                    <h6 class="page-title" style="margin-top:10px; border:0em;">Selecione itens para efetuar Pesquisa</h6>
                     <div class="form-group col-sm-3">
                         <label style="margin-left: 30px;">Pesquisa por Hospital</label>
-                        <input style="margin-left: 30px;" class="form-control" type="text" name="pesquisa_nome" placeholder="Selecione o Hospital" value="">
+                        <input style="margin-left: 30px;" class="form-control" type="text" name="pesquisa_nome" placeholder="Selecione o Hospital" value="<?= $busca ?>"><?php isset($_get['pesquisa_nome']) ? $_get['pesquisa_nome'] : ""; ?>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label style="margin-left: 30px;">Pesquisa por Usuário</label>
+                        <input style="margin-left: 30px;" class="form-control" type="text" name="pesquisa_user" placeholder="Selecione o Usuário" value="<?= $busca_user ?>">
                     </div>
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Limite</label>
@@ -74,20 +81,18 @@
                         <label>Classificar</label>
                         <select class="form-control mb-3" style="font-size:0.6em" id="ordenar" name="ordenar">
                             <option value="">Classificar por</option>
-                            <option value="id_hospitalUser" <?= $ordenar == 'id_hospitalUser' ? 'selected' : null ?>>Id Internação</option>
-                            <option value="nome_hosp" <?= $ordenar == 'nome_hosp' ? 'selected' : null ?>>hospitalUser</option>
+                            <option value="usuario_user" <?= $ordenar == 'usuario_user' ? 'selected' : null ?>>Usuário</option>
+                            <option value="nome_hosp" <?= $ordenar == 'nome_hosp' ? 'selected' : null ?>>Hospital</option>
                         </select>
                     </div>
-                    <div class="form-group col-sm-1" style="padding:0px 50px 30px 50px">
-                        <button style="margin:10px; font-weight:400" type="submit" class="btn-sm btn-primary">Pesquisar</button>
+                    <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
+                        <button type="submit" class="btn btn-primary mb-1"><span class="material-icons">
+                                person_search
+                            </span></button>
                     </div>
                 </div>
             </form>
-
             <?php
-            // PREENCHIMENTO DO FORMULARIO COM QUERY
-            // $query = $hospitalUser->joinHospitalUser($id_usuario);
-
             // GETS 
             unset($_GET['pag']);
             unset($_GET['pg']);
@@ -160,7 +165,7 @@
         <hr>
     </div>
     <div id="id-confirmacao" class="btn_acoes oculto">
-        <p>Deseja deletar este hospitalUser: ?</p>
+        <p>Deseja deletar este Relacionamento?</p>
         <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
         <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
     </div>
@@ -171,7 +176,7 @@
 
     <div>
         <hr>
-        <a class="btn btn-success styled" style="margin-left:120px" href="cad_hospitalUser.php">Novo hospitalUser</a>
+        <a class="btn btn-success styled" style="margin-left:120px" href="cad_hospitalUser.php">Novo Cadastro</a>
     </div>
 </body>
 

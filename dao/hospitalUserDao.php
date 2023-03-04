@@ -213,7 +213,23 @@ class hospitalUserDAO implements hospitalUserDAOInterface
         $order = strlen($order) ? 'ORDER BY ' . $order : '';
         $limite = strlen($limite) ? 'LIMIT ' . $limite : '';
 
-        $stmt = $this->conn->query('SELECT * ,COUNT(id_hospitalUser) as qtd FROM tb_hospitalUser ' . $where . ' ' . $order . ' ' . $limite);
+        $stmt = $this->conn->query('SELECT hu.id_hospitalUser,
+        hu.fk_usuario_hosp,
+        hu.fk_hospital_user,
+        ho.id_hospital,
+        us.id_usuario,
+        us.usuario_user,
+        us.cargo_user,
+        ho.nome_hosp,
+        COUNT(id_hospitalUser) as qtd
+        
+        FROM tb_hospitalUser hu 
+
+        left JOIN tb_hospital as ho On  
+        hu.fk_hospital_user = ho.id_hospital
+        
+		left JOIN tb_user as us On  
+        hu.fk_usuario_hosp = us.id_usuario ' . $where . ' ' . $order . ' ' . $limite);
 
         $stmt->execute();
 
