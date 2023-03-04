@@ -1,3 +1,6 @@
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 <div class="row">
     <h2 class="page-title"> Capeante - Lançamento</h2>
     <p class="page-description">Adicione informações do Capeante</p>
@@ -181,6 +184,7 @@
             <div class="form-group col-sm-2">
                 <label for="valor_glosa_enf">Glosa Enfermagem</label>
                 <input type="text" class="form-control" id="valor_glosa_enf" name="valor_glosa_enf" placeholder="Glosa Enfermagem">
+                <p class="oculto mensagem_error" id="err_valor_glosa_enf">Digite um número!</p>
             </div>
             <div class="form-group col-sm-2">
                 <label for="valor_glosa_med">Glosa Médica</label>
@@ -200,6 +204,50 @@
         <a class="btn btn-success styled" style="margin-left:10px" href="cad_capeante.php">Novo Capeante</a>
     </div>
 </div>
+<script>
+    // pegar dados do input valor_glosa_enf //
+
+    // var input = document.querySelector('#valor_glosa_enf');
+
+    let inputEnf = document.getElementById("valor_glosa_enf");
+
+    inputEnf.addEventListener("blur", function() {
+
+        // PEGAR VALOR DO INPUT
+        final = inputEnf.value;
+        // console.log(final);
+
+        let p = document.querySelector("#valor_glosa_enf").value;
+        let p_erro = document.querySelector("#err_valor_glosa_enf");
+        // let mensagem = document.createElement("p");
+        let textMsg = document.createTextNode("Digite um número!");
+
+        // CRIAR MENSAGEM DE ERRO
+        if (isNaN(final)) {
+
+            $("#err_valor_glosa_enf").removeClass("oculto");
+            $("#err_valor_glosa_enf").addClass("visible");
+
+            inputEnf.addEventListener("click", function() {
+                $("#err_valor_glosa_enf").addClass("oculto");
+
+            })
+        };
+
+        // INSERIR VALOR NO INPUT DE DADOS 
+        valor = final * 2;
+        let glosaTotal = document.getElementById("valor_glosa_total");
+        glosaTotal.value = valor;
+
+    })
+
+    function cancelar() {
+        let idAcoes = (document.getElementById('id-confirmacao'));
+        idAcoes.style.display = 'none';
+        console.log("chegou no cancelar");
+
+    };
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
