@@ -20,7 +20,7 @@ include_once("models/pagination.php");
 $busca = filter_input(INPUT_GET, 'pesquisa_nome');
 $ativo_hosp = filter_input(INPUT_GET, 'ativo_hosp');
 
-include_once("formularios/form_list_hopitalUser.php");
+include_once("formularios/form_list_hospitalUser.php");
 include_once("templates/footer.php");
 ?>
 
