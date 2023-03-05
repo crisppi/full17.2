@@ -1,5 +1,7 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
 <div class="row">
     <h2 class="page-title"> Capeante - Lançamento</h2>
@@ -188,11 +190,11 @@
             </div>
             <div class="form-group col-sm-2">
                 <label for="valor_glosa_med">Glosa Médica</label>
-                <input type="text" class="form-control" id="valor_glosa_med" name="valor_glosa_med" placeholder="Glosa Médica">
+                <input type="text" class="form-control dinheiro" id="valor_glosa_med" name="valor_glosa_med" placeholder="Glosa Médica">
             </div>
             <div class="form-group col-sm-2">
                 <label for="valor_glosa_total">Glosa Total</label>
-                <input type="text" class="form-control" id="valor_glosa_total" name="valor_glosa_total" placeholder="Glosa Total">
+                <input type="text" class="dinheiro form-control" id="valor_glosa_total" name="valor_glosa_total" placeholder="Glosa Total">
             </div>
 
         </div>
@@ -232,9 +234,19 @@
                 $("#err_valor_glosa_enf").addClass("oculto");
 
             })
-        };
+        } else {
 
-        // INSERIR VALOR NO INPUT DE DADOS 
+            inputEnf.addEventListener("blur", function() {
+                console.log("aui");
+                $('.dinheiro').mask('#.##0,00', {
+                    reverse: true
+                });
+            })
+
+
+        }
+
+        // INSERIR VALOR NO INPUT DE DADOS
         valor = final * 2;
         let glosaTotal = document.getElementById("valor_glosa_total");
         glosaTotal.value = valor;
