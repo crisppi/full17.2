@@ -95,11 +95,11 @@
         <div class="form-group row">
             <div class="form-group col-sm-2">
                 <label for="valor_apresentado_capeante">Valor Apresentado</label>
-                <input type="text" class="form-control" id="valor_diarias" name="valor_apresentado_capeante" placeholder="Valor apresentado">
+                <input type="text" class="form-control dinheiro" id="valor_diarias" name="valor_apresentado_capeante" placeholder="Valor apresentado">
             </div>
             <div class="form-group col-sm-2">
                 <label for="valor_final_capeante">Valor Final</label>
-                <input type="text" class="form-control" id="valor_final_capeante" name="valor_final_capeante" placeholder="Valor final">
+                <input type="text" class="form-control dinheiro" id="valor_final_capeante" name="valor_final_capeante" placeholder="Valor final">
             </div>
         </div>
         <br>
@@ -127,27 +127,27 @@
         <div class="form-group row">
             <div class="form-group col-sm-2">
                 <label for="valor_diarias">Valor Diárias</label>
-                <input type="text" class="form-control" id="valor_diarias" name="valor_diarias" placeholder="Valor diárias">
+                <input type="text" class="form-control dinheiro" id="valor_diarias" name="valor_diarias" placeholder="Valor diárias">
             </div>
             <div class="form-group col-sm-2">
                 <label for="valor_matmed">Valor MatMed</label>
-                <input type="text" class="form-control" id="valor_matmed" name="valor_matmed" placeholder="Valor MatMed">
+                <input type="text" class="form-control dinheiro" id="valor_matmed" name="valor_matmed" placeholder="Valor MatMed">
             </div>
             <div class="form-group col-sm-2">
                 <label for="valor_oxig">Valor Oxigenioterapia</label>
-                <input type="text" class="form-control" id="valor_oxig" name="valor_oxig" placeholder="Valor Oxigenioterapia">
+                <input type="text" class="form-control dinheiro" id="valor_oxig" name="valor_oxig" placeholder="Valor Oxigenioterapia">
             </div>
             <div class="form-group col-sm-2">
                 <label for="valor_sadt">Valor SADT</label>
-                <input type="text" class="form-control" id="valor_sadt" name="valor_sadt" placeholder="valor SADT">
+                <input type="text" class="form-control dinheiro" id="valor_sadt" name="valor_sadt" placeholder="Valor SADT">
             </div>
             <div class="form-group col-sm-2">
                 <label for="valor_taxa">Valor Taxas</label>
-                <input type="text" class="form-control" id="valor_taxa" name="valor_taxa" placeholder="Valor Taxa">
+                <input type="text" class="form-control dinheiro" id="valor_taxa" name="valor_taxa" placeholder="Valor Taxa">
             </div>
             <div class="form-group col-sm-2">
                 <label for="valor_honorarios">Valor Honorários</label>
-                <input type="text" class="form-control" id="valor_honorarios" name="valor_honorarios" placeholder="Valor Honorários">
+                <input type="text" class="form-control dinheiro" id="valor_honorarios" name="valor_honorarios" placeholder="Valor Honorários">
             </div>
         </div>
         <br>
@@ -156,27 +156,27 @@
         <div class="form-group row">
             <div class="form-group col-sm-2">
                 <label for="glosa_diarias">Glosa Diárias</label>
-                <input type="text" class="form-control" id="glosa_diarias" name="glosa_diarias" placeholder="Glosa diárias">
+                <input type="text" class="form-control dinheiro" id="glosa_diarias" name="glosa_diarias" placeholder="Glosa diárias">
             </div>
             <div class="form-group col-sm-2">
                 <label for="glosa_matmed">Glosa MatMed</label>
-                <input type="text" class="form-control" id="glosa_matmed" name="glosa_matmed" placeholder="Glosa MatMed">
+                <input type="text" class="form-control dinheiro" id="glosa_matmed" name="glosa_matmed" placeholder="Glosa MatMed">
             </div>
             <div class="form-group col-sm-2">
                 <label for="glosa_oxig">Glosa Oxigenioterapia</label>
-                <input type="text" class="form-control" id="glosa_oxig" name="glosa_oxig" placeholder="Glosa Oxigenioterapia">
+                <input type="text" class="form-control dinheiro" id="glosa_oxig" name="glosa_oxig" placeholder="Glosa Oxigenioterapia">
             </div>
             <div class="form-group col-sm-2">
                 <label for="glosa_sadt">Glosa SADT</label>
-                <input type="text" class="form-control" id="glosa_sadt" name="glosa_sadt" placeholder="Glosa SADT">
+                <input type="text" class="form-control dinheiro" id="glosa_sadt" name="glosa_sadt" placeholder="Glosa SADT">
             </div>
             <div class="form-group col-sm-2">
                 <label for="glosa_taxa">Glosa Taxas</label>
-                <input type="text" class="form-control" id="glosa_taxa" name="glosa_taxa" placeholder="Glosa Taxas">
+                <input type="text" class="form-control dinheiro" id="glosa_taxa" name="glosa_taxa" placeholder="Glosa Taxas">
             </div>
             <div class="form-group col-sm-2">
                 <label for="glosa_honorarios">Glosa Honorários</label>
-                <input type="text" class="form-control" id="glosa_honorarios" name="glosa_honorarios" placeholder="Glosa honorários">
+                <input type="text" class="form-control dinheiro" id="glosa_honorarios" name="glosa_honorarios" placeholder="Glosa honorários">
             </div>
         </div>
         <br>
@@ -185,7 +185,7 @@
         <div class="form-group row">
             <div class="form-group col-sm-2">
                 <label for="valor_glosa_enf">Glosa Enfermagem</label>
-                <input type="text" class="form-control" id="valor_glosa_enf" name="valor_glosa_enf" placeholder="Glosa Enfermagem">
+                <input type="text" class="dinheiro form-control" id="valor_glosa_enf" name="valor_glosa_enf" placeholder="Glosa Enfermagem">
                 <p class="oculto mensagem_error" id="err_valor_glosa_enf">Digite um número!</p>
             </div>
             <div class="form-group col-sm-2">
@@ -207,51 +207,87 @@
     </div>
 </div>
 <script>
-    // pegar dados do input valor_glosa_enf //
-
-    // var input = document.querySelector('#valor_glosa_enf');
-
+    // pegar dados do input //
     let inputEnf = document.getElementById("valor_glosa_enf");
+    let inputMed = document.getElementById("valor_glosa_med");
+    let inputApresent = document.getElementById("valor_apresentado_capeante");
+    let valorFinal = document.getElementById("valor_final_capeante");
 
-    inputEnf.addEventListener("blur", function() {
+    inputMed.addEventListener("blur", function() {
 
         // PEGAR VALOR DO INPUT
-        final = inputEnf.value;
-        // console.log(final);
 
-        let p = document.querySelector("#valor_glosa_enf").value;
-        let p_erro = document.querySelector("#err_valor_glosa_enf");
-        // let mensagem = document.createElement("p");
-        let textMsg = document.createTextNode("Digite um número!");
+        // LIMPAR DADOS DO INPUT - valor_glosa_enf
+        finalEnf = inputEnf.value;
+        var finalEnf = finalEnf;
+        finalEnf = finalEnf.replace(".", "");
+        finalEnf = finalEnf.replace(",", ".");
+        finalEnf = parseFloat(finalEnf);
+
+        // LIMPAR DADOS DO INPUT - valor_glosa_med
+        finalMed = inputMed.value;
+        var finalMed = finalMed;
+        finalMed = finalMed.replace(".", "");
+        finalMed = finalMed.replace(",", ".");
+        finalMed = parseFloat(finalMed);
+
+        // let p = document.querySelector("#valor_glosa_enf").value;
+        // let p_med = document.querySelector("#valor_glosa_med").value;
+
+        // let p_erro = document.querySelector("#err_valor_glosa_enf");
+        // // let mensagem = document.createElement("p");
+        // let textMsg = document.createTextNode("Digite um número!");
 
         // CRIAR MENSAGEM DE ERRO
-        if (isNaN(final)) {
+        // if (isNaN(final)) {
 
-            $("#err_valor_glosa_enf").removeClass("oculto");
-            $("#err_valor_glosa_enf").addClass("visible");
+        //     $("#err_valor_glosa_enf").removeClass("oculto");
+        //     $("#err_valor_glosa_enf").addClass("visible");
 
-            inputEnf.addEventListener("click", function() {
-                $("#err_valor_glosa_enf").addClass("oculto");
+        //     inputEnf.addEventListener("click", function() {
+        //         $("#err_valor_glosa_enf").addClass("oculto");
 
-            })
-        } else {
-
-            inputEnf.addEventListener("blur", function() {
-                console.log("aui");
-                $('.dinheiro').mask('#.##0,00', {
-                    reverse: true
-                });
-            })
-
-
-        }
+        //     })
+        // }
 
         // INSERIR VALOR NO INPUT DE DADOS
-        valor = final * 2;
-        let glosaTotal = document.getElementById("valor_glosa_total");
-        glosaTotal.value = valor;
+        finalGlosa = finalEnf + finalMed;
 
-    })
+        let inputGlosa = document.getElementById("valor_glosa_total");
+        // finalGlosa = glosaTotal.value;
+        // var finalGlosa = finalGlosa;
+
+        inputGlosa.value = finalGlosa;
+
+        finalGlosa = inputGlosa.value;
+        finalGlosa = finalGlosa.replace(".", "");
+        finalGlosa = finalGlosa.replace(",", ".");
+        finalGlosa = parseFloat(finalGlosa);
+
+        console.log(finalGlosa);
+
+        inputGlosa.value = finalGlosa;
+
+        // calcula o valor da conta e lancar no campo - valor_glosa_Glosa
+        // calcula o valor final da conta e lanca no campo input - valor_final_capeante 
+        // finalApresent = inputApresent.value;
+        // console.log(finalApresent);
+        // finalConta = inputApresent - (finalEnf + finalMed);
+        // finalContaTotal = valorFinal.value;
+        // valorFinal.value = (finalContaTotal);
+        // console.log(finalTotal);
+        // glosaTotal.value = valor;
+    });
+
+    $(document).ready(function() {
+        $("input.dinheiro").maskMoney({
+            showSymbol: true,
+            symbol: "R$",
+            decimal: ",",
+            thousands: "."
+        });
+    });
+
 
     function cancelar() {
         let idAcoes = (document.getElementById('id-confirmacao'));

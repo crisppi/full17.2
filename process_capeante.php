@@ -22,7 +22,6 @@ $type = filter_input(INPUT_POST, "type");
 if ($type === "create") {
 
     // Receber os dados dos inputs
-
     $adm_capeante = filter_input(INPUT_POST, "adm_capeante");
     $aud_enf_capeante = filter_input(INPUT_POST, "aud_enf_capeante");
     $aud_med_capeante = filter_input(INPUT_POST, "aud_med_capeante");
@@ -33,11 +32,23 @@ if ($type === "create") {
     $diarias_capeante = filter_input(INPUT_POST, "diarias_capeante");
 
     $glosa_diaria = filter_input(INPUT_POST, "glosa_diaria");
+    $glosa_diaria = str_replace(',', '.', $glosa_diaria);
+
     $glosa_honorarios = filter_input(INPUT_POST, "glosa_honorarios");
+    $glosa_honorarios = str_replace(',', '.', $glosa_honorarios);
+
     $glosa_matmed = filter_input(INPUT_POST, "glosa_matmed");
+    $glosa_matmed = str_replace(',', '.', $glosa_matmed);
+
     $glosa_oxig = filter_input(INPUT_POST, "glosa_oxig");
+    $glosa_oxig = str_replace(',', '.', $glosa_oxig);
+
     $glosa_sadt = filter_input(INPUT_POST, "glosa_sadt");
+    $glosa_sadt = str_replace(',', '.', $glosa_sadt);
+
     $glosa_taxas = filter_input(INPUT_POST, "glosa_taxas");
+    $glosa_taxas = str_replace(',', '.', $glosa_taxas);
+
 
     $adm_check = filter_input(INPUT_POST, "adm_check");
     $med_check = filter_input(INPUT_POST, "med_check");
@@ -49,17 +60,39 @@ if ($type === "create") {
     $fk_int_capeante = filter_input(INPUT_POST, "fk_int_capeante");
 
     $valor_apresentado_capeante = filter_input(INPUT_POST, "valor_apresentado_capeante");
+    $valor_apresentado_capeante = str_replace(',', '.', $valor_apresentado_capeante);
+
     $valor_final_capeante = filter_input(INPUT_POST, "valor_final_capeante");
+    $valor_final_capeante = str_replace(',', '.', $valor_final_capeante);
+
     $valor_diarias = filter_input(INPUT_POST, "valor_diarias");
+    $valor_diarias = str_replace(',', '.', $valor_diarias);
+
     $valor_matmed = filter_input(INPUT_POST, "valor_matmed");
+    $valor_matmed = str_replace(',', '.', $valor_matmed);
+
     $valor_oxig = filter_input(INPUT_POST, "valor_oxig");
+    $valor_oxig = str_replace(',', '.', $valor_oxig);
+
     $valor_sadt = filter_input(INPUT_POST, "valor_sadt");
+    $valor_sadt = str_replace(',', '.', $valor_sadt);
+
     $valor_taxa = filter_input(INPUT_POST, "valor_taxa");
+    $valor_taxa = str_replace(',', '.', $valor_taxa);
+
     $valor_honorarios = filter_input(INPUT_POST, "valor_honorarios");
+    $valor_honorarios = str_replace(',', '.', $valor_honorarios);
+
 
     $valor_glosa_enf = filter_input(INPUT_POST, "valor_glosa_enf");
+    $valor_glosa_enf = str_replace(',', '.', $valor_glosa_enf);
+
     $valor_glosa_med = filter_input(INPUT_POST, "valor_glosa_med");
+    $valor_glosa_med = str_replace(',', '.', $valor_glosa_med);
+
     $valor_glosa_total = filter_input(INPUT_POST, "valor_glosa_total");
+    $valor_glosa_total = str_replace(',', '.', $valor_glosa_total);
+
 
     $capeante = new capeante();
 
