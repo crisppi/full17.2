@@ -95,7 +95,7 @@
         <div class="form-group row">
             <div class="form-group col-sm-2">
                 <label for="valor_apresentado_capeante">Valor Apresentado</label>
-                <input type="text" class="form-control dinheiro" id="valor_diarias" name="valor_apresentado_capeante" placeholder="Valor apresentado">
+                <input type="text" class="form-control dinheiro" id="valor_apresentado_capeante" name="valor_apresentado_capeante" placeholder="Valor apresentado">
             </div>
             <div class="form-group col-sm-2">
                 <label for="valor_final_capeante">Valor Final</label>
@@ -194,7 +194,7 @@
             </div>
             <div class="form-group col-sm-2">
                 <label for="valor_glosa_total">Glosa Total</label>
-                <input type="text" class="dinheiro form-control" id="valor_glosa_total" name="valor_glosa_total" placeholder="Glosa Total">
+                <input type="text" class="money2 form-control" id="valor_glosa_total" name="valor_glosa_total" placeholder="Glosa Total">
             </div>
 
         </div>
@@ -207,7 +207,7 @@
     </div>
 </div>
 <script>
-    // pegar dados do input //
+    // PEGAR DADOS DOS INPUTS //
     let inputEnf = document.getElementById("valor_glosa_enf");
     let inputMed = document.getElementById("valor_glosa_med");
     let inputApresent = document.getElementById("valor_apresentado_capeante");
@@ -219,17 +219,17 @@
 
         // LIMPAR DADOS DO INPUT - valor_glosa_enf
         finalEnf = inputEnf.value;
-        var finalEnf = finalEnf;
-        finalEnf = finalEnf.replace(".", "");
-        finalEnf = finalEnf.replace(",", ".");
-        finalEnf = parseFloat(finalEnf);
+        var finalEnf2 = finalEnf;
+        finalEnf2 = finalEnf.replace(".", "");
+        finalEnf2 = finalEnf.replace(",", ".");
+        finalEnf2 = parseFloat(finalEnf2);
 
         // LIMPAR DADOS DO INPUT - valor_glosa_med
         finalMed = inputMed.value;
-        var finalMed = finalMed;
-        finalMed = finalMed.replace(".", "");
-        finalMed = finalMed.replace(",", ".");
-        finalMed = parseFloat(finalMed);
+        var finalMed2 = finalMed;
+        finalMed2 = finalMed.replace(".", "");
+        finalMed2 = finalMed.replace(",", ".");
+        finalMed2 = parseFloat(finalMed2);
 
         // let p = document.querySelector("#valor_glosa_enf").value;
         // let p_med = document.querySelector("#valor_glosa_med").value;
@@ -251,32 +251,45 @@
         // }
 
         // INSERIR VALOR NO INPUT DE DADOS
-        finalGlosa = finalEnf + finalMed;
-
+        finalGlosa = finalEnf2 + finalMed2;
         let inputGlosa = document.getElementById("valor_glosa_total");
-        // finalGlosa = glosaTotal.value;
-        // var finalGlosa = finalGlosa;
-
         inputGlosa.value = finalGlosa;
 
         finalGlosa = inputGlosa.value;
-        finalGlosa = finalGlosa.replace(".", "");
-        finalGlosa = finalGlosa.replace(",", ".");
-        finalGlosa = parseFloat(finalGlosa);
+        var finalGlosa2 = finalGlosa;
 
-        console.log(finalGlosa);
+        // PREENCHIMENTO DE CAMPO GLOSA TOTAL
+        finalGlosa2 = finalGlosa.replace(".", "");
+        finalGlosa2 = finalGlosa.replace(",", ".");
+        finalGlosa2 = parseFloat(finalGlosa2);
 
-        inputGlosa.value = finalGlosa;
+        var valorFormatGlosa = finalGlosa2.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+        inputGlosa.value = valorFormatGlosa;
 
-        // calcula o valor da conta e lancar no campo - valor_glosa_Glosa
-        // calcula o valor final da conta e lanca no campo input - valor_final_capeante 
-        // finalApresent = inputApresent.value;
-        // console.log(finalApresent);
-        // finalConta = inputApresent - (finalEnf + finalMed);
-        // finalContaTotal = valorFinal.value;
-        // valorFinal.value = (finalContaTotal);
-        // console.log(finalTotal);
-        // glosaTotal.value = valor;
+        // LIMPAR DADOS DO INPUT - valor_apresentado_capeante
+        apresCapeante = inputApresent.value;
+        var apresCapeante2 = apresCapeante;
+
+        apresCapeante2 = apresCapeante2.replace(".", "");
+        apresCapeante2 = apresCapeante2.replace(",", ".");
+        apresCapeante2 = parseFloat(apresCapeante2);
+
+        // PREENCHIMENTO DO CAMPO FINAL CAPEANTE
+        finalCapeante = apresCapeante2 - (finalEnf2 + finalMed2);
+        console.log(finalCapeante)
+
+        // valorFinal.value = finalCapeante;
+        // finalCapeante = valorFinal.value;
+        // var finalCapeante2 = finalCapeante;
+
+        var valorFormatFinal = finalCapeante.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+        valorFinal.value = valorFormatFinal;
     });
 
     $(document).ready(function() {

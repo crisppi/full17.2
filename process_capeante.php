@@ -91,8 +91,9 @@ if ($type === "create") {
     $valor_glosa_med = str_replace(',', '.', $valor_glosa_med);
 
     $valor_glosa_total = filter_input(INPUT_POST, "valor_glosa_total");
+    $valor_glosa_total = str_replace('.', '', $valor_glosa_total);
     $valor_glosa_total = str_replace(',', '.', $valor_glosa_total);
-
+    $valor_glosa_total = str_replace('R$', '', $valor_glosa_total);
 
     $capeante = new capeante();
 
