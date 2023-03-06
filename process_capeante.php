@@ -63,7 +63,9 @@ if ($type === "create") {
     $valor_apresentado_capeante = str_replace(',', '.', $valor_apresentado_capeante);
 
     $valor_final_capeante = filter_input(INPUT_POST, "valor_final_capeante");
+    $valor_final_capeante = str_replace('.', '', $valor_final_capeante);
     $valor_final_capeante = str_replace(',', '.', $valor_final_capeante);
+    $valor_final_capeante = str_replace('R$ ', '', $valor_final_capeante);
 
     $valor_diarias = filter_input(INPUT_POST, "valor_diarias");
     $valor_diarias = str_replace(',', '.', $valor_diarias);
@@ -93,7 +95,7 @@ if ($type === "create") {
     $valor_glosa_total = filter_input(INPUT_POST, "valor_glosa_total");
     $valor_glosa_total = str_replace('.', '', $valor_glosa_total);
     $valor_glosa_total = str_replace(',', '.', $valor_glosa_total);
-    $valor_glosa_total = str_replace('R$', '', $valor_glosa_total);
+    $valor_glosa_total = str_replace('R$ ', '', $valor_glosa_total);
 
     $capeante = new capeante();
 
