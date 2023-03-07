@@ -4,7 +4,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
 <div class="row">
-    <h2 class="page-title"> Capeante - Lançamento</h2>
+    <h2 id="titulo" class="page-title titulo"> Capeante - Lançamento</h2>
     <p class="page-description">Adicione informações do Capeante</p>
 
     <form class="formulario visible" action="<?= $BASE_URL ?>process_capeante.php" id="add-internacao-form" method="POST" enctype="multipart/form-data">
@@ -211,7 +211,8 @@
     let inputEnf = document.getElementById("valor_glosa_enf");
     let inputMed = document.getElementById("valor_glosa_med");
     let inputApresent = document.getElementById("valor_apresentado_capeante");
-    let valorFinal = document.getElementById("valor_final_capeante");
+    let data_inicial_capeante = document.getElementById("data_inicial_capeante");
+    let data_final_conta = document.getElementById("data_final_conta");
 
     inputMed.addEventListener("blur", function() {
 
@@ -272,18 +273,17 @@
         // LIMPAR DADOS DO INPUT - valor_apresentado_capeante
         apresCapeante = inputApresent.value;
         var apresCapeante2 = apresCapeante;
-
         apresCapeante2 = apresCapeante2.replace(".", "");
         apresCapeante2 = apresCapeante2.replace(",", ".");
         apresCapeante2 = parseFloat(apresCapeante2);
 
         // PREENCHIMENTO DO CAMPO FINAL CAPEANTE
         finalCapeante = apresCapeante2 - (finalEnf2 + finalMed2);
-        console.log(finalCapeante)
+        // console.log(finalCapeante)
 
-        // valorFinal.value = finalCapeante;
-        // finalCapeante = valorFinal.value;
-        // var finalCapeante2 = finalCapeante;
+        valorFinal.value = finalCapeante;
+        finalCapeante = valorFinal.value;
+        var finalCapeante2 = finalCapeante;
 
         var valorFormatFinal = finalCapeante.toLocaleString('pt-BR', {
             style: 'currency',
@@ -301,6 +301,41 @@
         });
     });
 
+    data_final_conta.addEventListener("blur", function() {
+
+        // PEGAR DIA DA DATA FINAL DO CAPEANTE
+        let dataInicConta = document.getElementById("data_inicial_capeante");
+        dataInicContaVal = dataInicConta.value;
+        var dtI = new Date(dataInicContaVal);
+        var diaInicial = dtI.getDate();
+        console.log(diaInicial + 1);
+
+        // pegar titulo h2
+        let textoNovo = document.querySelector(".titulo");
+        console.log(textoNovo);
+        textoNovo.innerHTML = "<em>   Mudou data  </em>"
+
+
+        // PEGAR DIA DA DATA FINAL DO CAPEANTE
+        let dataFinalConta = document.getElementById("data_final_conta");
+        dataFinalContaVal = dataFinalConta.value;
+        var dtf = new Date(dataFinalContaVal);
+        var diaFinal = dtf.getDate();
+        console.log(diaFinal + 1);
+
+        let diarias = document.getElementById("diarias_capeante");
+        let totalDiarias = diaFinal - diaInicial;
+        if (totalDiarias < 0) {
+            dataFinalConta.style.borderColor = "red";
+            dataFinalConta.value = "";
+            dataFinalConta.focus();
+        } else {
+            diarias.value = totalDiarias;
+            dataFinalConta.style.borderColor = "gray";
+
+        }
+
+    })
 
     function cancelar() {
         let idAcoes = (document.getElementById('id-confirmacao'));
