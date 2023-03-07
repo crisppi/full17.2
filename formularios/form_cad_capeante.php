@@ -5,7 +5,7 @@
 
 <div class="row">
     <h2 id="titulo" class="page-title titulo"> Capeante - Lançamento</h2>
-    <p class="page-description">Adicione informações do Capeante</p>
+    <p id="subtitulo" class="page-description">Adicione informações do Capeante</p>
 
     <form class="formulario visible" action="<?= $BASE_URL ?>process_capeante.php" id="add-internacao-form" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="type" value="create">
@@ -320,10 +320,23 @@
         var diaInicial = dtI.getDate();
         console.log(diaInicial + 1);
 
-        // pegar titulo h2
+        // pegar titulo h2 - criando div teste apos H2
         let textoNovo = document.querySelector(".titulo");
-        console.log(textoNovo);
         textoNovo.innerHTML = "<em>   Mudou data  </em>"
+
+        const paragrafo = document.createElement('div');
+        paragrafo.className = "nova_classe";
+        paragrafo.innerHTML = '<p>CreateElement example</p>';
+
+        const elementoPai = document.querySelector('#titulo')
+        const elementoFilho = document.querySelector('#subtitulo')
+        console.log(elementoPai);
+        console.log(elementoFilho);
+        elementoPai.insertBefore(paragrafo, elementoPai.firstElementChild)
+
+        const texto = document.createTextNode("Testando");
+        textoNovo.appendChild(texto);
+
 
 
         // PEGAR DIA DA DATA FINAL DO CAPEANTE
