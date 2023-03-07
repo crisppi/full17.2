@@ -213,6 +213,7 @@
     let inputApresent = document.getElementById("valor_apresentado_capeante");
     let data_inicial_capeante = document.getElementById("data_inicial_capeante");
     let data_final_conta = document.getElementById("data_final_conta");
+    let valorFinal = document.getElementById("valor_final_capeante");
 
     inputMed.addEventListener("blur", function() {
 
@@ -268,7 +269,12 @@
             style: 'currency',
             currency: 'BRL'
         });
+
         inputGlosa.value = valorFormatGlosa;
+        inputGlosa.style.fontWeight = 600;
+        inputGlosa.style.borderColor = "green";
+        inputGlosa.style.backgroundColor = "#808080";
+        inputGlosa.style.color = "white";
 
         // LIMPAR DADOS DO INPUT - valor_apresentado_capeante
         apresCapeante = inputApresent.value;
@@ -279,17 +285,21 @@
 
         // PREENCHIMENTO DO CAMPO FINAL CAPEANTE
         finalCapeante = apresCapeante2 - (finalEnf2 + finalMed2);
-        // console.log(finalCapeante)
 
+        var finalCapeante2 = finalCapeante;
         valorFinal.value = finalCapeante;
         finalCapeante = valorFinal.value;
-        var finalCapeante2 = finalCapeante;
 
-        var valorFormatFinal = finalCapeante.toLocaleString('pt-BR', {
+        var valorFormatFinal = finalCapeante2.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL'
         });
         valorFinal.value = valorFormatFinal;
+        valorFinal.style.fontWeight = 600;
+        valorFinal.style.borderColor = "green";
+        valorFinal.style.backgroundColor = "#808080";
+        valorFinal.style.color = "white";
+
     });
 
     $(document).ready(function() {
