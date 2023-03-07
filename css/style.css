@@ -510,11 +510,8 @@ p {
     font-size: 0.8em;
     color: #c10a13;
     background-color: rgb(211, 209, 209);
-    align-items: center;
     margin-left: 10px;
     margin-top: 5px;
-    text-align: center;
     border-radius: 10px;
-    padding: 7px 0px 7px 0px;
     border-color: #842029;
 }

@@ -10,7 +10,9 @@
     <form class="formulario visible" action="<?= $BASE_URL ?>process_capeante.php" id="add-internacao-form" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="type" value="create">
         <br>
-        <?php if ($_SESSION['cargo'] === "Enf_auditor") {
+        <?php
+        $dataFech = date('Y-m-d');
+        if ($_SESSION['cargo'] === "Enf_auditor") {
             echo "<div class='logado'>";
             echo "Olá !!! ";
             echo  $_SESSION['login_user'];
@@ -119,7 +121,7 @@
             </div>
             <div class="form-group col-sm-2">
                 <label for="data_fech_capeante">Data Fechamento</label>
-                <input type="date" class="form-control" id="data_fech_capeante" name="data_fech_capeante">
+                <input type="date" class="form-control" id="data_fech_capeante" value="<?= $dataFech ?>" name="data_fech_capeante">
             </div>
         </div>
         <hr>
@@ -198,8 +200,7 @@
             </div>
 
         </div>
-        <div> <button style="margin:10px" type="submit" class="btn-sm btn-success">Cadastrar</button>
-        </div>
+
     </form>
     <hr>
     <div>
@@ -215,9 +216,61 @@
     let data_final_conta = document.getElementById("data_final_conta");
     let valorFinal = document.getElementById("valor_final_capeante");
 
-    inputMed.addEventListener("blur", function() {
+    // ENTRADA DE DADOS DE VALOR DATAS CAPEANTE- ESTRUTURA CONDICIONAL
 
-        // PEGAR VALOR DO INPUT
+    data_final_conta.addEventListener("blur", function() {
+
+        // PEGAR DIA DA DATA FINAL DO CAPEANTE
+        let dataFechamento = document.getElementById("data_fech_capeante");
+        dataFechVal = dataFechamento.value;
+        console.log(dataFechVal);
+
+        // PEGAR DATA LANCAMENTO DO CAPEANTE
+        let dataInicConta = document.getElementById("data_inicial_capeante");
+        dataInicContaVal = dataInicConta.value;
+        var dtI = new Date(dataInicContaVal);
+        var diaInicial = dtI.getDate();
+        console.log(diaInicial + 1);
+
+        // pegar titulo h2 - criando div teste apos H2
+        let textoNovo = document.querySelector(".titulo");
+        textoNovo.innerHTML = "<em>   Mudou data  </em>"
+
+        const paragrafo = document.createElement('div');
+        paragrafo.className = "nova_classe";
+        paragrafo.innerHTML = '<p>CreateElement example</p>';
+
+        const elementoPai = document.querySelector('#titulo')
+        const elementoFilho = document.querySelector('#subtitulo')
+        console.log(elementoPai);
+        console.log(elementoFilho);
+        elementoPai.insertBefore(paragrafo, elementoPai.firstElementChild)
+
+        const texto = document.createTextNode("Testando");
+        textoNovo.appendChild(texto);
+
+        // PEGAR DIA DA DATA FINAL DO CAPEANTE
+        let dataFinalConta = document.getElementById("data_final_conta");
+        dataFinalContaVal = dataFinalConta.value;
+        var dtf = new Date(dataFinalContaVal);
+        var diaFinal = dtf.getDate();
+        console.log(diaFinal + 1);
+
+        let diarias = document.getElementById("diarias_capeante");
+        let totalDiarias = diaFinal - diaInicial;
+        if (totalDiarias < 0) {
+            dataFinalConta.style.borderColor = "red";
+            dataFinalConta.value = "";
+            dataFinalConta.focus();
+        } else {
+            diarias.value = totalDiarias;
+            dataFinalConta.style.borderColor = "gray";
+
+        }
+
+    })
+    // ENTRADA DE DADOS DE VALOR GLOSA MEDICA - ESTRUTURA CONDICIONAL
+    inputMed.addEventListener("blur", function() {
 
         // LIMPAR DADOS DO INPUT - valor_glosa_enf
         finalEnf = inputEnf.value;
@@ -232,25 +285,6 @@
         finalMed2 = finalMed.replace(".", "");
         finalMed2 = finalMed.replace(",", ".");
         finalMed2 = parseFloat(finalMed2);
-
-        // let p = document.querySelector("#valor_glosa_enf").value;
-        // let p_med = document.querySelector("#valor_glosa_med").value;
-
-        // let p_erro = document.querySelector("#err_valor_glosa_enf");
-        // // let mensagem = document.createElement("p");
-        // let textMsg = document.createTextNode("Digite um número!");
-
-        // CRIAR MENSAGEM DE ERRO
-        // if (isNaN(final)) {
-
-        //     $("#err_valor_glosa_enf").removeClass("oculto");
-        //     $("#err_valor_glosa_enf").addClass("visible");
-
-        //     inputEnf.addEventListener("click", function() {
-        //         $("#err_valor_glosa_enf").addClass("oculto");
-
-        //     })
-        // }
 
         // INSERIR VALOR NO INPUT DE DADOS
         finalGlosa = finalEnf2 + finalMed2;
@@ -311,54 +345,8 @@
         });
     });
 
-    data_final_conta.addEventListener("blur", function() {
-
-        // PEGAR DIA DA DATA FINAL DO CAPEANTE
-        let dataInicConta = document.getElementById("data_inicial_capeante");
-        dataInicContaVal = dataInicConta.value;
-        var dtI = new Date(dataInicContaVal);
-        var diaInicial = dtI.getDate();
-        console.log(diaInicial + 1);
-
-        // pegar titulo h2 - criando div teste apos H2
-        let textoNovo = document.querySelector(".titulo");
-        textoNovo.innerHTML = "<em>   Mudou data  </em>"
-
-        const paragrafo = document.createElement('div');
-        paragrafo.className = "nova_classe";
-        paragrafo.innerHTML = '<p>CreateElement example</p>';
-
-        const elementoPai = document.querySelector('#titulo')
-        const elementoFilho = document.querySelector('#subtitulo')
-        console.log(elementoPai);
-        console.log(elementoFilho);
-        elementoPai.insertBefore(paragrafo, elementoPai.firstElementChild)
-
-        const texto = document.createTextNode("Testando");
-        textoNovo.appendChild(texto);
 
 
-
-        // PEGAR DIA DA DATA FINAL DO CAPEANTE
-        let dataFinalConta = document.getElementById("data_final_conta");
-        dataFinalContaVal = dataFinalConta.value;
-        var dtf = new Date(dataFinalContaVal);
-        var diaFinal = dtf.getDate();
-        console.log(diaFinal + 1);
-
-        let diarias = document.getElementById("diarias_capeante");
-        let totalDiarias = diaFinal - diaInicial;
-        if (totalDiarias < 0) {
-            dataFinalConta.style.borderColor = "red";
-            dataFinalConta.value = "";
-            dataFinalConta.focus();
-        } else {
-            diarias.value = totalDiarias;
-            dataFinalConta.style.borderColor = "gray";
-
-        }
-
-    })
 
     function cancelar() {
         let idAcoes = (document.getElementById('id-confirmacao'));
