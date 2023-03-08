@@ -107,7 +107,7 @@
         <br>
         <!-- campos de dados gerais  -->
         <div class="form-group row">
-            <div class="form-group col-sm-2">
+            <div id="div_data_inicial_capeante" class="form-group col-sm-2">
                 <label for="data_inicial_capeante">Data Inicial</label>
                 <input type="date" class="form-control" id="data_inicial_capeante" name="data_inicial_capeante">
             </div>
@@ -223,38 +223,46 @@
         // PEGAR DIA DA DATA FINAL DO CAPEANTE
         let dataFechamento = document.getElementById("data_fech_capeante");
         dataFechVal = dataFechamento.value;
-        console.log(dataFechVal);
 
         // PEGAR DATA LANCAMENTO DO CAPEANTE
         let dataInicConta = document.getElementById("data_inicial_capeante");
         dataInicContaVal = dataInicConta.value;
         var dtI = new Date(dataInicContaVal);
         var diaInicial = dtI.getDate();
-        console.log(diaInicial + 1);
+        console.log(diaInicial);
 
-        // pegar titulo h2 - criando div teste apos H2
-        let textoNovo = document.querySelector(".titulo");
-        textoNovo.innerHTML = "<em>   Mudou data  </em>"
+        if (dataInicContaVal < dataFechVal) {
 
-        const paragrafo = document.createElement('div');
-        paragrafo.className = "nova_classe";
-        paragrafo.innerHTML = '<p>CreateElement example</p>';
+            // pegar titulo h2 - criando div teste apos H2
+            let textoNovo = document.querySelector("#div_data_inicial_capeante");
+            var texto = document.createTextNode("Um título qualquer");
 
-        const elementoPai = document.querySelector('#titulo')
-        const elementoFilho = document.querySelector('#subtitulo')
-        console.log(elementoPai);
-        console.log(elementoFilho);
-        elementoPai.insertBefore(paragrafo, elementoPai.firstElementChild)
+            textoNovo.appendChild(texto);
 
-        const texto = document.createTextNode("Testando");
-        textoNovo.appendChild(texto);
+
+        } else {
+            const elementoPai = document.querySelector('#div_data_inicial_capeante')
+            // console.log(elementoFilho);
+            const paragrafo = document.createElement('p');
+            paragrafo.innerHTML = '<p>data Incorreta</p>';
+
+            elementoPai.insertBefore(paragrafo, elementoPai.firstElementChild)
+
+            const texto = document.createTextNode("Data Inválida");
+            textoNovo.appendChild(texto);
+        }
 
         // PEGAR DIA DA DATA FINAL DO CAPEANTE
         let dataFinalConta = document.getElementById("data_final_conta");
         dataFinalContaVal = dataFinalConta.value;
         var dtf = new Date(dataFinalContaVal);
         var diaFinal = dtf.getDate();
-        console.log(diaFinal + 1);
+        console.log(diaFinal);
+
+        // METODO PARA CALCULAR DIARIAS USANDO GETTIME
+        var diff = dtf.getTime() - dtI.getTime();
+        var daydiff = diff / (1000 * 60 * 60 * 24);
+        console.log(daydiff);
 
         let diarias = document.getElementById("diarias_capeante");
         let totalDiarias = diaFinal - diaInicial;
