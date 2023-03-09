@@ -311,7 +311,7 @@ class capeanteDAO implements capeanteDAOInterface
         $limite = strlen($limite) ? 'LIMIT ' . $limite : '';
 
         //MONTA A QUERY
-        $query = $this->conn->query('SELECT SELECT SELECT ac.id_internacao, 
+        $query = $this->conn->query('SELECT ac.id_internacao, 
         ac.acoes_int, 
         ac.data_intern_int, 
         ac.data_visita_int, 

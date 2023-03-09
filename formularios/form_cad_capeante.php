@@ -1,3 +1,74 @@
+<?php
+
+require_once("templates/header.php");
+
+require_once("models/message.php");
+
+include_once("models/internacao.php");
+include_once("dao/internacaoDao.php");
+
+include_once("models/patologia.php");
+include_once("dao/patologiaDao.php");
+
+include_once("models/paciente.php");
+include_once("dao/pacienteDao.php");
+
+include_once("models/hospital.php");
+include_once("dao/hospitalDao.php");
+
+include_once("models/capeante.php");
+include_once("dao/capeanteDao.php");
+
+include_once("models/pagination.php");
+
+$Internacao_geral = new internacaoDAO($conn, $BASE_URL);
+$Internacaos = $Internacao_geral->findGeral();
+
+$pacienteDao = new pacienteDAO($conn, $BASE_URL);
+$pacientes = $pacienteDao->findGeral($limite, $inicio);
+
+$capeante_geral = new capeanteDAO($conn, $BASE_URL);
+$capeante = $capeante_geral->findGeral($limite, $inicio);
+
+$hospital_geral = new HospitalDAO($conn, $BASE_URL);
+$hospitals = $hospital_geral->findGeral($limite, $inicio);
+
+$patologiaDao = new patologiaDAO($conn, $BASE_URL);
+$patologias = $patologiaDao->findGeral();
+
+$internacao = new internacaoDAO($conn, $BASE_URL);
+
+//Instanciando a classe
+$QtdTotalInt = new internacaoDAO($conn, $BASE_URL);
+// METODO DE BUSCA DE PAGINACAO 
+$pesquisa_nome = filter_input(INPUT_GET, 'pesquisa_nome');
+$pesqInternado = filter_input(INPUT_GET, 'pesqInternado') ?: "s";
+$limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
+$pesquisa_pac = filter_input(INPUT_GET, 'pesquisa_pac');
+$id_internacao = filter_input(INPUT_GET, 'id_internacao');
+
+$ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
+// $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
+
+$condicoes = [
+    strlen($pesquisa_nome) ? 'ho.nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
+    strlen($pesquisa_pac) ? 'pa.nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
+    strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : NULL,
+    strlen($id_internacao) ? 'fk_int_capeante = "' . $id_internacao . '"' : NULL,
+];
+$condicoes = array_filter($condicoes);
+// REMOVE POSICOES VAZIAS DO FILTRO
+$where = implode(' AND ', $condicoes);
+
+// PAGINACAO
+$order = $ordenar;
+$obLimite = null;
+
+// PREENCHIMENTO DO FORMULARIO COM QUERY
+$intern = $capeante_geral->selectAllcapeante($where, $order, $obLimite);
+extract($intern);
+?>
+
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -9,7 +80,7 @@
     <p id="subtitulo" class="page-description">Adicione informações do Capeante</p>
 
     <form class="formulario visible" action="<?= $BASE_URL ?>process_capeante.php" id="add-internacao-form" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="type" value="create">
+        <input type="text" name="type" value="create">
         <br>
         <?php
         $dataFech = date('Y-m-d');
@@ -39,6 +110,20 @@
         <hr>
         <!-- profissionais  -->
         <div class="form-group row">
+            <div class="form-group row">
+                <div class="form-group col-sm-2">
+                    <label for="fk_int_capeante">Reg internação</label>
+                    <input type="text" class="form-control" id="fk_int_capeante" name="fk_int_capeante" value="<?= $intern['0']['id_internacao'] ?>" placeholder="<?= $intern['0']['id_internacao'] ?>">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label for="fk_hospital_int">Hospital</label>
+                    <input type="text" class="form-control" id="fk_hospital_int" name="fk_hospital_int" value="<?= $intern['0']['nome_hosp'] ?>" placeholder="<?= $intern['0']['nome_hosp'] ?>">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label for="valor_final_capeante">Paciente</label>
+                    <input type="text" class="form-control" id="fk_paciente_int" name="fk_paciente_int" placeholder="<?= $intern['0']['nome_pac'] ?>">
+                </div>
+            </div>
             <?php if ($_SESSION['cargo'] === "Adm") { ?>
                 <div class="form-group col-sm-2">
                     <label for="adm_capeante">Adm Capeante</label>
@@ -105,6 +190,7 @@
                 <input type="text" class="form-control dinheiro" id="valor_final_capeante" name="valor_final_capeante" placeholder="Valor final">
             </div>
         </div>
+
         <br>
         <!-- campos de dados gerais  -->
         <div class="form-group row">
@@ -202,8 +288,10 @@
                 <label for="valor_glosa_total">Glosa Total</label>
                 <input type="text" class="money2 form-control" id="valor_glosa_total" name="valor_glosa_total" placeholder="Glosa Total">
             </div>
-
+            <div> <button style="margin:10px" type="submit" class="btn-sm btn-success">Cadastrar</button>
+            </div>
         </div>
+        <br>
 
     </form>
     <hr>

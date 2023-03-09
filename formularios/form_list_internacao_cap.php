@@ -27,8 +27,8 @@
     $pacienteDao = new pacienteDAO($conn, $BASE_URL);
     $pacientes = $pacienteDao->findGeral($limite, $inicio);
 
-    $capeante_geral = new HospitalDAO($conn, $BASE_URL);
-    $capeantes = $capeante_geral->findGeral($limite, $inicio);
+    $capeante_geral = new capeanteDAO($conn, $BASE_URL);
+    $capeante = $capeante_geral->findGeral($limite, $inicio);
 
     $hospital_geral = new HospitalDAO($conn, $BASE_URL);
     $hospitals = $hospital_geral->findGeral($limite, $inicio);
@@ -136,7 +136,7 @@
     $obLimite = $obPagination->getLimit();
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
-    $query = $capeante->selectAllcapeante($where, $order, $obLimite);
+    $query = $capeante_geral->selectAllcapeante($where, $order, $obLimite);
 
     // GETS 
     unset($_GET['pag']);
@@ -169,8 +169,6 @@
                     <th scope="col">Data visita</th>
                     <th scope="col">Modo Admissão</th>
                     <th scope="col">Médico</th>
-                    <th scope="col">UTI</th>
-                    <th scope="col">Int UTI</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -178,7 +176,6 @@
                 <?php
                 foreach ($query as $intern) :
                     extract($query);
-
                 ?>
                     <tr>
                         <td scope="row" class="col-id"><?= $intern["id_internacao"] ?></td>
@@ -194,8 +191,6 @@
                         <td scope="row"><?= $intern["data_visita_int"] ?></td>
                         <td scope="row"><?= $intern["tipo_admissao_int"] ?></td>
                         <td scope="row"><?= $intern["titular_int"] ?></td>
-                        <td scope="row"><?= $intern["internacao_uti_int"] ?></td>
-                        <td scope="row"><?= $intern["internado_uti"] ?></td>
 
                         <td class="action">
                             <a href="<?= $BASE_URL ?>show_internacao.php?id_internacao=<?= $intern["id_internacao"] ?>"><i style="color:green; margin-right:10px" class="aparecer-acoes fas fa-eye check-icon"></i></a>

@@ -20,11 +20,12 @@ $type = filter_input(INPUT_POST, "type");
 // Resgata dados do usuário
 
 if ($type === "create") {
-
     // Receber os dados dos inputs
     $adm_capeante = filter_input(INPUT_POST, "adm_capeante");
     $aud_enf_capeante = filter_input(INPUT_POST, "aud_enf_capeante");
     $aud_med_capeante = filter_input(INPUT_POST, "aud_med_capeante");
+
+    $fk_int_capeante = filter_input(INPUT_POST, "fk_int_capeante");
 
     $data_inicial_capeante = filter_input(INPUT_POST, "data_inicial_capeante") ?: null;
     $data_fech_capeante = filter_input(INPUT_POST, "data_fech_capeante") ?: null;
