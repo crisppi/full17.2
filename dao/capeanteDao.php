@@ -311,7 +311,47 @@ class capeanteDAO implements capeanteDAOInterface
         $limite = strlen($limite) ? 'LIMIT ' . $limite : '';
 
         //MONTA A QUERY
-        $query = $this->conn->query('SELECT * FROM tb_capeante ' . $where . ' ' . $order . ' ' . $limite);
+        $query = $this->conn->query('SELECT SELECT SELECT ac.id_internacao, 
+        ac.acoes_int, 
+        ac.data_intern_int, 
+        ac.data_visita_int, 
+        ac.fk_paciente_int, 
+        ac.usuario_create_int, 
+        ac.fk_hospital_int, 
+        ac.modo_internacao_int, 
+        ac.tipo_admissao_int,
+        ac.tipo_alta_int,
+        ac.internado_uti_int,
+        ac.internacao_uti_int,
+        ac.especialidade_int, 
+        ac.titular_int, 
+        ac.grupo_patologia_int, 
+        ac.acomodacao_int, 
+        ac.fk_patologia_int, 
+        ac.fk_patologia2, 
+        ac.internado_int,
+        ac.visita_no_int,
+        ac.primeira_vis_int,
+        pa.id_paciente,
+        pa.nome_pac,
+        ho.id_hospital, 
+        ho.nome_hosp,
+        cp.fk_int_capeante,
+        cp.id_capeante
+    
+        FROM tb_capeante cp
+    
+			inner JOIN tb_internacao as ac On  
+            cp.fk_int_capeante = ac.id_internacao
+    
+            left JOIN tb_hospital as ho On  
+            ac.fk_hospital_int = ho.id_hospital
+    
+            
+            left join tb_paciente as pa on
+            ac.fk_paciente_int = pa.id_paciente  
+
+            ' . $where . ' ' . $order . ' ' . $limite);
 
         $query->execute();
 

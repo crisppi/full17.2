@@ -1,7 +1,6 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
 <div class="row">
@@ -111,9 +110,6 @@
             <div id="div_data_inicial_capeante" class="form-group col-sm-2">
                 <label for="data_inicial_capeante">Data Inicial</label>
                 <input type="date" class="form-control" id="data_inicial_capeante" name="data_inicial_capeante">
-                <div class="notif-input">
-                    Data inválida !
-                </div>
             </div>
             <div class="form-group col-sm-2">
                 <label for="data_final_conta">Data Final</label>
@@ -213,7 +209,199 @@
 </div>
 
 
-<script src="js/scriptData.js"></script>
+<script>
+    // ****************************************** //
+    // PEGAR DADOS DOS INPUTS //    
+    // ****************************************** //
+
+    let inputEnf = document.getElementById("valor_glosa_enf");
+    let inputMed = document.getElementById("valor_glosa_med");
+    let inputApresent = document.getElementById("valor_apresentado_capeante");
+    let data_inicial_capeante = document.getElementById("data_inicial_capeante");
+    let data_final_conta = document.getElementById("data_final_conta");
+    let valorFinal = document.getElementById("valor_final_capeante");
+
+    // ****************************************** //
+    // METODO DE VERIFICAR DATAS DO CAPEANTE //
+    // ****************************************** //
+
+    // ENTRADA DE DADOS DE VALOR DATAS CAPEANTE - ESTRUTURA CONDICIONAL DATA INICIAL CAPEANTE
+    data_inicial_capeante.addEventListener("blur", function() {
+
+        // PEGAR DATA INICIAL DO CAPEANTE
+        let dataInicConta = document.getElementById("data_inicial_capeante");
+        dataInicContaVal = dataInicConta.value;
+        var dtI = new Date(dataInicContaVal);
+        var diaInicial = dtI.getDate();
+        console.log(diaInicial);
+
+        // METODO DE PEGAR DATA FINAL DO CAPEANTE
+        let dataFechamento = document.getElementById("data_fech_capeante");
+        dataFechVal = dataFechamento.value;
+        console.log(dataFechVal);
+
+        // VERIFICAR SE DATA INICIAL MENOR Q DATA CAPEANTE
+        if (dataInicContaVal < dataFechVal) {
+
+            let textoNovo = document.querySelector("#data_inicial_capeante");
+            var texto = document.createTextNode("Data Incorreta");
+            textoNovo.appendChild(texto);
+
+        }
+    })
+
+    // ****************************************** //
+    // METODO DE VERIFICAR FINAL DO CAPEANTE //
+    // ****************************************** //
+
+    data_final_conta.addEventListener("blur", function() {
+
+        // METODO DE PEGAR DATA FINAL DO CAPEANTE
+        let dataFechamento = document.getElementById("data_fech_capeante");
+        dataFechVal = dataFechamento.value;
+
+        // PEGAR DATA LANCAMENTO DO CAPEANTE
+        let dataInicConta = document.getElementById("data_inicial_capeante");
+        dataInicContaVal = dataInicConta.value;
+        var dtI = new Date(dataInicContaVal);
+        var diaInicial = dtI.getDate();
+        console.log(diaInicial);
+
+        if (dataInicContaVal < dataFechVal) {
+
+            // pegar titulo h2 - criando div teste apos H2
+            let textoNovo = document.querySelector("#div_data_inicial_capeante");
+            var texto = document.createTextNode("Um título qualquer");
+            textoNovo.appendChild(texto);
+
+
+        } else {
+            const elementoPai = document.querySelector('#div_data_inicial_capeante')
+            // console.log(elementoFilho);
+            const paragrafo = document.createElement('p');
+            paragrafo.innerHTML = '<p>data Incorreta</p>';
+
+            elementoPai.insertBefore(paragrafo, elementoPai.firstElementChild)
+
+            const texto = document.createTextNode("Data Inválida");
+            textoNovo.appendChild(texto);
+        }
+
+        // PEGAR DIA DA DATA FINAL DO CAPEANTE
+        let dataFinalConta = document.getElementById("data_final_conta");
+        dataFinalContaVal = dataFinalConta.value;
+        var dtf = new Date(dataFinalContaVal);
+        var diaFinal = dtf.getDate();
+        console.log(diaFinal);
+
+        // METODO PARA CALCULAR DIARIAS USANDO GETTIME
+        var diff = dtf.getTime() - dtI.getTime();
+        var daydiff = diff / (1000 * 60 * 60 * 24);
+        console.log(daydiff);
+
+        let diarias = document.getElementById("diarias_capeante");
+        let totalDiarias = diaFinal - diaInicial;
+        if (totalDiarias < 0) {
+            dataFinalConta.style.borderColor = "red";
+            dataFinalConta.value = "";
+            dataFinalConta.focus();
+        } else {
+            diarias.value = totalDiarias;
+            dataFinalConta.style.borderColor = "gray";
+
+        }
+
+    })
+
+
+    // ****************************************** //
+    // ENTRADA DE DADOS DE VALOR GLOSA MEDICA - ESTRUTURA CONDICIONAL
+    // ****************************************** //
+    inputMed.addEventListener("blur", function() {
+
+        // LIMPAR DADOS DO INPUT - valor_glosa_enf
+        finalEnf = inputEnf.value;
+        var finalEnf2 = finalEnf;
+        finalEnf2 = finalEnf.replace(".", "");
+        finalEnf2 = finalEnf.replace(",", ".");
+        finalEnf2 = parseFloat(finalEnf2);
+
+        // LIMPAR DADOS DO INPUT - valor_glosa_med
+        finalMed = inputMed.value;
+        var finalMed2 = finalMed;
+        finalMed2 = finalMed.replace(".", "");
+        finalMed2 = finalMed.replace(",", ".");
+        finalMed2 = parseFloat(finalMed2);
+
+        // INSERIR VALOR NO INPUT DE DADOS
+        finalGlosa = finalEnf2 + finalMed2;
+        let inputGlosa = document.getElementById("valor_glosa_total");
+        inputGlosa.value = finalGlosa;
+
+        finalGlosa = inputGlosa.value;
+        var finalGlosa2 = finalGlosa;
+
+        // PREENCHIMENTO DE CAMPO GLOSA TOTAL
+        finalGlosa2 = finalGlosa.replace(".", "");
+        finalGlosa2 = finalGlosa.replace(",", ".");
+        finalGlosa2 = parseFloat(finalGlosa2);
+
+        var valorFormatGlosa = finalGlosa2.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+
+        inputGlosa.value = valorFormatGlosa;
+        inputGlosa.style.fontWeight = 600;
+        inputGlosa.style.borderColor = "green";
+        inputGlosa.style.backgroundColor = "#808080";
+        inputGlosa.style.color = "white";
+
+        // LIMPAR DADOS DO INPUT - valor_apresentado_capeante
+        apresCapeante = inputApresent.value;
+        var apresCapeante2 = apresCapeante;
+        apresCapeante2 = apresCapeante2.replace(".", "");
+        apresCapeante2 = apresCapeante2.replace(",", ".");
+        apresCapeante2 = parseFloat(apresCapeante2);
+
+        // PREENCHIMENTO DO CAMPO FINAL CAPEANTE
+        finalCapeante = apresCapeante2 - (finalEnf2 + finalMed2);
+
+        var finalCapeante2 = finalCapeante;
+        valorFinal.value = finalCapeante;
+        finalCapeante = valorFinal.value;
+
+        var valorFormatFinal = finalCapeante2.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+        valorFinal.value = valorFormatFinal;
+        valorFinal.style.fontWeight = 600;
+        valorFinal.style.borderColor = "green";
+        valorFinal.style.backgroundColor = "#808080";
+        valorFinal.style.color = "white";
+
+    });
+
+    $(document).ready(function() {
+        $("input.dinheiro").maskMoney({
+            showSymbol: true,
+            symbol: "R$",
+            decimal: ",",
+            thousands: "."
+        });
+    });
+
+
+
+
+    function cancelar() {
+        let idAcoes = (document.getElementById('id-confirmacao'));
+        idAcoes.style.display = 'none';
+        console.log("chegou no cancelar");
+
+    };
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
