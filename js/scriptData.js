@@ -10,6 +10,7 @@ let valorFinal = document.getElementById("valor_final_capeante");
 let data_inicial_capeante = document.getElementById("data_inicial_capeante");
 let data_final_conta = document.getElementById("data_final_conta");
 let dataInt = document.getElementById("data_intern_int");
+let diarias = document.getElementById("diarias_capeante");
 
 // ****************************************** //
 // METODO DE VERIFICAR DATAS DO CAPEANTE //
@@ -33,8 +34,6 @@ data_inicial_capeante.addEventListener("blur", function() {
 
         var dif1 = diaIni < diaInt; // ver se a data inicial da prorrogacao é menor que a data da internacao
 
-        console.log(dif1);
-
         var divMsg = document.querySelector("#notif-input");
 
         if (dif1 === false) {
@@ -53,12 +52,12 @@ data_inicial_capeante.addEventListener("blur", function() {
     // ********* FIM VERIFICAR DATA INICIAL ********// 
 
 
-    
+
 // ********** INICIO VERIFICAR DATA FINAL ********  // 
 
 // notificacao de data final menor q data internacao e data inicial
 data_final_conta.addEventListener("blur", function() {
-      // notificacao de data final menor q data internacao e maior q data inicial
+        // notificacao de data final menor q data internacao e maior q data inicial
         let dataInicConta = document.getElementById("data_inicial_capeante");
         dataInicContaV = dataInicConta.value;
 
@@ -68,6 +67,9 @@ data_final_conta.addEventListener("blur", function() {
         let dataFinalConta = document.getElementById("data_final_conta");
         dataFinalContaV = dataFinalConta.value;
 
+        let diarias = document.getElementById("diarias_capeante");
+        diariasV = diarias.value;
+
         dataIntVDao = new Date(dataIntV);
         dataInicContaDao = new Date(dataInicContaV);
         dataFinalContaDao = new Date(dataFinalContaV);
@@ -75,12 +77,9 @@ data_final_conta.addEventListener("blur", function() {
         var diaInt = (dataIntVDao.getUTCDate());
         var diaIni = (dataInicContaDao.getUTCDate());
         var diaFin = (dataFinalContaDao.getUTCDate());
-        console.log(diaInt);
 
         var dif1 = diaIni > diaInt; // ver se a data inicial da prorrogacao é menor que a data da internacao
         var dif2 = diaIni < diaFin; // ver se a data inicial da prorrogacao é menor que a data final da prorrogacao
-        console.log(dif1);
-        console.log(dif2);
 
         var divMsg2 = document.querySelector("#notif-input2");
 
@@ -93,7 +92,7 @@ data_final_conta.addEventListener("blur", function() {
         } else {
             divMsg2.style.display = "none";
             dataFinalConta.style.borderColor = "gray";
-
+            diarias.value = diaFin - diaIni;
         }
     })
     // ********** FIM VERIFICAR DATA FINAL ********  // 
