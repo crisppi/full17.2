@@ -5,9 +5,10 @@
 let inputEnf = document.getElementById("valor_glosa_enf");
 let inputMed = document.getElementById("valor_glosa_med");
 let inputApresent = document.getElementById("valor_apresentado_capeante");
+let valorFinal = document.getElementById("valor_final_capeante");
+
 let data_inicial_capeante = document.getElementById("data_inicial_capeante");
 let data_final_conta = document.getElementById("data_final_conta");
-let valorFinal = document.getElementById("valor_final_capeante");
 let dataInt = document.getElementById("data_intern_int");
 
 // ****************************************** //
@@ -51,11 +52,13 @@ data_inicial_capeante.addEventListener("blur", function() {
     })
     // ********* FIM VERIFICAR DATA INICIAL ********// 
 
+
+    
 // ********** INICIO VERIFICAR DATA FINAL ********  // 
 
 // notificacao de data final menor q data internacao e data inicial
 data_final_conta.addEventListener("blur", function() {
-        // notificacao de data final menor q data internacao e maior q data inicial
+      // notificacao de data final menor q data internacao e maior q data inicial
         let dataInicConta = document.getElementById("data_inicial_capeante");
         dataInicContaV = dataInicConta.value;
 
@@ -72,11 +75,15 @@ data_final_conta.addEventListener("blur", function() {
         var diaInt = (dataIntVDao.getUTCDate());
         var diaIni = (dataInicContaDao.getUTCDate());
         var diaFin = (dataFinalContaDao.getUTCDate());
+        console.log(diaInt);
 
         var dif1 = diaIni > diaInt; // ver se a data inicial da prorrogacao é menor que a data da internacao
         var dif2 = diaIni < diaFin; // ver se a data inicial da prorrogacao é menor que a data final da prorrogacao
+        console.log(dif1);
+        console.log(dif2);
 
         var divMsg2 = document.querySelector("#notif-input2");
+
         if (dif2 === false && dif1 === false) {
             divMsg2.style.display = "block";
             dataFinalConta.style.borderColor = "red";
@@ -89,10 +96,7 @@ data_final_conta.addEventListener("blur", function() {
 
         }
     })
-    // ********** INICIO VERIFICAR DATA FINAL ********  // 
-
-
-
+    // ********** FIM VERIFICAR DATA FINAL ********  // 
 
 
 // console.log(`${dataInicContaDao.getUTCFullYear()}-${(dataInicContaDao.getUTCMonth() + 1).toString().padStart(2, '0')}-${dataInicContaDao.getUTCDate().toString().padStart(2, '0')}`); // 1988-03-01
