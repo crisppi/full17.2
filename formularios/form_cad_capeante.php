@@ -1,25 +1,25 @@
 <?php
 
-require_once("templates/header.php");
+// require_once("templates/header.php");
 
-require_once("models/message.php");
+// require_once("models/message.php");
 
-include_once("models/internacao.php");
-include_once("dao/internacaoDao.php");
+// include_once("models/internacao.php");
+// include_once("dao/internacaoDao.php");
 
-include_once("models/patologia.php");
-include_once("dao/patologiaDao.php");
+// include_once("models/patologia.php");
+// include_once("dao/patologiaDao.php");
 
-include_once("models/paciente.php");
-include_once("dao/pacienteDao.php");
+// include_once("models/paciente.php");
+// include_once("dao/pacienteDao.php");
 
-include_once("models/hospital.php");
-include_once("dao/hospitalDao.php");
+// include_once("models/hospital.php");
+// include_once("dao/hospitalDao.php");
 
-include_once("models/capeante.php");
-include_once("dao/capeanteDao.php");
+// include_once("models/capeante.php");
+// include_once("dao/capeanteDao.php");
 
-include_once("models/pagination.php");
+// include_once("models/pagination.php");
 
 $Internacao_geral = new internacaoDAO($conn, $BASE_URL);
 $Internacaos = $Internacao_geral->findGeral();
