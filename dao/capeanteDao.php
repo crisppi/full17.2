@@ -226,7 +226,7 @@ class capeanteDAO implements capeanteDAOInterface
         $stmt->execute();
 
         // Mensagem de sucesso por adicionar filme
-        $this->message->setMessage("capeante adicionado com sucesso!", "success", "cad_capeante.php");
+        $this->message->setMessage("capeante adicionado com sucesso!", "success", "list_internacao_cap.php");
     }
 
     // public function update(capeante $capeante)

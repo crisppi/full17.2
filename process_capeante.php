@@ -183,7 +183,7 @@ if ($type === "create") {
 
     //     $capeanteDao->update($capeanteData);
 
-    include_once('cad_capeante.php');
+    include_once('list_internacao_cap.php');
 }
 //$type = "delete";
 //$type = filter_input(INPUT_POST, "type");

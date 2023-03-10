@@ -80,7 +80,7 @@ extract($intern);
     <p id="subtitulo" class="page-description">Adicione informações do Capeante</p>
 
     <form class="formulario visible" action="<?= $BASE_URL ?>process_capeante.php" id="add-internacao-form" method="POST" enctype="multipart/form-data">
-        <input type="text" name="type" value="create">
+        <input type="hidden" name="type" value="create">
         <br>
         <?php
         $dataFech = date('Y-m-d');
@@ -103,7 +103,7 @@ extract($intern);
             echo "<div class='logado'>";
             echo "Olá !!! ";
             echo  $_SESSION['login_user'];
-            echo "Você está logado como Administrativo(a)";
+            echo "  Você está logado como Administrativo(a)";
             echo "</div>";
         };
         ?>
@@ -122,6 +122,10 @@ extract($intern);
                 <div class="form-group col-sm-2">
                     <label for="valor_final_capeante">Paciente</label>
                     <input type="text" class="form-control" id="fk_paciente_int" name="fk_paciente_int" placeholder="<?= $intern['0']['nome_pac'] ?>">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label for="data_intern_int">Data internação</label>
+                    <input type="date" class="form-control" id="data_intern_int" name="data_intern_int" value="<?= $intern['0']['data_intern_int'] ?>">
                 </div>
             </div>
             <?php if ($_SESSION['cargo'] === "Adm") { ?>
@@ -302,6 +306,7 @@ extract($intern);
 
 
 <script src="js/scriptData.js"></script>
+<script src="js/scriptMoeda.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
