@@ -201,13 +201,16 @@ extract($intern);
             <div id="div_data_inicial_capeante" class="form-group col-sm-2">
                 <label for="data_inicial_capeante">Data Inicial</label>
                 <input type="date" class="form-control" id="data_inicial_capeante" name="data_inicial_capeante">
-                <div class="notif-input">
+                <div class="notif-input oculto" id="notif-input">
                     Data inválida !
                 </div>
             </div>
             <div class="form-group col-sm-2">
                 <label for="data_final_conta">Data Final</label>
                 <input type="date" class="form-control" id="data_final_conta" name="data_final_conta">
+                <div class="notif-input oculto" id="notif-input2">
+                    Data inválida !
+                </div>
             </div>
             <div class="form-group col-sm-2">
                 <label for="diarias_capeante">Diárias</label>
