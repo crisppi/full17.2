@@ -108,12 +108,12 @@ header("Content-type: text/html; charset=utf-8");
                 Contas
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_internacao_cap.php">List Capeante</a></li>
+                <li><a class="dropdown-item" href="<?php $BASE_URL ?>list_internacao_cap.php">Lançar Contas</a></li>
                 <li>
 
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="<?php $BASE_URL ?>cad_capeante.php">Capeante</a></li>
+                <li><a class="dropdown-item" href="<?php $BASE_URL ?>cad_capeante.php">Contas</a></li>
                 <li>
               </ul>
             </li>

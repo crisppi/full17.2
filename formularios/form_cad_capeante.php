@@ -117,11 +117,11 @@ extract($intern);
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="fk_hospital_int">Hospital</label>
-                    <input type="text" class="form-control" id="fk_hospital_int" name="fk_hospital_int" value="<?= $intern['0']['nome_hosp'] ?>" placeholder="<?= $intern['0']['nome_hosp'] ?>">
+                    <input type="text" class="form-control" id="fk_hospital_int" name="fk_hospital_int" value="<?= $intern['0']['nome_hosp'] ?>" placeholder="<?= $intern['0']['nome_hosp'] ?>" readonly>
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="valor_final_capeante">Paciente</label>
-                    <input type="text" class="form-control" id="fk_paciente_int" name="fk_paciente_int" placeholder="<?= $intern['0']['nome_pac'] ?>">
+                    <input type="text" class="form-control" id="fk_paciente_int" name="fk_paciente_int" placeholder="<?= $intern['0']['nome_pac'] ?>" readonly>
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="data_intern_int">Data internação</label>

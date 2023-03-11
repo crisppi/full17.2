@@ -1,7 +1,3 @@
-<?php
-
-
-?>
 <div id="container-prorrog" class="container" style="display:none">
     <br>
     <h4 class="page-title">Cadastrar dados de prorrogação</h4>
@@ -12,8 +8,13 @@
             <?php
             $a = ($gestaoIdMax[0]);
             $ultimoReg = ($a["ultimoReg"]);
+            extract($findMaxProInt);
             ?>
-            <input type="hidden" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= $ultimoReg ?>" placeholder="Relatório da auditoria">
+            <input type="text" class="form-control" id="fk_internacao_pror" name="fk_internacao_pror" value="<?= $ultimoReg ?>" placeholder="Relatório da auditoria">
+        </div>
+        <div class="form-group col-sm-2">
+            <label class="control-label" for="data_inter_int2">Data internacao</label>
+            <input type="date" class="form-control" id="data_inter_int2" value="<?= $findMaxProInt['0']['data_intern_int'] ?>" name="data_inter_int2" readonly>
         </div>
         <!-- PRORROGACAO 1 -->
         <div class="form-group row">
@@ -27,13 +28,20 @@
                     <?php } ?>
                 </select>
             </div>
+
             <div class="form-group col-sm-2">
                 <label class="control-label" for="prorrog1_ini_pror">Data inicial (1)</label>
                 <input type="date" class="form-control" id="prorrog1_ini_pror" name="prorrog1_ini_pror">
+                <div class="notif-input oculto" id="notif-input1">
+                    Data inválida !
+                </div>
             </div>
             <div class="form-group col-sm-2">
                 <label class="control-label" for="prorrog1_fim_pror">Data final (1)</label>
                 <input type="date" class="form-control" id="prorrog1_fim_pror" name="prorrog1_fim_pror">
+                <div class="notif-input oculto" id="notif-input2">
+                    Data inválida !
+                </div>
             </div>
             <div class="form-group col-sm-1">
                 <label class="control-label" for="isol_1_pror">Isolamento</label>
@@ -60,10 +68,16 @@
                 <div class="form-group col-sm-2">
                     <label class="control-label" for="prorrog2_ini_pror">Data inicial (2)</label>
                     <input type="date" class="form-control" id="prorrog2_ini_pror" name="prorrog2_ini_pror">
+                    <div class="notif-input oculto" id="notif-input3">
+                        Data inválida !
+                    </div>
                 </div>
                 <div class="form-group col-sm-2">
                     <label class="control-label" for="prorrog2_fim_pror">Data final (2)</label>
                     <input type="date" class="form-control" id="prorrog2_fim_pror" name="prorrog2_fim_pror">
+                    <div class="notif-input oculto" id="notif-input4">
+                        Data inválida !
+                    </div>
                 </div>
                 <div class="form-group col-sm-1">
                     <label class="control-label" for="isol_2_pror">Isolamento</label>
@@ -91,10 +105,16 @@
                 <div class="form-group col-sm-2">
                     <label class="control-label" for="prorrog3_ini_pror">Data inicial (3)</label>
                     <input type="date" class="form-control" id="prorrog3_ini_pror" name="prorrog3_ini_pror">
+                    <div class="notif-input oculto" id="notif-input5">
+                        Data inválida !
+                    </div>
                 </div>
                 <div class="form-group col-sm-2">
                     <label class="control-label" for="prorrog3_fim_pror">Data final (3)</label>
                     <input type="date" class="form-control" id="prorrog3_fim_pror" name="prorrog3_fim_pror">
+                    <div class="notif-input oculto" id="notif-input6">
+                        Data inválida !
+                    </div>
                 </div>
                 <div class="form-group col-sm-1">
                     <label class="control-label" for="isol_3_pror">Isolamento</label>
@@ -119,5 +139,7 @@
         </div>
     </div>
 </div>
+<script src="js/scriptDataPror.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

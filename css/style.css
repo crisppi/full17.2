@@ -14,6 +14,7 @@ a:link {
 
 h2 {
     color: black;
+    padding-top: 10px;
 }
 
 p {
@@ -61,6 +62,7 @@ p {
 /* FORMULARIO*/
 
 .formulario {
+    padding-top: 10px;
     font-family: Tahoma;
     background-color: rgb(255, 255, 255);
     width: 100%;
@@ -68,6 +70,7 @@ p {
     margin-bottom: 30px;
     color: black;
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 .formulario legend {
@@ -120,12 +123,12 @@ p {
 }
 
 .formulario input[type="date"] {
-    background-color: rgb(248, 241, 241);
+    background-color: rgb(240, 240, 240);
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
     font-size: .7em;
     font-weight: normal;
-    padding: 5px;
     margin-left: 5px;
+    padding: 4px 10px 5px 10px;
 }
 
 .formulario input[type="textarea"] {
@@ -135,6 +138,17 @@ p {
     font-weight: normal;
     padding: 5px;
     margin-left: 5px;
+    resize: none;
+}
+
+.formulario textarea {
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    font-size: .7em;
+    font-weight: normal;
+    padding: 5px;
+    margin-left: 5px;
+    resize: none;
 }
 
 .formulario input[type="email"] {
@@ -240,36 +254,6 @@ p {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
     color: white;
-}
-
-.rodape01 {
-    width: 31%;
-    margin: 15px;
-    background-color: hsl(120, 2%, 31%, 0.5);
-    float: right;
-    padding: 20px;
-    color: white;
-    border-radius: 5px;
-}
-
-.rodape02 {
-    width: 31%;
-    background-color: rgb(128, 0, 117, 0.5);
-    margin: 15px;
-    float: right;
-    padding: 20px;
-    color: white;
-    border-radius: 5px;
-}
-
-.rodape03 {
-    width: 31%;
-    background-color: rgb(122, 128, 0, 0.5);
-    margin: 15px;
-    float: right;
-    padding: 20px;
-    color: white;
-    border-radius: 5px;
 }
 
 .rodape nav ul li {
@@ -505,16 +489,6 @@ p {
 
 
 /* MENSAGEM DE ERRO NO CAPEANTE NOS INPUTS */
-
-.mensagem_error {
-    font-size: 0.7em;
-    color: #c10a13;
-    background-color: rgb(211, 209, 209);
-    margin-left: 10px;
-    margin-top: 5px;
-    border-radius: 10px;
-    border-color: #842029;
-}
 
 .notif-input {
     color: red;

@@ -287,7 +287,7 @@ class prorrogacaoDAO implements prorrogacaoDAOInterface
 
         $gestao = [];
 
-        $stmt = $this->conn->query("SELECT max(id_internacao) as ultimoReg from tb_internacao");
+        $stmt = $this->conn->query("SELECT data_intern_int, id_internacao AS ultimoReg from tb_internacao order by id_internacao desc limit 1");
 
         $stmt->execute();
 

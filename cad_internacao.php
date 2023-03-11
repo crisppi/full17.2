@@ -52,7 +52,9 @@ $findMaxUtiInt = $uti->findMaxUtiInt();
 
 $prorrogacao = new prorrogacaoDAO($conn, $BASE_URL);
 $prorrogacaoIdMax = $prorrogacao->findMaxPror();
+$prorrogacaoGeral = $prorrogacao->findGeral();
 $findMaxProInt = $prorrogacao->findMaxProInt();
+
 
 $negociacao = new negociacaoDAO($conn, $BASE_URL);
 $negociacaoLast = new negociacaoDAO($conn, $BASE_URL);

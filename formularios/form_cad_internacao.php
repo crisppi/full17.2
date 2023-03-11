@@ -25,14 +25,19 @@
                     <?php endforeach; ?>
                 </select>
             </div>
+            <?php $dataAtual = date('Y-m-d');
+            ?>
+
             <div class="form-group col-sm-2">
                 <label class="control-label" for="data_intern_int">Data Internação</label>
-                <input type="date" class="form-control" id="data_intern_int" value="<?= date('d/m/Y') ?>" name="data_intern_int">
+                <input type="date" class="form-control" id="data_intern_int" value="<?php echo date('Y-m-d') ?>" name="data_intern_int">
+                <div class="notif-input oculto" id="notif-input">
+                    Data inválida !
+                </div>
             </div>
             <div class="form-group col-sm-2">
                 <label for="data_visita_int">Data Visita</label>
-                <?php $agora = date('d/m/Y'); ?>
-                <input type="text" value='<?= $agora; ?>' class="form-control" id="data_visita_int" name="data_visita_int">
+                <input type="date" value='<?= $dataAtual; ?>' class="form-control" id="data_visita_int" name="data_visita_int" readonly>
             </div>
             <div class="form-group col-sm-1">
                 <label class="control-label" for="internado_int">Internado</label>
@@ -64,36 +69,36 @@
                 <input type="hidden" class="form-control" value="s" id="internacao_ativa_int" name="internacao_ativa_int">
             </div>
             <div class="form-group col-sm-1">
-                <input type="text" class="form-control" id="visita_enf_int" name="visita_enf_int" placeholder="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
-                                                                                                                    echo 's';
-                                                                                                                } else {
-                                                                                                                    echo 'n';
-                                                                                                                }; ?>" value="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
-                                                                                                                                    's';
-                                                                                                                                } else {
-                                                                                                                                    'n';
-                                                                                                                                }; ?>">
+                <input type="hidden" class="form-control" id="visita_enf_int" name="visita_enf_int" placeholder="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
+                                                                                                                        echo 's';
+                                                                                                                    } else {
+                                                                                                                        echo 'n';
+                                                                                                                    }; ?>" value="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
+                                                                                                                                        's';
+                                                                                                                                    } else {
+                                                                                                                                        'n';
+                                                                                                                                    }; ?>">
             </div>
             <div class="form-group col-sm-1">
-                <input type="text" class="form-control" id="visita_med_int" name="visita_med_int" placeholder="<?php if (($_SESSION['cargo']) === 'Med_auditor') {
-                                                                                                                    echo 's';
-                                                                                                                } else {
-                                                                                                                    echo 'n';
-                                                                                                                }; ?>" value="<?php if (($_SESSION['cargo']) == 'Med_auditor') {
-                                                                                                                                    's';
-                                                                                                                                } else {
-                                                                                                                                    'n';
-                                                                                                                                }; ?>">
+                <input type="hidden" class="form-control" id="visita_med_int" name="visita_med_int" placeholder="<?php if (($_SESSION['cargo']) === 'Med_auditor') {
+                                                                                                                        echo 's';
+                                                                                                                    } else {
+                                                                                                                        echo 'n';
+                                                                                                                    }; ?>" value="<?php if (($_SESSION['cargo']) == 'Med_auditor') {
+                                                                                                                                        's';
+                                                                                                                                    } else {
+                                                                                                                                        'n';
+                                                                                                                                    }; ?>">
             </div>
             <div class="form-group col-sm-1">
-                <input type="text" class="form-control" id="visita_auditor_prof_enf" name="visita_auditor_prof_enf" placeholder="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
+                <input type="hidden" class="form-control" id="visita_auditor_prof_enf" name="visita_auditor_prof_enf" placeholder="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
                                                                                                                                         echo ($_SESSION['login_user']);
                                                                                                                                     }; ?>" value="<?php if (($_SESSION['cargo']) === 'Enf_auditor') {
                                                                                                                                                         ($_SESSION['login_user']);
                                                                                                                                                     }; ?>">
             </div>
             <div class="form-group col-sm-1">
-                <input type="text" class="form-control" id="visita_auditor_prof_med" name="visita_auditor_prof_med" placeholder="<?php if (($_SESSION['cargo']) === 'Med_auditor') {
+                <input type="hidden" class="form-control" id="visita_auditor_prof_med" name="visita_auditor_prof_med" placeholder="<?php if (($_SESSION['cargo']) === 'Med_auditor') {
                                                                                                                                         echo ($_SESSION['login_user']);
                                                                                                                                     }; ?>" value="<?php if (($_SESSION['cargo']) == 'Med_auditor') {
                                                                                                                                                         ($_SESSION['login_user']);
@@ -171,26 +176,27 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="form-group col-sm-3">
-                <label for="usuario_create_int">Usuário</label>
-                <input type="text" class="form-control" id="usuario_create_int" value="<?= $_SESSION['email_user'] ?>" name="usuario_create_int">
-            </div>
+
             <div class="form-group col-sm-2">
                 <label for="senha_int">Senha</label>
                 <input type="text" class="form-control" id="senha_int" name="senha_int" placeholder="Digite a senha">
             </div>
+            <div class="form-group col-sm-3">
+                <label for="usuario_create_int">Usuário</label>
+                <input type="text" class="form-control" id="usuario_create_int" value="<?= $_SESSION['email_user'] ?>" name="usuario_create_int" readonly>
+            </div>
             <div class="form-group row">
                 <div>
                     <label for="rel_int">Relatório Auditoria</label>
-                    <textarea type="textarea" rows="10" class="form-control" id="rel_int" name="rel_int" placeholder="Relatório da auditoria"></textarea>
+                    <textarea type="textarea" rows="20" class="form-control" id="rel_int" name="rel_int" placeholder="Relatório da auditoria"></textarea>
                 </div>
                 <div>
                     <label for="acoes_int">Ações Auditoria</label>
-                    <textarea type="textarea" rows="10" class="form-control" id="acoes_int" name="acoes_int" placeholder="Ações de auditoria"></textarea>
+                    <textarea rows="20" type="textarea" class="form-control" id="acoes_int" name="acoes_int" placeholder="Ações de auditoria"></textarea>
                 </div>
                 <div class="form-group col-sm-3">
                     <?php $agora = date('d/m/Y'); ?>
-                    <input type="text" class="form-control" id="data_create_int" value='<?= $agora; ?>' name="data_create_int" placeholder="Digite o nome do médico">
+                    <input type="hidden" class="form-control" id="data_create_int" value='<?= $agora; ?>' name="data_create_int" placeholder="Digite o nome do médico">
                 </div>
             </div>
             <br>
@@ -200,6 +206,7 @@
         </div>
     </form>
 </div>
+<script src="js/scriptDataInt.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
