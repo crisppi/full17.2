@@ -1,5 +1,4 @@
 <div id="container-prorrog" class="container" style="display:none">
-    <br>
     <h4 class="page-title">Cadastrar dados de prorrogação</h4>
     <p class="page-description">Adicione informações sobre as diárias da prorrogação</p>
     <form class="formulario" action="<?= $BASE_URL ?>process_prorrogacao.php" id="add-prorrogacao-form" method="POST" enctype="multipart/form-data">
@@ -90,7 +89,7 @@
             </div>
         </div>
         <!-- PRORROGACAO 3 -->
-        <div class="form-group-row">
+        <!-- <div class="form-group-row">
             <div style="display:none" id="container-prog3">
                 <div class="form-group col-sm-2">
                     <label class="control-label" for="acomod3_pror">Acomodação (3)</label>
@@ -124,19 +123,18 @@
                     </select>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div>
-            <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
+            <button style="margin:10px" type="submit" class="btn-sm btn-info">Lançar</button>
         </div>
-
     </form>
     <div style="margin-top:-20px" class="formulario">
         <div style="display: inline-block; margin-left:10px; margin-bottom:10px" class="form-group col-sm-1">
             <button onclick="mostrarGrupo2('container-prog2')" style="color:blue; font-size:0.8em; border:none; margin-top:15px; margin-right:10px" id="btn-gp1" class="bi bi-plus-square-fill edit-icon"> 2ª acomod</button>
         </div>
-        <div style="display: inline-block; margin-left:30px" class="form-group col-sm-1">
+        <!-- <div style="display: inline-block; margin-left:30px" class="form-group col-sm-1">
             <button onclick="mostrarGrupo3('container-prog3')" style="color:blue; font-size:0.8em;border:none; margin-top:15px; margin-right:10px" id="btn-gp1" class="bi bi-plus-square-fill edit-icon"> 3ª acomod</button>
-        </div>
+        </div> -->
     </div>
 </div>
 <script src="js/scriptDataPror.js"></script>
