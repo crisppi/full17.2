@@ -17,6 +17,11 @@ h2 {
     padding-top: 10px;
 }
 
+h4 {
+    color: black;
+    padding-top: 10px;
+}
+
 p {
     color: black;
 }
@@ -28,7 +33,7 @@ p {
 }
 
 .input {
-    width: 100%;
+    /* width: 100%; */
     margin-bottom: 10px;
     outline: none;
 }
@@ -99,6 +104,15 @@ p {
     margin-left: 5px;
 }
 
+.formulario input[type="email"] {
+    background-color: rgb(241, 240, 240);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    font-size: .7em;
+    font-weight: normal;
+    padding: 5px;
+    margin-left: 5px;
+}
+
 .formulario input[type="number"] {
     background-color: rgb(241, 240, 240);
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
@@ -149,15 +163,6 @@ p {
     padding: 5px;
     margin-left: 5px;
     resize: none;
-}
-
-.formulario input[type="email"] {
-    background-color: rgb(240, 232, 232);
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-    font-size: .7em;
-    font-weight: normal;
-    padding: 5px;
-    margin-left: 5px;
 }
 
 .formulario input:hover {
@@ -354,10 +359,6 @@ p {
 
 .visible {
     display: yes;
-}
-
-.btn btn-primary {
-    margin: 20px;
 }
 
 

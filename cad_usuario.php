@@ -39,7 +39,7 @@ if (empty($id_usuario)) {
             <div class="form-group row">
                 <div class="form-group col-sm-4">
                     <label for="usuario_user">Nome do Usuário</label>
-                    <input type="text" class="form-control" id="usuario_user" name="usuario_user" placeholder="Digite o nome do usuário" required>
+                    <input type="text" class="form-control" id="usuario_user" name="usuario_user" placeholder="Digite o nome do usuário" autofocus required>
                 </div>
                 <div class="form-group col-sm-1">
                     <label for="idade_user">Idade</label>

@@ -43,15 +43,21 @@
     <!--tabela evento-->
     <div class="container py-2">
 
-        <div class="row" style="background-color: #d3d3d3">
+        <div class="row">
+            <h2 class="page-title">Hospitais</h2>
+
             <form class="formulario" id="form_pesquisa" method="GET">
                 <div class="form-group row">
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <div class="form-group col-sm-2">
+                        <label>Pesquisa por Hospital</label>
+
                         <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por hospital">
                     </div>
-                    <div class="form-group col-sm-1">
-                        <button style="margin:10px; font-weight:600" type="submit" class="btn-sm btn-light">Pesquisar</button>
+                    <div class="form-group col-sm-1" style="margin:20px 0px 10px 60px">
+                        <button type="submit" class="btn btn-primary mb-1"><span class="material-icons">
+                                person_search
+                            </span></button>
                     </div>
                 </div>
             </form>
@@ -79,6 +85,9 @@
             }
             ?>
         </div>
+    </div>
+
+    <div class="container">
         <div>
             <h4 class="page-title">Relação de Hospitais</h4>
         </div>
@@ -135,13 +144,11 @@
             <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
             <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
         </div>
+        <div>
+            <a class="btn btn-success styled" style="margin-left:120px" href="cad_hospital.php">Novo Hospital</a>
+        </div>
     </div>
 
-
-    <div>
-        <hr>
-        <a class="btn btn-success styled" style="margin-left:120px" href="cad_hospital.php">Novo Hospital</a>
-    </div>
 </body>
 
 <script>

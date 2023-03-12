@@ -50,23 +50,4 @@ if ($type === "create-ant") {
     $antecedenteDao->update($antecedenteData);
 
     include_once('list_antecedente.php');
-}
-
-if ($type === "delete-ant") {
-    // Recebe os dados do form
-    $id_antecedente = filter_input(INPUT_GET, "id_antecedente");
-    echo (filter_input(INPUT_GET, "id_antecedente"));
-    $antecedenteDao = new antecedenteDAO($conn, $BASE_URL);
-
-    $antecedente = $antecedenteDao->findById($id_antecedente);
-
-    if ($antecedente) {
-
-        $antecedenteDao->destroy($id_antecedente);
-
-        include_once('list_antecedente.php');
-    } else {
-
-        $message->setMessage("Informações inválidas!", "error", "index.php");
-    }
-}
+};

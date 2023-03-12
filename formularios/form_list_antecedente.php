@@ -42,17 +42,17 @@
     ?>
 
     <!--tabela antecedente-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <div class="container py-2">
         <h4 class="page-title">Relação de antecedentes</h4>
 
         <div class="menu_pesquisa">
             <form class="formulario" id="form_pesquisa" method="GET">
-                <div class="form-group row">
-
+                <div style="margin-left:20px" class="form-group row">
                     <div class="form-group col-sm-3">
-                        <label style="margin-left: 30px;">Pesquisa por Antecedente</label>
-
-                        <input type="text" value="<?= $busca ?>" class="form-control" name="pesquisa_antec" id="pesquisa_antec" placeholder="Pesquisa por antecedente">
+                        <label style="margin-left: 5px;">Pesquisa por Antecedente</label>
+                        <input type="text" value="<?= $busca ?>" class="form-control" name="pesquisa_antec" id="pesquisa_antec" autofocus placeholder="Digite o antecedente">
                     </div>
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Limite</label>
@@ -73,10 +73,10 @@
 
                         </select>
                     </div>
-                    <div class="form-group row">
-                        <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
-                            <button type="submit" class="btn btn-primary mb-1">Buscar</button>
-                        </div>
+                    <div class="form-group col-sm-1" style="margin:20px 0px 10px 60px">
+                        <button type="submit" class="btn btn-primary mb-1"><span class="material-icons">
+                                person_search
+                            </span></button>
                     </div>
             </form>
         </div>
@@ -129,6 +129,11 @@
 
                         <a href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:red; margin-left:10px" name="type" value="delete-ant" class="d-inline-block bi bi-x-square-fill delete-icon"></i></a>
 
+                        <!-- <form class="d-inline-block delete-form" action="del_internacao.php" method="POST">
+                                <input type="hidden" name="type" value="delete">
+                                <input type="hidden" name="id_internacao" value="<?= $intern["id_internacao"] ?>">
+                                <button type="submit" style="margin-left:3px; font-size: 16px; background:transparent; border-color:transparent; color:red" class="delete-btn"><i class=" d-inline-block aparecer-acoes bi bi-x-square-fill delete-icon"></i></button>
+                            </form> -->
                         <div id="info"></div>
                     </td>
                 </tr>

@@ -39,7 +39,7 @@ if (empty($id_seguradora)) {
             <div class="form-group row">
                 <div class="form-group col-sm-4">
                     <label for="seguradora_seg">Seguradora</label>
-                    <input type="text" class="form-control" id="seguradora_seg" name="seguradora_seg" placeholder="Digite o nome da Seguradora" required>
+                    <input type="text" class="form-control" id="seguradora_seg" name="seguradora_seg" placeholder="Digite o nome da Seguradora" autofocus required>
                 </div>
 
                 <div class="form-group col-sm-2">

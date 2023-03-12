@@ -25,7 +25,6 @@
         strlen($buscaAtivo) ? 'ativo_user = "' . $buscaAtivo . '"' : null
     ];
     $condicoes = array_filter($condicoes);
-
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
 
@@ -42,20 +41,20 @@
 
     // PREENCHIMENTO DO FORMULARIO COM QUERY
     $query = $usuario->selectAllUsuario($where, $order, $obLimite);
-
     ?>
 
     <!--tabela evento-->
     <div class="container py-2">
+        <h2 class="page-title">Usuários</h2>
 
         <div class="row" style="background-color: #d3d3d3">
             <form class="formulario" id="form_pesquisa" method="GET">
                 <div class="form-group row">
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
-                    <div class="form-group col-sm-2">
+                    <div class="form-group col-sm-3">
                         <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por usuário">
                     </div>
-                    <div class="form-group col-sm-1">
+                    <div class="form-group col-sm-2">
                         <input type="radio" checked name="ativo" value="s" id="ativo" placeholder="Pesquisa por evento">
                         <label for="ativo">Ativo</label><br>
                         <input type="radio" style="margin-top:-5px" name="ativo" value="n" id="ativo" placeholder="Pesquisa por evento">
@@ -71,7 +70,7 @@
                             <option value="50" <?= $limite == '50' ? 'selected' : null ?>>50</option>
                         </select>
                     </div>
-                    <div style="margin-left:20px" class="form-group col-sm-1">
+                    <div style="margin-left:20px" class="form-group col-sm-2">
                         <label>Classificar</label>
                         <select class="form-control mb-3" id="ordenar" name="ordenar">
                             <option value="">Classificar por</option>
@@ -80,10 +79,10 @@
 
                         </select>
                     </div>
-                    <div class="form-group row">
-                        <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
-                            <button type="submit" class="btn btn-primary mb-1">Buscar</button>
-                        </div>
+                    <div class="form-group col-sm-1" style="margin:20px 0px 10px 60px">
+                        <button type="submit" class="btn btn-primary mb-1"><span class="material-icons">
+                                person_search
+                            </span></button>
                     </div>
                 </div>
             </form>

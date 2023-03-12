@@ -48,14 +48,15 @@
     <!--tabela evento-->
     <div class="container py-2">
 
-        <div class="row" style="background-color: #d3d3d3">
+        <div class="row">
+            <h2 class="page-title">Acomodação</h2>
+
             <form class="formulario" id="form_pesquisa" method="GET">
                 <div class="form-group row">
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <div class="form-group col-sm-2 ">
                         <label>Pesquisa por nome</label>
-
-                        <input type="text" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" value="<?= $busca ?>" placeholder="Pesquisa por acomodacao">
+                        <input type="text" name="pesquisa_nome" style=" border:0rem" id="pesquisa_nome" value="<?= $busca ?>" autofocus placeholder="Pesquisa por acomodação">
                     </div>
 
                     <div style="margin-left:20px" class="form-group col-sm-1">
@@ -77,8 +78,10 @@
                             <option value="nome_hosp" <?= $ordenar == 'nome_hosp' ? 'selected' : null ?>>Hospital</option>
                         </select>
                     </div>
-                    <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
-                        <button type="submit" class="btn btn-primary mb-1">Buscar</button>
+                    <div class="form-group col-sm-1" style="margin:20px 0px 10px 60px">
+                        <button type="submit" class="btn btn-primary mb-1"><span class="material-icons">
+                                person_search
+                            </span></button>
                     </div>
                 </div>
             </form>
@@ -107,7 +110,7 @@
             ?>
         </div>
         <div>
-            <h4 class="page-title">Relação de acomodacaos</h4>
+            <h4 class="page-title">Relação de acomodações</h4>
         </div>
         <table class="table table-sm table-striped table-bordered table-hover table-condensed">
             <thead>
@@ -158,16 +161,14 @@
         ?>
 
         <div id="id-confirmacao" class="btn_acoes oculto">
-            <p>Deseja deletar este hospital: <?= $acomodacao_aco ?>?</p>
+            <p>Deseja deletar esta acomodação: <?= $acomodacao_aco ?>?</p>
             <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
             <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
         </div>
     </div>
-
-
     <div>
         <hr>
-        <a class="btn btn-success styled" style="margin-left:120px" href="cad_acomodacao.php">Nova acomodacao</a>
+        <a class="btn btn-success styled" style="margin-left:120px" href="cad_acomodacao.php">Nova acomodação</a>
     </div>
 </body>
 

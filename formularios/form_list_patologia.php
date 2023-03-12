@@ -15,7 +15,7 @@
 
     // METODO DE BUSCA DE PAGINACAO
     $busca = filter_input(INPUT_GET, 'pesquisa_nome');
- $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
+    $buscaAtivo = filter_input(INPUT_GET, 'ativo_pac');
     $limite = filter_input(INPUT_GET, 'limite') ? filter_input(INPUT_GET, 'limite') : 10;
     $ordenar = filter_input(INPUT_GET, 'ordenar') ? filter_input(INPUT_GET, 'ordenar') : 1;
 
@@ -46,12 +46,15 @@
     <!--tabela evento-->
     <div class="container py-2">
 
-        <div class="row" style="background-color: #d3d3d3">
+        <div class="row">
+            <h2 class="page-title">Patologia</h2>
+
             <form class="formulario" id="form_pesquisa" method="GET">
                 <div class="form-group row">
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <div class="form-group col-sm-2">
-                        <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por patologia">
+                        <label>Pesquisa por patologia</label>
+                        <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="border:0em" id="pesquisa_nome" autofocus placeholder="Pesquisa por patologia">
                     </div>
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Limite</label>
@@ -69,13 +72,12 @@
                             <option value="">Classificar por</option>
                             <option value="id_patologia" <?= $ordenar == 'id_patologia' ? 'selected' : null ?>>Id patologia</option>
                             <option value="patologia_pat" <?= $ordenar == 'patologia_pat' ? 'selected' : null ?>>Patologia</option>
-
                         </select>
                     </div>
-                    <div class="form-group row">
-                        <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
-                            <button type="submit" class="btn btn-primary mb-1">Buscar</button>
-                        </div>
+                    <div class="form-group col-sm-1" style="margin:20px 0px 10px 60px">
+                        <button type="submit" class="btn btn-primary mb-1"><span class="material-icons">
+                                person_search
+                            </span></button>
                     </div>
                 </div>
             </form>

@@ -14,7 +14,7 @@ require_once("dao/usuarioDao.php");
 
 
 // $message = new Message($BASE_URL);
-// $userDao = new UserDAO($conn, $BASE_URL);
+$userDao = new UserDAO($conn, $BASE_URL);
 $internacaoDao = new InternacaoDAO($conn, $BASE_URL);
 $utiDao = new utiDAO($conn, $BASE_URL);
 

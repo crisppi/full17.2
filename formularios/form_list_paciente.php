@@ -45,18 +45,19 @@
     ?>
     <!--tabela evento-->
     <div class="container py-2">
-        <div class="row" style="background-color: #d3d3d3">
+        <div class="row">
+            <h2 class="page-title">Pacientes</h2>
+
             <form class="formulario" id="form_pesquisa" method="GET">
                 <div class="form-group row">
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <div class="form-group col-sm-2">
                         <label>Pesquisa Nome</label>
-
-                        <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por paciente">
+                        <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="border:0rem" id="pesquisa_nome" autofocus placeholder="Pesquisa por paciente">
                     </div>
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Limite</label>
-                        <select class="form-control mb-3" id="limite" name="limite">
+                        <select class="form-control col-sm-2" id="limite" name="limite">
                             <option value="">Reg por página</option>
                             <option value="5" <?= $limite == '5' ? 'selected' : null ?>>5</option>
                             <option value="10" <?= $limite == '10' ? 'selected' : null ?>>10</option>
@@ -66,14 +67,16 @@
                     </div>
                     <div style="margin-left:20px" class="form-group col-sm-1">
                         <label>Classificar</label>
-                        <select class="form-control mb-3" id="ordenar" name="ordenar">
+                        <select class="form-control col-sm-2" id="ordenar" name="ordenar">
                             <option value="">Classificar por</option>
                             <option value="id_paciente" <?= $ordenar == 'id_paciente' ? 'selected' : null ?>>Id Internação</option>
                             <option value="nome_pac" <?= $ordenar == 'nome_pac' ? 'selected' : null ?>>Paciente</option>
                         </select>
                     </div>
-                    <div class="form-group col-sm-1" style="padding:0px 50px 30px 50px">
-                        <button style="margin:10px; font-weight:400" type="submit" class="btn-sm btn-primary">Pesquisar</button>
+                    <div class="form-group col-sm-1" style="margin:20px 0px 10px 60px">
+                        <button type="submit" class="btn btn-primary mb-1"><span class="material-icons">
+                                person_search
+                            </span></button>
                     </div>
                 </div>
             </form>

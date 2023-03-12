@@ -46,13 +46,15 @@
     <!--tabela evento-->
     <div class="container py-2">
 
-        <div class="row" style="background-color: #d3d3d3">
+        <div class="row">
+            <h2 class="page-title">Estipulantes</h2>
+
             <form class="formulario" id="form_pesquisa" method="GET">
                 <div class="form-group row">
                     <h6 class="page-title" style="margin-top:10px">Selecione itens para efetuar Pesquisa</h6>
                     <input type="hidden" name="pesquisa" id="pesquisa" value="sim">
                     <div class="form-group col-sm-2">
-                    <label>Pesquisa Empresa</label>
+                        <label>Pesquisa Empresa</label>
 
                         <input type="text" value="<?= $busca ?>" name="pesquisa_nome" style="margin-top:10px; border:0rem" id="pesquisa_nome" placeholder="Pesquisa por estipulante">
                     </div>
@@ -74,8 +76,10 @@
                             <option value="nome_est" <?= $ordenar == 'nome_est' ? 'selected' : null ?>>Estipulante</option>
                         </select>
                     </div>
-                    <div class="form-group col-sm-1" style="margin:0px 0px 10px 30px">
-                        <button type="submit" class="btn btn-primary mb-1">Buscar</button>
+                    <div class="form-group col-sm-1" style="margin:20px 0px 10px 60px">
+                        <button type="submit" class="btn btn-primary mb-1"><span class="material-icons">
+                                person_search
+                            </span></button>
                     </div>
                 </div>
             </form>

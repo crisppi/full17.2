@@ -10,52 +10,36 @@ $patologiaDao = new patologiaDAO($conn, $BASE_URL);
 // Receber id do usuário
 $id_patologia = filter_input(INPUT_GET, "id_patologia");
 
-if (empty($id_patologia)) {
-
-    if (!empty($userData)) {
-
-        $id = $userData->id_patologia;
-    } else {
-
-        //$message->setMessage("Usuário não encontrado!", "error", "index.php");
-    }
-} else {
-
-    $userData = $userDao->findById($id_patologia);
-
-    // Se não encontrar usuário
-    if (!$userData) {
-        $message->setMessage("patologia não encontrada!", "error", "index.php");
-    }
-}
-
 ?>
-<div id="main-container" class="container-fluid">
+<div id="main-container" class="container">
     <div class="row">
-        <h1 class="page-title">Cadastrar patologia</h1>
+        <h2 class="page-title">Cadastrar patologia</h2>
         <p class="page-description">Adicione informações sobre a patologia</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_patologia.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="type" value="create">
             <div class="form-group row">
                 <div class="form-group col-sm-4">
                     <label for="patologia_pat">Patologia</label>
-                    <input type="text" class="form-control" id="patologia_pat" name="patologia_pat" placeholder="Digite patologia" required>
+                    <input type="text" class="form-control" id="patologia_pat" name="patologia_pat" placeholder="Digite patologia" autofocus required>
                 </div>
                 <div class="form-group col-sm-4">
-                    <label for="dias_pato">Patologia</label>
+                    <label for="dias_pato">Diárias - DRG</label>
                     <input type="text" class="form-control" id="dias_pato" name="dias_pato" placeholder="Digite os dias da meta de internação">
                 </div>
                 <div class="form-group col-sm-4">
-                    <input type="text" class="form-control" id="fk_usuario_pat" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_pat" placeholder="Digite o usuário">
+                    <input type="hidden" class="form-control" id="fk_usuario_pat" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_pat">
                 </div>
             </div>
 
             <br>
-            <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
+            <button style="margin:30px 0px 40px 10px" type="submit" class="btn-sm btn-primary">Cadastrar</button>
             <br>
     </div>
     </form>
-</div>
+    <div>
+        <a class="btn btn-success" style="margin-left:10px" href="list_patologia.php">Listar
+        </a>
+    </div>
 </div>
 
 <script>

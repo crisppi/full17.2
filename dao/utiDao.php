@@ -295,9 +295,11 @@ class utiDAO implements utiDAOInterface
         ac.fk_hospital_int,
         ac.data_intern_int,
         ac.internado_int,
+        ac.internado_uti_int, 
+        ac.internacao_uti_int, 
         ac.fk_paciente_int
         
-        FROM tb_uti uti 
+        FROM tb_uti as uti 
     
             left JOIN tb_internacao AS ac ON
             uti.fk_internacao_uti = ac.id_internacao

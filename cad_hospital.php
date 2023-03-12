@@ -39,7 +39,7 @@ if (empty($id_hospital)) {
             <div class="form-group row">
                 <div class="form-group col-sm-4">
                     <label for="nome_hosp">Hospital</label>
-                    <input type="text" class="form-control" id="nome_hosp" name="nome_hosp" placeholder="Digite o nome do hospital" required>
+                    <input type="text" class="form-control" id="nome_hosp" name="nome_hosp" placeholder="Digite o nome do hospital" autofocus required>
                 </div>
 
                 <div class="form-group col-sm-1">

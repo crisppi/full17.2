@@ -43,7 +43,7 @@ if (empty($id_hospital)) {
 ?>
 <div id="main-container" class="container">
     <div class="row">
-        <h1 class="page-title">Cadastrar Paciente</h1>
+        <h2 class="page-title">Cadastrar Paciente</h2>
         <p class="page-description">Adicione informações sobre o paciente</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_paciente.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
 
@@ -51,7 +51,7 @@ if (empty($id_hospital)) {
             <div class="form-group row">
                 <div class="form-group col-sm-4">
                     <label for="nome_pac">Nome</label>
-                    <input type="text" class="form-control" id="nome_pac" name="nome_pac" placeholder="Digite o nome" required>
+                    <input type="text" class="form-control" id="nome_pac" name="nome_pac" placeholder="Digite o nome" autofocus required>
                 </div>
                 <div class="form-group col-sm-1">
                     <label for="idade_pac">Idade</label>
@@ -90,17 +90,17 @@ if (empty($id_hospital)) {
             </div>
             <div class="form-group row">
 
-                <div class="form-group col-sm-1">
+                <div class="form-group col-sm-2">
                     <label for="cpf_pac">CPF</label>
                     <input type="text" oninput="mascara(this, 'cpf')" class="form-control" id="cpf_pac" name="cpf_pac" placeholder="Digite o cpf">
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="email01_pac">email01</label>
-                    <input type="email" class="form-control" id="email01_pac" name="email01_pac" placeholder="Digite a email01">
+                    <input type="email" class="form-control" id="email01_pac" name="email01_pac" placeholder="Digite o email principal">
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="email02_pac">email02</label>
-                    <input type="email" class="form-control" id="email02_pac" name="email02_pac" placeholder="Digite a email02">
+                    <input type="email" class="form-control" id="email02_pac" name="email02_pac" placeholder="Digite email alternativo">
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="telefone01_pac">Telefone</label>
@@ -147,7 +147,7 @@ if (empty($id_hospital)) {
                 </div>
             </div>
             <br>
-            <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
+            <button style="margin:10px" type="submit" class="btn-sm btn-primary">Cadastrar</button>
             <br>
     </div>
     </form>

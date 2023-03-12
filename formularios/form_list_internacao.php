@@ -42,6 +42,8 @@
     <!-- FORMULARIO DE PESQUISAS -->
     <div class="container">
         <div class="container py-2">
+            <h2 class="page-title">Internações</h2>
+
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
             <form class="formulario visible" action="" id="select-internacao-form" method="GET">

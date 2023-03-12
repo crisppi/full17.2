@@ -39,7 +39,7 @@ if (empty($id_estipulante)) {
             <div class="form-group row">
                 <div class="form-group col-sm-4">
                     <label for="nome_est">Estipulante</label>
-                    <input type="text" class="form-control" id="nome_est" name="nome_est" placeholder="Digite o nome do usuário" required>
+                    <input type="text" class="form-control" id="nome_est" name="nome_est" placeholder="Digite o nome do usuário" autofocus required>
                 </div>
 
                 <div class="form-group col-sm-2">

@@ -19,10 +19,10 @@ $antecedenteDao = new antecedenteDAO($conn, $BASE_URL);
 $id_antecedente = filter_input(INPUT_GET, "id_antecedente");
 
 ?>
-<div id="main-container" class="container-fluid">
+<div id="main-container" class="container">
 
     <div class="row">
-        <h1 class="page-title">Cadastrar antecedente</h1>
+        <h2 class="page-title">Cadastrar antecedente</h2>
         <p class="page-description">Adicione informações sobre o antecedente</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_antecedente.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="type" value="create-ant">
@@ -36,10 +36,7 @@ $id_antecedente = filter_input(INPUT_GET, "id_antecedente");
                     <input type="hidden" class="form-control" id="fk_usuario_ant" value="<?= $_SESSION['id_usuario'] ?>" readonly name="fk_usuario_ant" placeholder="Digite o usuário">
                 </div>
             </div>
-            <br>
-            <button style="margin:10px" type="submit" class="btn-sm btn-info">Cadastrar</button>
-            <br>
-            <br>
+            <button style="margin:30px 0px 40px 10px" type="submit" class="btn-sm btn-primary">Cadastrar</button>
             <?php if (!empty($flassMessage["msg"])) : ?>
                 <div class="msg-container">
                     <p class="msg <?= $flassMessage["type"] ?>"><?= $flassMessage["msg"] ?></p>
@@ -49,7 +46,7 @@ $id_antecedente = filter_input(INPUT_GET, "id_antecedente");
 
     </form>
     <div>
-        <a class="btn btn-success" href="list_antecedente.php">Listar
+        <a class="btn btn-success" style="margin-left:10px" href="list_antecedente.php">Listar
         </a>
     </div>
 </div>

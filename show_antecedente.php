@@ -35,8 +35,7 @@ $antecedente = $antecedenteDao->findById($id_antecedente);
     <div id="id-confirmacao" class="btn_acoes visible">
         <p>Deseja deletar este antecedente: <?= $antecedente->antecedente_ant ?>?</p>
         <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
-        <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
-
+        <button class="btn btn-danger styled" onclick=deletar() value="delete-ant" type="button" id="deletar-btn" name="deletar">Deletar</button>
     </div>
 </div>
 
@@ -53,7 +52,7 @@ $antecedente = $antecedenteDao->findById($id_antecedente);
     function deletar() {
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'none';
-        window.location = "<?= $BASE_URL ?>process_antecedente.php?id_antecedente=<?= $id_antecedente ?>";
+        window.location = "<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $id_antecedente ?>";
 
     };
 
