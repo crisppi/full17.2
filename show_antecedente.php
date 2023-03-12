@@ -39,10 +39,7 @@ $antecedente = $antecedenteDao->findById($id_antecedente);
 
     </div>
 </div>
-<div class="mensagem-apg">apagada
 
-
-</div>
 <?php include_once("diversos/backbtn_antecedente.php"); ?>
 <script>
     function apareceOpcoes() {
@@ -64,7 +61,7 @@ $antecedente = $antecedenteDao->findById($id_antecedente);
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'none';
         console.log("chegou no cancelar");
-        window.location = "<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $id_antecedente ?>";
+        window.location = "<?= $BASE_URL ?>list_antecedente.php";
 
 
     };

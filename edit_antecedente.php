@@ -24,7 +24,7 @@ $antecedente = $antecedenteDao->findById($id_antecedente);
         <h1 class="page-title">Atualizar Antecedente</h1>
         <p class="page-description">Adicione informações sobre o antecedente</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_antecedente.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="type" value="update">
+            <input type="hidden" name="type" value="update-ant">
             <div class="form-group row">
 
                 <input type="hidden" class="form-control" id="id_antecedente" name="id_antecedente" value="<?= $antecedente->id_antecedente ?>" placeholder="ID">

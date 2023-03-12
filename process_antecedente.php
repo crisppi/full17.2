@@ -16,7 +16,7 @@ $type = filter_input(INPUT_POST, "type");
 
 // Resgata dados do usuário
 
-if ($type === "create") {
+if ($type === "create-ant") {
 
     // Receber os dados dos inputs
     $antecedente_ant = filter_input(INPUT_POST, "antecedente_ant");
@@ -34,7 +34,7 @@ if ($type === "create") {
 
         $message->setMessage("Você precisa adicionar pelo menos: antecedente_ant do antecedente!", "error", "cad_internacao.php");
     }
-} else if ($type === "update") {
+} else if ($type === "update-ant") {
 
     $antecedenteDao = new antecedenteDAO($conn, $BASE_URL);
 
@@ -54,7 +54,7 @@ if ($type === "create") {
 //$type = "delete";
 //$type = filter_input(INPUT_POST, "type");
 
-if ($type === "delete") {
+if ($type === "delete-ant") {
     // Recebe os dados do form
     $id_antecedente = filter_input(INPUT_POST, "id_antecedente");
     echo (filter_input(INPUT_POST, "id_antecedente"));

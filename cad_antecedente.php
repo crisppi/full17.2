@@ -23,16 +23,17 @@ $id_antecedente = filter_input(INPUT_GET, "id_antecedente");
 
     <div class="row">
         <h1 class="page-title">Cadastrar antecedente</h1>
-        <p class="page-description">Adicione informações sobre a antecedente</p>
+        <p class="page-description">Adicione informações sobre o antecedente</p>
         <form class="formulario" action="<?= $BASE_URL ?>process_antecedente.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="type" value="create">
+            <input type="hidden" name="type" value="create-ant">
             <div class="form-group row">
                 <div class="form-group col-sm-4">
-                    <label for="antecedente_ant">Patologia</label>
-                    <input type="text" class="form-control" id="antecedente_ant" name="antecedente_ant" placeholder="Digite o nome do usuário" required>
+                    <label for="antecedente_ant">Antecedente</label>
+                    <input type="text" class="form-control" id="antecedente_ant" name="antecedente_ant" placeholder="Digite o antecedente" autofocus required>
                 </div>
                 <div class="form-group col-sm-4">
-                    <input type="text" class="form-control" id="fk_usuario_ant" value="<?= $_SESSION['id_usuario'] ?>" name="fk_usuario_ant" placeholder="Digite o usuário">
+
+                    <input type="hidden" class="form-control" id="fk_usuario_ant" value="<?= $_SESSION['id_usuario'] ?>" readonly name="fk_usuario_ant" placeholder="Digite o usuário">
                 </div>
             </div>
             <br>
