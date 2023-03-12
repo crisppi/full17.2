@@ -51,13 +51,11 @@ if ($type === "create-ant") {
 
     include_once('list_antecedente.php');
 }
-//$type = "delete";
-//$type = filter_input(INPUT_POST, "type");
 
 if ($type === "delete-ant") {
     // Recebe os dados do form
-    $id_antecedente = filter_input(INPUT_POST, "id_antecedente");
-    echo (filter_input(INPUT_POST, "id_antecedente"));
+    $id_antecedente = filter_input(INPUT_GET, "id_antecedente");
+    echo (filter_input(INPUT_GET, "id_antecedente"));
     $antecedenteDao = new antecedenteDAO($conn, $BASE_URL);
 
     $antecedente = $antecedenteDao->findById($id_antecedente);

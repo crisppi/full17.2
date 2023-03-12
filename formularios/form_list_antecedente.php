@@ -127,7 +127,7 @@
 
                         <a href="<?= $BASE_URL ?>edit_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:blue" name="type" value="edite" class="aparecer-acoes far fa-edit edit-icon"></i></a>
 
-                        <a href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:red; margin-left:10px" name="type" value="edite" class="d-inline-block bi bi-x-square-fill delete-icon"></i></a>
+                        <a href="<?= $BASE_URL ?>show_antecedente.php?id_antecedente=<?= $id_antecedente ?>"><i style="color:red; margin-left:10px" name="type" value="delete-ant" class="d-inline-block bi bi-x-square-fill delete-icon"></i></a>
 
                         <div id="info"></div>
                     </td>
@@ -157,7 +157,7 @@
         <button class="btn btn-success styled" onclick=cancelar() type="button" id="cancelar" name="cancelar">Cancelar</button>
         <button class="btn btn-danger styled" onclick=deletar() value="default" type="button" id="deletar-btn" name="deletar">Deletar</button>
     </div>
-<div>
+    <div>
         <hr>
         <a class="btn btn-success styled" style="margin-left:120px" href="cad_antecedente.php">Novo Antecedente</a>
     </div>
@@ -181,7 +181,7 @@
         idAcoes.style.display = 'none';
         let mudancaStatus = ($('#deletar-btn').val())
         console.log(mudancaStatus);
-        window.location = "<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $id_antecedente ?>";
+        window.location = "<?= $BASE_URL ?>process_antecedente.php?id_antecedente=<?= $id_antecedente ?>";
     };
 
     function cancelar() {

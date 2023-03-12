@@ -53,7 +53,7 @@ $antecedente = $antecedenteDao->findById($id_antecedente);
     function deletar() {
         let idAcoes = (document.getElementById('id-confirmacao'));
         idAcoes.style.display = 'none';
-        window.location = "<?= $BASE_URL ?>del_antecedente.php?id_antecedente=<?= $id_antecedente ?>";
+        window.location = "<?= $BASE_URL ?>process_antecedente.php?id_antecedente=<?= $id_antecedente ?>";
 
     };
 
