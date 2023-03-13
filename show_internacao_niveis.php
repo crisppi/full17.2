@@ -34,30 +34,28 @@
     $a = $internacaoID['0'];
 
     $niveis = $internacaoDAO->findLast($a);
-    //Instanciar o metodo internacao 
-    // print_r($niveis);
-    // echo "<hr>";
 
+    // coverter formato data
+    $formatData = date('d/m/Y', strtotime($niveis['0']['data_intern_int']));
     ?>
-
-    <br>
-    <h4>Prorrogando paciente</h4>
+    <h4>Prorrogando Paciente</h4>
+    <hr>
     <div id="view-contact-container" class="container-fluid" style="align-items:center">
-        <span style="font-weight: 500; margin:0px 5px 0px 0px " class="card-title bold">Internação:</span>
-        <span class="card-title bold" style="font-weight: 500; margin:0px 80px 0px 5px "><?= $niveis['0']['id_internacao'] ?></span>
-        <span style="font-weight: 500; margin:0px 5px 0px 0px">Visita:</span>
-        <span style="font-weight: 500; margin:0px 80px 0px 0px"><?= $niveis['0']['data_intern_int']  ?></span>
-        <span style="font-weight: 500; margin:0px 5px 0px 80px">Hospital:</span>
-        <span style=" font-weight: 500; margin:0px 10px 0px 0px"><?= $niveis['0']['nome_hosp'] ?></span>
-        <br>
+        <span class="card-title bold" style="font-weight: 500; margin:0px 5px 0px 00px">Hospital:</span>
+        <span class="card-title bold" style=" font-weight: 800; margin:0px 10px 0px 0px"><?= $niveis['0']['nome_hosp'] ?></span>
+        <span style="font-weight: 500; margin:0px 5px 0px 80px">Paciente:</span>
+        <span style=" font-weight: 800; margin:0px 10px 0px 0px"><?= $niveis['0']['nome_pac'] ?></span>
+        <span style="font-weight: 500; margin:0px 5px 0px 80px">Data internação:</span>
+        <span style="font-weight: 800; margin:0px 80px 0px 0px"><?= $formatData  ?></span>
+        <span style="font-weight: 500; margin:0px 5px 0px 40px ">Internação:</span>
+        <span style="font-weight: 500; margin:0px 80px 0px 5px "><?= $niveis['0']['id_internacao'] ?></span>
     </div>
-    <br>
     <hr>
     <div>
-        <button class="btn-primary" id="btn-prorrog">Prorrogação</button>
-        <button class="btn-primary" id="btn-gestao">Gestão</button>
-        <button class="btn-primary" id="btn-uti">UTI</button>
-        <button class="btn-primary" id="btn-negoc">Negociações</button>
+        <button class="btn-int-niveis" id="btn-prorrog">Prorrogação</button>
+        <button class="btn-int-niveis" id="btn-gestao">Gestão</button>
+        <button class="btn-int-niveis" id="btn-uti">UTI</button>
+        <button class="btn-int-niveis" id="btn-negoc">Negociações</button>
     </div>
 
     <!-- FORMULARIO DE GESTÃO -->

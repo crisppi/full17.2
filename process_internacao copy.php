@@ -1,9 +1,11 @@
 <?php
 require_once("globals.php");
 require_once("db.php");
-
 require_once("models/internacao.php");
 require_once("dao/internacaoDao.php");
+
+require_once("models/uti.php");
+require_once("dao/utiDao.php");
 
 require_once("models/message.php");
 
@@ -14,8 +16,11 @@ require_once("dao/usuarioDao.php");
 // $message = new Message($BASE_URL);
 $userDao = new UserDAO($conn, $BASE_URL);
 $internacaoDao = new InternacaoDAO($conn, $BASE_URL);
+$utiDao = new utiDAO($conn, $BASE_URL);
 
 $id_internacao = filter_input(INPUT_POST, "id_internacao");
+
+$internadosUTI = $utiDao->findUTIInternacao($id_internacao);
 
 // Resgata o tipo do formulário
 $type = filter_input(INPUT_POST, "type");
@@ -102,7 +107,69 @@ if ($type === "create") {
         $internacaoDao->create($internacao);
 
         include_once('cad_internacao_niveis.php');
+    } else {
+        header("Location: javascript:history.back(1)");
+        $message->setMessage("Você precisa adicionar pelo menos: nome da internacao!", "error", "cad_internacao_niveis.php");
+    }
+} else if ($type === "alta") {
+
+    // Receber os dados dos inputs
+    $id_internacao = filter_input(INPUT_POST, "id_internacao");
+    $internado_int = filter_input(INPUT_POST, "internado_int");
+    $data_alta_int = filter_input(INPUT_POST, "data_alta_int");
+    $tipo_alta_int = filter_input(INPUT_POST, "tipo_alta_int");
+    $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
+    $data_create_int = filter_input(INPUT_POST, "data_create_int") ?: null;
+
+    // RECEBER DADOS DO INPUT PARA DARA ALTA DA UTI
+    $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int") ?: null;
+    $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int") ?: null;
+    $alta_uti = filter_input(INPUT_POST, "alta_uti");
+    $alta_uti = filter_input(INPUT_POST, "alta_uti");
+    $id_uti = filter_input(INPUT_POST, "id_uti");
+    $internado_uti_int = filter_input(INPUT_POST, "internado_uti_int");
+    $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti") ?: null;
+
+    // $internacao = new internacao();
+    $internacaoData = $internacaoDao->findById($id_internacao);
+
+    $internacaoData->id_internacao = $id_internacao;
+    $internacaoData->internado_int = $internado_int;
+    $internacaoData->data_alta_int = $data_alta_int;
+    $internacaoData->tipo_alta_int = $tipo_alta_int;
+    $internacaoData->usuario_create_int = $usuario_create_int;
+    $internacaoData->data_create_int = $data_create_int;
+
+    if ($alta_uti == "alta-uti") {
+        print_r('chegoou');
+        exit;
+        $UTIData->id_uti = $id_uti;
+        $UTIData->data_alta_uti = $data_alta_uti;
+        $UTIData->internado_uti = $internado_uti;
+
+        $utiDao->findAltaUpdate($UTIData);
+
+        include_once('list_internacao.php');
     }
 
+    $internacaoDao->update($internacaoData);
+
     // include_once('cad_internacao_niveis.php');
+    // print_r("chegou neste ponto");
+    // print_r($alta_uti);
+    if ($alta_uti == "alta_uti") {
+
+        // Receber os dados dos inputs
+        $id_uti = filter_input(INPUT_POST, "id_uti");
+        $data_alta_uti = filter_input(INPUT_POST, "data_alta_uti");
+        $internado_uti = filter_input(INPUT_POST, "internado_uti");
+
+        $UTIData->id_uti = $id_uti;
+        $UTIData->data_alta_uti = $data_alta_uti;
+        $UTIData->internado_uti = $internado_uti;
+
+        $utiDao->findAltaUpdate($UTIData);
+
+        include_once('cad_internacao_niveis.php');
+    }
 }
