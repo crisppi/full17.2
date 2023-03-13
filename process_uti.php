@@ -66,5 +66,5 @@ if ($type === "create") {
         $message->setMessage("Você precisa adicionar pelo menos: Uti!", "error", "back");
     }
 
-    include_once('cad_niveis_internacao.php');
+    include_once('list_internacao.php');
 }

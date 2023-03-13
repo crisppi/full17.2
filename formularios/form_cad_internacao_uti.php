@@ -6,7 +6,7 @@
         <input type="hidden" name="type" value="create">
         <!-- DADOS PARA FORMULARIO INTERNACAO UTI-->
         <div>
-            <input type="text" class="form-control" id="id_internacao" name="id_internacao" value="<?= ($ultimoReg) ?> ">
+            <input type="hidden" class="form-control" id="id_internacao" name="id_internacao" value="<?= ($ultimoReg) ?> ">
         </div>
 
         <!-- DADOS PARA FORMULARIO UTI -->
@@ -16,13 +16,13 @@
             $ultimoReg = ($a["ultimoReg"]);
             ?>
             <div>
-                <input type="text" class="form-control" id="fk_internacao_uti" name="fk_internacao_uti" value="<?= ($ultimoReg) ?> " placeholder="Relatório da auditoria">
+                <input type="hidden" class="form-control" id="fk_internacao_uti" name="fk_internacao_uti" value="<?= ($ultimoReg) ?> " placeholder="Relatório da auditoria">
             </div>
             <div>
-                <input type="text" class="form-control" id="internacao_uti" name="internacao_uti" value="s">
+                <input type="hidden" class="form-control" id="internacao_uti" name="internacao_uti" value="s">
             </div>
             <div>
-                <input type="text" class="form-control" id="internado_uti_int" name="internado_uti_int" value="s">
+                <input type="hidden" class="form-control" id="internado_uti_int" name="internado_uti_int" value="s">
             </div>
 
             <div class="form-group col-sm-2">

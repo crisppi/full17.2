@@ -22,7 +22,7 @@
     include_once("models/pagination.php");
 
     $internacao_geral = new internacaoDAO($conn, $BASE_URL);
-    $internacaos = $internacao_geral->findGeral();
+    $internacaos = $internacao_geral->findGeral($where, $limite, $inicio);
 
     $pacienteDao = new pacienteDAO($conn, $BASE_URL);
     $pacientes = $pacienteDao->findGeral($limite, $inicio);
@@ -113,14 +113,14 @@
     $uti_internacao = 's';
     // $buscaAtivo = in_array($buscaAtivo, ['s', 'n']) ?: "";
     $condicoes = [
-        strlen($pesquisa_nome) ? 'ho.nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
-        strlen($pesquisa_pac) ? 'pa.nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
+        strlen($pesquisa_nome) ? 'nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
+        strlen($pesquisa_pac) ? 'nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
         strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : NULL,
-        strlen($uti_internacao) ? 'internacao_uti = "s"' : "s",
+        // strlen($uti_internacao) ? 'internacao_uti = "s"' : "s",
 
     ];
     $condicoes = array_filter($condicoes);
-    print_r($condicoes);
+    // print_r($condicoes);
     // REMOVE POSICOES VAZIAS DO FILTRO
     $where = implode(' AND ', $condicoes);
 
@@ -183,7 +183,7 @@
                                                                         }; ?></td>
                             <td scope="row" class="nome-coluna-table"><?= $intern["nome_hosp"] ?></td>
                             <td scope="row"><?= $intern["nome_pac"] ?></td>
-                            <td scope="row"><?= $intern["data_intern_int"] ?></td>
+                            <td scope="row"><?php echo date('d/m/Y', strtotime($intern["data_intern_int"])) ?></td>
                             <td scope="row"><?= $intern["internado_uti"] ?></td>
                             <td scope="row"><?= $intern["internacao_uti"] ?></td>
 

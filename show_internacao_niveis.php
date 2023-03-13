@@ -53,8 +53,8 @@
     <hr>
     <div>
         <button class="btn-int-niveis" id="btn-prorrog">Prorrogação</button>
-        <button class="btn-int-niveis" id="btn-gestao">Gestão</button>
         <button class="btn-int-niveis" id="btn-uti">UTI</button>
+        <button class="btn-int-niveis" id="btn-gestao">Gestão</button>
         <button class="btn-int-niveis" id="btn-negoc">Negociações</button>
     </div>
 
