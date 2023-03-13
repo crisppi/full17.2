@@ -16,18 +16,25 @@ $type = filter_input(INPUT_POST, "type");
 
 // Resgata dados do usuário
 
-if ($type === "alta") {
+if ($type === "alta-int") {
 
     $internacaoDao = new internacaoDAO($conn, $BASE_URL);
 
     // Receber os dados dos inputs
     $id_internacao = filter_input(INPUT_POST, "id_internacao");
     $alta = filter_input(INPUT_POST, "alta");
+    $data_alta_int = filter_input(INPUT_POST, "data_alta_int");
+    $internado_int = filter_input(INPUT_POST, "internado_int");
+    $usuario_create_int = filter_input(INPUT_POST, "usuario_create_int");
+    $tipo_alta_int = filter_input(INPUT_POST, "tipo_alta_int");
 
     $internacaoData = $internacaoDao->findById($id_internacao);
 
     $internacaoData->id_internacao = $id_internacao;
-    $internacaoData->internado_int = $alta;
+    $internacaoData->data_alta_int = $data_alta_int;
+    $internacaoData->internado_int = $internado_int;
+    $internacaoData->usuario_create_int = $usuario_create_int;
+    $internacaoData->tipo_alta_int = $tipo_alta_int;
 
     $internacaoDao->alta($internacaoData);
 

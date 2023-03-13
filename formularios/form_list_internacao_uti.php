@@ -116,7 +116,7 @@
         strlen($pesquisa_nome) ? 'nome_hosp LIKE "%' . $pesquisa_nome . '%"' : null,
         strlen($pesquisa_pac) ? 'nome_pac LIKE "%' . $pesquisa_pac . '%"' : null,
         strlen($pesqInternado) ? 'internado_int = "' . $pesqInternado . '"' : NULL,
-        // strlen($uti_internacao) ? 'internacao_uti = "s"' : "s",
+        strlen($uti_internacao) ? 'internacao_uti = "s"' : "s",
 
     ];
     $condicoes = array_filter($condicoes);

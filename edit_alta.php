@@ -26,8 +26,8 @@ extract($internacao);
     <div class="row">
         <h4 class="page-title">Alta Hospitalar</h4>
         <p class="page-description">Adicione informações sobre o internacao</p>
-        <form class="formulario" action="<?= $BASE_URL ?>process_internacao.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="type" value="alta">
+        <form class="formulario" action="<?= $BASE_URL ?>process_alta.php" id="add-movie-form" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="type" value="alta-int">
             <div class="form-group col-sm-3">
                 <input type="hidden" class="form-control" id="id_internacao" name="id_internacao" value="<?= $id_internacao ?>">
             </div>
