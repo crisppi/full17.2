@@ -42,7 +42,7 @@ class utiDAO implements utiDAOInterface
         $uti->saps_uti = $data["saps_uti"];
         $uti->score_uti = $data["score_uti"];
         $uti->vm_uti = $data["vm_uti"];
-        $uti->fk_usuario_uti = $data["fk_usuario_uti"];
+        // $uti->fk_usuario_uti = $data["fk_usuario_uti"];
 
 
         return $uti;
@@ -356,7 +356,7 @@ class utiDAO implements utiDAOInterface
         $this->message->setMessage("uti atualizado com sucesso!", "success", "list_internacao_uti.php");
     }
     // METODO PARA DAR ALTA DA UTI
-    public function findAltaUpdate($internadosUTI) //ainda nao corrigido
+    public function findAltaUpdate($UTIData) //ainda nao corrigido
     {
 
         $stmt = $this->conn->prepare("UPDATE tb_uti SET
@@ -367,11 +367,11 @@ class utiDAO implements utiDAOInterface
         WHERE id_uti = :id_uti 
       ");
 
-        $stmt->bindParam(":fk_internacao_uti", $internadosUTI->fk_internacao_uti);
-        $stmt->bindParam(":data_alta_uti", $internadosUTI->data_alta_uti);
-        $stmt->bindParam(":internado_uti", $internadosUTI->internado_uti);
+        $stmt->bindParam(":fk_internacao_uti", $UTIData->fk_internacao_uti);
+        $stmt->bindParam(":data_alta_uti", $UTIData->data_alta_uti);
+        $stmt->bindParam(":internado_uti", $UTIData->internado_uti);
 
-        $stmt->bindParam(":id_uti", $internadosUTI->id_uti);
+        $stmt->bindParam(":id_uti", $UTIData->id_uti);
         $stmt->execute();
 
         // Mensagem de sucesso por editar uti

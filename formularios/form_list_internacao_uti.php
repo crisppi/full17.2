@@ -21,6 +21,7 @@
 
     include_once("models/pagination.php");
 
+    $where = null;
     $internacao_geral = new internacaoDAO($conn, $BASE_URL);
     $internacaos = $internacao_geral->findGeral($where, $limite, $inicio);
 

@@ -646,6 +646,7 @@ class internacaoDAO implements internacaoDAOInterface
     ut.fk_internacao_uti,
     ut.internacao_uti,
     ut.internado_uti,
+    ut.id_uti,
     ho.nome_hosp 
 
     FROM tb_internacao ac 
